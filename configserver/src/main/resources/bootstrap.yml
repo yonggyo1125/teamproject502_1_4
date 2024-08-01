@@ -1,0 +1,18 @@
+server:
+  port: 3100
+
+spring:
+  application:
+    name: config-server
+
+  profiles:
+    active: native
+
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/configs
+
+encrypt:
+  key: ${secretKey}

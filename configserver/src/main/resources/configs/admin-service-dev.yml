@@ -1,0 +1,10 @@
+spring:
+  # 라이브 리로드 설정
+  devtools:
+    livereload:
+      enabled: true
+
+  # 정적 자원 설정(CSS, JS, 이미지)
+  web:
+    resources:
+      staticLocations: file:src/main/resources/static/

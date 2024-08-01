@@ -1,0 +1,42 @@
+server:
+  port: 3000
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${eurekaUrl}
+
+spring:
+  cloud:
+    gateway:
+      discovery.locator:
+        enabled: true
+        lowerCaseServiceId: true
+
+      routes:
+        - id: front-service
+          uri: lb://front-service
+          predicates:
+            - Path=/app/**
+          filters:
+            - RewritePath=/app/?(?<path>.*),/$\{path}
+
+        - id: admin-service
+          uri: lb://admin-service
+          predicates:
+            - Path=/admin/**
+          filters:
+            - RewritePath=/admin/?(?<path>.*),/$\{path}
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway

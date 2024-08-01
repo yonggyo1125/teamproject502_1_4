@@ -1,0 +1,79 @@
+server:
+  port: 3001
+
+spring:
+  # 데이터베이스 설정
+  datasource:
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@${db.host}:${db.port}:XE
+    username: ${db.username}
+    password: ${db.password}
+
+  # JPA 설정
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+    hibernate:
+      ddlAuto: create
+
+  # 정적 자원 설정(CSS, JS, 이미지)
+  web:
+    resources:
+      staticLocations: classpath:/static/
+
+  # 파일 업로드 용량 설정
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 60MB
+      fileSizeThreshold: 30MB
+
+  mail:
+    host: smtp.gmail.com # SMTP 서버 호스트
+    port: 587 # SMTP 서버 포트
+    username: ${mail.username} # 이메일 아이디, 주소가 test@gmail.com이면 test
+    password: ${mail.password} # 앱 비밀번호
+    properties:
+      mail:
+        smtp:
+          auth: true # 사용자 인증 시도 여부 - 기본값 false
+          timeout: 5000 # Socket Read Timeout 시간(ms) - 기본값 : 무한대
+          starttls:
+            enable: true # StartTLS 활성화 여부 - 기본값 false
+
+# 파일 업로드 경로 설정
+file:
+  upload:
+    path: ${file.path}
+    url: /upload/
+
+# 로거 설정
+logging:
+  level:
+    org.hibernate.type: trace
+    org.hibernate.orm.jdbc.bind: trace
+
+# 유레카 설정
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${eurekaUrl}
+
+management:
+  endpoint:
+    health:
+      showDetails: always
+    refresh:
+      enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health
