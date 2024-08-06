@@ -1,10 +1,10 @@
-package org.group4.G9Project_P4;
+package org.g9project4.admin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class G9ProjectP4ApplicationTests {
+class AdminApplicationTests {
 
 	@Test
 	void contextLoads() {
