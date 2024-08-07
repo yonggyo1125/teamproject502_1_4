@@ -23,8 +23,10 @@
 <header th:replace="~{outlines/_header::common}"></header>
 <main>
     <aside th:replace="~{outlines/_side::menus}"></aside>
-    <nav th:replace="~{outlines/_submenu::submenus}"></nav>
-    <section  layout:fragment="content"></section>
+    <section>
+        <nav th:replace="~{outlines/_submenu::submenus}"></nav>
+        <section  layout:fragment="content"></section>
+    </section>
 </main>
 <iframe name="ifrmHidden" class="dn"></iframe>
 </body>

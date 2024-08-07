@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/admin/config")
+@RequestMapping("/config")
 @RequiredArgsConstructor
 public class BasicConfigController implements ExceptionProcessor {
 
@@ -51,7 +51,7 @@ public class BasicConfigController implements ExceptionProcessor {
 
         model.addAttribute("basicConfig", config);
 
-        return "admin/config/basic";
+        return "config/basic";
     }
 
     @PostMapping
@@ -61,6 +61,6 @@ public class BasicConfigController implements ExceptionProcessor {
 
         model.addAttribute("message", "저장되었습니다.");
 
-        return "admin/config/basic";
+        return "config/basic";
     }
 }
