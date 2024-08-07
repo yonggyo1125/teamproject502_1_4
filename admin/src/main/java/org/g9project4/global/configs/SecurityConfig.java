@@ -34,20 +34,20 @@ public class SecurityConfig {
                     .passwordParameter("password")
                     .successHandler(new LoginSuccessHandler())
                     .failureHandler(new LoginFailureHandler());
-//                    .successForwardUrl("/")
-//                    .failureUrl("/member/login?error=true");
         });
 
         http.logout(logout -> {
-            logout.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-//                    .logoutSuccessHandler()
+            logout
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                     .logoutSuccessUrl("/member/login");
         });
         /* 로그인, 로그아웃 E */
         /* 인가(접근 통제) 설정 S*/
         http.authorizeRequests(authorizeRequests -> {
-            authorizeRequests.requestMatchers("/mypage/**").authenticated()//회원 전용
+            authorizeRequests
+                    .requestMatchers("/member/**").permitAll()
                     .anyRequest().permitAll();
+                    //.anyRequest().hasAnyAuthority("ADMIN");
         });
         http.exceptionHandling(c -> {
             c.authenticationEntryPoint(new MemberAuthenticationEntryPoint())//예외 가
