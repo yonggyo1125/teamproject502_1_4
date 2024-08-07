@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Component
+@Component("utils")
 @RequiredArgsConstructor
 public class Utils { // 빈의 이름 - utils
 
