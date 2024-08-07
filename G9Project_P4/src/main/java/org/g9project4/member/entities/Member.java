@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.g9project4.global.entities.BaseEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor @AllArgsConstructor
-public class Member extends BaseEntity {
+public class Member extends BaseEntity implements Serializable {
     @Id @GeneratedValue
     private Long seq;
 

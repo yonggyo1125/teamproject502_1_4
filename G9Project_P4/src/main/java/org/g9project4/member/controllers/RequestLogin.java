@@ -3,8 +3,10 @@ package org.g9project4.member.controllers;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class RequestLogin {
+public class RequestLogin implements Serializable {
     @NotBlank
     private String email;
     @NotBlank

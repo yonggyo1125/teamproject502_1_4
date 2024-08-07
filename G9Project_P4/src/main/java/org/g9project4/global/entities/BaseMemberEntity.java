@@ -9,11 +9,13 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.io.Serializable;
+
 @MappedSuperclass
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseMemberEntity extends BaseEntity {// 로그인한 사용자
+public abstract class BaseMemberEntity extends BaseEntity implements Serializable {// 로그인한 사용자
     @CreatedBy
     @Column(updatable = false, length = 65)
     private String createBy;
