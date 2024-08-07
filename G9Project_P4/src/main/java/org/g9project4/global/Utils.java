@@ -28,7 +28,7 @@ public class Utils { // 빈의 이름 - utils
     }
 
     public String url(String url) {
-        List<ServiceInstance> instances = discoveryClient.getInstances("admin-service");
+        List<ServiceInstance> instances = discoveryClient.getInstances("front-service");
 
         return String.format("%s%s", instances.get(0).getUri().toString(), url);
     }
