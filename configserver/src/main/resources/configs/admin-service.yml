@@ -29,7 +29,7 @@ spring:
         format_sql: true
         use_sql_comments: true
     hibernate:
-      ddlAuto: create
+      ddlAuto: update
 
   # 정적 자원 설정(CSS, JS, 이미지)
   web:
