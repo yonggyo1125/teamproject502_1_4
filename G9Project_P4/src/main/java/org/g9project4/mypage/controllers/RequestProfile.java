@@ -5,11 +5,12 @@ import lombok.Data;
 
 @Data
 public class RequestProfile {
-    //@NotBlank(message = "회원명을 입력하세요.")
+    @NotBlank
     private String userName;
 
-    //@NotBlank(message = "비밀번호를 입력하세요.")
     private String password;
 
     private String confirmPassword;
+
+    private String mobile;
 }

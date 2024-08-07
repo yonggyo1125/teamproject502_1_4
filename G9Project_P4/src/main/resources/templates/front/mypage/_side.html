@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <aside th:fragment="menus">
+        <a th:href="${@utils.url('/mypage/info')}" th:text="#{회원정보_수정}"></a>
+        <a th:href="${@utils.url('/mypage/mypost')}" th:text="#{내가_쓴_게시글}"></a>
+    </aside>
+</html>
