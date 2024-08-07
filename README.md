@@ -117,3 +117,16 @@ public class RedisConfig {
     }
 }
 ```
+
+## 회원 관련 커맨드 객체, 엔티티 모두 Serializable 인터페이스 추가
+
+- global/entities/BaseEntity.java
+- global/entities/BaseMemberEntity.java
+
+- member/entities/Member.java
+- member/entities/Authorities.java
+- member/entities/AuthoritiesId.java
+
+- member/controllers/RequestJoin.java
+- member/controllers/RequestLogin.java
+- member/MemberInfo.java
