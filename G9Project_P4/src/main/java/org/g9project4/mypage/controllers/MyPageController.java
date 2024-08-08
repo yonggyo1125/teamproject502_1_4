@@ -4,7 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.member.MemberUtil;
 import org.g9project4.member.entities.Member;
+import org.g9project4.member.services.MemberSaveService;
 import org.g9project4.mypage.services.MyPageService;
+import org.g9project4.mypage.validators.ProfileUpdateValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -19,8 +21,8 @@ import java.util.List;
 @RequestMapping("/mypage")
 @RequiredArgsConstructor
 public class MyPageController {
-
-    private final MyPageService myPageService;
+    private final ProfileUpdateValidator profileUpdateValidator;
+    private final MemberSaveService memberSaveService;
     private final MemberUtil memberUtil;
 
     @GetMapping
@@ -44,11 +46,13 @@ public class MyPageController {
     public String updateInfo(@Valid RequestProfile form,
                              Errors errors) {
 
+        profileUpdateValidator.validate(form, errors);
+
         if (errors.hasErrors()) {
             return "front/mypage/info";
         }
 
-        //myPageService.update(profile);
+        memberSaveService.save(form);
 
         return "redirect:/mypage";
     }

@@ -1,12 +1,15 @@
 package org.g9project4.member.services;
 
 import lombok.RequiredArgsConstructor;
+import org.g9project4.member.MemberUtil;
 import org.g9project4.member.constants.Authority;
 import org.g9project4.member.controllers.RequestJoin;
 import org.g9project4.member.entities.Authorities;
 import org.g9project4.member.entities.Member;
+import org.g9project4.member.exceptions.MemberNotFoundException;
 import org.g9project4.member.repositories.AuthoritiesRepository;
 import org.g9project4.member.repositories.MemberRepository;
+import org.g9project4.mypage.controllers.RequestProfile;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,7 @@ public class MemberSaveService {
     private final MemberRepository memberRepository;
     private final AuthoritiesRepository authoritiesRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MemberUtil memberUtil;
 
     /**
      * 회원 가입 처리
@@ -33,6 +37,18 @@ public class MemberSaveService {
         String hash = passwordEncoder.encode(member.getPassword());
         member.setPassword(hash);
         save(member, List.of(Authority.USER));
+    }
+
+    /**
+     * 회원정보 수정
+     * @param form
+     */
+    public void save(RequestProfile form) {
+        Member member = memberUtil.getMember();
+        String email = member.getEmail();
+        member = memberRepository.findByEmail(email).orElseThrow(MemberNotFoundException::new);
+
+        
     }
 
     public void save(Member member, List<Authority> authorities) {
