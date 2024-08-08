@@ -17,6 +17,7 @@ function fileUploadCallback(files) {
     const box = dom.querySelector(".image-file-box");
 
     const targetEl = document.querySelector(".profile-image");
+    targetEl.innerHTML = "";
     targetEl.append(box);
 
     const removeEl = box.querySelector(".remove");
