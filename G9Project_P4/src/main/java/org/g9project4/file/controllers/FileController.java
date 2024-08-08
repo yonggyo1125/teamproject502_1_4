@@ -8,6 +8,7 @@ import org.g9project4.file.services.FileDownloadService;
 import org.g9project4.file.services.FileInfoService;
 import org.g9project4.file.services.FileUploadService;
 import org.g9project4.global.Utils;
+import org.g9project4.global.exceptions.BadRequestException;
 import org.g9project4.global.exceptions.RestExceptionProcessor;
 import org.g9project4.global.rests.JSONData;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ public class FileController implements RestExceptionProcessor {
                                            @Valid RequestUpload form, Errors errors) {
 
         if (errors.hasErrors()) {
-
+            throw new BadRequestException(utils.getErrorMessages(errors));
         }
 
         List<FileInfo> items = uploadService.upload(files, form.getGid(), form.getLocation());
