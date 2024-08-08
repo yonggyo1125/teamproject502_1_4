@@ -86,7 +86,17 @@ public class MemberController implements ExceptionProcessor {
         List<String> addScript = new ArrayList<>();
 
         addCss.add("member/style");  // 회원 공통 스타일
+        if (mode.equals("join")) {
+            addCommonScript.add("fileManager");
+            addCss.add("member/join");
+            addScript.add("member/join");
 
+        } else if (mode.equals("login")) {
+            addCss.add("member/login");
+        }
+
+        model.addAttribute("addCss", addCss);
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addScript", addScript);
     }
-
 }
