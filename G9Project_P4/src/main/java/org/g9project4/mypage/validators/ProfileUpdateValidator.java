@@ -38,16 +38,18 @@ public class ProfileUpdateValidator implements Validator, PasswordValidator, Mob
         String mobile = form.getMobile();
 
         // 1. 비밀번호가 입력된 경우
-        if (password.length() < 8) {
-            errors.rejectValue("password", "Size");
-        }
+        if (StringUtils.hasText(password)) {
+            if (password.length() < 8) {
+                errors.rejectValue("password", "Size");
+            }
 
-        if (!password.equals(confirmPassword)) {
-            errors.rejectValue("confirmPassword", "Mismatch.password");
-        }
+            if (!password.equals(confirmPassword)) {
+                errors.rejectValue("confirmPassword", "Mismatch.password");
+            }
 
-        if (!alphaCheck(password, false) || !numberCheck(password) || !specialCharsCheck(password)) {
-            errors.rejectValue("password", "Complexity");
+            if (!alphaCheck(password, false) || !numberCheck(password) || !specialCharsCheck(password)) {
+                errors.rejectValue("password", "Complexity");
+            }
         }
 
         // 2. 휴대전화번호가 입력된 경우

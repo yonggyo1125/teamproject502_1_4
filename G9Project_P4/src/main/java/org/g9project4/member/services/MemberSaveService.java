@@ -1,5 +1,6 @@
 package org.g9project4.member.services;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.member.MemberUtil;
 import org.g9project4.member.constants.Authority;
@@ -26,7 +27,7 @@ public class MemberSaveService {
     private final AuthoritiesRepository authoritiesRepository;
     private final PasswordEncoder passwordEncoder;
     private final MemberUtil memberUtil;
-
+    private final HttpSession session;
     /**
      * 회원 가입 처리
      *
@@ -47,8 +48,23 @@ public class MemberSaveService {
         Member member = memberUtil.getMember();
         String email = member.getEmail();
         member = memberRepository.findByEmail(email).orElseThrow(MemberNotFoundException::new);
+        String password = form.getPassword();
+        String mobile = form.getMobile();
+        if (StringUtils.hasText(mobile)) {
+            mobile = mobile.replaceAll("\\D", "");
+        }
 
-        
+        member.setUserName(form.getUserName());
+        member.setMobile(mobile);
+
+        if (StringUtils.hasText(password)) {
+            String hash = passwordEncoder.encode(password);
+            member.setPassword(hash);
+        }
+
+        memberRepository.saveAndFlush(member);
+
+        session.setAttribute("userInfoChanged", true);
     }
 
     public void save(Member member, List<Authority> authorities) {
