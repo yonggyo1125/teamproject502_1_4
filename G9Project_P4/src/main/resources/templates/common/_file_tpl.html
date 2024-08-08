@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <script th:fragment="image" type="text/html" id="image-file-tpl">
+        <div class="image-file-box" id="file-[seq]">
+            <div class="xi-close remove" data-seq="[seq]"></div>
+            <div class="inner" style="background:url('[fileUrl]') no-repeat center center; background-size: cover;" data-url="[fileUrl]"></div>
+        </div>
+    </script>
+</html>
