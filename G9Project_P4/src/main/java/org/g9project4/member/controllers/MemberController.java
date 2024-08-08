@@ -13,6 +13,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 
 @Slf4j
 @Controller
@@ -32,30 +36,31 @@ public class MemberController implements ExceptionProcessor {
 
     @GetMapping("/join")
     public String join(@ModelAttribute RequestJoin form, Model model) {
-        model.addAttribute("addCss", "join");
-//        boolean result = false;
-//        if(!result){
-//            throw new AlertRedirectException("테스트 예외,","/mypage", HttpStatus.BAD_REQUEST);
-//        }
+        commonProcess("join", model);
+
+
         return "front/member/join";
     }
 
     @PostMapping("/join")
     public String joinPs(@Valid RequestJoin form, Errors errors, Model model) {
-//        memberSaveService.save(form);
-        model.addAttribute("addCss", "join");
+        commonProcess("join", model);
+
         joinValidator.validate(form, errors);
-        errors.getAllErrors().forEach(System.out::println);
+
         if (errors.hasErrors()) {
             return "front/member/join";
         }
+
         memberSaveService.save(form);
+
         return "redirect:/member/login";
     }
 
     @GetMapping("/login")
     public String login(@Valid @ModelAttribute RequestLogin form, Errors errors, Model model) {
-        model.addAttribute("addCss", "join");
+        commonProcess("login", model);
+
         String code = form.getCode();
         if (StringUtils.hasText(code)) {
             errors.reject(code, form.getDefaultMessage());
@@ -67,6 +72,21 @@ public class MemberController implements ExceptionProcessor {
         return "front/member/login";
     }
 
+    /**
+     * 회원 관련 컨트롤러 공통 처리
+     *
+     * @param mode
+     * @param model
+     */
+    private void commonProcess(String mode, Model model) {
+        mode = Objects.requireNonNullElse(mode, "join");
 
+        List<String> addCss = new ArrayList<>();
+        List<String> addCommonScript = new ArrayList<>();
+        List<String> addScript = new ArrayList<>();
+
+        addCss.add("member/style");  // 회원 공통 스타일
+
+    }
 
 }
