@@ -21,6 +21,10 @@ const fileManager = {
                 throw new Error("필수 항목 누락 입니다(gid).");
             }
 
+            if (files.length > 1) {
+                throw new Error("하나의 파일만 업로드 하세요.");
+            }
+
             const formData = new FormData();
             formData.append("gid", gid.trim());
 
@@ -105,7 +109,5 @@ window.addEventListener("DOMContentLoaded", function() {
             imageOnly: fileEl.imageOnly,
             done: fileEl.done,
         });
-
     });
-
 });
