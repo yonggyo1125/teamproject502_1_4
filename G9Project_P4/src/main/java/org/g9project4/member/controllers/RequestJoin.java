@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @Data
 public class RequestJoin implements Serializable {
@@ -22,4 +23,6 @@ public class RequestJoin implements Serializable {
     private String mobile;
     @AssertTrue
     private boolean agree;
+
+    private String gid = UUID.randomUUID().toString();
 }
