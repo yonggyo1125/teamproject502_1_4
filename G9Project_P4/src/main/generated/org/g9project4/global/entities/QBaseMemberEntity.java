@@ -19,7 +19,7 @@ public class QBaseMemberEntity extends EntityPathBase<BaseMemberEntity> {
 
     public static final QBaseMemberEntity baseMemberEntity = new QBaseMemberEntity("baseMemberEntity");
 
-    public final StringPath createBy = createString("createBy");
+    public final StringPath createdBy = createString("createdBy");
 
     public final StringPath modifiedBy = createString("modifiedBy");
 
