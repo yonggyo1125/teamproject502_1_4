@@ -8,7 +8,10 @@ const fileManager = {
     * 파일 업로드
     *
     */
-    upload(files, gid, location) {
+    upload(files, options) {
+
+        const { gid, location, single, imageOnly, done } = options;
+
         try {
             if (!files || files.length == 0) {
                 throw new Error("파일을 선택 하세요.");
@@ -82,6 +85,9 @@ window.addEventListener("DOMContentLoaded", function() {
             const dataset = this.dataset;
             fileEl.gid = dataset.gid;
             if (dataset.location) fileEl.location = dataset.location;
+            fileEl.imageOnly = dataset.imageOnly === 'true';
+            fileEl.single = dataset.single === 'true';
+            fileEl.done = dataset.done === 'true';
 
             fileEl.click();
 
