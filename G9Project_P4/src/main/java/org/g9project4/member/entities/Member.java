@@ -2,6 +2,7 @@ package org.g9project4.member.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.g9project4.file.entities.FileInfo;
 import org.g9project4.global.entities.BaseEntity;
 
 import java.io.Serializable;
@@ -33,4 +34,7 @@ public class Member extends BaseEntity implements Serializable {
     @ToString.Exclude
     @OneToMany(mappedBy = "member")
     private List<Authorities> authorities;
+
+    @Transient
+    private FileInfo profileImage;
 }

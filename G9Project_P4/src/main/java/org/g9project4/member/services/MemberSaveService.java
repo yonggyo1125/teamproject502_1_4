@@ -2,6 +2,7 @@ package org.g9project4.member.services;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.g9project4.file.services.FileUploadDoneService;
 import org.g9project4.member.MemberUtil;
 import org.g9project4.member.constants.Authority;
 import org.g9project4.member.controllers.RequestJoin;
@@ -23,6 +24,7 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class MemberSaveService {
+    private final FileUploadDoneService uploadDoneService;
     private final MemberRepository memberRepository;
     private final AuthoritiesRepository authoritiesRepository;
     private final PasswordEncoder passwordEncoder;
@@ -87,5 +89,8 @@ public class MemberSaveService {
                     .build()).toList();
             authoritiesRepository.saveAllAndFlush(items);
         }
+
+        // 파일 업로드 완료 처리
+        uploadDoneService.process(member.getGid());
     }
 }
