@@ -3,8 +3,8 @@ package org.g9project4.member.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.ExceptionProcessor;
-import org.g9project4.member.MemberUtil;
 import org.g9project4.member.services.MemberSaveService;
 import org.g9project4.member.validators.JoinValidator;
 import org.springframework.stereotype.Controller;
@@ -27,7 +27,7 @@ public class MemberController implements ExceptionProcessor {
 
     private final JoinValidator joinValidator;
     private final MemberSaveService memberSaveService;
-    private final MemberUtil memberUtil;
+    private final Utils utils;
 
     @ModelAttribute
     public RequestLogin requestLogin() {
@@ -39,7 +39,7 @@ public class MemberController implements ExceptionProcessor {
         commonProcess("join", model);
 
 
-        return "front/member/join";
+        return utils.tpl("member/join");
     }
 
     @PostMapping("/join")
@@ -49,7 +49,7 @@ public class MemberController implements ExceptionProcessor {
         joinValidator.validate(form, errors);
 
         if (errors.hasErrors()) {
-            return "front/member/join";
+            return utils.tpl("member/join");
         }
 
         memberSaveService.save(form);
@@ -69,7 +69,7 @@ public class MemberController implements ExceptionProcessor {
                 return "redirect:/member/password/reset ";
             }
         }
-        return "front/member/login";
+        return utils.tpl("member/login");
     }
 
     /**
