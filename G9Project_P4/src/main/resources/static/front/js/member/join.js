@@ -29,6 +29,14 @@ function fileUploadCallback(files) {
         const seq = this.dataset.seq;
         fileManager.delete(seq);
     });
+}
 
 
+/**
+* 파일 삭제 후 후속 처리
+*
+*/
+function fileDeleteCallback(file) {
+    const targetEl = document.querySelector(".profile-image");
+    if (targetEl) targetEl.innerHTML = "";
 }
