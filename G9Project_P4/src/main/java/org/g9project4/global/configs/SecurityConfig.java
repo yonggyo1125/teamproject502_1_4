@@ -1,6 +1,7 @@
 package org.g9project4.global.configs;
 
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.member.services.LoginFailureHandler;
 import org.g9project4.member.services.LoginSuccessHandler;
@@ -34,14 +35,17 @@ public class SecurityConfig {
                     .passwordParameter("password")
                     .successHandler(new LoginSuccessHandler())
                     .failureHandler(new LoginFailureHandler());
-//                    .successForwardUrl("/")
-//                    .failureUrl("/member/login?error=true");
         });
 
         http.logout(logout -> {
             logout.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-//                    .logoutSuccessHandler()
-                    .logoutSuccessUrl("/member/login");
+                    .logoutSuccessHandler((req, res, e) -> {
+
+                        HttpSession session = req.getSession();
+                        session.removeAttribute("device");
+
+                        res.sendRedirect(req.getContextPath() + "/member/login");
+                    });
         });
         /* 로그인, 로그아웃 E */
         /* 인가(접근 통제) 설정 S*/
