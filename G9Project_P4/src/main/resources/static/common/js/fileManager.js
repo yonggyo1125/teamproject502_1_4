@@ -77,10 +77,15 @@ const fileManager = {
     delete(seq) {
         if (!seq) return;
 
+        const { ajaxLoad } = commonLib;
+
         (async () => {
             try {
                 const fileInfo = await ajaxLoad(`/file/delete/${seq}`, 'DELETE');
-                console.log(fileInfo);
+
+                if (typeof parent.fileDeleteCallback === 'function') {
+                    parent.fileDeleteCallback(fileInfo);
+                }
 
             } catch (err) {
                 alert(err.message);
