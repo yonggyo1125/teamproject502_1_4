@@ -72,8 +72,23 @@ const fileManager = {
     /**
     * 파일 삭제
     *
+    * @param seq : 파일 등록 번호
     */
-    delete() {
+    delete(seq) {
+        if (!seq) return;
+
+        (async () => {
+            try {
+                const fileInfo = await ajaxLoad(`/file/delete/${seq}`, 'DELETE');
+                console.log(fileInfo);
+
+            } catch (err) {
+                alert(err.message);
+                console.error(err);
+            }
+        })();
+
+
 
     },
     /**
