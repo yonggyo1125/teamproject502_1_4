@@ -142,6 +142,33 @@ window.addEventListener("DOMContentLoaded", function() {
     fileEl.multiple = true;
 
     for (const el of fileUploads) {
+        const mode = el.dataset.mode;
+        // 드래그 앤 드롭 파일 업로드
+        if (mode == 'dragNdrop') {
+
+            el.addEventListener("dragover", function(e) {
+                e.preventDefault();
+            });
+
+            el.addEventListener("drop", function(e) {
+                e.preventDefault();
+
+                const files = e.dataTransfer.files;
+
+                const dataset = this.dataset;
+                const gid = dataset.gid;
+                const location = dataset.location;
+                const single = dataset.single === 'true';
+                const imageOnly = dataset.imageOnly === 'true';
+                const done = dataset.done === 'true';
+
+                fileManager.upload(files, { gid, location, single, imageOnly, done });
+
+            });
+
+            continue;
+        }
+
         el.addEventListener("click", function() {
             fileEl.value = "";
             delete fileEl.gid;
