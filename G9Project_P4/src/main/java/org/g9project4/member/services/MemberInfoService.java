@@ -1,6 +1,8 @@
 package org.g9project4.member.services;
 
 import lombok.RequiredArgsConstructor;
+import org.g9project4.file.entities.FileInfo;
+import org.g9project4.file.services.FileInfoService;
 import org.g9project4.member.MemberInfo;
 import org.g9project4.member.constants.Authority;
 import org.g9project4.member.entities.Authorities;
@@ -19,6 +21,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class MemberInfoService implements UserDetailsService {
     private final MemberRepository memberRepository;
+    private final FileInfoService fileInfoService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -33,11 +36,28 @@ public class MemberInfoService implements UserDetailsService {
         List<SimpleGrantedAuthority> authorities = tmp.stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthority().name()))
                 .toList();
+
+        // 추가 데이터 처리
+        addMemberInfo(member);
+
         return MemberInfo.builder()
                 .email(member.getEmail())
                 .password(member.getPassword())
                 .authorities(authorities)
                 .member(member)
                 .build();
+    }
+
+    /**
+     * 회원 추가 데이터 처리
+     *
+     * @param member
+     */
+    public void addMemberInfo(Member member) {
+       String gid = member.getGid();
+       List<FileInfo> items = fileInfoService.getList(gid);
+       if (items != null && !items.isEmpty()) {
+           member.setProfileImage(items.get(0));
+       }
     }
 }

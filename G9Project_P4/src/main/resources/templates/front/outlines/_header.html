@@ -15,6 +15,7 @@
     </a>
     </th:block>
     <th:block sec:authorize="isAuthenticated()">
+        <div th:replace="~{common/_profile_image::image1}"></div>
         <span th:text="${#messages.msg('LOGIN_MSG',loggedMember.userName,loggedMember.email)}"/><br>
         <a th:href="@{/member/logout}">
             <button type="submit" th:text="#{로그아웃}"></button>
