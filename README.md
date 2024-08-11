@@ -132,3 +132,35 @@ public class RedisConfig {
 - member/MemberInfo.java
 
 # 소셜 로그인 
+
+## 카카오 로그인 
+
+### REST API 키 설정 추가 
+> templates/config/api.html
+
+```html
+...
+    <h2>카카오 API 앱키</h2>
+    ...
+            <tr>
+                <th>REST API 키</th>
+                <td>
+                    <input type="text" name="kakaoRestApiKey" th:field="*{kakaoRestApiKey}">
+                </td>
+            </tr>
+        </table>
+```
+
+> config/controllers/ApiConfig.java
+
+```java
+...
+
+@Data
+public class ApiConfig {
+  ...
+
+  private String kakaoJavascriptKey; // 카카오 API - 자바스크립트 앱 키
+  private String kakaoRestApiKey; // 카카오 API - REST API 키
+}
+```

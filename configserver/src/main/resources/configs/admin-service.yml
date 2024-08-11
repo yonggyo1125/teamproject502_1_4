@@ -36,6 +36,11 @@ spring:
     resources:
       staticLocations: classpath:/static/
 
+  # 타임리프 설정
+  thymeleaf:
+    cache: true
+    prefix: classpath:/templates/
+
   # 파일 업로드 용량 설정
   servlet:
     multipart:
