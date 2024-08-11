@@ -130,3 +130,5 @@ public class RedisConfig {
 - member/controllers/RequestJoin.java
 - member/controllers/RequestLogin.java
 - member/MemberInfo.java
+
+# 소셜 로그인 
