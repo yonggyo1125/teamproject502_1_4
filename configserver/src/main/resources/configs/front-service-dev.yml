@@ -8,3 +8,8 @@ spring:
   web:
     resources:
       staticLocations: file:src/main/resources/static/
+
+  # 타임리프 설정
+  thymeleaf:
+    cache: false
+    prefix: file:src/main/resources/templates/

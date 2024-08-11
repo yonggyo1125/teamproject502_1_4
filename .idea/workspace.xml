@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="317a578c-a399-4490-aff6-243ef2dcacfa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/4조.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/org/g9project4/config/controllers/ApiConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/org/g9project4/config/controllers/ApiConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/templates/config/api.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/templates/config/api.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +57,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "social",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/포트폴리오(p-4)/4조"
   }
