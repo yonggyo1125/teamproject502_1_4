@@ -4,6 +4,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.Setter;
+import org.g9project4.global.Utils;
 import org.g9project4.member.controllers.RequestLogin;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
@@ -11,7 +13,10 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 
 import java.io.IOException;
 
+@Setter
 public class LoginFailureHandler implements AuthenticationFailureHandler {
+
+    private Utils utils;
 
     //로그인 실패 시에 유입 되는 메서드
     @Override
@@ -42,6 +47,6 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         session.setAttribute("requestLogin", form);
 
         //로그인 실패시 로그인 페이지 이동
-        response.sendRedirect(request.getContextPath() + "/member/login");
+        response.sendRedirect(utils.redirectUrl("/member/login"));
     }
 }

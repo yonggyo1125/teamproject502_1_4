@@ -3,7 +3,7 @@
 layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
     <h1 th:text="#{로그인}"></h1>
-    <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off" th:object="${requestLogin}">
+    <form name="frmLogin" method="post" th:action="${@utils.redirectUrl('/member/login')}" autocomplete="off" th:object="${requestLogin}">
         <input type="hidden" name="redirectUrl" th:field="*{redirectUrl}">
         <dl>
             <dt th:text="#{이메일}"></dt>
