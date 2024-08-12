@@ -18,7 +18,7 @@ import java.io.Serializable;
 public abstract class BaseMemberEntity extends BaseEntity implements Serializable {// 로그인한 사용자
     @CreatedBy
     @Column(updatable = false, length = 65)
-    private String createBy;
+    private String createdBy;
 
     @LastModifiedBy
     @Column(length = 65, insertable = false)
