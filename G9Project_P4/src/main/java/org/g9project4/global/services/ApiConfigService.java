@@ -16,7 +16,9 @@ public class ApiConfigService {
     private Map<String, String> configs;
 
     public String get(String code) {
-      return configs == null ? "" : Objects.requireNonNullElse(configs.get(code), "");
+
+        Map<String, String> configs = getAll();
+        return configs == null ? "" : Objects.requireNonNullElse(configs.get(code), "");
     }
 
     private Map<String, String> getAll() {
