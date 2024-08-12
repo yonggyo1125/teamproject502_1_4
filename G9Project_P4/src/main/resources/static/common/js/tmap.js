@@ -1,6 +1,7 @@
 const tmapLib = {
     departure: null, // 출발지 LatLng 객체
     arrival: null, // 도착지 latLng 객체
+    markers: [], // 마커
     load(mapId, width, height, zoom) {
         navigator.geolocation.getCurrentPosition((pos) => {
             const { latitude, longitude } = pos.coords;
@@ -24,6 +25,9 @@ const tmapLib = {
             map.addListener("click", function(e) {
                 if (!tmapLib.departure) { // 출발지 좌표 객체
                     tmapLib.departure = e.latLng;
+                    const opt = { position : e.latLng, map }
+                    const marker = new Tmapv2.Marker(opt);
+                    tmapLib.markers.push(marker);
 
                 } else if (tmapLib.departure && !tmapLib.arrival) { // 도착지 좌표
                     tmapLib.arrival = e.latLng;
