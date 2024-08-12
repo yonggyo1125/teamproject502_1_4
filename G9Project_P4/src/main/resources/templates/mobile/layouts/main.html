@@ -18,6 +18,8 @@
           th:each="cssFile: ${addCss}" th:href="${@utils.url(#strings.concat('/mobile/css/', cssFile, '.css'))}">
     <th:block layout:fragment="addCss"></th:block>
 
+    <script th:if="${tmapJavascriptKey != null}" th:src="${'https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=' + tmapJavascriptKey}"></script>
+
     <script th:src="${@utils.url('/common/js/common.js')}"></script>
     <script th:src="${@utils.url('/mobile/js/common.js')}"></script>
 
