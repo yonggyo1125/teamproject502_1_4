@@ -3,7 +3,15 @@ const tmapLib = {
     arrival: null, // 도착지 latLng 객체
     markers: [], // 마커
     resultDrawArr: [],
+    mapId: null,
+    width: '100%',
+    height: '400px',
+    zoom: 17,
     load(mapId, width, height, zoom) {
+        this.mapId = mapId;
+        this.width = width;
+        this.height = height;
+        this.zoom = zoom;
         navigator.geolocation.getCurrentPosition((pos) => {
             const { latitude, longitude } = pos.coords;
 
@@ -59,7 +67,6 @@ const tmapLib = {
         const { ajaxLoad } = commonLib;
 
         const { departure, arrival } = this;
-        console.log(departure._lat, departure._lng);
 
         const data = {
            startX : departure._lng,
@@ -147,7 +154,7 @@ const tmapLib = {
                     }
                 } // endfor
 
-                tmapLib.drawLine(drawInfoArr);
+                tmapLib.drawLine(drawInfoArr, map);
 
             } catch (err) {
                 console.error(err);
@@ -162,5 +169,23 @@ const tmapLib = {
         	map : map
         });
         this.resultDrawArr.push(polyline_);
+    },
+    /**
+    * 초기화
+    *
+    */
+    reset() {
+        this.departure = this.arrival = null;
+        this.markers.forEach(m => {
+            try {
+                m?.setMap(null);
+            } catch (e) {}
+        });
+        this.resultDrawArr.forEach(d => {
+            try {
+                d?.setMap(null);
+            } catch (e) {}
+        });
+        this.markers = this.resultDrawArr = [];
     }
 };
