@@ -5,7 +5,6 @@ import org.g9project4.config.services.ConfigInfoService;
 import org.g9project4.global.SHA256;
 import org.springframework.stereotype.Service;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 @Service
@@ -14,12 +13,14 @@ public class PaymentConfigService {
     private final ConfigInfoService infoService;
 
     public PaymentConfig get(long oid, int price) {
-        PaymentConfig config = infoService.get("payment", PaymentConfig.class)
-                .orElseGet(PaymentConfig::new);
-        long timestamp = new Date().getTime();
-        String signKey = config.getSignKey();
-
         try {
+            PaymentConfig config = infoService.get("payment", PaymentConfig.class)
+                .orElseGet(PaymentConfig::new);
+
+            long timestamp = new Date().getTime();
+             String signKey = config.getSignKey();
+
+
             // signature S
             String data = String.format("oid=%d&price=%d&timestamp=%d", oid, price, timestamp);
             String signature = SHA256.encrypt(data);
@@ -36,12 +37,14 @@ public class PaymentConfigService {
             String mKey = SHA256.encrypt(signKey);
             config.setMKey(mKey);
 
-        } catch (NoSuchAlgorithmException e) {
+            config.setTimestamp(timestamp);
+            return config;
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        config.setTimestamp(timestamp);
-        return config;
+        return null;
     }
 
 
