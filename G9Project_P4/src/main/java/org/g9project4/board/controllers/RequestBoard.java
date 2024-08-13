@@ -9,7 +9,10 @@ import java.util.UUID;
 public class RequestBoard {
     private Long seq; // 글 번호 - 글 수정시 필요
     private String mode = "write"; // write : 글 작성, update - 글 수정
+
+    @NotBlank
     private String bid; // 게시판 ID
+
     private String gid = UUID.randomUUID().toString();
 
     private boolean notice; // 공지글 여부

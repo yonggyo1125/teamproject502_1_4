@@ -44,5 +44,19 @@ public class BoardValidator implements Validator, PasswordValidator {
                 }
             }
         }
+
+        /**
+         * 글 수정 모드인 경우에는 seq 필수
+         */
+        String mode = form.getMode();
+        mode = StringUtils.hasText(mode) ? mode : "write";
+        if (mode.equals("update") && (form.getSeq() == null || form.getSeq() < 1L)) {
+            errors.rejectValue("seq", "NotBlank");
+        }
+
+        // 공지글은 관리자만 작성 가능, 관리자가 아닌 경우 false로 고정
+        if (!memberUtil.isAdmin()) {
+            form.setNotice(false);
+        }
     }
 }
