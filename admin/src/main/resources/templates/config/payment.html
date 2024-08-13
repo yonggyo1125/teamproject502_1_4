@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+
+<section layout:fragment="content">
+    <div th:replace="~{common/_message::message}"></div>
+    <h1>결제 설정</h1>
+
+    <form name="frmSave" method="POST" th:action="${@utils.redirectUrl('/config/payment')}" th:object="${paymentConfig}" autocomplete="off">
+        <table class="table_cols">
+            <tr>
+                <th width="180">상점 아이디(MID)</th>
+                <td>
+                    <input type="text" name="mid" th:field="*{mid}">
+                </td>
+            </tr>
+            <tr>
+                <th>사인키(SignKey)</th>
+                <td>
+                    <input type="text" name="signKey" th:field="*{signKey}">
+                </td>
+            </tr>
+            <tr>
+                <th>결제 수단</th>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+
+</section>
+</html>

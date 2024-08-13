@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.g9project4.config.service.ConfigInfoService;
 import org.g9project4.config.service.ConfigSaveService;
 import org.g9project4.global.exceptions.ExceptionProcessor;
-import org.g9project4.menus.Menu;
-import org.g9project4.menus.MenuDetail;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,30 +11,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 
 @Controller
 @RequestMapping("/config")
 @RequiredArgsConstructor
-public class BasicConfigController implements ExceptionProcessor {
+public class BasicConfigController implements ExceptionProcessor, CommonConfig {
 
     private final ConfigSaveService saveService;
     private final ConfigInfoService infoService;
 
-    @ModelAttribute("menuCode")
-    public String getMenuCode() {
-        return "config";
-    }
-
     @ModelAttribute("subMenuCode")
     public String getSubMenuCode() {
         return "basic";
-    }
-
-    @ModelAttribute("subMenus")
-    public List<MenuDetail> getSubMenus() {
-        return Menu.getMenus("config");
     }
 
     @ModelAttribute("pageTitle")

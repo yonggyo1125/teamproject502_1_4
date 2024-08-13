@@ -13,8 +13,9 @@ public class Menu {
         menus = new HashMap<>();
 
         menus.put("config", Arrays.asList(
-                new MenuDetail("basic", "기본설정", "/config"),
-                new MenuDetail("api", "API 설정", "/config/api")
+                new MenuDetail("basic", "기본 설정", "/config"),
+                new MenuDetail("api", "API 설정", "/config/api"),
+                new MenuDetail("payment", "결제 설정", "/config/payment")
         ));
 
         menus.put("member", Arrays.asList(
