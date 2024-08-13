@@ -14,8 +14,6 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class MemberUtil {
-    //private final HttpSession session;
-    //private final MemberInfoService infoService;
 
     public boolean isLogin() {
         return getMember() != null;
@@ -33,12 +31,8 @@ public class MemberUtil {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication.isAuthenticated() && authentication.getPrincipal() instanceof MemberInfo memberInfo) {
-            /*
-            if (session.getAttribute("userInfoChanged") != null) { // 회원 정보를 변경한 경우
-                memberInfo = (MemberInfo)infoService.loadUserByUsername(memberInfo.getEmail());
-            }
-            */
+        if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof MemberInfo memberInfo) {
+
             return memberInfo.getMember();
         }
 
