@@ -21,11 +21,9 @@ public class BoardData extends BaseEntity {
     private String gid;
 
     @JoinColumn(name="bid")
-    @Column(updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
 
-    @Column(updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 

@@ -81,6 +81,8 @@ public class BoardSaveService {
         }
         /* 글작성, 글 수정 공통 E */
 
+        // 게시글 저장 처리
+        boardDataRepository.saveAndFlush(data);
 
         // 파일 업로드 완료 처리
         doneService.process(gid);
