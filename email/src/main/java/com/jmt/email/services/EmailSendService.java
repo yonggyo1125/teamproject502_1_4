@@ -68,7 +68,7 @@ public class EmailSendService {
                             .message(message.getMessage())
                             .build();
 
-           // historyService.save(history);
+            historyService.save(history);
 
             return true;
         } catch (MessagingException e) {

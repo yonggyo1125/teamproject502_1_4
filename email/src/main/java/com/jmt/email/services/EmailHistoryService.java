@@ -14,6 +14,4 @@ public class EmailHistoryService {
     public void save(EmailHistory history) {
         repository.saveAndFlush(history);
     }
-
-
 }
