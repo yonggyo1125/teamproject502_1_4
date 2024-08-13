@@ -23,9 +23,19 @@
             </tr>
             <tr>
                 <th>결제 수단</th>
-                <td></td>
+                <td>
+                    <th:block  th:each="pay : ${payMethods}">
+                        <input type="checkbox" name="payMethods" th:value="${pay[0]}" th:id="${'pay_' + pay[0]}" th:field="*{payMethods}">
+                        <label th:for="${'pay_' + pay[0]}" th:text="${#messages.msg(pay[1])}"></label>
+                    </th:block>
+
+                </td>
             </tr>
         </table>
+        <div class="submit_btns">
+            <button type="reset" class="btn">다시입력</button>
+            <button type="submit" class="btn">저장하기</button>
+        </div>
     </form>
 
 </section>
