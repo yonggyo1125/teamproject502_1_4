@@ -1,5 +1,6 @@
 package org.g9project4.board.controllers;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.util.UUID;
@@ -14,8 +15,16 @@ public class RequestBoard {
     private boolean notice; // 공지글 여부
 
     private String category;
-    private String poster;
+
+    @NotBlank
+    private String poster; // 작성자
+
+    private String guestPw; // 비회원 비밀번호(수정, 삭제)
+
+    @NotBlank
     private String subject;
+
+    @NotBlank
     private String content;
 
     private Long num1;
