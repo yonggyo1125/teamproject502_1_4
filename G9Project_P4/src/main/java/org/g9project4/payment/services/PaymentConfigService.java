@@ -12,10 +12,14 @@ import java.util.Date;
 public class PaymentConfigService {
     private final ConfigInfoService infoService;
 
-    public PaymentConfig get(long oid, int price) {
+    public PaymentConfig get(Long oid, Integer price) {
         try {
             PaymentConfig config = infoService.get("payment", PaymentConfig.class)
                 .orElseGet(PaymentConfig::new);
+
+            if (oid == null || price == null) {
+                return config;
+            }
 
             long timestamp = new Date().getTime();
              String signKey = config.getSignKey();
@@ -47,5 +51,7 @@ public class PaymentConfigService {
         return null;
     }
 
-
+    public PaymentConfig get() {
+        return get(null, null);
+    }
 }

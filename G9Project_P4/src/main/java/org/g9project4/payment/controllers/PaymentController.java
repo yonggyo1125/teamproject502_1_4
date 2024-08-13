@@ -1,6 +1,8 @@
 package org.g9project4.payment.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.g9project4.global.exceptions.ExceptionProcessor;
+import org.g9project4.payment.services.PaymentProcessService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,13 +11,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/payment")
+@RequiredArgsConstructor
 public class PaymentController implements ExceptionProcessor {
+
+    private final PaymentProcessService processService;
 
     @ResponseBody
     @PostMapping("/process")
     public void process(PayAuthResult result) {
 
-        System.out.println(result);
+        processService.process(result);
+
     }
 
     @RequestMapping("/close")

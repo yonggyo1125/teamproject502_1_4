@@ -22,8 +22,6 @@ public class MainController {
 
         PaymentConfig config = configService.get(oid, price);
 
-        System.out.println(config);
-
         model.addAttribute("config", config);
         model.addAttribute("oid", oid);
         model.addAttribute("price", price);
