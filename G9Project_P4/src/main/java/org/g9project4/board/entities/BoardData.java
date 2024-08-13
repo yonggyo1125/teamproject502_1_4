@@ -12,6 +12,7 @@ import org.g9project4.member.entities.Member;
 @Entity
 @Builder
 @NoArgsConstructor @AllArgsConstructor
+@Table(indexes = @Index(name="idx_board_data", columnList = "notice DESC, createdAt DESC"))
 public class BoardData extends BaseEntity {
     @Id @GeneratedValue
     private Long seq;
