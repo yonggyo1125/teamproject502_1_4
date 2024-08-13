@@ -1,4 +1,4 @@
-package org.g9project4.order.constants;
+package org.g9project4.payment.constants;
 
 import java.util.List;
 

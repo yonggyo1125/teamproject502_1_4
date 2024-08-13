@@ -1,4 +1,4 @@
-package org.g9project4.order.controllers;
+package org.g9project4.payment.controllers;
 
 import org.g9project4.global.exceptions.ExceptionProcessor;
 import org.springframework.stereotype.Controller;
@@ -13,8 +13,9 @@ public class PaymentController implements ExceptionProcessor {
 
     @ResponseBody
     @PostMapping("/process")
-    public void process() {
-        System.out.println("process");
+    public void process(PayAuthResult result) {
+
+        System.out.println(result);
     }
 
     @RequestMapping("/close")

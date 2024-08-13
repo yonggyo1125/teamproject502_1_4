@@ -1,8 +1,8 @@
 package org.g9project4.main;
 
 import lombok.RequiredArgsConstructor;
-import org.g9project4.order.services.PaymentConfig;
-import org.g9project4.order.services.PaymentConfigService;
+import org.g9project4.payment.services.PaymentConfig;
+import org.g9project4.payment.services.PaymentConfigService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

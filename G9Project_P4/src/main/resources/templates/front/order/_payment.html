@@ -6,13 +6,13 @@
         <input type="hidden" name="version" value="1.0">
         <input type="hidden" name="gopaymethod" value="VBank">
         <input type="hidden" name="mid" th:value="${config.mid}">
-        <input type="hidden" name="oid" value="${oid}">
-        <input type="hidden" name="price" value="${price}">
-        <input type="hidden" name="timestamp" value="${config.timestamp}">
+        <input type="hidden" name="oid" th:value="${oid}">
+        <input type="hidden" name="price" th:value="${price}">
+        <input type="hidden" name="timestamp" th:value="${config.timestamp}">
         <input type="hidden" name="use_chkfake" value="Y">
-        <input type="hidden" name="signature" value="${config.signature}">
-        <input type="hidden" name="verification" value="${config.verification}">
-        <input type="hidden" name="mKey" value="${config.mKey}}">
+        <input type="hidden" name="signature" th:value="${config.signature}">
+        <input type="hidden" name="verification" th:value="${config.verification}">
+        <input type="hidden" name="mKey" th:value="${config.mKey}">
         <input type="hidden" name="currency" value="WON">
         <input type="hidden" name="goodname" value="좋은 상품">
         <input type="hidden" name="buyername" value="주문자">

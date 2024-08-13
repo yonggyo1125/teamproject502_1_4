@@ -1,4 +1,4 @@
-package org.g9project4.order.services;
+package org.g9project4.payment.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

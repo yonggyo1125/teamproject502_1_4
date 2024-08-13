@@ -1,4 +1,4 @@
-package org.g9project4.order.services;
+package org.g9project4.payment.services;
 
 import lombok.RequiredArgsConstructor;
 import org.g9project4.config.services.ConfigInfoService;
