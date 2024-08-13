@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="payform">
+    <script src="https://stdpay.inicis.com/stdjs/INIStdPay.js"></script>
+    <form id="inicisForm" method="POST">
+        <input type="hidden" name="version" value="1.0">
+        <input type="hidden" name="gopaymethod" value="VBank">
+        <input type="hidden" name="mid" value="">
+        <input type="hidden" name="oid" value="">
+        <input type="hidden" name="price" value="">
+        <input type="hidden" name="timestamp" value="">
+        <input type="hidden" name="use_chkfake" value="Y">
+        <input type="hidden" name="signature" value="">
+        <input type="hidden" name="verification" value="">
+        <input type="hidden" name="mKey" value="">
+        <input type="hidden" name="currency" value="WON">
+        <input type="hidden" name="goodname" value="">
+        <input type="hidden" name="buyername" value="">
+        <input type="hidden" name="buyertel" value="">
+        <input type="hidden" name="buyeremail" value="">
+        <input type="hidden" name="returnUrl" value="">
+        <input type="hidden" name="closeUrl" value="">
+        <input type="hidden" name="acceptmethod" value="below1000">
+    </form>
+</th:block>
+</html>

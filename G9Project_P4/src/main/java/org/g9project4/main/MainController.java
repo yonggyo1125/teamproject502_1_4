@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
     @GetMapping
     public String index(HttpSession session) {
-        session.setAttribute("test", "value");
+
         return "front/main/index";
     }
 }

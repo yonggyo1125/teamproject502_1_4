@@ -4,5 +4,7 @@
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
     <h1>메인페이지</h1>
+
+    <th:block th:replace="~{order/_payment:payform}"></th:block>
 </main>
 </html>
