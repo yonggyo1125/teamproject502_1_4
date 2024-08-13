@@ -17,13 +17,15 @@ public class BoardData extends BaseEntity {
     @Id @GeneratedValue
     private Long seq;
 
-    @Column(length=65, nullable = false)
+    @Column(length=65, nullable = false, updatable = false)
     private String gid;
 
     @JoinColumn(name="bid")
+    @Column(updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
 
+    @Column(updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
@@ -48,9 +50,10 @@ public class BoardData extends BaseEntity {
     private int viewCount; // 조회수
     private boolean editorView; // 에디터를 사용해서 글 작성했는지 여부
 
-    @Column(length=20)
+    @Column(length=20, updatable = false)
     private String ip; // IP 주소
 
+    @Column(updatable = false)
     private String ua; // User-Agent
 
     private Long num1; // 정수 추가 필드1
