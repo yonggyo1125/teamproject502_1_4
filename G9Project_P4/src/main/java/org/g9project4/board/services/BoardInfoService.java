@@ -24,6 +24,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -45,6 +46,9 @@ public class BoardInfoService {
         int limit = search.getLimit();
         int offset = (page - 1) * limit;
 
+        // 삭제가 되지 않은 게시글 목록이 기본 값
+        status = Objects.requireNonNullElse(status, DeleteStatus.UNDELETED);
+
         String sopt = search.getSopt();
         String skey = search.getSkey();
 
@@ -54,6 +58,15 @@ public class BoardInfoService {
         /* 검색 처리 S */
         QBoardData boardData = QBoardData.boardData;
         BooleanBuilder andBuilder = new BooleanBuilder();
+
+        // 삭제, 미삭제 게시글 조회 처리
+        if (status != DeleteStatus.ALL) {
+            if (status == DeleteStatus.UNDELETED) {
+                andBuilder.and(boardData.deletedAt.isNull()); // 미삭된 게시글
+            } else {
+                andBuilder.and(boardData.deletedAt.isNotNull()); // 삭제된 게시글
+            }
+        }
 
         if (bid != null && StringUtils.hasText(bid.trim())) { // 게시판별 조회
             bids = List.of(bid);
@@ -184,7 +197,30 @@ public class BoardInfoService {
      */
     public BoardData get(Long seq, DeleteStatus status) {
 
-        BoardData item = repository.findById(seq).orElseThrow(BoardDataNotFoundException::new);
+        BooleanBuilder andBuilder = new BooleanBuilder();
+        QBoardData boardData = QBoardData.boardData;
+        andBuilder.and(boardData.seq.eq(seq));
+
+        // 삭제, 미삭제 게시글 조회 처리
+        if (status != DeleteStatus.ALL) {
+            if (status == DeleteStatus.UNDELETED) {
+                andBuilder.and(boardData.deletedAt.isNull()); // 미삭된 게시글
+            } else {
+                andBuilder.and(boardData.deletedAt.isNotNull()); // 삭제된 게시글
+            }
+        }
+
+        BoardData item = queryFactory.selectFrom(boardData)
+                .leftJoin(boardData.board)
+                .fetchJoin()
+                .leftJoin(boardData.member)
+                .fetchJoin()
+                .where(andBuilder)
+                .fetchFirst();
+
+        if (item == null) {
+            throw new BoardDataNotFoundException();
+        }
 
         // 추가 데이터 처리
         addInfo(item);
