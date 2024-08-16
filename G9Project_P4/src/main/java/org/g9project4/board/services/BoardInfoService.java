@@ -76,8 +76,9 @@ public class BoardInfoService {
             /* 이름 검색 E */
 
             if (sopt.equals("ALL")) { // 통합 검색
-                condition = boardData.subject.concat(boardData.content)
-                        .contains(skey);
+                 orBuilder.or(boardData.subject.concat(boardData.content)
+                        .contains(skey))
+                         .or(nameCondition);
 
 
 
