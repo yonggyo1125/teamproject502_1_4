@@ -65,6 +65,34 @@ public class BoardInfoService {
             skey = skey.trim();
             BooleanExpression condition = null;
 
+            BooleanBuilder orBuilder = new BooleanBuilder();
+
+            /* 이름 검색 S */
+            BooleanBuilder nameCondition = new BooleanBuilder();
+            nameCondition.or(boardData.poster.contains(skey));
+            if (boardData.member != null) {
+                nameCondition.or(boardData.member.userName.contains(skey));
+            }
+            /* 이름 검색 E */
+
+            if (sopt.equals("ALL")) { // 통합 검색
+                condition = boardData.subject.concat(boardData.content)
+                        .contains(skey);
+
+
+
+            } else if (sopt.equals("SUBJECT")) { // 제목 검색
+                condition = boardData.subject.contains(skey);
+            } else if (sopt.equals("CONTENT")) { // 내용 검색
+                condition = boardData.content.contains(skey);
+            } else if (sopt.contains("SUBJECT_CONTENT")) { // 제목 + 내용 검색
+                condition = boardData.subject.concat(boardData.content)
+                        .contains(skey);
+            } else if (sopt.equals("NAME")) {
+
+
+            }
+
         }
 
         /* 검색 처리 E */
