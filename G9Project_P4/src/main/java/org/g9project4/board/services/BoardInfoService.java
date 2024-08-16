@@ -1,7 +1,10 @@
 package org.g9project4.board.services;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.board.controllers.BoardDataSearch;
@@ -80,8 +83,6 @@ public class BoardInfoService {
                         .contains(skey))
                          .or(nameCondition);
 
-
-
             } else if (sopt.equals("SUBJECT")) { // 제목 검색
                 condition = boardData.subject.contains(skey);
             } else if (sopt.equals("CONTENT")) { // 내용 검색
@@ -90,13 +91,31 @@ public class BoardInfoService {
                 condition = boardData.subject.concat(boardData.content)
                         .contains(skey);
             } else if (sopt.equals("NAME")) {
-
-
+                andBuilder.and(nameCondition);
             }
 
+            if (condition != null) andBuilder.and(condition);
+            andBuilder.and(orBuilder);
         }
 
         /* 검색 처리 E */
+
+        /* 정렬 처리 S */
+        String sort = search.getSort();
+
+        PathBuilder<BoardData> pathBuilder = new PathBuilder<>(BoardData.class, "boardData");
+        OrderSpecifier orderSpecifier = null;
+        Order order = Order.DESC;
+        if (sort != null && StringUtils.hasText(sort.trim())) {
+            // 정렬항목_방향   예) viewCount_DESC -> 조회수가 많은 순으로 정렬
+            String[] _sort = sort.split("_");
+            if (_sort[1].toUpperCase().equals("ASC")) {
+                order = Order.ASC;
+            }
+
+            orderSpecifier = new OrderSpecifier(order, pathBuilder.get(_sort[0]));
+        }
+        /* 정렬 처리 E */
 
         return null;
     }
