@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 public class BoardDataSearch extends CommonSearch {
 
+    private int limit;
+
     private String bid; // 게시판 ID
     private List<String> bids; // 게시한 ID 여러개
 

@@ -1,5 +1,6 @@
 package org.g9project4.board.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -100,6 +101,7 @@ public class Board extends BaseMemberEntity {
      *
      * @return
      */
+    @JsonIgnore
     public List<String> getCategories() {
         List<String> categories = new ArrayList<>();
 

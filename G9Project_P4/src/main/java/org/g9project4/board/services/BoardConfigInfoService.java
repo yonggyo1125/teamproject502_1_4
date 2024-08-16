@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class BoardConfigInfoService {
@@ -23,26 +25,26 @@ public class BoardConfigInfoService {
      * @param bid
      * @return
      */
-    public Board get(String bid) {
+    public Optional<Board> get(String bid) {
         try {
             String url = utils.adminUrl("/api/board/config/" + bid);
             ResponseEntity<JSONData> response = restTemplate.getForEntity(url, JSONData.class);
             if (response.getStatusCode().isSameCodeAs(HttpStatus.OK)) {
                 JSONData jsonData = response.getBody();
                 if (!jsonData.isSuccess()) {
-                    return null;
+                    return Optional.empty();
                 }
 
                 Object data = jsonData.getData();
 
                 Board board = om.readValue(om.writeValueAsString(data), Board.class);
 
-                return board;
+                return Optional.ofNullable(board);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return null;
+        return Optional.empty();
     }
 }

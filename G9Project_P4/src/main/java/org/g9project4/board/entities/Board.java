@@ -1,5 +1,6 @@
 package org.g9project4.board.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(indexes = @Index(name="idx_board_basic", columnList = "listOrder DESC, createdAt DESC"))
 public class Board extends BaseMemberEntity {
     @Id

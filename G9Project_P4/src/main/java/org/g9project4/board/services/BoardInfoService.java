@@ -10,12 +10,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.board.controllers.BoardDataSearch;
 import org.g9project4.board.controllers.RequestBoard;
+import org.g9project4.board.entities.Board;
 import org.g9project4.board.entities.BoardData;
 import org.g9project4.board.entities.QBoardData;
 import org.g9project4.board.exceptions.BoardDataNotFoundException;
+import org.g9project4.board.exceptions.BoardNotFoundException;
 import org.g9project4.board.repositories.BoardDataRepository;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Pagination;
+import org.g9project4.global.Utils;
 import org.g9project4.global.constants.DeleteStatus;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -33,7 +36,9 @@ public class BoardInfoService {
 
     private final JPAQueryFactory queryFactory;
     private final BoardDataRepository repository;
+    private final BoardConfigInfoService configInfoService;
     private final HttpServletRequest request;
+    private final Utils utils;
 
     /**
      * 게시글 목록 조회
@@ -42,8 +47,17 @@ public class BoardInfoService {
      */
     public ListData<BoardData> getList(BoardDataSearch search, DeleteStatus status) {
 
+
+        String bid = search.getBid();
+        List<String> bids = search.getBids(); // 게시판 여러개 조회
+
+        // 게시판 설정 조회
+        Board board = bid != null && StringUtils.hasText(bid.trim()) ? configInfoService.get(bid.trim()).orElseThrow(BoardNotFoundException::new) : new Board();
+
         int page = Math.max(search.getPage(), 1);
         int limit = search.getLimit();
+        limit = limit > 0 ? limit : board.getRowsPerPage();
+
         int offset = (page - 1) * limit;
 
         // 삭제가 되지 않은 게시글 목록이 기본 값
@@ -52,8 +66,7 @@ public class BoardInfoService {
         String sopt = search.getSopt();
         String skey = search.getSkey();
 
-        String bid = search.getBid();
-        List<String> bids = search.getBids(); // 게시판 여러개 조회
+
 
         /* 검색 처리 S */
         QBoardData boardData = QBoardData.boardData;
@@ -168,7 +181,9 @@ public class BoardInfoService {
         long total = repository.count(andBuilder);
 
         // 페이징 처리
-        Pagination pagination = new Pagination(page, (int)total, 10, limit, request);
+        int ranges = utils.isMobile() ? board.getPageCountMobile() : board.getPageCountPc();
+
+        Pagination pagination = new Pagination(page, (int)total, ranges, limit, request);
 
         return new ListData<>(items, pagination);
     }
