@@ -16,6 +16,7 @@ import org.g9project4.board.exceptions.BoardDataNotFoundException;
 import org.g9project4.board.repositories.BoardDataRepository;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Pagination;
+import org.g9project4.global.constants.DeleteStatus;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +39,7 @@ public class BoardInfoService {
      *
      * @return
      */
-    public ListData<BoardData> getList(BoardDataSearch search) {
+    public ListData<BoardData> getList(BoardDataSearch search, DeleteStatus status) {
 
         int page = Math.max(search.getPage(), 1);
         int limit = search.getLimit();
@@ -166,10 +167,14 @@ public class BoardInfoService {
      * @param search
      * @return
      */
-    public ListData<BoardData> getList(String bid, BoardDataSearch search) {
+    public ListData<BoardData> getList(String bid, BoardDataSearch search, DeleteStatus status) {
         search.setBid(bid);
 
-        return getList(search);
+        return getList(search, status);
+    }
+
+    public ListData<BoardData> getList(String bid, BoardDataSearch search) {
+        return getList(bid, search, DeleteStatus.UNDELETED);
     }
 
     /**
@@ -177,7 +182,7 @@ public class BoardInfoService {
      * @param seq
      * @return
      */
-    public BoardData get(Long seq) {
+    public BoardData get(Long seq, DeleteStatus status) {
 
         BoardData item = repository.findById(seq).orElseThrow(BoardDataNotFoundException::new);
 
@@ -187,14 +192,18 @@ public class BoardInfoService {
         return item;
     }
 
+    public BoardData get(Long seq) {
+        return get(seq, DeleteStatus.UNDELETED);
+    }
+
     /**
      * BoardData 엔티티 -> RequestBoard 커맨드 객체로 변환
      *
      * @param seq
      * @return
      */
-    public RequestBoard getForm(Long seq) {
-        BoardData item = get(seq);
+    public RequestBoard getForm(Long seq, DeleteStatus status) {
+        BoardData item = get(seq, status);
 
         return getForm(item);
     }
