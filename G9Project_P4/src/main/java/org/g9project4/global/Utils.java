@@ -44,6 +44,11 @@ public class Utils { // 빈의 이름 - utils
         return fromGateway ? request.getScheme() + "://" + gatewayHost + "/app" + url : request.getContextPath() + url;
     }
 
+    public String adminUrl(String url) {
+        List<ServiceInstance> instances = discoveryClient.getInstances("admin-service");
+        return String.format("%s%s", instances.get(0).getUri().toString(), url);
+    }
+
     public Map<String, List<String>> getErrorMessages(Errors errors) {//JSON 받을 때는 에러를 직접 가공
         // FieldErrors
 
