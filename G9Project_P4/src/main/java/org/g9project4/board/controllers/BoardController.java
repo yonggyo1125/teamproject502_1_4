@@ -111,8 +111,16 @@ public class BoardController implements ExceptionProcessor {
             // 글쓰기, 수정
             // 파일 업로드, 에디터 - 공통
             // form.js
-            addCommonScript.add("fileManager");
-            addCommonScript.add("ckeditor5/ckeditor");
+            // 파일 첨부, 에디터 이미지 첨부를 사용하는 경우
+            if (board.isUseUploadFile() || board.isUseUploadImage()) {
+                addCommonScript.add("fileManager");
+            }
+
+            // 에디터 사용의 경우
+            if (board.isUseEditor()) {
+                addCommonScript.add("ckeditor5/ckeditor");
+            }
+
             addScript.add("board/" + skin + "/form");
         }
 
