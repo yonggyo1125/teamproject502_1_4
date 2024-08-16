@@ -21,7 +21,7 @@ public class BoardInfoService {
      *
      * @return
      */
-    private ListData<BoardData> getList() {
+    public ListData<BoardData> getList() {
 
         return null;
     }
@@ -32,7 +32,7 @@ public class BoardInfoService {
      * @param seq
      * @return
      */
-    private BoardData get(Long seq) {
+    public BoardData get(Long seq) {
 
         return null;
     }
