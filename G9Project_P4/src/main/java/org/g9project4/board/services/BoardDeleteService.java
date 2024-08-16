@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.g9project4.board.entities.BoardData;
 import org.g9project4.board.repositories.BoardDataRepository;
 import org.g9project4.file.services.FileDeleteService;
+import org.g9project4.global.constants.DeleteStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +34,7 @@ public class BoardDeleteService {
 
     @Transactional
     public BoardData complete(Long seq) {
-        BoardData data = infoService.get(seq);
+        BoardData data = infoService.get(seq, DeleteStatus.ALL);
 
         String gid = data.getGid();
 
