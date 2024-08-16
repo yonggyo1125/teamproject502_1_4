@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="pageTitle" class="page-title">
+        <h1>
+            <a th:href="${utils.redirectUrl('/board/list/' + board.bid)}" th:text="${board.bName}"></a>
+        </h1>
+    </div>
+</html>
