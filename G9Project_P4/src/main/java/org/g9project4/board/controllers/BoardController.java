@@ -3,6 +3,7 @@ package org.g9project4.board.controllers;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.board.entities.Board;
 import org.g9project4.board.entities.BoardData;
+import org.g9project4.board.exceptions.BoardNotFoundException;
 import org.g9project4.board.services.BoardConfigInfoService;
 import org.g9project4.board.services.BoardDeleteService;
 import org.g9project4.board.services.BoardInfoService;
@@ -11,7 +12,11 @@ import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.ExceptionProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/board")
@@ -51,7 +56,11 @@ public class BoardController implements ExceptionProcessor {
     public String save(RequestBoard form, Model model) {
         commonProcess(form.getBid(), form.getMode(), model);
 
-        return null;
+
+        // 목록 또는 상세 보기 이동
+        String url = board.getLocationAfterWriting().equals("list") ? "/board/list/" + board.getBid() : "/board/view/" + boardData.getSeq();
+
+        return utils.redirectUrl(url);
     }
 
     @GetMapping("/list/{bid}")
@@ -82,7 +91,35 @@ public class BoardController implements ExceptionProcessor {
      * @param model
      */
     private void commonProcess(String bid, String mode, Model model) {
+        board = configInfoService.get(bid).orElseThrow(BoardNotFoundException::new); // 게시판 설정
 
+        List<String> addCss = new ArrayList<>();
+        List<String> addCommonScript = new ArrayList<>();
+        List<String> addScript = new ArrayList<>();
+
+        mode = mode == null || !StringUtils.hasText(mode.trim()) ? "write" : mode.trim();
+
+        String skin = board.getSkin(); // 스킨
+
+        // 게시판 공통 CSS
+        addCss.add("board/style");
+
+        // 스킨별 공통 CSS
+        addCss.add("board/" + skin + "/style");
+
+        if (mode.equals("write") || mode.equals("update")) {
+            // 글쓰기, 수정
+            // 파일 업로드, 에디터 - 공통
+            // form.js
+            addCommonScript.add("fileManager");
+            addCommonScript.add("ckeditor5/ckeditor");
+            addScript.add("board/" + skin + "/form");
+        }
+
+        model.addAttribute("addCss", addCss);
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addScript", addScript);
+        model.addAttribute("board", board); // 게시판 설정
     }
 
     /**
@@ -95,6 +132,8 @@ public class BoardController implements ExceptionProcessor {
      */
     private void commonProcess(Long seq, String mode, Model model) {
         boardData = infoService.get(seq);
+
+        model.addAttribute("boardData", boardData);
 
         commonProcess(boardData.getBoard().getBid(), mode, model);
     }
