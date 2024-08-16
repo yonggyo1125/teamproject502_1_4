@@ -76,10 +76,13 @@ public class BoardController implements ExceptionProcessor {
         return utils.tpl("board/view");
     }
 
+    // 게시글 삭제
     @GetMapping("/delete/{seq}")
-    public String delete(@PathVariable("seq") Long seq) {
+    public String delete(@PathVariable("seq") Long seq, Model model) {
+        commonProcess(seq, "delete", model);
 
-        return null;
+
+        return utils.redirectUrl("/board/list/" + board.getBid());
     }
 
 
