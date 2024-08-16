@@ -46,7 +46,11 @@ public class BoardController implements ExceptionProcessor {
 
     // 글 수정
     @GetMapping("/update/{seq}")
-    public String update(@PathVariable("seq") Long seq) {
+    public String update(@PathVariable("seq") Long seq, Model model) {
+        commonProcess(seq, "update", model);
+
+        RequestBoard form = infoService.getForm(boardData);
+        model.addAttribute("requestBoard", form);
 
         return utils.tpl("board/update");
     }
@@ -71,7 +75,8 @@ public class BoardController implements ExceptionProcessor {
     }
 
     @GetMapping("/view/{seq}")
-    public String view(@PathVariable("seq") Long seq) {
+    public String view(@PathVariable("seq") Long seq, Model model) {
+        commonProcess(seq, "view", model);
 
         return utils.tpl("board/view");
     }
