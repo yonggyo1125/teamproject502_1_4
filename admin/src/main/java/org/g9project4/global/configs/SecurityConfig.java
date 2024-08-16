@@ -45,7 +45,7 @@ public class SecurityConfig {
         /* 인가(접근 통제) 설정 S*/
         http.authorizeRequests(authorizeRequests -> {
             authorizeRequests
-                    .requestMatchers("/member/**").permitAll()
+                    .requestMatchers("/member/**", "/api/board/config/**").permitAll()
                     .anyRequest().permitAll();
                     //.anyRequest().hasAnyAuthority("ADMIN");
         });
