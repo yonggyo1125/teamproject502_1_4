@@ -3,10 +3,13 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
+    <th:block th:if="${board.skin == 'default'}">
+        <th:block th:replace="~{front/board/default/_update::update}"></th:block>
+    </th:block>
 
-    <th:block th:if="${board.skin == 'default'}" th:replace="~{front/board/default/_update::update}"></th:block>
-
-    <th:block th:if="${board.skin == 'gallery'}" th:replace="~{front/board/gallery/_update::update}"></th:block>
+    <th:block th:if="${board.skin == 'gallery'}">
+        <th:block th:replace="~{front/board/gallery/_update::update}"></th:block>
+    </th:block>
 
 </main>
 </html>
