@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -115,7 +116,29 @@ public class BoardInfoService {
 
             orderSpecifier = new OrderSpecifier(order, pathBuilder.get(_sort[0]));
         }
+
+        List<OrderSpecifier> orderSpecifiers = new ArrayList<>();
+        orderSpecifiers.add(boardData.notice.desc());
+        if (orderSpecifier != null) {
+            orderSpecifiers.add(orderSpecifier);
+        }
+        orderSpecifiers.add(boardData.createdAt.desc());
         /* 정렬 처리 E */
+
+        /* 목록 조회 처리 S */
+        List<BoardData> items = queryFactory
+                .selectFrom(boardData)
+                .leftJoin(boardData.board)
+                .fetchJoin()
+                .leftJoin(boardData.member)
+                .fetchJoin()
+                .where(andBuilder)
+                .orderBy(orderSpecifiers)
+                .offset(offset)
+                .limit(limit)
+                .fetch();
+
+        /* 목록 조회 처리 E */
 
         return null;
     }
