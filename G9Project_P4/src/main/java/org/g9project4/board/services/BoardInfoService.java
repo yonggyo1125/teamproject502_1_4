@@ -133,7 +133,7 @@ public class BoardInfoService {
                 .leftJoin(boardData.member)
                 .fetchJoin()
                 .where(andBuilder)
-                .orderBy(orderSpecifiers)
+                .orderBy(orderSpecifiers.toArray(OrderSpecifier[]::new))
                 .offset(offset)
                 .limit(limit)
                 .fetch();
