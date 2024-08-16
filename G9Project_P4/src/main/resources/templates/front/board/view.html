@@ -4,10 +4,17 @@
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
 
+    <th:block th:if="${board.skin == 'default'}" th:replace="~{front/board/default/_view::view}"></th:block>
+
+    <th:block th:if="${board.skin == 'gallery'}" th:replace="~{front/board/gallery/_view::view}"></th:block>
 
 
     <th:block th:if="${board.useComment}" th:replace="~{front/board/_comment::comment}"></th:block>
 
-    <th:block th:if="${board.showListBelowView}" th:replace="~{front/board/_list_items::items}"></th:block>
+    <th:block th:if="${board.showListBelowView}">
+        <th:block th:if="${board.skin == 'default'}" th:replace="~{front/board/default/_list_items::items}"></th:block>
+
+        <th:block th:if="${board.skin == 'gallery'}" th:replace="~{front/board/gallery/_list_items::items}"></th:block>
+    </th:block>
 </main>
 </html>

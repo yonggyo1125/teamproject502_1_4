@@ -4,5 +4,8 @@
     layout:decorate="~{front/layouts/main}">
     <main layout:fragment="content">
 
+        <th:block th:if="${board.skin == 'default'}" th:replace="~{front/board/default/_write::write}"></th:block>
+
+        <th:block th:if="${board.skin == 'gallery'}" th:replace="~{front/board/gallery/_write::write}"></th:block>
     </main>
 </html>
