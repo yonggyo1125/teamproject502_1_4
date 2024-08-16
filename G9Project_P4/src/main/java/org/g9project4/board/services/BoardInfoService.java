@@ -1,6 +1,7 @@
 package org.g9project4.board.services;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.board.controllers.BoardDataSearch;
@@ -43,9 +44,10 @@ public class BoardInfoService {
         BooleanBuilder andBuilder = new BooleanBuilder();
 
         if (bid != null && StringUtils.hasText(bid.trim())) { // 게시판별 조회
-            andBuilder.and(boardData.board.bid.eq(bid.trim()));
+            bids = List.of(bid);
+        }
 
-        } else if (bids != null && !bids.isEmpty()){ // 게시판 여러개 조회
+        if (bids != null && !bids.isEmpty()){ // 게시판 여러개 조회
             andBuilder.and(boardData.board.bid.in(bids));
         }
 
@@ -60,6 +62,8 @@ public class BoardInfoService {
          */
         sopt = sopt != null && StringUtils.hasText(sopt.trim()) ? sopt.trim() : "ALL";
         if (skey != null && StringUtils.hasText(skey.trim())) {
+            skey = skey.trim();
+            BooleanExpression condition = null;
 
         }
 
