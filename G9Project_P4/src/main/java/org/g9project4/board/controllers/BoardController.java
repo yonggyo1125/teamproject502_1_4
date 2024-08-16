@@ -1,5 +1,6 @@
 package org.g9project4.board.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.board.entities.Board;
 import org.g9project4.board.entities.BoardData;
@@ -8,11 +9,14 @@ import org.g9project4.board.services.BoardConfigInfoService;
 import org.g9project4.board.services.BoardDeleteService;
 import org.g9project4.board.services.BoardInfoService;
 import org.g9project4.board.services.BoardSaveService;
+import org.g9project4.board.validators.BoardValidator;
+import org.g9project4.global.ListData;
 import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.ExceptionProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -26,6 +30,7 @@ public class BoardController implements ExceptionProcessor {
     private final BoardInfoService infoService;
     private final BoardSaveService saveService;
     private final BoardDeleteService deleteService;
+    private final BoardValidator validator;
     private final Utils utils;
 
 
@@ -57,9 +62,16 @@ public class BoardController implements ExceptionProcessor {
 
     // 글 작성, 수정 처리
     @PostMapping("/save")
-    public String save(RequestBoard form, Model model) {
-        commonProcess(form.getBid(), form.getMode(), model);
+    public String save(@Valid RequestBoard form, Errors errors, Model model) {
+        String mode = form.getMode();
+        mode = mode != null && StringUtils.hasText(mode.trim()) ? mode.trim() : "write";
+        commonProcess(form.getBid(), mode, model);
 
+        validator.validate(form, errors);
+
+        if (errors.hasErrors()) {
+            return utils.tpl("board/" + mode);
+        }
 
         // 목록 또는 상세 보기 이동
         String url = board.getLocationAfterWriting().equals("list") ? "/board/list/" + board.getBid() : "/board/view/" + boardData.getSeq();
@@ -70,6 +82,11 @@ public class BoardController implements ExceptionProcessor {
     @GetMapping("/list/{bid}")
     public String list(@PathVariable("bid") String bid, @ModelAttribute BoardDataSearch search, Model model) {
         commonProcess(bid, "list", model);
+
+        ListData<BoardData> data = infoService.getList(bid, search);
+
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
 
         return utils.tpl("board/list");
     }
@@ -86,6 +103,7 @@ public class BoardController implements ExceptionProcessor {
     public String delete(@PathVariable("seq") Long seq, Model model) {
         commonProcess(seq, "delete", model);
 
+        deleteService.delete(seq);
 
         return utils.redirectUrl("/board/list/" + board.getBid());
     }
