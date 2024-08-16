@@ -9,12 +9,14 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.board.controllers.BoardDataSearch;
+import org.g9project4.board.controllers.RequestBoard;
 import org.g9project4.board.entities.BoardData;
 import org.g9project4.board.entities.QBoardData;
 import org.g9project4.board.exceptions.BoardDataNotFoundException;
 import org.g9project4.board.repositories.BoardDataRepository;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Pagination;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -183,6 +185,22 @@ public class BoardInfoService {
         addInfo(item);
 
         return item;
+    }
+
+    /**
+     * BoardData 엔티티 -> RequestBoard 커맨드 객체로 변환
+     *
+     * @param seq
+     * @return
+     */
+    public RequestBoard getForm(Long seq) {
+        BoardData item = get(seq);
+
+        return getForm(item);
+    }
+
+    public RequestBoard getForm(BoardData item) {
+       return new ModelMapper().map(item, RequestBoard.class);
     }
 
     /**
