@@ -84,4 +84,18 @@ public class BoardController implements ExceptionProcessor {
     private void commonProcess(String bid, String mode, Model model) {
 
     }
+
+    /**
+     * 게시글 번호가 경로 변수로 들어오는 공통 처리
+     *  게시판 설정 + 게시글 내용
+     *
+     * @param seq
+     * @param mode
+     * @param model
+     */
+    private void commonProcess(Long seq, String mode, Model model) {
+        boardData = infoService.get(seq);
+
+        commonProcess(boardData.getBoard().getBid(), mode, model);
+    }
 }
