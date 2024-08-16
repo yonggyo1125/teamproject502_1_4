@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+
+
+
+    <th:block th:if="${board.useComment}" th:replace="~{front/board/_comment::comment}"></th:block>
+
+    <th:block th:if="${board.showListBelowView}" th:replace="~{front/board/_list_items::items}"></th:block>
+</main>
+</html>
