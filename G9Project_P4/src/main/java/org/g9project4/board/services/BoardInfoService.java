@@ -205,13 +205,20 @@ public class BoardInfoService {
     public RequestBoard getForm(Long seq, DeleteStatus status) {
         BoardData item = get(seq, status);
 
-        return getForm(item);
+        return getForm(item, status);
     }
 
-    public RequestBoard getForm(BoardData item) {
+    public RequestBoard getForm(BoardData item, DeleteStatus status) {
        return new ModelMapper().map(item, RequestBoard.class);
     }
 
+    public RequestBoard getForm(Long seq) {
+        return getForm(seq, DeleteStatus.UNDELETED);
+    }
+
+    public RequestBoard getForm(BoardData item) {
+        return getForm(item, DeleteStatus.UNDELETED);
+    }
     /**
      *  추가 데이터 처리
      *      - 업로드한 파일 목록
