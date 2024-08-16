@@ -42,8 +42,25 @@ public class BoardInfoService {
         QBoardData boardData = QBoardData.boardData;
         BooleanBuilder andBuilder = new BooleanBuilder();
 
-        if (StringUtils.hasText(bid) && StringUtils.hasText(bid.trim())) { // 게시판별 조회
+        if (bid != null && StringUtils.hasText(bid.trim())) { // 게시판별 조회
             andBuilder.and(boardData.board.bid.eq(bid.trim()));
+
+        } else if (bids != null && !bids.isEmpty()){ // 게시판 여러개 조회
+            andBuilder.and(boardData.board.bid.in(bids));
+        }
+
+        /**
+         * 조건 검색 처리
+         *
+         * sopt - ALL : 통합검색(제목 + 내용 + 글작성자(작성자, 회원명))
+         *       SUBJECT : 제목검색
+         *       CONTENT : 내용검색
+         *       SUBJECT_CONTENT: 제목 + 내용 검색
+         *       NAME : 이름(작성자, 회원명)
+         */
+        sopt = sopt != null && StringUtils.hasText(sopt.trim()) ? sopt.trim() : "ALL";
+        if (skey != null && StringUtils.hasText(skey.trim())) {
+
         }
 
         /* 검색 처리 E */
