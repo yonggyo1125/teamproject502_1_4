@@ -100,6 +100,8 @@ public class BoardController implements ExceptionProcessor {
         List<String> addCommonScript = new ArrayList<>();
         List<String> addScript = new ArrayList<>();
 
+        String pageTitle = board.getBName(); // 게시판명 - title 태그 제목
+
         mode = mode == null || !StringUtils.hasText(mode.trim()) ? "write" : mode.trim();
 
         String skin = board.getSkin(); // 스킨
@@ -127,10 +129,16 @@ public class BoardController implements ExceptionProcessor {
             addScript.add("board/" + skin + "/form");
         }
 
+        // 게시글 제목으로 title을 표시 하는 경우
+        if (List.of("view", "update", "delete").contains(mode)) {
+            pageTitle = boardData.getSubject();
+        }
+
         model.addAttribute("addCss", addCss);
         model.addAttribute("addCommonScript", addCommonScript);
         model.addAttribute("addScript", addScript);
         model.addAttribute("board", board); // 게시판 설정
+        model.addAttribute("pageTitle", pageTitle);
     }
 
     /**
