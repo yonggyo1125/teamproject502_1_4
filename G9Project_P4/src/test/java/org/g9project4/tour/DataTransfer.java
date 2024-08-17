@@ -18,6 +18,6 @@ public class DataTransfer {
         LocalDate edate = LocalDate.now();
         LocalDate sdate = edate.minusMonths(1L);
 
-        service.updateMetcoRegnVisit(1, sdate, edate);
+        service.updateSidoVisit(1, sdate, edate);
     }
 }
