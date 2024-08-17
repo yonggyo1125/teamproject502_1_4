@@ -2,6 +2,7 @@ package org.g9project4.tourvisit.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.g9project4.global.rests.gov.api.ApiBody2;
 import org.g9project4.global.rests.gov.api.ApiResult2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class VisitStatisticService {
      *
      */
     public void updateSidoVisit(String type) {
-        String serviceKey = "RtrIIdYjcb3IXn1a/zF7itGWY5ZFS3IEj85ohFx/snuKG9hYABL5Tn8jEgCEaCw6uEIHvUz30yF4n0GGP6bVIA==";
+
 
         int pageNo = 1;
         type = StringUtils.hasText(type) ? type : "1D";
@@ -44,6 +45,19 @@ public class VisitStatisticService {
             sdate = edate.minusYears(1L);
         }
 
+
+
+        ApiBody2 body = result.getResponse().getBody();
+        int total = body.getTotalCount();
+        int totalPages = (int)Math.ceil(total / 1000.0);
+        List<Map<String, String>> items = body.getItems().getItem();
+        items.forEach(System.out::println);
+    }
+
+    private ApiResult2 getData(int pageNo, LocalDate sdate, LocalDate edate) {
+
+        String serviceKey = "RtrIIdYjcb3IXn1a/zF7itGWY5ZFS3IEj85ohFx/snuKG9hYABL5Tn8jEgCEaCw6uEIHvUz30yF4n0GGP6bVIA==";
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
         String url = String.format("https://apis.data.go.kr/B551011/DataLabService/metcoRegnVisitrDDList?MobileOS=AND&MobileApp=TEST&serviceKey=%s&startYmd=%s&endYmd=%s&numOfRows=1000&pageNo=%d&_type=json", serviceKey, formatter.format(sdate), formatter.format(edate), pageNo);
@@ -51,15 +65,14 @@ public class VisitStatisticService {
         ResponseEntity<ApiResult2> response = restTemplate.getForEntity(URI.create(url), ApiResult2.class);
 
         if (!response.getStatusCode().is2xxSuccessful()) {
-            return;
+            return null;
         }
 
         ApiResult2 result = response.getBody();
         if (!result.getResponse().getHeader().getResultCode().equals("0000")) {
-            return;
+            return null;
         }
 
-        List<Map<String, String>> items = result.getResponse().getBody().getItems().getItem();
-        items.forEach(System.out::println);
+        return result;
     }
 }
