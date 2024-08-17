@@ -14,10 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -93,6 +90,7 @@ public class VisitStatisticService {
             }
         }
 
+        List<SidoVisit> items = new ArrayList<>();
         for (Map.Entry<String, Map<String, Object>> entry : data.entrySet()) {
             String areaCode = entry.getKey();
             Map<String, Object> visitData = entry.getValue();
@@ -132,7 +130,10 @@ public class VisitStatisticService {
                 item.setType3D1(type3);
             }
 
+            items.add(item);
         }
+
+        repository.saveAllAndFlush(items);
 
         // 통계 데이터 업데이트
 
