@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
-
 @SpringBootTest
 public class DataTransfer {
 
@@ -15,9 +13,7 @@ public class DataTransfer {
 
     @Test
     void test1() {
-        LocalDate edate = LocalDate.now();
-        LocalDate sdate = edate.minusMonths(1L);
 
-        service.updateSidoVisit(1, sdate, edate);
+        service.updateSidoVisit("1M");
     }
 }

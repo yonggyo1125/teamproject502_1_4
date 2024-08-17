@@ -11,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -47,7 +49,17 @@ public class VisitStatisticService {
         String url = String.format("https://apis.data.go.kr/B551011/DataLabService/metcoRegnVisitrDDList?MobileOS=AND&MobileApp=TEST&serviceKey=%s&startYmd=%s&endYmd=%s&numOfRows=1000&pageNo=%d&_type=json", serviceKey, formatter.format(sdate), formatter.format(edate), pageNo);
 
         ResponseEntity<ApiResult2> response = restTemplate.getForEntity(URI.create(url), ApiResult2.class);
-        System.out.println(response);
 
+        if (!response.getStatusCode().is2xxSuccessful()) {
+            return;
+        }
+
+        ApiResult2 result = response.getBody();
+        if (!result.getResponse().getHeader().getResultCode().equals("0000")) {
+            return;
+        }
+
+        List<Map<String, String>> items = result.getResponse().getBody().getItems().getItem();
+        items.forEach(System.out::println);
     }
 }
