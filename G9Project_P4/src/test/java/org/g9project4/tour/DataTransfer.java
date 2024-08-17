@@ -1,6 +1,6 @@
 package org.g9project4.tour;
 
-import org.g9project4.tourvisit.services.VisitStatisticService;
+import org.g9project4.tourvisit.services.SidoVisitStatisticService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,11 +9,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class DataTransfer {
 
     @Autowired
-    private VisitStatisticService service;
+    private SidoVisitStatisticService service;
 
     @Test
     void test1() {
-
-        service.updateSidoVisit("1M");
+        service.updateSidoVisit("6M");
+        //service.updateSidoVisit("1M");
     }
 }

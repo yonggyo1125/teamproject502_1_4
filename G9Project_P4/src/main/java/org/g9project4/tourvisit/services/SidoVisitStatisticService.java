@@ -7,6 +7,7 @@ import org.g9project4.global.rests.gov.api.ApiResult2;
 import org.g9project4.tourvisit.entities.SidoVisit;
 import org.g9project4.tourvisit.repositories.SidoVisitRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
@@ -18,7 +19,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class VisitStatisticService {
+public class SidoVisitStatisticService {
     private final RestTemplate restTemplate;
     private final ObjectMapper om;
     private final SidoVisitRepository repository;
@@ -159,5 +160,37 @@ public class VisitStatisticService {
         }
 
         return result;
+    }
+
+
+    // 일별 통계
+    @Scheduled(cron = "0 0 1 * * *")  // 매일 새벽 1시
+    public void updateSidoVisit1D() {
+        updateSidoVisit("1D");
+    }
+
+    @Scheduled(cron = "0 10 1 * * *") // 매일 새벽 1시 10분
+    public void updateSidoVisit1W() {
+        updateSidoVisit("1W");
+    }
+
+    @Scheduled(cron = "0 20 1 * * *") // 매일 새벽 1시 20분
+    public void updateSidoVisit1M() {
+        updateSidoVisit("1M");
+    }
+
+    @Scheduled(cron = "0 30 1 * * *") // 매일 새벽 1시 30분
+    public void updateSidoVisit3M() {
+        updateSidoVisit("3M");
+    }
+
+    @Scheduled(cron = "0 50 1 * * *") // 매일 새벽 1시 50분
+    public void updateSidoVisit6M() {
+        updateSidoVisit("6M");
+    }
+
+    @Scheduled(cron = "0 20 2 * * *") // 매일 새벽 2시 20분
+    public void updateSidoVisit1Y() {
+        updateSidoVisit("1Y");
     }
 }
