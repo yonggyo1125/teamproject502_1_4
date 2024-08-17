@@ -1,5 +1,7 @@
 package org.g9project4.tour;
 
+import org.g9project4.publicData.tour.services.ApiUpdateService;
+import org.g9project4.publicData.tour.services.VisitUpdateService;
 import org.g9project4.tourvisit.services.SidoVisitStatisticService;
 import org.g9project4.tourvisit.services.SigunguVistStatisticService;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,12 @@ public class DataTransfer {
     @Autowired
     private SigunguVistStatisticService service2;
 
+    @Autowired
+    private ApiUpdateService apiUpdateService;
+
+    @Autowired
+    private VisitUpdateService visitUpdateService;
+
     @Test
     void test1() {
         service.updateSidoVisit("6M");
@@ -23,6 +31,12 @@ public class DataTransfer {
 
     @Test
     void test2() {
-        service2.updateVisit("1M");
+        service2.updateVisit("3M");
+    }
+
+    @Test
+    void test3() {
+        //apiUpdateService.update();
+        visitUpdateService.update();
     }
 }

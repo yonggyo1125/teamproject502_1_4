@@ -8,6 +8,7 @@ import org.g9project4.tourvisit.entities.SigunguVisit;
 import org.g9project4.tourvisit.repositories.SidoVisitRepository;
 import org.g9project4.tourvisit.repositories.SigunguVisitRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
@@ -160,5 +161,36 @@ public class SigunguVistStatisticService {
         }
 
         return result;
+    }
+
+    // 일별 통계
+    @Scheduled(cron = "0 0 3 * * *")  // 매일 새벽 1시
+    public void updateVisit1D() {
+        updateVisit("1D");
+    }
+
+    @Scheduled(cron = "0 10 3 * * *") // 매일 새벽 1시 10분
+    public void updateVisit1W() {
+        updateVisit("1W");
+    }
+
+    @Scheduled(cron = "0 20 3 * * *") // 매일 새벽 1시 20분
+    public void updateVisit1M() {
+        updateVisit("1M");
+    }
+
+    @Scheduled(cron = "0 30 3 * * *") // 매일 새벽 1시 30분
+    public void updateVisit3M() {
+        updateVisit("3M");
+    }
+
+    @Scheduled(cron = "0 50 3 * * *") // 매일 새벽 1시 50분
+    public void updateVisit6M() {
+        updateVisit("6M");
+    }
+
+    @Scheduled(cron = "0 20 4 * * *") // 매일 새벽 2시 20분
+    public void updateVisit1Y() {
+        updateVisit("1Y");
     }
 }

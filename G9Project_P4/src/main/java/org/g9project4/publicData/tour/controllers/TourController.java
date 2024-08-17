@@ -1,4 +1,4 @@
-package org.g9project4.tour.controllers;
+package org.g9project4.publicData.tour.controllers;
 
 import org.g9project4.global.exceptions.ExceptionProcessor;
 import org.springframework.stereotype.Controller;
