@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +30,7 @@ public class VisitStatisticService {
 
 
         int pageNo = 1;
+        int limit = 1000;
         type = StringUtils.hasText(type) ? type : "1D";
 
         LocalDate edate = LocalDate.now().minusMonths(1L);
@@ -45,22 +47,41 @@ public class VisitStatisticService {
             sdate = edate.minusYears(1L);
         }
 
+        ApiResult2 result2 = getData(1, 1, sdate, edate);
+        if (result2 == null) return;
 
+        int total = result2.getResponse().getBody().getTotalCount();
+        int totalPages = (int)Math.ceil(total / (double)limit);
 
-        ApiBody2 body = result.getResponse().getBody();
-        int total = body.getTotalCount();
-        int totalPages = (int)Math.ceil(total / 1000.0);
-        List<Map<String, String>> items = body.getItems().getItem();
-        items.forEach(System.out::println);
+        // type1 - 현지인, type2 - 외지인, type3 - 외국인
+        double type1 = 0.0, type2 = 0.0, type3 = 0.0;
+        for (int i = 1; i <= totalPages; i++) {
+            ApiResult2 result = getData(i, limit, sdate, edate);
+
+            ApiBody2 body = result.getResponse().getBody();
+
+            List<Map<String, String>> items = body.getItems().getItem();
+            for (Map<String, String> item : items) {
+                String divNm = item.get("touDivNm");
+                double num = Double.valueOf(Objects.requireNonNullElse(item.get("touNum"), "0.0"));
+                if (divNm.contains("현지인")) {
+                    type1 += num;
+                } else if (divNm.contains("외지인")) {
+                    type2 += num;
+                } else if (divNm.contains("외국인")) {
+                    type3 += num;
+                }
+            }
+        }
     }
 
-    private ApiResult2 getData(int pageNo, LocalDate sdate, LocalDate edate) {
+    private ApiResult2 getData(int pageNo, int limit, LocalDate sdate, LocalDate edate) {
 
         String serviceKey = "RtrIIdYjcb3IXn1a/zF7itGWY5ZFS3IEj85ohFx/snuKG9hYABL5Tn8jEgCEaCw6uEIHvUz30yF4n0GGP6bVIA==";
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-        String url = String.format("https://apis.data.go.kr/B551011/DataLabService/metcoRegnVisitrDDList?MobileOS=AND&MobileApp=TEST&serviceKey=%s&startYmd=%s&endYmd=%s&numOfRows=1000&pageNo=%d&_type=json", serviceKey, formatter.format(sdate), formatter.format(edate), pageNo);
+        String url = String.format("https://apis.data.go.kr/B551011/DataLabService/metcoRegnVisitrDDList?MobileOS=AND&MobileApp=TEST&serviceKey=%s&startYmd=%s&endYmd=%s&numOfRows=%d&pageNo=%d&_type=json", serviceKey, formatter.format(sdate), formatter.format(edate), limit, pageNo);
 
         ResponseEntity<ApiResult2> response = restTemplate.getForEntity(URI.create(url), ApiResult2.class);
 
