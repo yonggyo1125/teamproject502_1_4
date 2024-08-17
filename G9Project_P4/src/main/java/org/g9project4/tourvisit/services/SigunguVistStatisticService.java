@@ -3,6 +3,8 @@ package org.g9project4.tourvisit.services;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.global.rests.gov.api.ApiBody2;
 import org.g9project4.global.rests.gov.api.ApiResult2;
+import org.g9project4.tourvisit.entities.SidoVisit;
+import org.g9project4.tourvisit.entities.SigunguVisit;
 import org.g9project4.tourvisit.repositories.SidoVisitRepository;
 import org.g9project4.tourvisit.repositories.SigunguVisitRepository;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -86,6 +85,59 @@ public class SigunguVistStatisticService {
 
             }
         }
+
+        List<SigunguVisit> items = new ArrayList<>();
+        for (Map.Entry<String, Map<String, Object>> entry : data.entrySet()) {
+            String sigunguCode = entry.getKey();
+            Map<String, Object> visitData = entry.getValue();
+            String sigunguName = (String)visitData.get("sigunguName");
+
+            double type1 = (double)visitData.getOrDefault("type1", 0.0);
+            double type2 = (double)visitData.getOrDefault("type2", 0.0);
+            double type3 = (double)visitData.getOrDefault("type3", 0.0);
+
+            SigunguVisit item = repository1.findById(sigunguCode).orElseGet(SigunguVisit::new);
+            item.setSigunguCode(sigunguCode);
+            item.setSigunguName(sigunguName);
+
+            if (type.equals("1W")) { // 1주 전
+                item.setType1W1(type1);
+                item.setType2W1(type2);
+                item.setType3W1(type3);
+            } else if (type.equals("1M")) { // 1달 전
+                item.setType1M1(type1);
+                item.setType2M1(type2);
+                item.setType3M1(type3);
+            } else if (type.equals("3M")) { // 3달 전
+                item.setType1M3(type1);
+                item.setType2M3(type2);
+                item.setType3M3(type3);
+            } else if (type.equals("6M")) { // 6달 전
+                item.setType1M6(type1);
+                item.setType2M6(type2);
+                item.setType3M6(type3);
+            } else if (type.equals("1Y")) { // 1년 전
+                item.setType1Y1(type1);
+                item.setType2Y1(type2);
+                item.setType3Y1(type3);
+            } else { // 1D - 하루 전
+                item.setType1D1(type1);
+                item.setType2D1(type2);
+                item.setType3D1(type3);
+            }
+
+            if (item.getSidoVisit() == null) { // 처음 통계
+                String areaCode = sigunguCode.substring(0, 2);
+                SidoVisit sidoVisit = repository2.findById(areaCode).orElse(null);
+                item.setSidoVisit(sidoVisit);
+            }
+
+            items.add(item);
+        }
+
+        repository1.saveAllAndFlush(items);
+
+        // 통계 데이터 업데이트
     }
 
     private ApiResult2 getData(int pageNo, int limit, LocalDate sdate, LocalDate edate) {
