@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -59,7 +60,30 @@ public class SigunguVistStatisticService {
 
             List<Map<String, String>> items = body.getItems().getItem();
             for (Map<String, String> item : items) {
-                System.out.println(item);
+                String sigunguCode = item.get("signguCode");
+
+                Map<String, Object> visitData = data.getOrDefault(sigunguCode, new HashMap<>());
+                visitData.put("sigunguName", item.get("signguNm"));
+
+                double type1 = (double)visitData.getOrDefault("type1", 0.0); // 현지인
+                double type2 = (double)visitData.getOrDefault("type2", 0.0); // 외지인
+                double type3 = (double)visitData.getOrDefault("type3", 0.0);
+
+                String divNm = item.get("touDivNm");
+                double num = Double.valueOf(Objects.requireNonNullElse(item.get("touNum"), "0.0"));
+                if (divNm.contains("현지인")) {
+                    type1 += num;
+                } else if (divNm.contains("외지인")) {
+                    type2 += num;
+                } else if (divNm.contains("외국인")) {
+                    type3 += num;
+                }
+
+                visitData.put("type1", type1);
+                visitData.put("type2", type2);
+                visitData.put("type3", type3);
+                data.put(sigunguCode, visitData);
+
             }
         }
     }
