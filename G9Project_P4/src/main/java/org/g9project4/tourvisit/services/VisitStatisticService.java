@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.global.rests.gov.api.ApiBody2;
 import org.g9project4.global.rests.gov.api.ApiResult2;
+import org.g9project4.tourvisit.entities.SidoVisit;
+import org.g9project4.tourvisit.repositories.SidoVisitRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -22,6 +24,8 @@ import java.util.Objects;
 public class VisitStatisticService {
     private final RestTemplate restTemplate;
     private final ObjectMapper om;
+    private final SidoVisitRepository repository;
+
 
     /**
      * 광역시 방문 통계
@@ -87,6 +91,47 @@ public class VisitStatisticService {
                 visitData.put("type3", type3);
                 data.put(areaCode, visitData);
             }
+        }
+
+        for (Map.Entry<String, Map<String, Object>> entry : data.entrySet()) {
+            String areaCode = entry.getKey();
+            Map<String, Object> visitData = entry.getValue();
+            String areaName = (String)visitData.get("areaName");
+
+            double type1 = (double)visitData.getOrDefault("type1", 0.0);
+            double type2 = (double)visitData.getOrDefault("type2", 0.0);
+            double type3 = (double)visitData.getOrDefault("type3", 0.0);
+
+            SidoVisit item = repository.findById(areaCode).orElseGet(SidoVisit::new);
+            item.setAreaCode(areaCode);
+            item.setAreaName(areaName);
+
+            if (type.equals("1W")) { // 1주 전
+                item.setType1W1(type1);
+                item.setType2W1(type2);
+                item.setType3W1(type3);
+            } else if (type.equals("1M")) { // 1달 전
+                item.setType1M1(type1);
+                item.setType2M1(type2);
+                item.setType3M1(type3);
+            } else if (type.equals("3M")) { // 3달 전
+                item.setType1M3(type1);
+                item.setType2M3(type2);
+                item.setType3M3(type3);
+            } else if (type.equals("6M")) { // 6달 전
+                item.setType1M6(type1);
+                item.setType2M6(type2);
+                item.setType3M6(type3);
+            } else if (type.equals("1Y")) { // 1년 전
+                item.setType1Y1(type1);
+                item.setType2Y1(type2);
+                item.setType3Y1(type3);
+            } else { // 1D - 하루 전
+                item.setType1D1(type1);
+                item.setType2D1(type2);
+                item.setType3D1(type3);
+            }
+
         }
 
         // 통계 데이터 업데이트
