@@ -1,6 +1,5 @@
 package org.g9project4.tourvisit.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.global.rests.gov.api.ApiBody2;
 import org.g9project4.global.rests.gov.api.ApiResult2;
@@ -21,7 +20,6 @@ import java.util.*;
 @RequiredArgsConstructor
 public class SidoVisitStatisticService {
     private final RestTemplate restTemplate;
-    private final ObjectMapper om;
     private final SidoVisitRepository repository;
 
 
@@ -31,8 +29,6 @@ public class SidoVisitStatisticService {
      */
     public void updateSidoVisit(String type) {
 
-
-        int pageNo = 1;
         int limit = 1000;
         type = StringUtils.hasText(type) ? type : "1D";
 

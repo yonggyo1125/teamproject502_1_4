@@ -1,9 +1,10 @@
 package org.g9project4.tourvisit.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.global.rests.gov.api.ApiBody2;
 import org.g9project4.global.rests.gov.api.ApiResult2;
+import org.g9project4.tourvisit.repositories.SidoVisitRepository;
+import org.g9project4.tourvisit.repositories.SigunguVisitRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -21,12 +22,11 @@ import java.util.Map;
 public class SigunguVistStatisticService {
 
     private final RestTemplate restTemplate;
-    private final ObjectMapper om;
+    private final SigunguVisitRepository repository1;
+    private final SidoVisitRepository repository2;
 
     public void updateVisit(String type) {
 
-
-        int pageNo = 1;
         int limit = 1000;
         type = StringUtils.hasText(type) ? type : "1D";
 
@@ -59,8 +59,7 @@ public class SigunguVistStatisticService {
 
             List<Map<String, String>> items = body.getItems().getItem();
             for (Map<String, String> item : items) {
-
-
+                System.out.println(item);
             }
         }
     }
