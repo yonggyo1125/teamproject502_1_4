@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -54,7 +55,8 @@ public class VisitStatisticService {
         int totalPages = (int)Math.ceil(total / (double)limit);
 
         // type1 - 현지인, type2 - 외지인, type3 - 외국인
-        double type1 = 0.0, type2 = 0.0, type3 = 0.0;
+        Map<String, Map<String, Object>> data = new HashMap<>();
+
         for (int i = 1; i <= totalPages; i++) {
             ApiResult2 result = getData(i, limit, sdate, edate);
 
@@ -62,6 +64,14 @@ public class VisitStatisticService {
 
             List<Map<String, String>> items = body.getItems().getItem();
             for (Map<String, String> item : items) {
+                String areaCode = item.get("areaCode");
+                Map<String, Object> visitData = data.getOrDefault(areaCode, new HashMap<>());
+                visitData.put("areaName", item.get("areaNm"));
+
+                double type1 = (double)visitData.getOrDefault("type1", 0.0); // 현지인
+                double type2 = (double)visitData.getOrDefault("type2", 0.0); // 외지인
+                double type3 = (double)visitData.getOrDefault("type3", 0.0);
+
                 String divNm = item.get("touDivNm");
                 double num = Double.valueOf(Objects.requireNonNullElse(item.get("touNum"), "0.0"));
                 if (divNm.contains("현지인")) {
@@ -71,8 +81,16 @@ public class VisitStatisticService {
                 } else if (divNm.contains("외국인")) {
                     type3 += num;
                 }
+
+                visitData.put("type1", type1);
+                visitData.put("type2", type2);
+                visitData.put("type3", type3);
+                data.put(areaCode, visitData);
             }
         }
+
+        // 통계 데이터 업데이트
+
     }
 
     private ApiResult2 getData(int pageNo, int limit, LocalDate sdate, LocalDate edate) {
