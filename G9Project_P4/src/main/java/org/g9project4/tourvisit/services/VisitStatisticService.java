@@ -2,6 +2,7 @@ package org.g9project4.tourvisit.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.g9project4.global.rests.gov.api.ApiResult2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -27,9 +28,9 @@ public class VisitStatisticService {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-        String url = String.format("https://apis.data.go.kr/B551011/DataLabService/metcoRegnVisitrDDList?MobileOS=AND&MobileApp=TEST&serviceKey=%s&startYmd=%s&endYmd=%s&numOfRows=1000&pageNo=%d&_type=json", serviceKey, formatter.format(sdate), formatter.format(edate),  pageNo);
+        String url = String.format("https://apis.data.go.kr/B551011/DataLabService/metcoRegnVisitrDDList?MobileOS=AND&MobileApp=TEST&serviceKey=%s&startYmd=%s&endYmd=%s&numOfRows=1000&pageNo=%d&_type=json", serviceKey, formatter.format(sdate), formatter.format(edate), pageNo);
 
-        ResponseEntity<String> response = restTemplate.getForEntity(URI.create(url), String.class);
+        ResponseEntity<ApiResult2> response = restTemplate.getForEntity(URI.create(url), ApiResult2.class);
         System.out.println(response);
 
     }
