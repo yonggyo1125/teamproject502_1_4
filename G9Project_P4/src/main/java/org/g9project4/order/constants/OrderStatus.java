@@ -11,7 +11,6 @@ public enum OrderStatus {
     COMPLETE("주문완료"), // 주문완료
     CANCEL("주문취소"), // 주문취소(입금전)
     REFUND("환불"), // 환불(입금완료, 배송전, 배송완료)
-    EXCHANGE("교환"), // 교환(배송완료 후
     RETURN("반품"); // 반품(배송 완료 후)
 
     private final String title;
@@ -30,7 +29,6 @@ public enum OrderStatus {
                 new String[] {COMPLETE.name(), COMPLETE.title},
                 new String[] {CANCEL.name(), CANCEL.title},
                 new String[] {REFUND.name(), REFUND.title},
-                new String[] {EXCHANGE.name(), EXCHANGE.title},
                 new String[] {RETURN.name(), RETURN.title}
         );
     }
