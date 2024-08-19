@@ -45,6 +45,15 @@ const commonLib = {
                 .then(data => resolve(data))
                 .catch(err => reject(err));
         });
+    },
+    /**
+    * 에디터 로드
+    *
+    */
+    editorLoad(id) {
+        if(!ClassicEditor || !id?.trim()) return;
+
+        return ClassicEditor.create(document.getElementById(id.trim()), {});
     }
 };
 
