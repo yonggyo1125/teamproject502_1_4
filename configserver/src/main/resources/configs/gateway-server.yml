@@ -32,6 +32,13 @@ spring:
           filters:
             - RewritePath=/admin/?(?<path>.*),/$\{path}
 
+        - id: email-service
+          uri: lb://email-service
+          predicates:
+            - Path=/email/**
+          filters:
+            - RewritePath=/email/?(?<path>.*),/$\{path}
+
 management:
   endpoint:
     gateway:

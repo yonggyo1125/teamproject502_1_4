@@ -76,7 +76,7 @@ public class BoardController implements ExceptionProcessor {
         // 목록 또는 상세 보기 이동
         String url = board.getLocationAfterWriting().equals("list") ? "/board/list/" + board.getBid() : "/board/view/" + boardData.getSeq();
 
-        return utils.redirectUrl(url);
+        return "redirect:" + utils.redirectUrl(url);
     }
 
     @GetMapping("/list/{bid}")
