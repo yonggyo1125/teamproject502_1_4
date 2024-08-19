@@ -5,4 +5,12 @@
             <a th:href="${@utils.redirectUrl('/board/list/' + board.bid)}" th:text="${board.bName}"></a>
         </h1>
     </div>
+
+    <div th:fragment="category" class="category-tab">
+        <span th:if="${board.categories != null && !board.categories.empty}"
+              th:each="cat, status : ${board.categories}">
+            <input type="radio" name="category" th:value="${cat}" th:checked="${cat == category}" th:id="${'category-' + status.index}">
+            <label th:for="${'category-' + status.index}" th:text="${cat}"></label>
+        </span>
+    </div>
 </html>
