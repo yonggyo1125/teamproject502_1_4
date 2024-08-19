@@ -1,5 +1,6 @@
 package org.g9project4.member.validators;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.global.validators.MobileValidator;
 import org.g9project4.global.validators.PasswordValidator;
@@ -13,6 +14,8 @@ import org.springframework.validation.Validator;
 @RequiredArgsConstructor
 public class JoinValidator implements Validator, PasswordValidator, MobileValidator {
     private final MemberRepository memberRepository;
+    private final HttpSession session;
+
     @Override
     public boolean supports(Class<?> clazz) {
         return clazz.isAssignableFrom(RequestJoin.class);
@@ -39,6 +42,12 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
 //      1. 이미 가입된 회원인지 체크
         if(memberRepository.exists(email)){
             errors.rejectValue("email","Duplicated");
+        }
+
+        // 이메일 인증 여부 체크
+        Boolean emailVerified = (Boolean)session.getAttribute("EmailAuthVerified");
+        if (emailVerified == null || !emailVerified) {
+            errors.rejectValue("email","NotVerified");
         }
 
         //2. 비밀번호, 비밀번호 확인 일치 여부

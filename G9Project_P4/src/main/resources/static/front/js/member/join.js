@@ -15,7 +15,8 @@ window.addEventListener("DOMContentLoaded", function() {
             }
 
             sendEmailVerify(email); // 이메일 인증 코드 전송
-            this.disabled = frmRegist.email.readonly = true;
+            this.disabled = true;
+            frmRegist.email.setAttribute("readonly", true);
 
             /* 인증코드 재전송 처리 S */
             if (emailReVerifyEl) {
@@ -89,7 +90,7 @@ function callbackEmailVerifyCheck(data) {
         emailVerifyEl.parentElement.removeChild(emailVerifyEl);
 
         // 3. 이메일 입력 항목 readonly 속성으로 변경
-        frmRegist.email.readonly = true;
+        frmRegist.email.setAttribute("readonly", true);
 
         // 4. 인증 성공시 인증코드 입력 영역 제거, 5. 인증 코드 입력 영역에 "확인된 이메일 입니다."라고 출력 처리
         const authBoxEl = document.querySelector(".auth_box");
@@ -128,7 +129,8 @@ const authCount = {
                 const emailReVerifyEl = document.getElementById("email_re_verify"); // 재전송 버튼
                 const emailVerifyEl = document.getElementById("email_verify"); // 인증코드 전송
                 emailConfirmEl.disabled = emailReVerifyEl.disabled = true;
-                emailVerifyEl.disabled = frmRegist.email.readonly = false;
+                emailVerifyEl.disabled = false;
+                frmRegist.email.removeAttribute("readonly");
                 return;
             }
 
@@ -149,7 +151,8 @@ const authCount = {
         const emailConfirmEl = document.getElementById("email_confirm"); // 확인 버튼
         const emailReVerifyEl = document.getElementById("email_re_verify"); // 재전송 버튼
         emailConfirmEl.disabled = emailReVerifyEl.disabled = false;
-        emailVerifyEl.disabled = frmRegist.email.readonly = true;
+        emailVerifyEl.disabled = true;
+        frmRegist.email.setAttribute("readonly", true);
 
         this.count = 60 * 3;
         if (this.intervalId) clearInterval(this.intervalId);

@@ -1,5 +1,6 @@
 package org.g9project4.member.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
-@SessionAttributes("requestLogin")
+@SessionAttributes({"requestLogin", "EmailAuthVerified"})
 public class MemberController implements ExceptionProcessor {
 
     private final JoinValidator joinValidator;
@@ -38,12 +40,14 @@ public class MemberController implements ExceptionProcessor {
     public String join(@ModelAttribute RequestJoin form, Model model) {
         commonProcess("join", model);
 
+        // 이메일 인증 여부 false로 초기화
+        model.addAttribute("EmailAuthVerified", false);
 
         return utils.tpl("member/join");
     }
 
     @PostMapping("/join")
-    public String joinPs(@Valid RequestJoin form, Errors errors, Model model) {
+    public String joinPs(@Valid RequestJoin form, Errors errors, Model model, SessionStatus status, HttpSession session) {
         commonProcess("join", model);
 
         joinValidator.validate(form, errors);
@@ -53,6 +57,9 @@ public class MemberController implements ExceptionProcessor {
         }
 
         memberSaveService.save(form);
+
+        status.setComplete();
+        session.removeAttribute("EmailAuthVerified");
 
         return "redirect:" + utils.redirectUrl("/member/login");
     }

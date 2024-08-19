@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="317a578c-a399-4490-aff6-243ef2dcacfa" name="Changes" comment="">
+    <list default="true" id="317a578c-a399-4490-aff6-243ef2dcacfa" name="Changes" comment=".">
+      <change afterPath="$PROJECT_DIR$/MEMBER_EMAIL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REDIS_SESSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/G9Project_P4/src/main/java/org/g9project4/global/configs/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/G9Project_P4/src/main/java/org/g9project4/global/configs/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/G9Project_P4/src/main/java/org/g9project4/member/controllers/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/G9Project_P4/src/main/java/org/g9project4/member/controllers/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/G9Project_P4/src/main/java/org/g9project4/member/validators/JoinValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/G9Project_P4/src/main/java/org/g9project4/member/validators/JoinValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/G9Project_P4/src/main/resources/messages/validations.properties" beforeDir="false" afterPath="$PROJECT_DIR$/G9Project_P4/src/main/resources/messages/validations.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/G9Project_P4/src/main/resources/static/front/js/member/join.js" beforeDir="false" afterPath="$PROJECT_DIR$/G9Project_P4/src/main/resources/static/front/js/member/join.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,5 +77,9 @@
       <updated>1723418834359</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
 </project>

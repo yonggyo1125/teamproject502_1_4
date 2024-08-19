@@ -64,6 +64,7 @@ public class SecurityConfig {
         http.exceptionHandling(c -> {
             c.authenticationEntryPoint(new MemberAuthenticationEntryPoint())//예외 가
                     .accessDeniedHandler((req, res, e) -> {
+                        e.printStackTrace();
                         res.sendError(HttpStatus.UNAUTHORIZED.value());
                     });
         });
