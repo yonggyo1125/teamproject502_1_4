@@ -45,8 +45,6 @@ public class QOrderItem extends EntityPathBase<OrderItem> {
 
     public final NumberPath<Long> seq = createNumber("seq", Long.class);
 
-    public final EnumPath<org.g9project4.order.constants.OrderStatus> status = createEnum("status", org.g9project4.order.constants.OrderStatus.class);
-
     public QOrderItem(String variable) {
         this(OrderItem.class, forVariable(variable), INITS);
     }

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.g9project4.global.entities.BaseEntity;
 import org.g9project4.member.entities.Member;
+import org.g9project4.order.constants.OrderStatus;
 import org.g9project4.payment.constants.PayMethod;
 
 @Data
@@ -16,6 +17,10 @@ import org.g9project4.payment.constants.PayMethod;
 public class OrderInfo extends BaseEntity {
     @Id
     private Long orderNo = System.currentTimeMillis();
+
+    @Column(length=20)
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status = OrderStatus.START;
 
     @OneToOne(mappedBy = "orderInfo", fetch = FetchType.LAZY)
     private OrderItem orderItem;
@@ -47,6 +52,12 @@ public class OrderInfo extends BaseEntity {
     private String addressSub; // 나머지 배송지 주소
 
     private String deliveryMemo; // 배송 메모
+
+    @Column(length=60)
+    private String deliveryCompany; // 배송업체
+
+    @Column(length=60)
+    private String deliveryInvoice; // 운송장번호
 
     @Column(length=20)
     @Enumerated(EnumType.STRING)

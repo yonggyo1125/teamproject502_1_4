@@ -1,9 +1,14 @@
 package org.g9project4.payment.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.global.SHA256;
 import org.g9project4.global.Utils;
+import org.g9project4.payment.constants.PayMethod;
 import org.g9project4.payment.controllers.PayAuthResult;
+import org.g9project4.payment.controllers.PayConfirmResult;
 import org.g9project4.payment.exceptions.PaymentAuthException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,19 +22,22 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentProcessService {
     private final PaymentConfigService configService;
     private final RestTemplate restTemplate;
+    private final ObjectMapper om;
     private final Utils utils;
 
     /**
      * 인증 데이터로 결제 승인 처리
      * @param result
      */
-    public void process(PayAuthResult result) {
+    public PayConfirmResult process(PayAuthResult result) {
 
         String mid = result.getMid();
         String authToken = result.getAuthToken();
@@ -81,10 +89,35 @@ public class PaymentProcessService {
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
 
         ResponseEntity<String> response = restTemplate.postForEntity(URI.create(authUrl), request, String.class);
-        String body = response.getBody();
 
         if (response.getStatusCode().is2xxSuccessful()) {
+            try {
+                Map<String, String> resultMap = om.readValue(response.getBody(), new TypeReference<>() {});
+                if (!resultMap.get("resultCode").equals("0000")) {
+                    return null;
+                }
 
-        }
+                PayMethod payMethod = PayMethod.valueOf(resultMap.get("payMethod"));
+
+                String payLog = resultMap.entrySet()
+                        .stream()
+                        .map(entry -> String.format("%s: %s", entry.getKey(), entry.getValue())).collect(Collectors.joining("\n"));
+
+                return PayConfirmResult.builder()
+                        .orderNo(Long.valueOf(resultMap.get("MOID")))
+                        .tid("tid")
+                        .payMethod(payMethod)
+                        .bankAccount(resultMap.get("vactBankName")) // 가상계좌은행
+                        .bankAccount(resultMap.get("VACT_Num")) // 가상계좌번호
+                        .payLog(payLog)
+                        .build();
+
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+
+        } // endif
+
+        return null;
     }
 }

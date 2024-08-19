@@ -42,6 +42,7 @@ public class OrderSaveService {
         orderInfo.setPayMethod(PayMethod.valueOf(form.getPayMethod()));
         orderInfo.setOrderNo(orderNo);
         orderInfo.setMember(memberUtil.getMember());
+        orderInfo.setStatus(OrderStatus.START);
 
         infoRepository.saveAndFlush(orderInfo);
         /* 주문서 정보 저장 E */
@@ -53,7 +54,6 @@ public class OrderSaveService {
                 .price(price)
                 .qty(qty)
                 .boardData(boardData)
-                .status(OrderStatus.START)
                 .build();
         itemRepository.saveAndFlush(orderItem);
         /* 주문 상품 정보 저장 E */

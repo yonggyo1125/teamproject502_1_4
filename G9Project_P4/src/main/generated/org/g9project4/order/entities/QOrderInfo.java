@@ -34,6 +34,10 @@ public class QOrderInfo extends EntityPathBase<OrderInfo> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> deletedAt = _super.deletedAt;
 
+    public final StringPath deliveryCompany = createString("deliveryCompany");
+
+    public final StringPath deliveryInvoice = createString("deliveryInvoice");
+
     public final StringPath deliveryMemo = createString("deliveryMemo");
 
     public final org.g9project4.member.entities.QMember member;
@@ -60,6 +64,8 @@ public class QOrderInfo extends EntityPathBase<OrderInfo> {
     public final StringPath receiverMobile = createString("receiverMobile");
 
     public final StringPath receiverName = createString("receiverName");
+
+    public final EnumPath<org.g9project4.order.constants.OrderStatus> status = createEnum("status", org.g9project4.order.constants.OrderStatus.class);
 
     public final StringPath zoneCode = createString("zoneCode");
 
