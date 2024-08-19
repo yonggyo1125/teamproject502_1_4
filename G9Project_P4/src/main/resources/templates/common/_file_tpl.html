@@ -6,4 +6,19 @@
             <div class="inner" style="background:url('[fileUrl]') no-repeat center center; background-size: cover;" data-url="[fileUrl]"></div>
         </div>
     </script>
+
+    <script th:fragment="attach" type="text/html" id="attach-file-tpl">
+        <div class="file-item" id="file-[seq]">
+            <a th:href="${@utils.redirectUrl('/file/download/[seq]')}">[fileName]</a>
+            <i class="xi-close remove" data-seq="[seq]"></i>
+        </div>
+    </script>
+
+    <script th:fragment="attach" type="text/html" id="editor-file-tpl">
+        <div class="file-item" id="file-[seq]">
+            <a th:href="${@utils.redirectUrl('/file/download/[seq]')}">[fileName]</a>
+
+            <i class="xi-close remove" data-seq="[seq]"></i>
+        </div>
+    </script>
 </html>
