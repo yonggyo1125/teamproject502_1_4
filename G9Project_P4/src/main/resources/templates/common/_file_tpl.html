@@ -14,10 +14,10 @@
         </div>
     </script>
 
-    <script th:fragment="attach" type="text/html" id="editor-file-tpl">
+    <script th:fragment="editor" type="text/html" id="editor-file-tpl">
         <div class="file-item" id="file-[seq]">
             <a th:href="${@utils.redirectUrl('/file/download/[seq]')}">[fileName]</a>
-
+            <i class="xi-file-upload insert-editor" data-url="[fileUrl]"></i>
             <i class="xi-close remove" data-seq="[seq]"></i>
         </div>
     </script>

@@ -22,8 +22,17 @@ function fileUploadCallback(files) {
     // 에디터에 첨부할 이미지 URL
     const imageUrls = [];
 
+    // 파일 업로드 location 별 파일 목록 템플릿
+    const attachTpl = document.getElementById("attach-file-tpl");
+    const editorTpl = document.getElementById("editor-file-tpl");
+
+    const attachTarget = document.getElementById("uploaded-files-attach");
+    const editorTarget = document.getElementById("uploaded-files-editor");
+
+    const domParser = new DOMParser();
+
     for (const file of files) {
-        const { location, fileUrl } = file;
+        const { seq, location, fileUrl, fileName } = file;
 
         if (location === 'editor') { // 에디터 첨부
             imageUrls.push(fileUrl);
