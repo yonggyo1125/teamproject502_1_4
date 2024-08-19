@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="317a578c-a399-4490-aff6-243ef2dcacfa" name="Changes" comment=".">
-      <change afterPath="$PROJECT_DIR$/MEMBER_EMAIL.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/REDIS_SESSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/G9Project_P4/src/main/java/org/g9project4/global/configs/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/G9Project_P4/src/main/java/org/g9project4/global/configs/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/G9Project_P4/src/main/java/org/g9project4/member/controllers/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/G9Project_P4/src/main/java/org/g9project4/member/controllers/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/G9Project_P4/src/main/java/org/g9project4/member/validators/JoinValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/G9Project_P4/src/main/java/org/g9project4/member/validators/JoinValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/G9Project_P4/src/main/resources/messages/validations.properties" beforeDir="false" afterPath="$PROJECT_DIR$/G9Project_P4/src/main/resources/messages/validations.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/G9Project_P4/src/main/resources/static/front/js/member/join.js" beforeDir="false" afterPath="$PROJECT_DIR$/G9Project_P4/src/main/resources/static/front/js/member/join.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MEMBER_EMAIL.md" beforeDir="false" afterPath="$PROJECT_DIR$/MEMBER_EMAIL.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,6 +71,15 @@
       <option name="presentableId" value="Default" />
       <updated>1723418834359</updated>
     </task>
+    <task id="LOCAL-00001" summary=".">
+      <option name="closed" value="true" />
+      <created>1724042062631</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1724042062631</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
