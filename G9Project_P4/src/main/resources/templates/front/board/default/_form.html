@@ -5,6 +5,14 @@
     <input type="hidden" name="gid" th:field="*{gid}">
 
     <dl>
+        <dt th:text="#{작성자}"></dt>
+        <dd>
+            <input type="text" name="poster" th:field="*{poster}">
+            <div class="error" th:each="err : ${#fields.errors('poster')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+
+    <dl>
         <dt th:text="#{제목}"></dt>
         <dd>
             <input type="text" name="subject" th:field="*{subject}">
@@ -16,6 +24,7 @@
         <dt th:text="#{내용}"></dt>
         <dd>
             <textarea name="content" th:field="*{content}" id="content"></textarea>
+            <div class="error" th:each="err : ${#fields.errors('content')}" th:text="${err}"></div>
         </dd>
     </dl>
 </th:block>

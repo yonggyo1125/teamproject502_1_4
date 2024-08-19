@@ -43,7 +43,7 @@ public class BoardController implements ExceptionProcessor {
      * @return
      */
     @GetMapping("/write/{bid}")
-    public String write(@PathVariable("bid") String bid, Model model) {
+    public String write(@PathVariable("bid") String bid, @ModelAttribute RequestBoard form, Model model) {
         commonProcess(bid, "write", model);
 
         return utils.tpl("board/write");
