@@ -55,6 +55,10 @@ public class QOrderInfo extends EntityPathBase<OrderInfo> {
 
     public final NumberPath<Long> orderNo = createNumber("orderNo", Long.class);
 
+    public final StringPath payBankAccount = createString("payBankAccount");
+
+    public final StringPath payBankName = createString("payBankName");
+
     public final StringPath payLog = createString("payLog");
 
     public final EnumPath<org.g9project4.payment.constants.PayMethod> payMethod = createEnum("payMethod", org.g9project4.payment.constants.PayMethod.class);

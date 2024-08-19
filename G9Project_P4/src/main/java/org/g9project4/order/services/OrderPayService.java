@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.g9project4.order.constants.OrderStatus;
 import org.g9project4.order.entities.OrderInfo;
 import org.g9project4.order.entities.OrderItem;
+import org.g9project4.order.repositories.OrderInfoRepository;
 import org.g9project4.payment.constants.PayMethod;
 import org.g9project4.payment.controllers.PayConfirmResult;
 import org.g9project4.payment.services.PaymentConfig;
@@ -16,6 +17,7 @@ public class OrderPayService {
     private final OrderInfoService orderInfoService;
     private final OrderStatusService orderStatusService;
     private final PaymentConfigService paymentConfigService;
+    private final OrderInfoRepository orderInfoRepository;
 
     public PaymentConfig getConfig(Long orderNo) {
         OrderInfo orderInfo = orderInfoService.get(orderNo);
@@ -35,7 +37,7 @@ public class OrderPayService {
         return config;
     }
 
-    public void update(PayConfirmResult result) {
+    public OrderInfo update(PayConfirmResult result) {
         Long orderNo = result.getOrderNo();
         PayMethod method = result.getPayMethod();
         OrderStatus status = method.equals(PayMethod.VBank) ? OrderStatus.APPLY : OrderStatus.INCASH;
@@ -44,8 +46,13 @@ public class OrderPayService {
         OrderInfo orderInfo = orderInfoService.get(orderNo);
         orderInfo.setPayLog(result.getPayLog());
         orderInfo.setPayTid(result.getTid());
+        orderInfo.setPayBankName(result.getBankName());
+        orderInfo.setPayBankAccount(result.getBankAccount());
+        orderInfoRepository.saveAndFlush(orderInfo);
 
         // 주문 상태 변경
         orderStatusService.change(orderNo, status);
+
+        return orderInfo;
     }
 }
