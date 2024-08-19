@@ -4,6 +4,10 @@
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
     <input type="hidden" name="gid" th:field="*{gid}">
 
+    <th:block>
+        <div th:replace="~{front/board/default/_common::category}"></div>
+    </th:block>
+
     <dl>
         <dt th:text="#{작성자}"></dt>
         <dd>
