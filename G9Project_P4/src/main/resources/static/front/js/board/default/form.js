@@ -37,12 +37,18 @@ function fileUploadCallback(files) {
         const target = location === 'editor' ? editorTarget : attachTarget;
         let html = location === 'editor' ? editorTpl : attachTpl;
 
-        if (location === 'editor') { // 에디터 첨부
-            imageUrls.push(fileUrl);
-        }
+        html = html.replace(/\[seq\]/g, seq)
+                    .replace(/\[fileName\]/g, fileName)
+                    .replace(/\[fileUrl\]/g, fileUrl);
 
         const dom = domParser.parseFromString(html, "text/html");
         const el = dom.querySelector(".file-item");
+
+        target.append(el);
+
+        if (location === 'editor') { // 에디터 첨부
+            imageUrls.push(fileUrl);
+        }
     }
 
     // 에디터 본문에 이미지 추가
