@@ -23,8 +23,8 @@ function fileUploadCallback(files) {
     const imageUrls = [];
 
     // 파일 업로드 location 별 파일 목록 템플릿
-    const attachTpl = document.getElementById("attach-file-tpl");
-    const editorTpl = document.getElementById("editor-file-tpl");
+    const attachTpl = document.getElementById("attach-file-tpl").innerHTML;
+    const editorTpl = document.getElementById("editor-file-tpl").innerHTML;
 
     const attachTarget = document.getElementById("uploaded-files-attach");
     const editorTarget = document.getElementById("uploaded-files-editor");
@@ -48,11 +48,44 @@ function fileUploadCallback(files) {
 
         if (location === 'editor') { // 에디터 첨부
             imageUrls.push(fileUrl);
+
+            const insertEditorEl = el.querySelector(".insert-editor");
+            if (insertEditorEl) {
+                insertEditorEl.addEventListener("click", (e) => insertEditor(e.currentTarget.dataset.url));
+            }
         }
+
+        // 파일 삭제 이벤트 처리
+        const { fileManager } = commonLib;
+        const removeEl = el.querySelector(".remove");
+        removeEl.addEventListener("click", () => {
+            if (confirm('정말 삭제하겠습니까?')) {
+                fileManager.delete(seq);
+            }
+        });
+
     }
 
     // 에디터 본문에 이미지 추가
     if (imageUrls.length > 0) {
-        editor.execute("insertImage", { source: imageUrls });
+        insertEditor(imageUrls);
     }
+}
+
+function insertEditor(source) {
+    editor.execute("insertImage", { source });
+}
+
+
+/**
+* 파일 삭제 후속 처리
+*
+*/
+function fileDeleteCallback(file) {
+    if (!file) return;
+
+    const { seq } = file;
+
+    const el = document.getElementById(`file-${seq}`);
+    el.parentElement.removeChild(el);
 }
