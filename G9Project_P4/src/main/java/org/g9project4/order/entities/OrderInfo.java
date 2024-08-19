@@ -69,6 +69,12 @@ public class OrderInfo extends BaseEntity {
     @Column(length=65)
     private String payTid; // PG 거래 ID(tid)
 
+    @Column(length=40)
+    private String payBankName; // 가상계좌 은행
+
+    @Column(length=40)
+    private String payBankAccount; // 가상계좌
+
     @Transient
     private int totalPayPrice; // 총 결제금액
 }
