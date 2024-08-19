@@ -25,7 +25,7 @@ public class OrderItem extends BaseEntity {
     private BoardData boardData;
 
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private OrderInfo orderInfo;
 
     private int price; // 상품 단품 금액

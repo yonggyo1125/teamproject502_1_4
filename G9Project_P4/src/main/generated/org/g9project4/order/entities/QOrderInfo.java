@@ -43,7 +43,7 @@ public class QOrderInfo extends EntityPathBase<OrderInfo> {
 
     public final StringPath orderEmail = createString("orderEmail");
 
-    public final ListPath<OrderItem, QOrderItem> orderItems = this.<OrderItem, QOrderItem>createList("orderItems", OrderItem.class, QOrderItem.class, PathInits.DIRECT2);
+    public final QOrderItem orderItem;
 
     public final StringPath orderMobile = createString("orderMobile");
 
@@ -82,6 +82,7 @@ public class QOrderInfo extends EntityPathBase<OrderInfo> {
     public QOrderInfo(Class<? extends OrderInfo> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.member = inits.isInitialized("member") ? new org.g9project4.member.entities.QMember(forProperty("member")) : null;
+        this.orderItem = inits.isInitialized("orderItem") ? new QOrderItem(forProperty("orderItem"), inits.get("orderItem")) : null;
     }
 
 }

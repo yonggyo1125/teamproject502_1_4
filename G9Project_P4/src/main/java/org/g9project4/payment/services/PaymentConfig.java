@@ -15,4 +15,10 @@ public class PaymentConfig {
     private String signature; // oid, price, timestamp
     private String verification; // oid, price, signKey, timestamp
     private String mKey; // mid, signKey
+    private Long oid;
+    private int price;
+    private String goodname;
+    private String buyername;
+    private String buyertel;
+    private String buyeremail;
 }

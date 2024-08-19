@@ -9,8 +9,6 @@ import org.g9project4.global.entities.BaseEntity;
 import org.g9project4.member.entities.Member;
 import org.g9project4.payment.constants.PayMethod;
 
-import java.util.List;
-
 @Data
 @Entity
 @Builder
@@ -19,8 +17,8 @@ public class OrderInfo extends BaseEntity {
     @Id
     private Long orderNo = System.currentTimeMillis();
 
-    @OneToMany(mappedBy = "orderInfo", fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems;
+    @OneToOne(mappedBy = "orderInfo", fetch = FetchType.LAZY)
+    private OrderItem orderItem;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
@@ -59,4 +57,7 @@ public class OrderInfo extends BaseEntity {
 
     @Column(length=65)
     private String payTid; // PG 거래 ID(tid)
+
+    @Transient
+    private int totalPayPrice; // 총 결제금액
 }
