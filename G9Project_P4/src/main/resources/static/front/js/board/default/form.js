@@ -34,9 +34,15 @@ function fileUploadCallback(files) {
     for (const file of files) {
         const { seq, location, fileUrl, fileName } = file;
 
+        const target = location === 'editor' ? editorTarget : attachTarget;
+        let html = location === 'editor' ? editorTpl : attachTpl;
+
         if (location === 'editor') { // 에디터 첨부
             imageUrls.push(fileUrl);
         }
+
+        const dom = domParser.parseFromString(html, "text/html");
+        const el = dom.querySelector(".file-item");
     }
 
     // 에디터 본문에 이미지 추가
