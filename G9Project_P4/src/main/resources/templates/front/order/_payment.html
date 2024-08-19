@@ -18,8 +18,8 @@
         <input type="hidden" name="buyername" value="주문자">
         <input type="hidden" name="buyertel" value="01010001000">
         <input type="hidden" name="buyeremail" value="yonggyo00@kakao.com">
-        <input type="hidden" name="returnUrl" value="http://localhost:3001/payment/process">
-        <input type="hidden" name="closeUrl" value="http://localhost:3001/payment/close">
+        <input type="hidden" name="returnUrl" th:value="${@utils.redirectUrl('/payment/process')}">
+        <input type="hidden" name="closeUrl" th:value="${@utils.redirectUrl('/payment/close')}">
         <input type="hidden" name="acceptmethod" value="below1000">
     </form>
     <script src="https://stdpay.inicis.com/stdjs/INIStdPay.js"></script>
