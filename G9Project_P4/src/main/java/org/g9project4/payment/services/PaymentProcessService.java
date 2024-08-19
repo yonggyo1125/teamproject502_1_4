@@ -81,7 +81,10 @@ public class PaymentProcessService {
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
 
         ResponseEntity<String> response = restTemplate.postForEntity(URI.create(authUrl), request, String.class);
+        String body = response.getBody();
 
-        System.out.println(response);
+        if (response.getStatusCode().is2xxSuccessful()) {
+
+        }
     }
 }
