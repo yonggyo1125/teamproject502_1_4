@@ -7,7 +7,7 @@ import lombok.Data;
 public class RequestOrder {
 
     @NotNull
-    private Long bSeq; // 게시글 번호
+    private Long bSeq = 952L; // 게시글 번호
 
     @NotBlank
     private String orderName; // 주문자명

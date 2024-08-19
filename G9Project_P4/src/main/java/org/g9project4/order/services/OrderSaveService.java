@@ -14,6 +14,7 @@ import org.g9project4.payment.constants.PayMethod;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 @Service
 @Transactional
@@ -43,6 +44,12 @@ public class OrderSaveService {
         orderInfo.setOrderNo(orderNo);
         orderInfo.setMember(memberUtil.getMember());
         orderInfo.setStatus(OrderStatus.START);
+
+        String orderMobile = form.getOrderMobile();
+        if (StringUtils.hasText(orderMobile)) {
+            orderMobile = orderMobile.replaceAll("\\D", "");
+            orderInfo.setOrderMobile(orderMobile);
+        }
 
         infoRepository.saveAndFlush(orderInfo);
         /* 주문서 정보 저장 E */

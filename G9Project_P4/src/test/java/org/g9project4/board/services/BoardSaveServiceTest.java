@@ -8,10 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
-@ActiveProfiles("test")
+//@ActiveProfiles("test")
 public class BoardSaveServiceTest {
 
     @Autowired
@@ -52,6 +51,9 @@ public class BoardSaveServiceTest {
         form.setSubject("제목");
         form.setContent("내용");
         form.setGuestPw("1234ab");
+        form.setNum1(25000L);
+        form.setNum2(2L);
+        form.setText1("맥 프로16");
 
         BoardData data = saveService.save(form);
         System.out.println(data);
