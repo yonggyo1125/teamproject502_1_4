@@ -13,6 +13,7 @@ import org.g9project4.board.validators.BoardValidator;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.ExceptionProcessor;
+import org.g9project4.member.MemberUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -31,7 +32,9 @@ public class BoardController implements ExceptionProcessor {
     private final BoardSaveService saveService;
     private final BoardDeleteService deleteService;
     private final BoardValidator validator;
+    private final MemberUtil memberUtil;
     private final Utils utils;
+
 
 
     private Board board; // 게시판 설정
@@ -45,6 +48,9 @@ public class BoardController implements ExceptionProcessor {
     @GetMapping("/write/{bid}")
     public String write(@PathVariable("bid") String bid, @ModelAttribute RequestBoard form, Model model) {
         commonProcess(bid, "write", model);
+
+        form.setGuest(!memberUtil.isLogin());
+        if (memberUtil.isLogin()) form.setPoster(memberUtil.getMember().getUserName());
 
         return utils.tpl("board/write");
     }

@@ -260,7 +260,10 @@ public class BoardInfoService {
     }
 
     public RequestBoard getForm(BoardData item, DeleteStatus status) {
-       return new ModelMapper().map(item, RequestBoard.class);
+       RequestBoard form = new ModelMapper().map(item, RequestBoard.class);
+       form.setGuest(item.getMember() == null);
+
+       return form;
     }
 
     public RequestBoard getForm(Long seq) {

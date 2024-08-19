@@ -22,6 +22,7 @@ public class RequestBoard {
     @NotBlank
     private String poster; // 작성자
 
+    private boolean guest; // 비회원
     private String guestPw; // 비회원 비밀번호(수정, 삭제)
 
     @NotBlank
