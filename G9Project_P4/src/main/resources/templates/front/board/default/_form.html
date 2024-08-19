@@ -48,7 +48,18 @@
     <dl th:if="${board.useEditor && board.useUploadImage}">
         <dt th:text="#{이미지_업로드}"></dt>
         <dd>
-
+            <button type="button" class="fileUploads" th:data-gid="*{gid}"
+                    data-location="editor" data-image-only="true"
+                    th:text="#{이미지_선택}"></button>
+            <div class="uploaded-files" id="uploaded-files-editor"></div>
+        </dd>
+    </dl>
+    <dl th:if="${board.useUploadFile}">
+        <dt th:text="#{파일_첨부}"></dt>
+        <dd>
+            <button type="button" class="fileUploads" th:data-gid="*{gid}"
+                    data-location="attach" th:text="#{파일_선택}"></button>
+            <div class="uploaded-files" id="uploaded-files-attach"></div>
         </dd>
     </dl>
 </th:block>
