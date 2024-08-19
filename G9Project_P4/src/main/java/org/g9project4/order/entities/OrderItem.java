@@ -1,10 +1,7 @@
 package org.g9project4.order.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.g9project4.board.entities.BoardData;
 import org.g9project4.global.entities.BaseEntity;
 import org.g9project4.order.constants.OrderStatus;
@@ -27,6 +24,7 @@ public class OrderItem extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private BoardData boardData;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     private OrderInfo orderInfo;
 
