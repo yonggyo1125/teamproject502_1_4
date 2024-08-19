@@ -56,7 +56,6 @@ function fileUploadCallback(files) {
         }
 
         // 파일 삭제 이벤트 처리
-        const { fileManager } = commonLib;
         const removeEl = el.querySelector(".remove");
         removeEl.addEventListener("click", () => {
             if (confirm('정말 삭제하겠습니까?')) {
