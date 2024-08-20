@@ -29,7 +29,7 @@ public class OrderSaveService {
         // 게시글 조회
         BoardData boardData = boardInfoService.get(form.getBSeq());
 
-        long orderNo = System.currentTimeMillis();
+        long orderNo = form.getOrderNo() < 1L ? System.currentTimeMillis() : form.getOrderNo();
 
         Long num1 = boardData.getNum1();
         Long num2 = boardData.getNum2();
