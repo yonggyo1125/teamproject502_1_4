@@ -31,7 +31,7 @@ public class DataTransfer {
 
     @Test
     void test2() {
-        service2.updateVisit("3M");
+        service2.updateVisit("1M");
     }
 
     @Test

@@ -18,6 +18,7 @@ import org.g9project4.global.ListData;
 import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.ExceptionProcessor;
 import org.g9project4.member.MemberUtil;
+import org.g9project4.search.services.SearchHistoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -38,6 +39,8 @@ public class BoardController implements ExceptionProcessor {
     private final BoardSaveService saveService;
     private final BoardDeleteService deleteService;
     private final FileInfoService fileInfoService;
+    private final SearchHistoryService historyService;
+
     private final BoardValidator validator;
     private final MemberUtil memberUtil;
     private final Utils utils;
@@ -117,6 +120,8 @@ public class BoardController implements ExceptionProcessor {
     @GetMapping("/list/{bid}")
     public String list(@PathVariable("bid") String bid, @ModelAttribute BoardDataSearch search, Model model) {
         commonProcess(bid, "list", model);
+
+        historyService.saveBoard(search.getSkey());
 
         ListData<BoardData> data = infoService.getList(bid, search);
 
