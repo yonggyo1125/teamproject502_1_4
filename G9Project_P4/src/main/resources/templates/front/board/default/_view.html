@@ -21,6 +21,8 @@
                 <span th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm:ss')}"></span>
             </div>
         </div> <!--// post-info -->
+        <div class="contents" th:if="*{editorView}" th:utext="*{content}"></div>
+        <div class="contents" th:unless="*{editorView}" th:utext="*{@utils.nl2br(content)}"></div>
     </div>  <!--// view-content -->
 
 </th:block>

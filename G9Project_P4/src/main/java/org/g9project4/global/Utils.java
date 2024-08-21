@@ -127,4 +127,16 @@ public class Utils { // 빈의 이름 - utils
 
         return prefix + path;
     }
+
+    /**
+     * 줄개행 문자(\n, \n\r) -> <br>
+     * @param data
+     * @return
+     */
+    public String nl2br(String data) {
+        data = data.replace("\\n", "<br>")
+                .replace("\\r", "");
+
+        return data;
+    }
 }
