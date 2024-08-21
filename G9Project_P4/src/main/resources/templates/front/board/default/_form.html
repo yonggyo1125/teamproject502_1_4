@@ -51,7 +51,13 @@
             <button type="button" class="fileUploads" th:data-gid="*{gid}"
                     data-location="editor" data-image-only="true"
                     th:text="#{이미지_선택}"></button>
-            <div class="uploaded-files" id="uploaded-files-editor"></div>
+            <div class="uploaded-files" id="uploaded-files-editor">
+                <div th:if="*{editorImages != null}" th:each="file : *{editorImages}" class="file-item" th:id="${'file-' + file.seq}">
+                    <a th:href="${@utils.redirectUrl('/file/download/' + file.seq)}" th:text="${file.fileName}"></a>
+                    <i class="xi-file-upload insert-editor" th:data-url="${file.fileUrl}"></i>
+                    <i class="xi-close remove" th:data-seq="${file.seq}"></i>
+                </div>
+            </div>
         </dd>
     </dl>
     <dl th:if="${board.useUploadFile}">
