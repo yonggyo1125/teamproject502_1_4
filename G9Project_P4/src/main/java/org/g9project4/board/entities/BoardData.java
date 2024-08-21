@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.g9project4.file.entities.FileInfo;
 import org.g9project4.global.entities.BaseEntity;
 import org.g9project4.member.entities.Member;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -72,4 +75,22 @@ public class BoardData extends BaseEntity {
 
     @Lob
     private String longText2; // 여러줄 텍스트 추가 필드2
+
+    @Transient // 에디터 첨부 이미지 파일 목록
+    private List<FileInfo> editorImages;
+
+    @Transient // 첨부 파일 목록
+    private List<FileInfo> attachFiles;
+
+    @Transient
+    private boolean editable; // 수정, 삭제 가능 여부
+
+    @Transient
+    private boolean commentable; // 댓글 수정, 삭제 가능 여부
+
+    @Transient
+    private boolean viewable; // 상세쪽 조회 가능 여부
+
+    @Transient
+    private boolean listable; // 목록쪽 조회 가능 여부
 }
