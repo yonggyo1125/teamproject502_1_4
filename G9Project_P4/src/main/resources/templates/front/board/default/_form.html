@@ -65,7 +65,12 @@
         <dd>
             <button type="button" class="fileUploads" th:data-gid="*{gid}"
                     data-location="attach" th:text="#{파일_선택}"></button>
-            <div class="uploaded-files" id="uploaded-files-attach"></div>
+            <div class="uploaded-files" id="uploaded-files-attach">
+                <div th:if="*{attachFiles != null}" th:each="file : *{attachFiles}" class="file-item" th:id="${'file-' + file.seq}">
+                    <a th:href="${@utils.redirectUrl('/file/download/' + file.seq)}" th:text="${file.fileName}"></a>
+                    <i class="xi-close remove" th:data-seq="${file.seq}"></i>
+                </div>
+            </div>
         </dd>
     </dl>
 
