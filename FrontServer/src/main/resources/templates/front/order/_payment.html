@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="payform">
+
+    <form id="inicisForm" method="POST" th:object="${orderInfo}">
+        <input type="hidden" name="version" value="1.0">
+        <input type="hidden" name="gopaymethod" th:value="*{payMethod.name}">
+        <input type="hidden" name="mid" th:value="${config.mid}">
+        <input type="hidden" name="oid" th:value="${config.oid}">
+        <input type="hidden" name="price" th:value="${config.price}">
+        <input type="hidden" name="timestamp" th:value="${config.timestamp}">
+        <input type="hidden" name="use_chkfake" value="Y">
+        <input type="hidden" name="signature" th:value="${config.signature}">
+        <input type="hidden" name="verification" th:value="${config.verification}">
+        <input type="hidden" name="mKey" th:value="${config.mKey}">
+        <input type="hidden" name="currency" value="WON">
+        <input type="hidden" name="goodname" th:value="*{orderItem.itemName}">
+        <input type="hidden" name="buyername" th:value="*{orderName}">
+        <input type="hidden" name="buyertel" th:value="*{orderMobile}">
+        <input type="hidden" name="buyeremail" th:value="*{orderEmail}">
+        <input type="hidden" name="returnUrl" th:value="${@utils.redirectUrl('/payment/process')}">
+        <input type="hidden" name="closeUrl" th:value="${@utils.redirectUrl('/payment/close')}">
+        <input type="hidden" name="acceptmethod" value="below1000">
+    </form>
+    <script src="https://stdpay.inicis.com/stdjs/INIStdPay.js"></script>
+    <script>
+        INIStdPay.pay("inicisForm");
+    </script>
+</th:block>
+</html>

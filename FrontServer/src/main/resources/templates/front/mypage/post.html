@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{front/layouts/main}">
+    <main layout:fragment="content">
+        <title>내가 쓴 글 보기</title>
+        <h1 th:text="#{내가_쓴_글_보기}"></h1>
+        <form name="frmPost" method="post" th:action="@{/mypage/post}" autocomplete="off">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+
+            <table id="postTable">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>작성자</th>
+                        <th>게시글 제목</th>
+                        <th>게시글 내용</th>
+                        <th>작성 일자</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="post, iterStat : ${posts}">
+                        <td th:text="${iterStat.index + 1}">번호</td>
+                        <td th:text="${post.poster}">작성자</td>
+                        <td th:text="${post.subject}">제목</td>
+                        <td th:text="${post.content}">내용</td>
+                        <td th:text="${post.formattedCreatedAt}">작성 일자</td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </main>
+</html>

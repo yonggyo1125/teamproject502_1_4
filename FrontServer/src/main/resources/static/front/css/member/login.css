@@ -1,0 +1,64 @@
+/* login.css */
+
+/* 폼 전체 스타일 */
+form[name="frmLogin"] {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+/* 입력 필드 스타일 */
+form[name="frmLogin"] input[type="text"],
+form[name="frmLogin"] input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* 버튼 스타일 */
+form[name="frmLogin"] button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+form[name="frmLogin"] button[type="submit"]:hover {
+    background-color: black;
+}
+
+/* 자동 로그인 체크박스 스타일 */
+form[name="frmLogin"] div {
+    margin: 10px 0;
+}
+
+form[name="frmLogin"] label[for="autoLogin"] {
+    margin-left: 5px;
+}
+
+/* 에러 메시지 스타일 */
+form[name="frmLogin"] .error {
+    color: red;
+    font-size: 12px;
+}
+
+/* 아이디/비밀번호 찾기 링크 스타일 */
+form[name="frmLogin"] div a {
+    margin-right: 10px;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+}
+
+form[name="frmLogin"] div a:hover {
+    text-decoration: underline;
+}

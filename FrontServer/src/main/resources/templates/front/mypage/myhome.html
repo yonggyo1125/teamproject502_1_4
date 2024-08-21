@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{front/layouts/main}">
+    <main layout:fragment="content">
+        <h1 th:text="#{마이_페이지}"></h1>
+
+        <form name="frmMyhome" method="get" th:action="@{/mypage/myhome}" autocomplete="off">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+
+            <!-- 프로필 -->
+            <div class="profile-container">
+                <div class="profile-image" id="profileImageContainer" onclick="openProfilePopup()">
+                    <img id="profileImage" th:src="${profileImage}">
+                </div>
+            </div>
+
+            <div id="profilePopup" class="popup">
+                <div class="popup-content">
+                    <span class="close" onclick="closeProfilePopup()">&times;</span>
+                    <h2>프로필 이미지 수정</h2>
+                    <form id="uploadForm" action="/mypage/myhome" method="post" enctype="multipart/form-data">
+                        <input type="file" name="newProfileImage" id="fileInput" accept="image/*" required>
+
+                        <!-- 버튼 컨테이너 추가 -->
+                        <div class="button-container">
+                            <button type="submit" class="pro">프로필 이미지 저장</button>
+                            <button type="button" id="cancelBtn" onclick="closeProfilePopup()">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 페이지 버튼 -->
+            <div class="buttons">
+                <a th:href="@{/mypage/info}">
+                    <button type="button" class="btn" th:text="#{회원_정보}"></button>
+                </a>
+                <a th:href="@{/mypage/like}">
+                    <button type="button" class="btn" th:text="#{찜_목록_보기}"></button>
+                </a>
+                <a th:href="@{/mypage/post}">
+                    <button type="button" class="btn" th:text="#{내가_쓴_글_보기}"></button>
+                </a>
+                <a th:href="@{/mypage/sellAndBuy}">
+                    <button type="button" class="btn" th:text="#{판매_내역_구매_내역_보기}"></button>
+                </a>
+            </div>
+            <script src="/front/js/mypage/myhome.js"></script>
+        </form>
+    </main>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+    <h1 th:text="#{주문서_작성}"></h1>
+    <form name="frmSave" method="POST" th:action="${@utils.redirectUrl('/order')}" autocomplete="off" th:object="${requestOrder}">
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+        <input type="hidden" name="bSeq" th:field="*{bSeq}">
+        <input type="hidden" name="orderNo" th:field="*{orderNo}">
+        <h2 th:text="#{주문상품}"></h2>
+
+        <h2 th:text="#{주문_정보입력}"></h2>
+        <dl>
+            <dt th:text="#{주문자_이름}"></dt>
+            <dd>
+                <input type="text" name="orderName" th:field="*{orderName}">
+                <div class="error" th:each="err : ${#fields.errors('orderName')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{이메일}"></dt>
+            <dd>
+                <input type="text" name="orderEmail" th:field="*{orderEmail}">
+                <div class="error" th:each="err : ${#fields.errors('orderEmail')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{휴대전화번호}"></dt>
+            <dd>
+                <input type="text" name="orderMobile" th:field="*{orderMobile}">
+                <div class="error" th:each="err : ${#fields.errors('orderMobile')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+
+        <h2 th:text="#{배송정보_입력}"></h2>
+        <dl>
+            <dt th:text="#{받는분_이름}"></dt>
+            <dd>
+                <input type="text" name="receiverName" th:field="*{receiverName}">
+                <div class="error" th:each="err : ${#fields.errors('receiverName')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{휴대전화번호}"></dt>
+            <dd>
+                <input type="text" name="receiverMobile" th:field="*{receiverMobile}">
+                <div class="error" th:each="err : ${#fields.errors('receiverMobile')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{배송지_주소}"></dt>
+            <dd>
+                <input type="text" name="zoneCode" th:field="*{zoneCode}">
+                <input type="text" name="address" th:field="*{address}">
+                <input type="text" name="addressSub" th:field="*{addressSub}">
+                <div class="error" th:each="err : ${#fields.errors('zoneCode')}" th:text="${err}"></div>
+                <div class="error" th:each="err : ${#fields.errors('address')}" th:text="${err}"></div>
+                <div class="error" th:each="err : ${#fields.errors('addressSub')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{배송_메모}"></dt>
+            <dd>
+                <input type="text" name="deliveryMemo" th:field="*{deliveryMemo}">
+            </dd>
+        </dl>
+
+        <h2 th:text="#{결제정보}"></h2>
+        <dl>
+            <dt th:text="#{결제금액}"></dt>
+            <dd></dd>
+        </dl>
+        <dl>
+            <dt th:text="#{결제방법}"></dt>
+            <dd>
+                <span th:each="pay : ${payMethods}">
+                    <input type="radio" name="payMethod" th:value="${pay[0]}" th:id="${'payMethod-' + pay[0]}" th:field="*{payMethod}">
+                    <label th:for="${'payMethod-' + pay[0]}" th:text="${pay[1]}"></label>
+                </span>
+            </dd>
+        </dl>
+        <h2 th:text="#{주문_약관}"></h2>
+        <div>
+            약관...
+        </div>
+        <div class="terms-agree">
+            <input type="checkbox" name="agree" value="true" th:field="*{agree}" id="agree">
+            <label for="agree" th:text="#{주문_약관에_동의합니다.}"></label>
+        </div>
+        <div class="error" th:each="err : ${#fields.errors('agree')}" th:text="${err}"></div>
+        <button type="submit" th:text="#{주문하기}"></button>
+    </form>
+
+    <th:block th:if="${config != null}">
+        <th:block th:replace="~{front/order/_payment::payform}"></th:block>
+    </th:block>
+</main>
+
+</html>

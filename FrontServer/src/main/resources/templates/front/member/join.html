@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+
+<head>
+    <title>회원 가입</title>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <th:block layout:fragment="addCommonJs">
+        <th:block th:with="skipCommonJs=true"></th:block>
+    </th:block>
+</head>
+
+<body>
+<main layout:fragment="content">
+
+    <h1>회원 가입</h1>
+    <form name="frmRegist" method="post" th:action="${@utils.redirectUrl('/member/join')}" autocomplete="off" th:object="${requestJoin}">
+        <!-- 글로벌 오류 메시지 -->
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+
+        <!-- 이메일 입력 필드 -->
+        <dl>
+            <dt>이메일</dt>
+            <dd>
+                <div>
+                    <input type="text" name="email" th:field="*{email}" th:readonly="${session.EmailAuthVerified != null && session.EmailAuthVerified}">
+                    <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" id="email_verify" th:text="#{인증코드_전송}"></button>
+                </div>
+                <div class="auth_box">
+                    <th:block th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
+                        <input type="text" id="auth_num" th:placeholder="#{인증코드_입력}">
+                        <span id="auth_count">03:00</span>
+                        <button type="button" id="email_confirm" th:text="#{확인}" disabled></button>
+                        <button type="button" id="email_re_verify" th:text="#{재전송}" disabled></button>
+                    </th:block>
+                    <th:block th:unless="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
+                        <span class='confirmed' th:text="#{확인된_이메일입니다.}"></span>
+                    </th:block>
+                </div>
+                <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+
+            </dd>
+        </dl>
+
+        <!-- 비밀번호 입력 필드 -->
+        <dl>
+            <dt>비밀번호</dt>
+            <dd>
+                <input type="password" id="password" name="password" th:field="*{password}" />
+                <div class="error" th:if="${#fields.hasErrors('password')}" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <!-- 비밀번호 확인 입력 필드 -->
+        <dl>
+            <dt>비밀번호 확인</dt>
+            <dd>
+                <input type="password" id="confirmPassword" name="confirmPassword" th:field="*{confirmPassword}" />
+                <div class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <!-- 닉네임 입력 필드 -->
+        <dl>
+            <dt>닉네임</dt>
+            <dd>
+                <input type="text" id="userName" name="userName" th:field="*{userName}" />
+                <button type="button" id="checkUserName">중복 확인</button>
+                <div id="userNameError" class="error"></div>
+            </dd>
+        </dl>
+
+        <!-- 주소 입력 필드 -->
+        <dl>
+            <dt>주소</dt>
+            <dd>
+                <input type="text" id="user_postcode" placeholder="우편번호" readonly>
+                <input type="button" onclick="user_execDaumPostcode()" value="우편번호 찾기"><br>
+                <input type="text" id="user_address" name="address" placeholder="주소" readonly><br>
+                <input type="text" id="user_extraAddress" placeholder="참고항목" readonly>
+                <input type="text" id="user_detailAddress" name="detailAddress" placeholder="상세주소">
+            </dd>
+        </dl>
+
+        <!-- 약관 동의 체크박스 -->
+        <div class="terms">
+            <div class="tit">회원가입 약관</div>
+            <div class="terms-contents">약관 내용 뭐하지</div>
+            <input type="checkbox" name="agree" value="true" id="agree" th:field="*{agree}" />
+            <label for="agree">약관 동의</label>
+            <div class="error" th:if="${#fields.hasErrors('agree')}" th:each="err : ${#fields.errors('agree')}" th:text="${err}"></div>
+        </div>
+
+        <!-- 버튼 -->
+        <div class="buttons">
+            <button type="reset">다시 입력</button>
+            <button type="submit">가입하기</button>
+        </div>
+    </form>
+</main>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+/* 기본 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    margin-top: 15px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+/* 제목 */
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2em;
+    color: #333;
+}
+
+.info-box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 800px;
+    margin: 10px;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+.info-row p {
+    width: 120px;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+    padding-right: 15px;
+    padding-left: 5px;
+    text-align: center;
+}
+
+.info-row span {
+    flex: 1;
+    color: #555;
+    text-align: center;
+}
+
+.vertical-line {
+    width: 1px;
+    height: 100%;
+    background-color: #ddd;
+    margin: 0 15px;
+}
+
+.info-row.no-border {
+    border-bottom: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* 버튼 */
+.button {
+    background-color: #68A5FE;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    margin: 0 10px;
+}
+
+.button:hover {
+    background-color: #F5D2D2;
+}
