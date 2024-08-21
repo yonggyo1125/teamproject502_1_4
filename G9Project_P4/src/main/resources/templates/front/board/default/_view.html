@@ -2,5 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="view">
     <div th:replace="~{front/board/default/_common::pageTitle}"></div>
+
+    <div class="view-content" th:object="${boardData}">
+        <div class="subject">
+            <span th:if="*{category != null && !#strings.isEmpty(#strings.trim(category))}" th:text="*{'[' + category + ']'}"></span>
+            <th:text th:text="*{subject}"></th:text>
+        </div>
+        <div class="post-info">
+            <div class="left">
+                <th:block th:text="#{작성자}"></th:block>:
+                <th:block th:text="*{poster}"></th:block>
+                <th:block th:if="*{member != null}" th:text="*{#strings.concat('(', member.email, ')')}"></th:block>
+            </div>
+            <div class="right">
+                <th:block th:text="#{조회수}"></th:block>: <span th:text="*{viewCount > 1000 ? #numbers.formatInteger(viewCount, 3, 'COMMA'): viewCount}"></span>
+                IP: <span th:text="*{ip}"></span>
+                <th:block th:text="#{작성일시}"></th:block>:
+                <span th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm:ss')}"></span>
+            </div>
+        </div> <!--// post-info -->
+    </div>  <!--// view-content -->
+
 </th:block>
 </html>
