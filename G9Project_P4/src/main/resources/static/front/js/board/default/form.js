@@ -6,6 +6,23 @@ window.addEventListener("DOMContentLoaded", function() {
             if (editor) window.editor = editor;
         } catch (err) {}
    })();
+
+   /* 이미지 본문 추가 이벤트 처리 S */
+   const insertEditors = document.getElementsByClassName("insert-editor");
+   for (const el of insertEditors) {
+        el.addEventListener("click", (e) => insertEditor(e.currentTarget.dataset.url));
+   }
+
+   const removeEls = document.querySelectorAll(".file-item .remove");
+   for (const el of removeEls) {
+        el.addEventListener("click", function() {
+            if (confirm('정말 삭제하겠습니까?')) {
+                const seq = this.dataset.seq;
+                fileManager.delete(seq);
+            }
+        });
+   }
+   /* 이미지 본문 추가 이벤트 처리 E */
 });
 
 
