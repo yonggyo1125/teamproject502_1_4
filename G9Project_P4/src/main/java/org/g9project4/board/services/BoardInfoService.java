@@ -38,6 +38,7 @@ public class BoardInfoService {
     private final BoardDataRepository repository;
     private final BoardConfigInfoService configInfoService;
     private final HttpServletRequest request;
+    private final ModelMapper modelMapper;
     private final Utils utils;
 
     /**
@@ -256,11 +257,14 @@ public class BoardInfoService {
     public RequestBoard getForm(Long seq, DeleteStatus status) {
         BoardData item = get(seq, status);
 
-        return getForm(item, status);
+        return getForm(item);
     }
 
-    public RequestBoard getForm(BoardData item, DeleteStatus status) {
-       RequestBoard form = new ModelMapper().map(item, RequestBoard.class);
+    public RequestBoard getForm(BoardData item) {
+
+        RequestBoard form = modelMapper.map(item, RequestBoard.class);
+        form.setBid(item.getBoard().getBid());
+
        form.setGuest(item.getMember() == null);
 
        return form;
@@ -270,9 +274,6 @@ public class BoardInfoService {
         return getForm(seq, DeleteStatus.UNDELETED);
     }
 
-    public RequestBoard getForm(BoardData item) {
-        return getForm(item, DeleteStatus.UNDELETED);
-    }
     /**
      *  추가 데이터 처리
      *      - 업로드한 파일 목록
