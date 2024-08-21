@@ -134,8 +134,8 @@ public class Utils { // 빈의 이름 - utils
      * @return
      */
     public String nl2br(String data) {
-        data = data.replace("\\n", "<br>")
-                .replace("\\r", "");
+        data = data.replace("\n", "<br>")
+                .replace("\r", "");
 
         return data;
     }
