@@ -17,14 +17,7 @@ public class MainController {
     @GetMapping
     public String index(Model model) {
 
-        long oid = 100000L;
-        int price = 100;
 
-        PaymentConfig config = configService.get(oid, price);
-
-        model.addAttribute("config", config);
-        model.addAttribute("oid", oid);
-        model.addAttribute("price", price);
 
         return "front/main/index";
     }

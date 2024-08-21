@@ -12,6 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class Member extends BaseEntity implements Serializable {
+
     @Id @GeneratedValue
     private Long seq;
 

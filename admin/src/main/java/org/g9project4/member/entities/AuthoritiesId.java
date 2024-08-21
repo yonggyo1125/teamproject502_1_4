@@ -12,6 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthoritiesId implements Serializable {
+
     private Member member;
     private Authority authority;
 }

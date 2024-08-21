@@ -11,6 +11,9 @@ import java.util.UUID;
 
 @Data
 public class RequestJoin implements Serializable {
+
+    private final long serialVersionUID = 1L;
+
     @NotBlank @Email
     private String email;
     @NotBlank @Size(min = 8)

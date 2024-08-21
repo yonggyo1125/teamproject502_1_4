@@ -7,6 +7,9 @@ import java.io.Serializable;
 
 @Data
 public class RequestLogin implements Serializable {
+
+    private final long serialVersionUID = 1L;
+
     @NotBlank
     private String email;
     @NotBlank
