@@ -1,11 +1,17 @@
 package org.g9project4.planner.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.ExceptionProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/planner")
@@ -25,7 +31,7 @@ public class PlannerController implements ExceptionProcessor {
      * @return
      */
     @GetMapping("/write")
-    public String write(Model model) {
+    public String write(@ModelAttribute RequestPlanner form, Model model) {
         commonProcess("write", model);
 
         return utils.tpl("planner/write");
@@ -50,7 +56,15 @@ public class PlannerController implements ExceptionProcessor {
      * @return
      */
     @PostMapping("/save")
-    public String save() {
+    public String save(@Valid RequestPlanner form, Errors errors, Model model) {
+        String mode = StringUtils.hasText(form.getMode()) ? form.getMode() : "write";
+        commonProcess(mode, model);
+
+        if (errors.hasErrors()) {
+            return utils.tpl("planner/" + mode);
+        }
+
+        // 저장 처리
 
         return "redirect:" + utils.redirectUrl("/planner");
     }
@@ -87,7 +101,20 @@ public class PlannerController implements ExceptionProcessor {
      * @param model
      */
     private void commonProcess(String mode, Model model) {
+        mode = StringUtils.hasText(mode) ? mode : "write";
 
+        List<String> addCss = new ArrayList<>();
+        List<String> addScript = new ArrayList<>();
+        addCss.add("planner/style");
+
+        // 플래너 작성, 수정
+        if (List.of("write", "update").contains(mode)) {
+            addCss.add("planner/form");
+            addScript.add("planner/form");
+        }
+
+        model.addAttribute("addCss", addCss);
+        model.addAttribute("addScript", addScript);
     }
 
     /**
