@@ -41,8 +41,6 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath password = createString("password");
 
-    public final ListPath<org.g9project4.planner.entities.Planner, org.g9project4.planner.entities.QPlanner> planners = this.<org.g9project4.planner.entities.Planner, org.g9project4.planner.entities.QPlanner>createList("planners", org.g9project4.planner.entities.Planner.class, org.g9project4.planner.entities.QPlanner.class, PathInits.DIRECT2);
-
     public final NumberPath<Long> seq = createNumber("seq", Long.class);
 
     public final StringPath userName = createString("userName");

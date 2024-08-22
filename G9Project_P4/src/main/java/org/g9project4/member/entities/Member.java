@@ -39,7 +39,7 @@ public class Member extends BaseEntity implements Serializable {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<Planner> planners;
+    private transient List<Planner> planners;
 
     @Transient
     private FileInfo profileImage;

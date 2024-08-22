@@ -11,11 +11,11 @@ import java.util.Collection;
 @Data
 @Builder
 public class MemberInfo implements UserDetails {
-
+    private final long serialVersionUID = 1L;
     private String email;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-    private Member member;
+    private transient Member member;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

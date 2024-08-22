@@ -2,6 +2,7 @@ package org.g9project4.member.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.g9project4.file.entities.FileInfo;
 import org.g9project4.global.entities.BaseEntity;
 
 import java.io.Serializable;
@@ -16,6 +17,9 @@ public class Member extends BaseEntity implements Serializable {
     @Id @GeneratedValue
     private Long seq;
 
+    @Column(length=45, nullable = false)
+    private String gid;
+
     @Column(length = 65, unique = true, nullable = false)
     private String email;
 
@@ -29,6 +33,9 @@ public class Member extends BaseEntity implements Serializable {
     private String mobile;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Authorities> authorities;
+
+    @Transient
+    private FileInfo profileImage;
 }
