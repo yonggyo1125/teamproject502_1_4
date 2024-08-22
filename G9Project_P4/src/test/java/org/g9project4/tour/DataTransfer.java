@@ -23,9 +23,11 @@ public class DataTransfer {
     @Autowired
     private VisitUpdateService visitUpdateService;
 
+
     @Test
     void test1() {
-        service.updateSidoVisit("6M");
+        apiUpdateService.update();
+        //service.updateSidoVisit("6M");
         //service.updateSidoVisit("1M");
     }
 
