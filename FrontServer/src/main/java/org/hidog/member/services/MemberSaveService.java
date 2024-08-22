@@ -1,13 +1,14 @@
 package org.hidog.member.services;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.hidog.file.services.FileUploadDoneService;
 import org.hidog.member.MemberUtil;
 import org.hidog.member.constants.Authority;
 import org.hidog.member.controllers.RequestJoin;
 import org.hidog.member.entities.Authorities;
 import org.hidog.member.entities.Member;
-import org.hidog.member.exceptions.MemberNotFoundException;
+import org.hidog.member.entities.QMember;
+import org.hidog.member.exceptions.DuplicateMemberException;
 import org.hidog.member.repositories.AuthoritiesRepository;
 import org.hidog.member.repositories.MemberRepository;
 import org.hidog.mypage.controllers.RequestProfile;
@@ -27,7 +28,7 @@ public class MemberSaveService {
     private final AuthoritiesRepository authoritiesRepository;
     private final PasswordEncoder passwordEncoder;
     private final MemberUtil memberUtil;
-    private final HttpSession session;
+    private final FileUploadDoneService doneService;
 
     /**
      * 회원 가입 처리
@@ -52,27 +53,25 @@ public class MemberSaveService {
      */
     public void save(RequestProfile form) {
         Member member = memberUtil.getMember();
-        String email = member.getEmail();
-        member = memberRepository.findByEmail(email).orElseThrow(MemberNotFoundException::new);
 
         String userName = form.getUserName();
         String password = form.getPassword();
 
-        // 닉네임 중복 체크
-        if (memberRepository.existsByUserName(userName) && !member.getUserName().equals(userName)) {
-            throw new IllegalArgumentException("이미 사용 중인 닉네임입니다.");  // 중복 시 예외 발생
+        QMember qMember = QMember.member;
+        if (memberRepository.exists(qMember.userName.eq(userName))) {
+            throw new DuplicateMemberException();
         }
 
         member.setUserName(userName);
+        member.setAddress(form.getAddress());
+        member.setDetailAddress(form.getDetailAddress());
 
         if (StringUtils.hasText(password)) {
             String hash = passwordEncoder.encode(password);
             member.setPassword(hash);
         }
 
-        memberRepository.saveAndFlush(member);
-
-        session.setAttribute("userInfoChanged", true);
+        save(member, null);
     }
 
     /**
@@ -91,5 +90,8 @@ public class MemberSaveService {
                     .map(authority -> Authorities.builder().member(member).authority(authority).build()).toList();
             authoritiesRepository.saveAllAndFlush(items);
         }
+
+        // 파일 업로드 완료 처리
+        doneService.process(member.getEmail());
     }
 }
