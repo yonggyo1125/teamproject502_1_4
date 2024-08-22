@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <link rel="stylesheet" th:href="@{/css/_header.css}">
-    </head>
-    <body>
-        <header th:fragment="common">
-            <h1>상단 영역</h1>
+    <header th:fragment="common">
+        <h1>상단 영역</h1>
             <nav>
                 <ul class="menu-bar">
                     <li>
-                        <a th:href="@{/app}">
+                        <a th:href="${@utils.redirectUrl('/')}">
                             <button type="submit" th:text="#{메인화면}"></button>
                         </a>
                     </li>
@@ -34,18 +30,17 @@
                     </li>
                     <li th:block sec:authorize="isAuthenticated()">
                         <span th:text="${#messages.msg('LOGIN_MSG', loggedMember.userName, loggedMember.email)}"></span><br>
-                        <a th:href="@{/app/member/logout}">
+                        <a th:href="${@utils.redirectUrl('/member/logout')}">
                             <button type="submit" th:text="#{로그아웃}"></button>
                         </a>
                         <a th:href="${@utils.redirectUrl('/mypage/myhome')}">
                             <button type="submit" th:text="#{마이_페이지}"></button>
                         </a>
-                        <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin}" target="_blank">
+                        <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="${@utils.redirectUrl('/admin')}" target="_blank">
                             <button type="submit" th:text="#{관리자_페이지}"></button>
                         </a>
                     </li>
                 </ul>
             </nav>
-        </header>
-    </body>
+    </header>
 </html>
