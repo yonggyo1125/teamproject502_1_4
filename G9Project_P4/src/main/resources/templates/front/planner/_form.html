@@ -1,6 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <th:block th:fragment="form">
+    <th:block th:fragment="form" th:object="${requestPlanner}">
+        <input type="hidden" name="itinerary" th:field="*{itinerary}">
+        <input type="hidden" name="sDate" th:field="*{sDate}">
+        <input type="hidden" name="eDate" th:field="*{eDate}">
 
+        <div class="planner-box">
+            <div class="left">
+                <iframe class="select-date" th:src="${@utils.redirectUrl('/calendar')}" frameborder="0"></iframe>
+                <div class="error" th:each="err : ${#fields.errors('sDate')}" th:text="${err}"></div>
+                <div class="error" th:each="err : ${#fields.errors('eDate')}" th:text="${err}"></div>
+            </div>
+            <div class="right">
+                <div class="title-wrap">
+                    <dl>
+                        <dt th:text="#{플래너명}"></dt>
+                        <dd>
+                            <input type="text" name="title" th:field="*{title}">
+                            <div class="error" th:each="err : ${#fields.errors('title')}" th:text="${err}"></div>
+                        </dd>
+                    </dl>
+                    <div class="controls">
+                        <button type="button" th:text="#{전체삭제}" class="remove-all"></button>
+                        <button type="button" th:text="#{삭제}" class="remove"></button>
+                        <button type="button" th:text="#{추가}" class="add"></button>
+                    </div>
+                </div> <!--// title-wrap -->
+
+                <div class="itinerary">
+                    <div class="inner">
+                    // 여행 일정
+                    </div>
+                    <div class="error" th:each="err: ${#fields.errors('itinerary')}" th:text="${err}"></div>
+                </div>
+
+                <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+                <div class="button-group">
+                    <button type="reset" th:text="#{취소}"></button>
+                    <button type="submit" th:text="#{저장}"></button>
+                </div>
+            </div>
+        </div> <!--// planner-box -->
     </th:block>
 </html>

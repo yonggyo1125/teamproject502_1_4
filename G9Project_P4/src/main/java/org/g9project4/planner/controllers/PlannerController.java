@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.ExceptionProcessor;
+import org.g9project4.planner.services.PlannerSaveService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlannerController implements ExceptionProcessor {
 
+    private final PlannerSaveService saveService;
     private final Utils utils;
     
     @ModelAttribute("pageTitle")
@@ -65,6 +67,7 @@ public class PlannerController implements ExceptionProcessor {
         }
 
         // 저장 처리
+        saveService.save(form);
 
         return "redirect:" + utils.redirectUrl("/planner");
     }
