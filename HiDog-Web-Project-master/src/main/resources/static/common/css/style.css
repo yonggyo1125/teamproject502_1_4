@@ -1,0 +1,123 @@
+.dn {
+    display: none !important;
+}
+a{
+    text-decoration: none;
+}
+
+/* 공통 컬러 시작*/
+/* 공통 컬러 사용법-css:    var(--primary-color);
+ 타 css파일에 공통컬러 적용시 추가->  @import url('common/css/style.css');
+ */
+:root {
+   --primary-color: #7d845a; /* Primary 색상- 녹두색 */
+    --secondary-color: #5f504b; /* Secondary 색상- 갈색 */
+    --accent-color: #2d2926; /* Accent 색상- 다크그린*/
+    --background-color: #ffffff; /* 배경 색상 - 화이트 */
+    --text-color: #000000; /* 텍스트 색상- 블랙 */
+    --muted-text-color: #9c9ca6; /* 메서드 색상- 매트그레이 */
+   --border-color: #454546; /* 테두리 색상- 다크그레이 */
+
+
+ --button-padding: 10px 20px;
+    --button-font-size: 16px;
+    --button-font-weight: bold;
+    --button-color: #fff;
+    --button-border-radius: 4px;
+    --button-cursor: pointer;
+    --button-transition: background-color 0.3s ease;
+    --button-primary-bg: #7d845a; /* Primary 색상- 녹두색 */
+    --button-primary-hover-bg: #b3bc88;
+    --button-secondary-bg: #5f504b;  /* Secondary 색상- 갈색 */
+    --button-secondary-hover-bg: #937c74;
+    --button-success-bg: #28a745;
+    --button-success-hover-bg: #218838;
+    --button-danger-bg: #dc3545;
+    --button-danger-hover-bg: #c82333;
+    --button-warning-bg: #ffc107;
+    --button-warning-hover-bg: #e0a800;
+    --button-info-bg: #17a2b8;
+    --button-info-hover-bg: #138496;
+
+/* 공통 컬러 끝*/
+
+}
+
+/* 공통 버튼 시작*/
+
+/* 공통 버튼 사용법-html:   <button type="submit" class="button button-secondary">검색</button>   */
+
+
+/* 공통 버튼 스타일 1 */
+.button {
+    display: inline-block;
+    padding: var(--button-padding);
+    font-size: var(--button-font-size);
+    font-weight: var(--button-font-weight);
+    color: var(--button-color);
+    border: none;
+    border-radius: var(--button-border-radius);
+    cursor: var(--button-cursor);
+    text-align: center;
+    text-decoration: none;
+    transition: var(--button-transition);
+}
+
+/* 버튼 색상 정의 */
+.button-primary {
+    background-color: var(--button-primary-bg);
+}
+
+.button-secondary {
+    background-color: var(--button-secondary-bg);
+}
+
+.button-success {
+    background-color: var(--button-success-bg);
+}
+
+.button-danger {
+    background-color: var(--button-danger-bg);
+}
+
+.button-warning {
+    background-color: var(--button-warning-bg);
+}
+
+.button-info {
+    background-color: var(--button-info-bg);
+}
+
+/* 호버 효과 */
+.button-primary:hover {
+    background-color: var(--button-primary-hover-bg);
+}
+
+.button-secondary:hover {
+    background-color: var(--button-secondary-hover-bg);
+}
+
+.button-success:hover {
+    background-color: var(--button-success-hover-bg);
+}
+
+.button-danger:hover {
+    background-color: var(--button-danger-hover-bg);
+}
+
+.button-warning:hover {
+    background-color: var(--button-warning-hover-bg);
+}
+
+.button-info:hover {
+    background-color: var(--button-info-hover-bg);
+}
+.follow-image {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    pointer-events: none; /* 마우스 이벤트를 이미지에 전달하지 않음 */
+    z-index: 10000;
+    transition: transform 0.1s ease; /* 부드러운 이동 효과 */
+}
+/* 공통 버튼 끝*/

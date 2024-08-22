@@ -1,0 +1,10 @@
+.ck-editor__editable {
+    height: 350px;
+}
+
+/* 페이징 공통 S */
+.pagination { text-align: center; margin: 30px 0; }
+.pagination .page { border: 1px solid #68A5FE;; color: #596b99; display: inline-block; padding: 5px 10px; border-radius: 3px; background: #fff; }
+.pagination .page.on { background: #68A5FE;; color: #fff; }
+.pagination .page + .page { margin-left: 3px; }
+/* 페이징 공통 E */

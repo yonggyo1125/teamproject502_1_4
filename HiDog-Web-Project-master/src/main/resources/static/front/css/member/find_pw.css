@@ -1,0 +1,74 @@
+/* find_pw.css */
+
+/* 폼 전체 스타일 */
+form[name="frmFindPw"] {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+/* 입력 필드 스타일 */
+form[name="frmFindPw"] input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* 버튼 스타일 */
+form[name="frmFindPw"] button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #9dc5f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 19px;
+}
+
+/* 에러 메시지 스타일 */
+form[name="frmFindPw"] .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* 글로벌 에러 메시지 스타일 */
+form[name="frmFindPw"] .global.error {
+    font-size: 14px;
+    color: red;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* 제목 스타일 */
+h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* 필드 제목 스타일 */
+dl dt {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* 링크 스타일 (아이디/비밀번호 찾기) */
+form[name="frmFindPw"] div a {
+    margin-right: 10px;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+}
+
+form[name="frmFindPw"] div a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+
+<main layout:fragment="content">
+    <div id="mapId"></div>
+    <div th:data-startMarker="*{startMarker}"></div>
+    <aside>
+        <input type="text" th:placeholder="#{검색어를_입력하세요.}">
+        <button type="submit" th:text="#{검색하기}"></button>
+        <ul>
+            <li>글1</li>
+            <li>글2</li>
+        </ul>
+    </aside>
+</main>
+</html>

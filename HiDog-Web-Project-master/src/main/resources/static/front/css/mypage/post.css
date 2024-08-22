@@ -1,0 +1,77 @@
+/* 기본 S */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+/* 기본 E */
+
+/* 제목 */
+h1 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* 게시글 목록 S */
+#postTable {
+    width: 90%;
+    margin: 10px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#postTable thead {
+    background-color: #72A2F1;
+    color: #fff;
+}
+
+#postTable th, #postTable td {
+    color: black;
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.9em;
+}
+
+#postTable th {
+    font-weight: bold;
+}
+
+#postTable td {
+    background-color: #f9f9f9;
+}
+
+#postTable tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+#postTable a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+#postTable a:hover {
+    text-decoration: underline;
+}
+/* 게시글 목록 E */
+
+/* 반응형 디자인 (모바일 화면) */
+@media (max-width: 768px) {
+    #postTable {
+        width: 100%;
+    }
+    #postTable th, #postTable td {
+        font-size: 0.8em;
+        padding: 10px;
+    }
+}

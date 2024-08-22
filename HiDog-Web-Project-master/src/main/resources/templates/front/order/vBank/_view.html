@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th th:fragment="view">
+    <div class="view-content" th:object="${orderInfo}">
+        <div class="order_info">
+            <span class="success">
+                <th:block th:text="#{주문이_완료되었습니다.}"></th:block>
+            </span>
+            <table>
+                <tr>
+                    <th th:text="#{주문번호}"></th>
+                    <td class="order_no">
+                        <th:block th:text="*{orderNo}"></th:block>
+                    </td>
+                </tr>
+                <tr>
+                    <th th:text="#{결제방법}"></th>
+                    <td class="payMethod">
+                        <th:block th:text="*{payMethod}"></th:block>
+                    </td>
+                </tr>
+                <tr>
+                    <th th:text="#{입금계좌}"></th>
+                    <td class="payBankAccount">
+                        <span th:text="*{payBankName}"></span>
+                        <span th:text="*{payBankAccount}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th th:text="#{입금금액}"></th>
+                    <td class="payBankAccount">
+                        <span th:text="*{totalPayPrice}"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="delivery_info">
+            <table>
+                <tr>
+                    <td>
+                        <th:block th:text="*{receiverName}"></th:block>
+                        <th:block th:text="*{receiverMobile}"></th:block>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <th:block th:text="*{zoneCode}"></th:block>
+                        <th:block th:text="*{address}"></th:block>
+                        <th:block th:text="*{addressSub}"></th:block>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="item_info">
+            <table>
+                <tr>
+                    <th th:text="#{상품명}"></th>
+                    <td class="product_item">
+                        <th:block th:text="*{orderItem.itemName}"></th:block>
+                    </td>
+                </tr>
+                <tr>
+                    <th th:text="#{수량}"></th>
+                    <td class="product_item">
+                        <th:block th:text="*{orderItem.qty}"></th:block>
+                    </td>
+                </tr>
+            </table>
+        </div>
+</th:block>
+</html>

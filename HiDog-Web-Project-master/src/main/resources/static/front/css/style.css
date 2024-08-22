@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+* { font-family: 'Noto Sans KR', sans-serif; color: #000; box-sizing: border-box; outline: none; }
+html { font-size: 13px; }
+body { margin: 0; }
+a { text-decoration: none; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
+dl, dt, dd { margin: 0; padding: 0; }
+img { border: 0; }
+
+/* 파일 공통 S */
+.image-file-box {
+    border: 2px solid #000;
+    width: 204px;
+    position: relative;
+}
+
+.image-file-box + .image-file-box {
+    margin-left: 10px;
+}
+
+.image-file-box > .inner {
+    width: 200px;
+    height: 200px;
+}
+
+.image-file-box .remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    line-height: 20px;
+}
+/* 파일 공통 E */

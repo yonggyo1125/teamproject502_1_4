@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{front/layouts/main}">
+    <main layout:fragment="content">
+        <h1 th:text="#{판매_내역_구매_내역_보기}">판매 내역 및 구매 내역</h1>
+        <form name="frmSellAndBuy" method="post" th:action="@{/mypage/sellAndBuy}" autocomplete="off">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+
+            <div class="container">
+                <!-- 판매 내역 테이블 -->
+                <h2>판매 내역</h2>
+                <table class="table1">
+                    <thead>
+                        <tr>
+                            <th class="th_s">아이디</th>
+                            <th class="th_m">상품명</th>
+                            <th class="th_m">가격</th>
+                            <th class="th_e">판매 날짜</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="record : ${sellRecords}">
+                            <td th:text="${record.id}"></td>
+                            <td th:text="${record.itemName}"></td>
+                            <td th:text="${record.price}"></td>
+                            <td th:text="${record.date}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- 구매 내역 테이블 -->
+                <h2>구매 내역</h2>
+                <table class="table2">
+                    <thead>
+                        <tr>
+                            <th class="th_s">아이디</th>
+                            <th class="th_m">상품명</th>
+                            <th class="th_m">가격</th>
+                            <th class="th_e">구매 날짜</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="record : ${buyRecords}">
+                            <td th:text="${record.id}"></td>
+                            <td th:text="${record.itemName}"></td>
+                            <td th:text="${record.price}"></td>
+                            <td th:text="${record.date}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </main>
+</html>

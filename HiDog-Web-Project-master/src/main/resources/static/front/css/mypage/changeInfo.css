@@ -1,0 +1,95 @@
+.info-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+dl {
+    display: flex;
+    align-items: center;
+    margin: 0 20px 20px 20px;
+    padding-left: 10px;
+}
+
+dt {
+    font-weight: bold;
+    color: #555;
+    flex: 0 0 70px;
+}
+
+dd {
+    margin: 0 30px 0 0;
+    flex: 1;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* 읽기 전용 */
+input[readonly] {
+    background-color: #F0F0F0; /* #A3AABE; */
+    cursor: not-allowed;
+}
+
+/* 수정 가능 */
+input::placeholder {
+    color: #aaa;
+}
+
+.error {
+    color: #e74c3c;
+    font-size: 0.875em;
+    margin-top: 5px;
+}
+
+/* 성공 및 오류 메시지 */
+.message-container {
+    margin-bottom: 20px;
+}
+
+.success-message {
+    color: #2ecc71;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+/* 버튼 */
+.button-container {
+    text-align: center;
+}
+
+.button-container button {
+    background-color: #68A5FE;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button-container button:hover {
+    background-color: #F5D2D2;
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>이메일 인증</title>
+</head>
+<body>
+    <dl>
+        <dd th:text="${subject}"></dd>
+    </dl>
+    <dl>
+        <dt></dt>
+        <dd th:utext="${message}"></dd>
+    </dl>
+    <dl>
+        <dd th:text="${authNum}"></dd>
+    </dl>
+</body>
+</html>

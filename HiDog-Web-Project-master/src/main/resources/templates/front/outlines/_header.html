@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <header th:fragment="common">
+        <h1>상단 영역</h1>
+            <nav>
+                <ul class="menu-bar">
+                    <li>
+                        <a th:href="${@utils.redirectUrl('/')}">
+                            <button type="submit" th:text="#{메인화면}"></button>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="${@utils.redirectUrl('/walking/map')}">
+                            <button type="submit" th:text="#{맵}"></button>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="${@utils.redirectUrl('/board/list' + bid)}">
+                            <button type="submit" th:text="#{게시판}"></button>
+                        </a>
+                    </li>
+                    <li th:block sec:authorize="isAnonymous()">
+                        <a th:href="${@utils.redirectUrl('/member/login')}">
+                            <button type="submit" th:text="#{로그인}"></button>
+                        </a>
+                        <a th:href="${@utils.redirectUrl('/member/join')}">
+                            <button type="submit" th:text="#{회원가입}"></button>
+                        </a>
+                    </li>
+                    <li th:block sec:authorize="isAuthenticated()">
+                        <span th:text="${#messages.msg('LOGIN_MSG', loggedMember.userName, loggedMember.email)}"></span><br>
+                        <a th:href="${@utils.redirectUrl('/member/logout')}">
+                            <button type="submit" th:text="#{로그아웃}"></button>
+                        </a>
+                        <a th:href="${@utils.redirectUrl('/mypage/myhome')}">
+                            <button type="submit" th:text="#{마이_페이지}"></button>
+                        </a>
+                        <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="${@utils.redirectUrl('/admin')}" target="_blank">
+                            <button type="submit" th:text="#{관리자_페이지}"></button>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+    </header>
+</html>

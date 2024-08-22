@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+    <th:block th:if="${board.skin == 'default'}">
+        <div th:replace="~{front/board/default/_common::pageTitle}"></div>
+    </th:block>
+
+    <th:block th:if="${board.skin == 'walking'}">
+        <div th:replace="~{front/board/walking/_common::pageTitle}"></div>
+    </th:block>
+
+    <th:block th:if="${board.skin == 'market'}">
+        <div th:replace="~{front/board/market/_common::pageTitle}"></div>
+    </th:block>
+
+    <th:block th:if="${board.skin == 'default'}">
+        <th:block th:replace="~{front/board/default/_list_items::items}"></th:block>
+    </th:block>
+
+    <th:block th:if="${board.skin == 'walking'}">
+        <th:block th:replace="~{front/board/walking/_list_items::items}"></th:block>
+    </th:block>
+
+    <th:block th:if="${board.skin == 'market'}">
+        <th:block th:replace="~{front/board/market/_list_items::items}"></th:block>
+    </th:block>
+</main>
+</html>

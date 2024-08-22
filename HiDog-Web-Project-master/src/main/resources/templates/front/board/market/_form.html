@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="form" th:object="${requestBoard}">
+    <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+    <input type="hidden" name="gid" th:field="*{gid}">
+    <input type="hidden" name="gid" th:field="*{poster}">
+
+    <h1 th:text="#{상품등록}"></h1>
+
+    <dl>
+        <dt th:text="#{제목}"></dt>
+        <dd>
+            <input type="text" name="subject" th:field="*{subject}">
+            <div class="error" th:each="err : ${#fields.errors('subject')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+
+    <h2 th:text="#{상품정보}"></h2>
+    <dl>
+        <dt th:text="#{상품명}"></dt>
+        <dd>
+            <input type="text" name="text1" th:field="*{text1}">
+            <div class="error" th:each="err : ${#fields.errors('text1')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{설명}"></dt>
+        <dd>
+            <textarea name="content" th:field="*{content}" id="content"></textarea>
+            <div class="error" th:each="err : ${#fields.errors('content')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+    <h3 th:text="#{가격}"></h3>
+    <dl>
+        <dt th:text="#{가격}"></dt>
+        <dd>
+            <input type="number" name="num1" th:field="*{num1}">
+            <div class="error" th:each="err : ${#fields.errors('num1')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+    <h3 th:text="#{수량}"></h3>
+    <dl>
+        <dt th:text="#{수량}"></dt>
+        <dd>
+            <input type="number" name="num2" th:field="*{num2}">
+            <div class="error" th:each="err : ${#fields.errors('num2')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+    <div class="image-upload-container">
+        <div class="image-upload-placeholder">
+            <span>
+                <i class="xi-camera-o xi-4x insert-editor" data-url="[fileUrl]"></i>
+            </span>
+            <input type="file" accept="image/*" id="image-upload-input" multiple style="display:none;" />
+        </div>
+    </div>
+    <div id="image-preview-container"></div>
+</th:block>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="pageTitle" class="page-title">
+    <h1>
+        <a th:href="${@utils.redirectUrl('/board/list/' + board.bid)}" th:text="${board.bName}"></a>
+    </h1>
+</div>
+
+<div th:fragment="category" class="category-tab">
+        <span th:if="${board.categories != null && !board.categories.isEmpty()}"
+              th:each="cat, status : ${board.categories}">
+            <input type="radio" name="category" th:value="${cat}"  th:id="${'category-' + status.index}" th:checked="${(requestBoard != null && requestBoard.category == cat) || (param.category == cat)}">
+            <label th:for="${'category-' + status.index}" th:text="${cat}"></label>
+        </span>
+</div>
+</html>

@@ -1,0 +1,38 @@
+/* find_pw.css */
+ body {
+     font-family: Arial, sans-serif; /* 기본 글꼴 설정 */
+     display: flex;
+     flex-direction: column;
+     align-items: center; /* 가로 중앙 정렬 */
+     justify-content: center; /* 세로 중앙 정렬 */
+     min-height: 100vh; /* 전체 화면 높이 */
+     margin: 0;
+     padding: 0;
+ }
+
+ main {
+     text-align: center; /* 텍스트 중앙 정렬 */
+     max-width: 600px; /* 최대 너비 설정 (선택 사항) */
+     padding: 20px; /* 내부 여백 추가 */
+ }
+
+ h1 {
+     font-size: 2.5em; /* 제목 글씨 크기 조정 */
+     margin-bottom: 15px; /* 제목과 다른 요소 간의 간격 조정 */
+ }
+
+ div {
+     font-size: 1.5em; /* 일반 텍스트 글씨 크기 조정 */
+     margin-bottom: 15px; /* 텍스트와 다른 요소 간의 간격 조정 */
+ }
+
+ a {
+     font-size: 1.5em; /* 링크 글씨 크기 조정 */
+     text-decoration: none; /* 링크의 밑줄 제거 */
+     color: #007bff; /* 링크 색상 설정 */
+     transition: color 0.3s ease; /* 링크 색상 변화 효과 */
+ }
+
+ a:hover {
+     color: #0056b3; /* 링크에 마우스 오버 시 색상 변경 */
+ }

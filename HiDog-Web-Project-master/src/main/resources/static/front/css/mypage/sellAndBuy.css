@@ -1,0 +1,110 @@
+/* 페이지 전체 설정 */
+main {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding-bottom: 15px;
+}
+
+/* 페이지 제목 */
+h1 {
+    text-align: center;
+    font-size: 2em;
+    color: #333;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 5px 20px 15px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+/* 표 전체 설정 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+/* 판매 내역 테이블 스타일 */
+.table1 .th_s {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.table1 .th_e {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.table1 thead {
+    background-color: #72A2F1;
+}
+
+.table1 th, .table1 td {
+    padding: 10px;
+    text-align: center;
+}
+
+.table1 th {
+    color: white;
+}
+
+.table1 td {
+    color: #333;
+}
+
+/* 구매 내역 테이블 스타일 */
+.table2 .th_s {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.table2 .th_e {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.table2 thead {
+    background-color: #72A2F1;
+}
+
+.table2 th, .table2 td {
+    padding: 10px;
+    text-align: center;
+}
+
+.table2 th {
+    color: white;
+}
+
+.table2 td {
+    color: #333;
+}
+
+/* 열 사이의 세로 줄 */
+th.th_s {
+    border-right: 2px solid #fff; /* 왼쪽 끝 세로 줄 */
+}
+
+th.th_m {
+    border-right: 2px solid #fff; /* 중간 열 세로 줄 */
+}
+
+th.th_e {
+    border-right: none; /* 오른쪽 끝 세로 줄 없음 */
+}
+
+/* 테이블 제목 */
+h2 {
+    text-align: center;
+    color: #333;
+    border-bottom: 2px solid #72A2F1;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}

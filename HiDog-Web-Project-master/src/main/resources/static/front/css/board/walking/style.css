@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+* { font-family: 'Noto Sans KR', sans-serif; color: #000; box-sizing: border-box; outline: none; }
+html { font-size: 13px; }
+body { margin: 0; }
+a { text-decoration: none; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
+dl, dt, dd { margin: 0; padding: 0; }
+img { border: 0; }
+
+dl { display: flex; }
+dt { width: 180px; }
+dd { flex-grow: 1; }
+
+.layout_width { max-width: 1300px; min-width: 1000px; margin: 0 auto; }
+
+/**
+gpt
+ */
+
+/* 전체적인 스타일 설정 */
+body {
+    font-family: 'Noto Sans KR', sans-serif; /* 한글 폰트를 사용할 경우 */
+    margin: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* 제목 영역 스타일 */
+.subject {
+    font-weight: bold;
+    font-size: 25px;
+    color: #222;
+}
+
+/* 게시글 정보 섹션 스타일 */
+.post_info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* 왼쪽 정보 섹션 스타일 */
+.post_info .left span {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+/* 오른쪽 정보 섹션 스타일 */
+.post_info .right span {
+    display: block;
+    text-align: right;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/* 버튼 영역 스타일 */
+.board_btns {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.board_btns .btn {
+    display: inline-block;
+    padding: 8px 15px;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.board_btns .btn:hover {
+    background-color: #0056b3;
+}
+
+/* 삭제 버튼 경고 스타일 */
+.board_btns .btn[onclick] {
+    background-color: #dc3545;
+}
+
+.board_btns .btn[onclick]:hover {
+    background-color: #c82333;
+}

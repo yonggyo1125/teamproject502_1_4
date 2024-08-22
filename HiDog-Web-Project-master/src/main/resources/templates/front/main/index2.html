@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+    <h1>마켓</h1>
+    <div class="dropdown">
+        <div class="nav_title"><a onclick="alert('아래의 공지사항 또는 QnA를 선택해주세요')">게시판</a></div>
+        <ul class="dropdown-content">
+            <li><a th:href="${@utils.redirectUrl('/board/write/1')}" th:text="#{글쓰기}"></li>
+            <li><a th:href="${@utils.redirectUrl('/board/list/1')}" th:text="#{글목록}"></a></li>
+        </ul>
+    </div>
+    <th:block th:each="boardList : ${boardList}"  class="boardList">
+        <li th:text="${boardList}"></li>
+        <li>
+            <a th:href="${@utils.redirectUrl('/board/list/' + boardList)}"></a>
+        </li>
+    </th:block>
+    <p>
+    1
+    1
+    1
+    1
+    1
+    1
+    1
+    </p>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">1</div>
+            <div class="swiper-slide">2</div>
+            <div class="swiper-slide">3</div>
+            <div class="swiper-slide">4</div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</main>
+</html>

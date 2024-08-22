@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="comment">
+
+    <th:block th:if="${board.skin == 'default'}" th:replace="~{front/board/default/_comment::comment}"></th:block>
+
+    <th:block th:if="${board.skin == 'walking'}" th:replace="~{front/board/walking/_comment::comment}"></th:block>
+
+    <th:block th:if="${board.skin == 'market'}" th:replace="~{front/board/market/_comment::comment}"></th:block>
+</th:block>
+</html>

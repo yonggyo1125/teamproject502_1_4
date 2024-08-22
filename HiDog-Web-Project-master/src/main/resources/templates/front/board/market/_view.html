@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="view">
+
+    <div class="view-content" th:object="${boardData}">
+        <div class="product_info1">
+            <span class="subject">
+                <th:block th:text="*{subject}"></th:block>
+            </span>
+            <span class="price">
+                <th:block th:if="*{num1 == 0}" class="free" th:text="#{무료나눔}"></th:block>
+                <th:block th:unless="*{num1 == 0}" th:text="*{#numbers.formatInteger(num1, 1, 'COMMA')} + '원'"></th:block>
+            </span>
+        </div>
+        <div class="post_info">
+            <span class="view_count">
+                조회수 :
+                <th:block th:text="*{viewCount >= 1000 ? #numbers.formatInteger(viewCount, 3, 'COMMA') : viewCount}"></th:block>
+            </span>
+            <span class="post_date"
+                  th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></span>
+        </div>
+        <div class="links">
+            <a th:href="${@utils.redirectUrl('/board/write/' + board.bid)}" th:text="#{찜}"></a>
+            <a th:href="*{@utils.redirectUrl('/order')}" th:text="#{구매}"></a>
+        </div>
+        <div class="product_info2">
+            <span class="content">
+                <th:block th:text="*{content}"></th:block>
+            </span>
+        </div>
+        <div class="poster_info">
+            <div class="left">
+                <th:block th:text="#{작성자}"></th:block>:
+                <th:block th:text="*{poster}"></th:block>
+                <th:block th:if="*{member != null}" th:text="*{#strings.concat('(', member.email, ')')}"></th:block>
+            </div>
+        </div >
+    </div>  <!--// view-content -->
+
+</th:block>
+</html>

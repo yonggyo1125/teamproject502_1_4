@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+* { font-family: 'Noto Sans KR', sans-serif; color: #000; box-sizing: border-box; outline: none; }
+html { font-size: 13px; }
+body { margin: 0; }
+a { text-decoration: none; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
+dl, dt, dd { margin: 0; padding: 0; }
+img { border: 0; }
+
+dl { display: flex; }
+dt { width: 180px; }
+dd { flex-grow: 1; }
+
+.layout_width { max-width: 1300px; min-width: 1000px; margin: 0 auto; }
+
+/**
+gpt
+ */
+
+/* 전체 레이아웃 및 기본 설정 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* 게시판 리스트 레이아웃 */
+.board_list {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flex {
+    display: flex;
+}
+
+.sb {
+    justify-content: space-between;
+}
+
+.aic {
+    align-items: center;
+}
+
+/* 글쓰기 버튼 스타일 */
+.write_btn {
+    padding: 10px 20px;
+    background-color: #68A5FE;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.write_btn:hover {
+    background-color: #68A5FE;
+}
+
+/* 게시글 리스트 스타일 */
+.items {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.item {
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+/* 공지사항 스타일 */
+.notice {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* 제목 스타일 */
+.subject {
+    font-size: 18px;
+    color: #68A5FE;
+    text-decoration: none;
+}
+
+.subject:hover {
+    text-decoration: underline;
+}
+
+/* 게시글 정보 스타일 */
+.post_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* 작성자 정보 스타일 */
+.poster {
+    font-weight: bold;
+}
+
+.poster span {
+    font-weight: normal;
+    color: #888;
+}
+
+/* 조회수 스타일 */
+.view_count {
+    margin-left: 20px;
+}
+
+.view_count::before {
+    content: "|";
+    margin-right: 10px;
+    color: #ddd;
+}
+
+/* 게시 날짜 스타일 */
+.post_date {
+    color: #999;
+}
+
+/* 조회된 게시글이 없을 때 */
+.no_data {
+    text-align: center;
+    font-size: 16px;
+    color: #999;
+    padding: 20px 0;
+}

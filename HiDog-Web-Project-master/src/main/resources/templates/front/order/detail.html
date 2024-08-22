@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content" th:object="${orderInfo}">
+    <th:block th:if="*{payMethod == 'VBANK'}" th:replace="~{front/order/vBank/_view::view}"></th:block>
+
+<!--    <th:block th:if="*{payMethod == 'DIRECTBANK'}" th:replace="~{front/order/vBank/_view::view}"></th:block>-->
+
+<!--    <th:block th:if="*{payMethod == 'CARD'}" th:replace="~{front/order/vBank/_view::view}"></th:block>-->
+
+</main>
+</html>

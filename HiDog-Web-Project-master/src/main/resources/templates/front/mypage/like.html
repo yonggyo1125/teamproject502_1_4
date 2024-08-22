@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{front/layouts/main}">
+    <main layout:fragment="content">
+        <h1 th:text="#{찜_목록_보기}"></h1>
+        <form name="frmLike" method="post" th:action="@{/mypage/like}" autocomplete="off">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+
+                <table class="wishlist-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>상품명</th>
+                            <th>가격</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item, itemNo : ${wishlist}">
+                            <td th:text="${itemNo.index + 1}"></td>
+                            <td th:text="${item.productName}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+        </form>
+    </main>
+</html>

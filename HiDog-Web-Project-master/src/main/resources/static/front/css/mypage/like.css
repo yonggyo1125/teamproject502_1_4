@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 20px 0 20px 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2em;
+    color: #333;
+    margin: 0 0 20px 0;
+}
+
+.wishlist-table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.wishlist-table th, .wishlist-table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.wishlist-table th {
+    background-color: #72A2F1;
+    color: white;
+    text-align: center;
+}
+
+.wishlist-table td a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.wishlist-table td a:hover {
+    text-decoration: underline;
+}
