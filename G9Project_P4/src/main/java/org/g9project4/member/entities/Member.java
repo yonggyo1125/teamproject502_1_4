@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.g9project4.file.entities.FileInfo;
 import org.g9project4.global.entities.BaseEntity;
+import org.g9project4.planner.entities.Planner;
 
 import java.io.Serializable;
 import java.util.List;
@@ -33,8 +34,12 @@ public class Member extends BaseEntity implements Serializable {
     private String mobile;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Authorities> authorities;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Planner> planners;
 
     @Transient
     private FileInfo profileImage;
