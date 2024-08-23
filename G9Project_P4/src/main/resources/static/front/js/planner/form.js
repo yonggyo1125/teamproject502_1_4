@@ -1,12 +1,9 @@
 const planner = {
     /* 초기화 */
     init() {
-        const dates = this.getDates();
-        if (dates.length === 0 || !this.getTarget()) return;
+        if (this.getDates().length === 0 || !this.getTarget()) return;
 
         let seq = Date.now();
-
-        let options = dates.map(s => `<option value='${s}'>${s}</option>\n`);
 
         for (const date of dates) {
            this.add(seq, date);
@@ -15,7 +12,9 @@ const planner = {
     },
     // 여행일정 추가
     add(seq, date) {
+
         const domParser = new DOMParser();
+        const options = this.getDates().map(s => `<option value='${s}'>${s}</option>\n`);
         let html = this.getTpl();
         html = html.replace(/\[seq\]/g, seq)
                    .replace(/\[dates\]/g, options);
