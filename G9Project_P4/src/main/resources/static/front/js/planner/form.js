@@ -1,11 +1,12 @@
 const planner = {
     /* 초기화 */
     init() {
-        if (this.getDates().length === 0 || !this.getTarget()) return;
+        const dates = this.getDates();
+        if (dates.length === 0 || !this.getTarget()) return;
 
         let seq = Date.now();
 
-        for (const date of this.getDates()) {
+        for (const date of dates) {
            this.add(seq, date);
            seq++;
         }
