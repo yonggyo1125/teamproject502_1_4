@@ -301,11 +301,23 @@ public class BoardInfoService {
         }
 
         QBoardData boardData = QBoardData.boardData;
+        BooleanBuilder andBuilder = new BooleanBuilder();
+        andBuilder.and(boardData.seq.in(seqs));
 
         List<BoardData> items = queryFactory.selectFrom(boardData)
-                .where(boardData.seq.in(seqs))
+                .where(andBuilder)
+                .leftJoin(boardData.board)
+                .fetchJoin()
+                .offset(offset)
+                .limit(limit)
+                .orderBy(boardData.createdAt.desc())
+                .fetch();
 
+        long total = repository.count(andBuilder);
+        int ranges = utils.isMobile() ? 5 : 10;
+        Pagination pagination = new Pagination(page, (int)total, ranges, limit, request);
 
+        return new ListData<>(items, pagination);
     }
 
     /**
