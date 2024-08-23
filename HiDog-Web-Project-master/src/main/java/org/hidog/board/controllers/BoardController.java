@@ -122,6 +122,8 @@ public class BoardController implements ExceptionProcessor {
         boardValidator.validate(form, errors);
 
         if (errors.hasErrors()) {
+            errors.getAllErrors().forEach(System.out::println);
+
             // 업로드 된 파일 목록 - location : editor, attach
             String gid = form.getGid();
             List<FileInfo> editorImages = fileInfoService.getList(gid, "editor", FileStatus.ALL);

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<section layout:fragment="content">
+    <div th:replace="~{common/_message::message}"></div>
+    <form name="frmList" method="post" th:action="@{/admin/member/list}" autocomplete="off" th:object="${AdminMember}">
+        <head>
+            <title>회원 관리</title>
+        </head>
+        <body>
+        <h1>회원 목록</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>이메일</th>
+                <th>이름</th>
+                <th>액션</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.email}"></td>
+                <td th:text="${member.name}"></td>
+                <td>
+                    <a th:href="@{/admin/members/{email}(email=${member.email})}">상세</a> |
+                    <form th:action="@{/admin/member/{email}(email=${member.email})}" method="post" th:method="delete">
+                        <button type="submit">삭제</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </body>
+</html>

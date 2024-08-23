@@ -23,11 +23,11 @@ public class RequestBoard {
     private String category; // 게시판 분류
 
     @NotBlank
-    private String poster; // 게시글 작성자
+    private String poster = "기본"; // 게시글 작성자
 
     private boolean guest; // 비회원
 
-    private String guestPw; // 비회원 비밀번호(수정, 삭제 시 필요) // 미로그인 상태일때는 필수, 로그인 상태일때는 필요x(선별적인 필수)
+    private String guestPw = "1234abc"; // 비회원 비밀번호(수정, 삭제 시 필요) // 미로그인 상태일때는 필수, 로그인 상태일때는 필요x(선별적인 필수)
 
 
     @NotBlank

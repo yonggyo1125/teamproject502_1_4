@@ -1,0 +1,69 @@
+#기본 profile
+
+#서버 설정
+server:
+  port: 3000
+
+#스프링 설정
+spring:
+  #데이터베이스 설정
+  datasource:
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@${db.host}:${db.port}:XE
+    username: ${db.username}
+    password: ${db.password}
+
+  #JPA 설정
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+    hibernate:
+      ddl-auto: update
+
+  #라이브 리로드 설정(배포 시 설정 x false)
+  devtools:
+    livereload:
+      enabled: true
+
+  #정적 자원 설정(css, js, image ...)
+  web:
+    resources:
+      static-locations: file:src/main/resources/static/
+
+
+  #파일 업로드 용량 설정 (서블릿 설정)
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 60MB
+      file-size-threshold: 30MB
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${mail.username}
+    password: ${mail.password}
+    properties:
+      mail:
+        smtp:
+          timeout: 5000
+          auth: true
+          starttls:
+            enable: true
+        debug: true
+
+#파일 업로드 경로 설정
+file:
+  upload:
+    path: D:/uploads
+    url: /upload/
+
+
+#로거 설정
+logging:
+  level:
+    org.hibernate.type: trace
+    org.hibernate.orm.jdbc.bind: trace

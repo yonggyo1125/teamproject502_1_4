@@ -21,7 +21,7 @@
                             <button type="submit" th:text="#{게시판}"></button>
                         </a>
                     </li>
-                    <li th:block sec:authorize="isAnonymous()">
+                    <li th:block th:if="${!isLogin}">
                         <a th:href="${@utils.redirectUrl('/member/login')}">
                             <button type="submit" th:text="#{로그인}"></button>
                         </a>
@@ -29,7 +29,7 @@
                             <button type="submit" th:text="#{회원가입}"></button>
                         </a>
                     </li>
-                    <li th:block sec:authorize="isAuthenticated()">
+                    <li th:block th:if="${isLogin}">
                         <span th:text="${#messages.msg('LOGIN_MSG', loggedMember.userName, loggedMember.email)}"></span><br>
                         <a th:href="${@utils.redirectUrl('/member/logout')}">
                             <button type="submit" th:text="#{로그아웃}"></button>

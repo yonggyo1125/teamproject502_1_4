@@ -1,6 +1,7 @@
 package org.hidog.global.advices;
 
 import lombok.RequiredArgsConstructor;
+import org.hidog.board.controllers.BoardDataSearch;
 import org.hidog.member.MemberUtil;
 import org.hidog.member.entities.Member;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,5 +26,10 @@ public class CommonControllerAdvice {//전역에서 확인 가능
     @ModelAttribute("isAdmin")
     public boolean isAdmin() {
         return memberUtil.isAdmin();
+    }
+
+    @ModelAttribute("boardDataSearch")
+    public BoardDataSearch boardDataSearch() {
+        return new BoardDataSearch();
     }
 }

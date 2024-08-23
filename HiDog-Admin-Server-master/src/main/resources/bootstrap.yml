@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: admin-service
+
+  cloud:
+    config:
+      uri: ${configServerUrl}
