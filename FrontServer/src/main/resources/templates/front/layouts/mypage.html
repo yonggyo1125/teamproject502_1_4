@@ -19,6 +19,11 @@
     <th:block layout:fragment="addCss"></th:block>
 
     <script th:src="${@utils.url('/common/js/common.js')}"></script>
+
+    <th:block layout:fragment="addCommonScript"></th:block>
+    <script th:if="${addCommonScript != null}"
+            th:each="jsFile : ${addCommonScript}" th:src="${@utils.url(#strings.concat('/common/js/', jsFile, '.js'))}"></script>
+
     <script th:src="${@utils.url('/front/js/common.js')}"></script>
     <script th:if="${addScript != null}" th:each="jsFile : ${addScript}" th:src="${@utils.url(#strings.concat('/front/js/', jsFile, '.js'))}"></script>
     <th:block layout:fragment="addScript"></th:block>
@@ -26,7 +31,6 @@
 <body>
 <header th:replace="~{front/outlines/_header::common}"></header>
 <main>
-    <aside th:replace="~{front/mypage/_side::menus}"></aside>
     <section layout:fragment="content"></section>
 </main>
 <footer th:replace="~{front/outlines/_footer::common}"></footer>

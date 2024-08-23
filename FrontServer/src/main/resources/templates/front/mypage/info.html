@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/mypage}">
+<section layout:fragment="content">
+    <form name="frmSave" method="POST" th:action="${@utils.redirectUrl('/mypage/info')}" autocomplete="off" th:object="${requestProfile}">
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+        <dl>
+            <dt th:text="#{프로필}"></dt>
+            <dd>
+                <button type="button" class="fileUploads" th:data-gid="${loggedMember.email}" data-image-only="true" data-single="true" th:text="#{이미지_선택}"></button>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{이메일}"></dt>
+            <dd th:text="${loggedMember.email}"></dd>
+        </dl>
+        <dl>
+            <dt th:text="#{닉네임}"></dt>
+            <dd>
+                <input type="text" name="userName" th:field="*{userName}">
+                <div class="error" th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{비밀번호}"></dt>
+            <dd>
+                <input type="password" name="password" th:field="*{password}">
+                <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{비밀번호_확인}"></dt>
+            <dd>
+                <input type="password" name="confirmPassword" th:field="*{confirmPassword}">
+                <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <!-- 주소 입력 필드 -->
+        <dl>
+            <dt>주소</dt>
+            <dd>
+                <input type="text" id="user_postcode" placeholder="우편번호" readonly>
+                <input type="button" onclick="user_execDaumPostcode()" value="우편번호 찾기"><br>
+                <input type="text" id="user_address" name="address" placeholder="주소" readonly th:field="*{address}"><br>
+                <input type="text" id="user_extraAddress" placeholder="참고항목" readonly>
+                <input type="text" id="user_detailAddress" name="detailAddress" placeholder="상세주소" th:field="*{detailAddress}">
+                <div class="error" th:each="err : ${#fields.errors('address')}" th:text="${err}"></div>
+                <div class="error" th:each="err : ${#fields.errors('detailAddress')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <button type="rest" th:text="#{다시입력}"></button>
+        <button type="submit" th:text="#{수정하기}"></button>
+    </form>
+</section>
+</html>
