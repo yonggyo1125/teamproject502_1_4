@@ -1,3 +1,10 @@
+const planner = {
+    /* 초기화 */
+    init() {
+
+    }
+};
+
 window.addEventListener("DOMContentLoaded", function() {
     const reSelectCalendar = document.getElementById("reselect-calendar");
     reSelectCalendar.addEventListener("click", function() {
@@ -34,4 +41,6 @@ function callbackCalendar(date) {
     }
 
     ifrmCalendar.location.href=url;
+
+
 }
