@@ -18,10 +18,13 @@ import org.g9project4.board.exceptions.BoardNotFoundException;
 import org.g9project4.board.repositories.BoardDataRepository;
 import org.g9project4.file.entities.FileInfo;
 import org.g9project4.file.services.FileInfoService;
+import org.g9project4.global.CommonSearch;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Pagination;
 import org.g9project4.global.Utils;
 import org.g9project4.global.constants.DeleteStatus;
+import org.g9project4.wishlist.constants.WishType;
+import org.g9project4.wishlist.services.WishListService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +43,7 @@ public class BoardInfoService {
     private final BoardDataRepository repository;
     private final BoardConfigInfoService configInfoService;
     private final FileInfoService fileInfoService;
+    private final WishListService wishListService;
     private final HttpServletRequest request;
     private final ModelMapper modelMapper;
     private final Utils utils;
@@ -275,6 +279,33 @@ public class BoardInfoService {
 
     public RequestBoard getForm(Long seq) {
         return getForm(seq, DeleteStatus.UNDELETED);
+    }
+
+    /**
+     * 내가 찜한 게시글 목록
+     *
+     * @param search
+     * @return
+     */
+    public ListData<BoardData> getWishList(CommonSearch search) {
+
+        int page = Math.max(search.getPage(), 1);
+        int limit = search.getLimit();
+        limit = limit < 1 ? 10 : limit;
+        int offset = (page - 1) * limit;
+
+
+        List<Long> seqs = wishListService.getList(WishType.BOARD);
+        if (seqs == null || seqs.isEmpty()) {
+            return new ListData<>();
+        }
+
+        QBoardData boardData = QBoardData.boardData;
+
+        List<BoardData> items = queryFactory.selectFrom(boardData)
+                .where(boardData.seq.in(seqs))
+
+
     }
 
     /**
