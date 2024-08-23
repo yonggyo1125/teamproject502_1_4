@@ -19,7 +19,7 @@
     </ul>
     <ul class="days">
         <li th:each="day, status : ${days}">
-            <div th:text="${day}" class="day" th:data-date="${dates[status.index]}"></div>
+            <div th:text="${day[0]}" class="day" th:data-date="${dates[status.index]}" th:classappend="${day[1]} ? 'on'"></div>
         </li>
     </ul>
 </main>
