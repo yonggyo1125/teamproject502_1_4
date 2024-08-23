@@ -86,7 +86,11 @@ window.addEventListener("DOMContentLoaded", function() {
         planner.removeAll();
     });
 
-
+    // 일정 추가
+    const addEl = document.querySelector(".controls .add");
+    addEl.addEventListener("click", function() {
+        planner.add(Date.now());
+    });
 });
 
 
