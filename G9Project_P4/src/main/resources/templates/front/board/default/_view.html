@@ -15,7 +15,7 @@
                 <th:block th:if="*{member != null}" th:text="*{#strings.concat('(', member.email, ')')}"></th:block>
             </div>
             <div class="right">
-                <span class="wishlist-toggle" th:data-seq="*{seq}" data-type="BOARD">★</span>
+                <span class="wishlist-toggle" th:data-seq="*{seq}" data-type="BOARD" th:classappend="*{@wishListService.check(seq, 'BOARD')} ? 'on'">★</span>
                 <th:block th:text="#{조회수}"></th:block>: <span th:text="*{viewCount > 1000 ? #numbers.formatInteger(viewCount, 3, 'COMMA'): viewCount}"></span>
                 IP: <span th:text="*{ip}"></span>
                 <th:block th:text="#{작성일시}"></th:block>:
