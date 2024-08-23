@@ -23,7 +23,7 @@ public class Calendar {
      *      - 1~7(월~일)로 나오므로 일요일 부터 시작하는 달력이면 7 -> 0으로 변경한다.
      * 2. 매 월의 마지막 일자 구하기 : 28, 29, 30, 31 등 월마다 달라질 수 있는 값, 다음달 1일에서 하루를 현재 달의 마지막 날짜를 구할 수 있음
      */
-    public Map<String, Object> getData(Integer _year, Integer _month) {
+    public Map<String, Object> getData(Integer _year, Integer _month, LocalDate _sDate, LocalDate _eDate) {
         int year, month = 0;
         if (_year == null || _month == null) { // 년도와 월 값이 없으면 현재 년도, 월로 고정
             LocalDate today = LocalDate.now();
@@ -32,6 +32,14 @@ public class Calendar {
         } else {
             year = _year.intValue();
             month = _month.intValue();
+        }
+
+        /* 범위 검색인 _sDate, _eDate가 서로 반대인 경우 반대로 변경 */
+        LocalDate tmp = null;
+        if (_sDate.isAfter(_eDate)) {
+            tmp = _sDate;
+            _sDate = _eDate;
+            _eDate = tmp;
         }
 
         LocalDate sdate = LocalDate.of(year, month, 1);
@@ -47,7 +55,7 @@ public class Calendar {
 
         Map<String, Object> data = new HashMap<>();
 
-        List<String> days = new ArrayList<>(); // 날짜, 1, 2, 3,
+        List<Object[]> days = new ArrayList<>(); // 날짜, 1, 2, 3,
         List<String> dates = new ArrayList<>(); // 날짜 문자열 2024-01-12
         List<String> yoils = new ArrayList<>(); // 요일 정보
 
@@ -56,14 +64,23 @@ public class Calendar {
 
             int yoil = date.getDayOfWeek().getValue();
             yoil = yoil == 7 ? 0 : yoil; // 0 ~ 6 (일 ~ 토)
-            days.add(String.valueOf(date.getDayOfMonth()));
+
+            boolean checked = false; // 날짜 선택 표시 처리 여부
+
+            if (_sDate != null && _eDate != null &&
+                    (date.isEqual(_sDate) || date.isEqual(_eDate) ||
+                            (date.isAfter(_sDate) && date.isBefore(_eDate)))) {
+                checked = true;
+            }
+
+            days.add(new Object[] {date.getDayOfMonth(), checked});
             dates.add(date.toString());
             yoils.add(String.valueOf(yoil));
 
-            data.put("days", days);
-            data.put("dates", dates);
-            data.put("yoils", yoils);
         }
+        data.put("days", days);
+        data.put("dates", dates);
+        data.put("yoils", yoils);
 
         // 이전달 년도, 월
         LocalDate prevMonthDate = sdate.minusMonths(1L);

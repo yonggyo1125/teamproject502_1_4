@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 @Controller
@@ -20,12 +20,13 @@ public class CalendarController {
 
 
     @GetMapping
-    public String index(
-            @RequestParam(name="year", required = false) Integer year,
-            @RequestParam(name="month", required = false) Integer month,
-            Model model) {
+    public String index(RequestCalendar search, Model model) {
+        Integer year = search.getYear();
+        Integer month = search.getMonth();
+        LocalDate sDate = search.getSDate();
+        LocalDate eDate = search.getEDate();
 
-        Map<String, Object> data = calendar.getData(year, month);
+        Map<String, Object> data = calendar.getData(year, month, sDate, eDate);
         model.addAllAttributes(data);
 
 
