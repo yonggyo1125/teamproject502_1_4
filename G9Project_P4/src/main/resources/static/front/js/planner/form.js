@@ -1,8 +1,27 @@
 const planner = {
     /* 초기화 */
     init() {
+        const dates = this.getDates();
+    },
+    /**
+    * 선택 날짜 - sDate, eDate로
+    * 날짜 선택 범위
+    *
+    */
+    getDates() {
+        let sDate = frmSave.sDate.value;
+        let eDate = frmSave.eDate.value;
+        if (!sDate || !eDate) {
+            return [];
+        }
 
+        let sTime = new Date(sDate).getTime();
+        let eTime = new Date(eDate).getTime();
+    },
+    getTpl() {
+       return document.getElementById("tpl-planner").innerHTML;
     }
+
 };
 
 window.addEventListener("DOMContentLoaded", function() {
