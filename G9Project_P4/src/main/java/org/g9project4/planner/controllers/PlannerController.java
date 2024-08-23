@@ -114,7 +114,6 @@ public class PlannerController implements ExceptionProcessor {
         // 플래너 작성, 수정
         if (List.of("write", "update").contains(mode)) {
             addCss.add("planner/form");
-            addCommonScript.add("calendar");
             addScript.add("planner/form");
         }
 

@@ -8,7 +8,6 @@
 
 window.addEventListener("DOMContentLoaded", function() {
 
-
     /* 달력 클릭 이벤트 처리 S */
     const days = document.querySelectorAll(".popup_calendar .day");
     for (const el of days) {

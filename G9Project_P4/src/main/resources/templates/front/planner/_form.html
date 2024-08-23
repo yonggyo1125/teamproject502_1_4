@@ -7,7 +7,7 @@
 
         <div class="planner-box">
             <div class="left">
-                <iframe class="select-date" th:src="${@utils.redirectUrl('/calendar')}" frameborder="0"></iframe>
+                <iframe name="ifrmCalendar" class="select-date" th:src="${@utils.redirectUrl('/calendar')}" frameborder="0"></iframe>
                 <div class="error" th:each="err : ${#fields.errors('sDate')}" th:text="${err}"></div>
                 <div class="error" th:each="err : ${#fields.errors('eDate')}" th:text="${err}"></div>
             </div>

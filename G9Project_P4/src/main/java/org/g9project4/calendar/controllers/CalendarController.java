@@ -27,9 +27,6 @@ public class CalendarController {
         LocalDate sDate = search.getSDate();
         LocalDate eDate = search.getEDate();
 
-        System.out.println("====== 확인 =======");
-        System.out.println(search);
-
         Map<String, Object> data = calendar.getData(year, month, sDate, eDate);
         model.addAllAttributes(data);
 

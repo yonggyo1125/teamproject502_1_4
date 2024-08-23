@@ -73,6 +73,10 @@ public class Calendar {
                 checked = true;
             }
 
+            if (_sDate != null && _eDate == null && _sDate.equals(date)) {
+                checked = true;
+            }
+
             days.add(new Object[] {date.getDayOfMonth(), checked});
             dates.add(date.toString());
             yoils.add(String.valueOf(yoil));
