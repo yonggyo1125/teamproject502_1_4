@@ -6,6 +6,7 @@ import org.g9project4.global.Utils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
@@ -20,11 +21,14 @@ public class CalendarController {
 
 
     @GetMapping
-    public String index(RequestCalendar search, Model model) {
+    public String index(@ModelAttribute RequestCalendar search, Model model) {
         Integer year = search.getYear();
         Integer month = search.getMonth();
         LocalDate sDate = search.getSDate();
         LocalDate eDate = search.getEDate();
+
+        System.out.println("====== 확인 =======");
+        System.out.println(search);
 
         Map<String, Object> data = calendar.getData(year, month, sDate, eDate);
         model.addAllAttributes(data);

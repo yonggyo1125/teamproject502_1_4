@@ -36,7 +36,7 @@ public class Calendar {
 
         /* 범위 검색인 _sDate, _eDate가 서로 반대인 경우 반대로 변경 */
         LocalDate tmp = null;
-        if (_sDate.isAfter(_eDate)) {
+        if (_sDate != null && _eDate != null && _sDate.isAfter(_eDate)) {
             tmp = _sDate;
             _sDate = _eDate;
             _eDate = tmp;
