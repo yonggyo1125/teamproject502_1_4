@@ -6,11 +6,12 @@ import org.g9project4.member.entities.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 @Data
 @Builder
-public class MemberInfo implements UserDetails {
+public class MemberInfo implements UserDetails, Serializable {
     private final long serialVersionUID = 1L;
     private String email;
     private String password;
