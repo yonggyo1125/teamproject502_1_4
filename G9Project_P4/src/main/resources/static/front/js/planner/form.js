@@ -5,14 +5,13 @@ const planner = {
 
         let seq = Date.now();
 
-        for (const date of dates) {
+        for (const date of this.getDates()) {
            this.add(seq, date);
            seq++;
         }
     },
     // 여행일정 추가
     add(seq, date) {
-
         const domParser = new DOMParser();
         const options = this.getDates().map(s => `<option value='${s}'>${s}</option>\n`);
         let html = this.getTpl();
