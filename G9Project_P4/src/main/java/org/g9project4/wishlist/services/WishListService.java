@@ -59,4 +59,14 @@ public class WishListService {
 
         return items;
     }
+
+    public boolean check(Long seq, String type) {
+        if (memberUtil.isLogin()) {
+            WishListId wishListId = new WishListId(seq, WishType.valueOf(type), memberUtil.getMember());
+
+            return repository.existsById(wishListId);
+        }
+
+        return false;
+    }
 }
