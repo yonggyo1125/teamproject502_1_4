@@ -45,6 +45,10 @@ public class WishListService {
     }
 
     public List<Long> getList(WishType type) {
+        if (!memberUtil.isLogin()) {
+            return null;
+        }
+
         BooleanBuilder builder = new BooleanBuilder();
         QWishList wishList = QWishList.wishList;
         builder.and(wishList.member.eq(memberUtil.getMember()))
