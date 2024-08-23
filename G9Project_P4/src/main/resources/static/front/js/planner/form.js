@@ -91,6 +91,29 @@ window.addEventListener("DOMContentLoaded", function() {
     addEl.addEventListener("click", function() {
         planner.add(Date.now());
     });
+
+    // 일정 제거
+    const removeEl = document.querySelector(".controls .remove");
+    removeEl.addEventListener("click", function() {
+        if (!confirm('정말 삭제하겠습니까?')) {
+            return;
+        }
+
+        const chkChecked = document.querySelectorAll(".itinerary input[name='chk']:checked")
+        if (chkChecked.length === 0) {
+            alert('삭제할 여행일정을 선택하세요.');
+            return;
+        }
+
+        const chks = document.querySelectorAll(".itinerary input[name='chk']");
+        for (const chk of chks) {
+            if (chk.checked) {
+                const seq = chk.value;
+                const tr = document.getElementById(`item-${seq}`);
+                if (tr) tr.parentElement.removeChild(tr);
+            }
+        }
+    });
 });
 
 
@@ -120,8 +143,8 @@ function callbackCalendar(date) {
     }
 
     ifrmCalendar.location.href=url;
-
-    if (selected === 2) {
+    const trs = document.querySelectorAll(".itinerary tbody tr");
+    if (selected === 2 && trs.length === 0) {
         planner.init(); // 선택 일정만큼 입력 항목 생성
     }
 
