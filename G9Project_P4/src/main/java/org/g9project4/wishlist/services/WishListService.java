@@ -1,14 +1,19 @@
 package org.g9project4.wishlist.services;
 
+import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.member.MemberUtil;
 import org.g9project4.wishlist.constants.WishType;
+import org.g9project4.wishlist.entities.QWishList;
 import org.g9project4.wishlist.entities.WishList;
 import org.g9project4.wishlist.entities.WishListId;
 import org.g9project4.wishlist.repositories.WishListRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static org.springframework.data.domain.Sort.Order.desc;
 
 @Service
 @RequiredArgsConstructor
@@ -39,8 +44,15 @@ public class WishListService {
         repository.flush();
     }
 
-    public List<Long> getList(WishList type) {
+    public List<Long> getList(WishType type) {
+        BooleanBuilder builder = new BooleanBuilder();
+        QWishList wishList = QWishList.wishList;
+        builder.and(wishList.member.eq(memberUtil.getMember()))
+                .and(wishList.wishType.eq(type));
 
-        return null;
+        List<Long> items = ((List<WishList>)repository.findAll(builder, Sort.by(desc("createdAt")))).stream().map(WishList::getSeq).toList();
+
+
+        return items;
     }
 }
