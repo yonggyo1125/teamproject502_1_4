@@ -155,7 +155,7 @@ public class BoardController implements ExceptionProcessor {
 
         deleteService.delete(seq);
 
-        return utils.redirectUrl("/board/list/" + board.getBid());
+        return "redirect:" + utils.redirectUrl("/board/list/" + board.getBid());
     }
 
 

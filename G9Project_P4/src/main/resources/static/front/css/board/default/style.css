@@ -1,0 +1,91 @@
+/* 게시글 목록 공통 S */
+.list-items li {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    height: 45px;
+}
+
+.list-items li:first-of-type {
+    border-top: 1px solid #ccc;
+}
+
+.list-item li:hover {
+    background: #f8f8f8;
+}
+
+.list-items .post-info {
+    width: 300px;
+    text-align: right;
+}
+
+.list-items .post-info > span {
+    line-height: 43px;
+}
+
+.list-items .subject {
+    flex-grow: 1;
+    line-height: 43px;
+    padding: 0 10px;
+    font-size: 1.15rem;
+}
+
+.list-items .no-data {
+    align-items: center;
+    height: 250px;
+    font-size: 1.15rem;
+    justify-content: center;
+}
+
+.category-links {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.category-links a {
+    height: 45px;
+    padding: 0 35px;
+    line-height: 45px;
+    background: #ccc;
+    border-radius: 10px;
+    font-size: 1.15rem;
+}
+
+.category-links a.on {
+    background: #000;
+    color: #fff;
+}
+
+.category-links a + a {
+    margin-left: 10px;
+}
+
+.bottom-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 65px;
+}
+
+.bottom-box .links .btn {
+    display: inline-block;
+    height: 45px;
+    padding: 0 35px;
+    line-height: 45px;
+    background: #ccc;
+    border-radius: 10px;
+    font-size: 1.15rem;
+    border: 0;
+    transition: all 1s;
+}
+
+.bottom-box .links .btn:hover {
+    background: #000;
+    color: #fff;
+}
+
+.bottom-box .links .btn + .btn {
+    margin-left: 5px;
+}
+
+/* 게시글 목록 공통 E */
