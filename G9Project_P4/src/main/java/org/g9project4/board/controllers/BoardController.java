@@ -31,6 +31,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @SessionAttributes({"boardData"})
 public class BoardController implements ExceptionProcessor {
+
     private final BoardConfigInfoService configInfoService;
     private final BoardInfoService infoService;
     private final BoardSaveService saveService;
@@ -38,6 +39,7 @@ public class BoardController implements ExceptionProcessor {
     private final FileInfoService fileInfoService;
     private final SearchHistoryService historyService;
     private final BoardViewCountService viewCountService;
+    private final BoardAuthService authService;
 
     private final BoardValidator validator;
     private final MemberUtil memberUtil;
@@ -216,6 +218,11 @@ public class BoardController implements ExceptionProcessor {
         model.addAttribute("board", board); // 게시판 설정
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("mode", mode);
+
+        // 권한 체크
+        authService.check(mode, board.getBid());
+        authService.setBoard(board);
+        authService.setBoardData(boardData);
     }
 
     /**
@@ -227,7 +234,12 @@ public class BoardController implements ExceptionProcessor {
      * @param model
      */
     private void commonProcess(Long seq, String mode, Model model) {
+
         boardData = infoService.get(seq);
+
+        authService.check(mode, seq); // 권한 체크
+        authService.setBoardData(boardData);
+        authService.setBoard(boardData.getBoard());
 
         model.addAttribute("boardData", boardData);
 
