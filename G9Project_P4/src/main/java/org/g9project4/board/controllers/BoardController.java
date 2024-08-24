@@ -33,7 +33,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/board")
 @RequiredArgsConstructor
-@SessionAttributes({"boardData"})
+@SessionAttributes({"boardData", "board"})
 public class BoardController implements ExceptionProcessor {
 
     private final BoardConfigInfoService configInfoService;
@@ -225,9 +225,9 @@ public class BoardController implements ExceptionProcessor {
         model.addAttribute("mode", mode);
 
         // 권한 체크
-        authService.check(mode, board.getBid());
-        authService.setBoard(board);
-        authService.setBoardData(boardData);
+        if (List.of("write", "list").contains(mode)) {
+            authService.check(mode, board.getBid());
+        }
     }
 
     /**
@@ -242,13 +242,11 @@ public class BoardController implements ExceptionProcessor {
 
         boardData = infoService.get(seq);
 
-        authService.check(mode, seq); // 권한 체크
-        authService.setBoardData(boardData);
-        authService.setBoard(boardData.getBoard());
-
         model.addAttribute("boardData", boardData);
-
+        model.addAttribute("board", boardData.getBoard());
         commonProcess(boardData.getBoard().getBid(), mode, model);
+
+        authService.check(mode, seq); // 권한 체크
     }
 
     @Override
@@ -270,7 +268,7 @@ public class BoardController implements ExceptionProcessor {
             mv.setViewName(utils.tpl("board/password"));
             return mv;
         }
-
+        e.printStackTrace();
         return ExceptionProcessor.super.errorHandler(e, request);
     }
 }
