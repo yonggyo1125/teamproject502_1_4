@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.g9project4.board.entities.Board;
 import org.g9project4.board.entities.BoardData;
 import org.g9project4.board.exceptions.BoardNotFoundException;
-import org.g9project4.board.services.BoardConfigInfoService;
-import org.g9project4.board.services.BoardDeleteService;
-import org.g9project4.board.services.BoardInfoService;
-import org.g9project4.board.services.BoardSaveService;
+import org.g9project4.board.services.*;
 import org.g9project4.board.validators.BoardValidator;
 import org.g9project4.file.constants.FileStatus;
 import org.g9project4.file.entities.FileInfo;
@@ -40,6 +37,7 @@ public class BoardController implements ExceptionProcessor {
     private final BoardDeleteService deleteService;
     private final FileInfoService fileInfoService;
     private final SearchHistoryService historyService;
+    private final BoardViewCountService viewCountService;
 
     private final BoardValidator validator;
     private final MemberUtil memberUtil;
@@ -140,6 +138,8 @@ public class BoardController implements ExceptionProcessor {
             model.addAttribute("items", data.getItems());
             model.addAttribute("pagination", data.getPagination());
         }
+
+        viewCountService.update(seq); // 조회수 증가
 
         return utils.tpl("board/view");
     }
