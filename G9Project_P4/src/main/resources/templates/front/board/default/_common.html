@@ -13,4 +13,8 @@
             <label th:for="${'category-' + status.index}" th:text="${cat}"></label>
         </span>
     </div>
+
+    <nav th:fragment="categorylink" class="category-links">
+        <a th:if="${board.categories != null && !board.categories.empty}" th:each="category : ${board.categories}" th:text="${category}" class="link" th:classappend="${category == param.category} ? 'on'"></a>
+    </nav>
 </html>
