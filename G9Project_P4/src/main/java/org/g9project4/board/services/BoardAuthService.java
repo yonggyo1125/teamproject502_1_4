@@ -5,7 +5,9 @@ import lombok.Setter;
 import org.g9project4.board.entities.Board;
 import org.g9project4.board.entities.BoardData;
 import org.g9project4.board.exceptions.BoardNotFoundException;
+import org.g9project4.global.exceptions.UnAuthorizedException;
 import org.g9project4.member.MemberUtil;
+import org.g9project4.member.constants.Authority;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -42,12 +44,37 @@ public class BoardAuthService {
         }
 
         // 게시글 목록 접근 권한 체크
-        if (mode.equals("list") && boardData.isShowListButton()) {
-
+        Authority authority = board.getListAccessType();
+        if (mode.equals("list") && authority == Authority.USER && !memberUtil.isLogin()) {
+            throw new UnAuthorizedException();
         }
 
+        // 게시글 보기 접근 권한 체크
+        Authority viewAuthority = board.getViewAccessType();
+        if (mode.equals("view") && viewAuthority == Authority.USER && !memberUtil.isLogin()) {
+            throw new UnAuthorizedException();
+        }
 
+        // 글쓰기 접근 권한 체크
+        Authority writeAuthority = board.getWriteAccessType();
+        if (mode.equals("write") && writeAuthority == Authority.USER && !memberUtil.isLogin()) {
+            throw new UnAuthorizedException();
+        }
 
+        /**
+         * 글 수정, 삭제 - 작성자만 수정 가능
+         *      - 회원 게시글은 로그인한 사용자와 일치여부
+         *      - 비회원 게시글은 인증 여부 체크 -> 인증 X -> 비밀번호 확인 페이지로 이동 검증
+         *      - 검증 완료된 경우, 문제 X
+         */
+        if (!boardData.isEditable()) {
+            if (boardData.getMember() == null) {
+                // 비회원 게시글 - 비밀번호 검증 필요
+
+            }
+
+            throw new UnAuthorizedException();
+        }
     }
 
     /**
