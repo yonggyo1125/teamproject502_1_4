@@ -260,7 +260,7 @@ public class BoardController implements ExceptionProcessor {
             String script = String.format("alert('%s');history.back();", message);
 
             mv.setStatus(unAuthorizedException.getStatus());
-            mv.setViewName(utils.tpl("common/_execute_script"));
+            mv.setViewName("common/_execute_script");
             mv.addObject("script", script);
 
             return mv;
