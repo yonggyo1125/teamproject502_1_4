@@ -16,8 +16,11 @@ const commonLib = {
             let rootUrl = document.querySelector("meta[name='rootUrl']")?.content?.trim() ?? '';
             rootUrl = rootUrl === '/' ? '' : rootUrl;
 
-            url = location.protocol + "//" + location.host + rootUrl + url;
+            url = rootUrl.includes("http") ? rootUrl + url.replace("/", "") : location.protocol + "//" + location.host + url;
         }
+
+        console.log(url);
+
         method = method.toUpperCase();
         if (method === 'GET') {
             data = null;
