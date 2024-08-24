@@ -7,6 +7,15 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 dl, dt, dd { margin: 0; padding: 0; }
 img { border: 0; }
 
+/* 레이아웃 공통 */
+.layout-width {
+    max-width: 1100px;
+    min-width: 1000px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+
 /* 파일 공통 S */
 .image-file-box {
     border: 2px solid #000;

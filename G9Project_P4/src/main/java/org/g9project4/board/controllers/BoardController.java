@@ -43,10 +43,14 @@ public class BoardController implements ExceptionProcessor {
     private final MemberUtil memberUtil;
     private final Utils utils;
 
-
-
     private Board board; // 게시판 설정
     private BoardData boardData; // 게시글 내용
+
+
+    @ModelAttribute("mainClass")
+    public String mainClass() {
+        return "board-main layout-width";
+    }
 
     /**
      * 글 쓰기
