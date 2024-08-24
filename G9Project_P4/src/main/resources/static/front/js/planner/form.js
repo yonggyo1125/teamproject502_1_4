@@ -25,6 +25,14 @@ const planner = {
             const dateEl = tr.querySelector(`select[name='date_${seq}']`);
             dateEl.value = date;
         }
+        // 여행지 선택 팝업 처리
+        const selectTourPlaces = tr.getElementsByClassName("select-tour-place");
+        for (const el of selectTourPlaces) {
+            el.addEventListener("click", function(e) {
+                planner.selectTourPlace(seq);
+            });
+        }
+
         this.getTarget().append(tr);
 
     },
@@ -71,6 +79,10 @@ const planner = {
 
         // 여행 일정 제거
         document.querySelector(".itinerary tbody").innerHTML = "";
+    },
+    // 여행지 선택
+    selectTourPlace(seq) {
+        layerPopup.open('/planner/select/tourplace', 800, 600);
     }
 };
 
@@ -114,6 +126,17 @@ window.addEventListener("DOMContentLoaded", function() {
             }
         }
     });
+
+    // 여행지 선택 하기 S
+    const selectTourPlaces = document.getElementsByClassName("select-tour-place");
+    for (const el of selectTourPlaces) {
+        el.addEventListener("click", function() {
+            const tr = this.parentElement;
+            const seq = tr.dataset.seq;
+            planner.selectTourPlace(seq);
+        });
+    }
+    // 여행지 선택 하기 E
 });
 
 

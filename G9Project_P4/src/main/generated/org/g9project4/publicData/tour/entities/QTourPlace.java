@@ -60,7 +60,7 @@ public class QTourPlace extends EntityPathBase<TourPlace> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedAt = _super.modifiedAt;
 
-    public final NumberPath<Integer> sigugunCode = createNumber("sigugunCode", Integer.class);
+    public final NumberPath<Integer> sigunguCode = createNumber("sigunguCode", Integer.class);
 
     public final StringPath tel = createString("tel");
 

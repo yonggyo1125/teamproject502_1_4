@@ -58,7 +58,7 @@ public class ApiUpdateService {
                                 .latitude(item.getMapy())
                                 .longitude(item.getMapx())
                                 .mapLevel(item.getMlevel())
-                                .sigugunCode(item.getSigungucode())
+                                .sigunguCode(item.getSigungucode())
                                 .build();
                         tourPlaceRepository.saveAndFlush(tourPlace);
                     } catch (Exception e) {//예외 발생하면 이미 등록된 여행지

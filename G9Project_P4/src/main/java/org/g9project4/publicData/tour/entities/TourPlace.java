@@ -1,14 +1,12 @@
 package org.g9project4.publicData.tour.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.g9project4.global.entities.BaseEntity;
+import org.g9project4.publicData.tour.constants.ContentType;
 
 @Data
 @Entity
@@ -54,7 +52,11 @@ public class TourPlace extends BaseEntity {
     private Double latitude; // mapy
     private Double longitude; // mapx
     private Integer mapLevel;
-    private Integer sigugunCode;
+    private Integer sigunguCode;
+
+
+    @Transient
+    public ContentType contentType;
 
     private Double type1D1; // 현지인(a) 일별 통계
     private Double type2D1; // 외지인(b) 일별 통계

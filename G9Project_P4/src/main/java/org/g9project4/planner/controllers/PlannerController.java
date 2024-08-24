@@ -2,9 +2,13 @@ package org.g9project4.planner.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.g9project4.global.ListData;
 import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.ExceptionProcessor;
 import org.g9project4.planner.services.PlannerSaveService;
+import org.g9project4.publicData.tour.controllers.TourPlaceSearch;
+import org.g9project4.publicData.tour.entities.TourPlace;
+import org.g9project4.publicData.tour.services.TourPlaceInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -20,6 +24,7 @@ import java.util.List;
 public class PlannerController implements ExceptionProcessor {
 
     private final PlannerSaveService saveService;
+    private final TourPlaceInfoService tourPlaceInfoService;
     private final Utils utils;
     
     @ModelAttribute("pageTitle")
@@ -98,6 +103,26 @@ public class PlannerController implements ExceptionProcessor {
     }
 
     /**
+     * 여행지 선택
+     * @param mode
+     * @param model
+     * @return
+     */
+    @GetMapping("/select/{mode}")
+    public String select(@PathVariable("mode") String mode, @ModelAttribute TourPlaceSearch search, Model model) {
+        commonProcess("select_" + mode, model);
+        mode = mode = StringUtils.hasText(mode) ? mode : "tourplace";
+
+        if (mode.equals("tourplace")) {
+            ListData<TourPlace> data = tourPlaceInfoService.getTotalList(search);
+            model.addAttribute("items", data.getItems());
+            model.addAttribute("pagination", data.getPagination());
+        }
+
+        return utils.tpl("planner/select_" + mode);
+    }
+
+    /**
      * 공통 처리
      *
      * @param mode
@@ -115,6 +140,9 @@ public class PlannerController implements ExceptionProcessor {
         if (List.of("write", "update").contains(mode)) {
             addCss.add("planner/form");
             addScript.add("planner/form");
+        } else if (mode.equals("select_tourplace")) { // 여행지 선택
+            addCss.add("planner/select_tourplace");
+            addScript.add("planner/select_tourplace");
         }
 
         model.addAttribute("addCss", addCss);
