@@ -18,6 +18,6 @@
         <a th:href="${@utils.redirectUrl('/board/list/' + board.bid)}" th:text="#{전체}" class="link" th:classappend="${param.category == null || param.category == ''} ? 'on'"></a>
         <a th:each="category : ${board.categories}" th:text="${category}"
            th:href="${@utils.redirectUrl('/board/list/' + board.bid + '?category=' + category)}"
-           class="link" th:classappend="${category == param.category} ? 'on'"></a>
+           class="link" th:classappend="${category.equals(param.category)} ? 'on'"></a>
     </nav>
 </html>
