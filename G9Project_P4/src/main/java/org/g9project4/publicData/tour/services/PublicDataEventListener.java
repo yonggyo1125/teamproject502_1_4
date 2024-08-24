@@ -18,7 +18,6 @@ public class PublicDataEventListener {
     @Async
     @EventListener
     public void update1(PublicDataStartEvent event) throws InterruptedException{
-        Thread.sleep(3000);
         log.info("이벤트 수신, 작업명: {} 시작", event.getWorkNm());
 
         // 작업 코드 추가
