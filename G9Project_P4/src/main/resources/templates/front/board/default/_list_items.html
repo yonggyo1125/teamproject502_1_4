@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="items">
 
+    <nav th:replace="~{front/board/default/_common::categorylink}"></nav>
+
     <ul>
         <li th:if="${items == null || items.empty}" th:text="#{조회된_게시글이_없습니다.}" class="no-data"></li>
         <li th:if="${items != null && !items.empty}" th:each="item : ${items}" th:object="${item}">

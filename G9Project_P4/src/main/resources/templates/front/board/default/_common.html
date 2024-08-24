@@ -14,7 +14,10 @@
         </span>
     </div>
 
-    <nav th:fragment="categorylink" class="category-links">
-        <a th:if="${board.categories != null && !board.categories.empty}" th:each="category : ${board.categories}" th:text="${category}" class="link" th:classappend="${category == param.category} ? 'on'"></a>
+    <nav th:fragment="categorylink" class="category-links" th:if="${board.categories != null && !board.categories.empty}">
+        <a th:href="${@utils.redirectUrl('/board/list/' + board.bid)}" th:text="#{전체}" class="link" th:classappend="${param.category == null || param.category == ''} ? 'on'"></a>
+        <a th:each="category : ${board.categories}" th:text="${category}"
+           th:href="${@utils.redirectUrl('/board/list/' + board.bid + '?category=' + category)}"
+           class="link" th:classappend="${category == param.category} ? 'on'"></a>
     </nav>
 </html>
