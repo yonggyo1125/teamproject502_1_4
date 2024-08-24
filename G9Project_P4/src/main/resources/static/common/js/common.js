@@ -19,8 +19,6 @@ const commonLib = {
             url = rootUrl.includes("http") ? rootUrl + url.replace("/", "") : location.protocol + "//" + location.host + url;
         }
 
-        console.log(url);
-
         method = method.toUpperCase();
         if (method === 'GET') {
             data = null;
