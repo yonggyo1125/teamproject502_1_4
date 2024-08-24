@@ -1,11 +1,13 @@
 package org.g9project4.board.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.board.entities.Board;
 import org.g9project4.board.entities.BoardData;
 import org.g9project4.board.exceptions.BoardNotFoundException;
+import org.g9project4.board.exceptions.GuestPasswordCheckException;
 import org.g9project4.board.services.*;
 import org.g9project4.board.validators.BoardValidator;
 import org.g9project4.file.constants.FileStatus;
@@ -14,6 +16,7 @@ import org.g9project4.file.services.FileInfoService;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.ExceptionProcessor;
+import org.g9project4.global.exceptions.UnAuthorizedException;
 import org.g9project4.member.MemberUtil;
 import org.g9project4.search.services.SearchHistoryService;
 import org.springframework.stereotype.Controller;
@@ -22,6 +25,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +48,7 @@ public class BoardController implements ExceptionProcessor {
     private final BoardValidator validator;
     private final MemberUtil memberUtil;
     private final Utils utils;
+
 
     private Board board; // 게시판 설정
     private BoardData boardData; // 게시글 내용
@@ -244,5 +249,28 @@ public class BoardController implements ExceptionProcessor {
         model.addAttribute("boardData", boardData);
 
         commonProcess(boardData.getBoard().getBid(), mode, model);
+    }
+
+    @Override
+    public ModelAndView errorHandler(Exception e, HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView();
+        if (e instanceof UnAuthorizedException unAuthorizedException) {
+            String message = unAuthorizedException.getMessage();
+            message = unAuthorizedException.isErrorCode() ? utils.getMessage(message) : message;
+            String script = String.format("alert('%s');history.back();", message);
+
+            mv.setStatus(unAuthorizedException.getStatus());
+            mv.setViewName(utils.tpl("common/_execute_script"));
+            mv.addObject("script", script);
+
+            return mv;
+        } else if ( e instanceof GuestPasswordCheckException passwordCheckException) {
+
+            mv.setStatus(passwordCheckException.getStatus());
+            mv.setViewName(utils.tpl("board/password"));
+            return mv;
+        }
+
+        return ExceptionProcessor.super.errorHandler(e, request);
     }
 }
