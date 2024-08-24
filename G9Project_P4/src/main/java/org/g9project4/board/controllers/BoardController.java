@@ -211,6 +211,7 @@ public class BoardController implements ExceptionProcessor {
         model.addAttribute("addScript", addScript);
         model.addAttribute("board", board); // 게시판 설정
         model.addAttribute("pageTitle", pageTitle);
+        model.addAttribute("mode", mode);
     }
 
     /**
