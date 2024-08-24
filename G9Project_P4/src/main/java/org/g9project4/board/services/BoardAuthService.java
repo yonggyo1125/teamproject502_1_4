@@ -48,19 +48,19 @@ public class BoardAuthService {
 
         // 게시글 목록 접근 권한 체크
         Authority authority = board.getListAccessType();
-        if (mode.equals("list") && authority == Authority.USER && !memberUtil.isLogin()) {
+        if (mode.equals("list") && ((authority == Authority.USER && !memberUtil.isLogin()) || (authority == Authority.ADMIN && !memberUtil.isAdmin()))) {
             throw new UnAuthorizedException();
         }
 
         // 게시글 보기 접근 권한 체크
         Authority viewAuthority = board.getViewAccessType();
-        if (mode.equals("view") && viewAuthority == Authority.USER && !memberUtil.isLogin()) {
+        if (mode.equals("view") && ((viewAuthority == Authority.USER && !memberUtil.isLogin()) || (viewAuthority == Authority.ADMIN && !memberUtil.isAdmin()))) {
             throw new UnAuthorizedException();
         }
 
         // 글쓰기 접근 권한 체크
         Authority writeAuthority = board.getWriteAccessType();
-        if (mode.equals("write") && writeAuthority == Authority.USER && !memberUtil.isLogin()) {
+        if (mode.equals("write") && ((writeAuthority == Authority.USER && !memberUtil.isLogin()) || (writeAuthority == Authority.ADMIN && !memberUtil.isAdmin()))) {
             throw new UnAuthorizedException();
         }
 
