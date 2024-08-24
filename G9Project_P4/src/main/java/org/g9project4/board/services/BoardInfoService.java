@@ -395,7 +395,34 @@ public class BoardInfoService {
         item.setEditable(editable);
         item.setCommentable(commentable);
         item.setMine(mine);
+
         /* 게시글 권한 정보 처리 E */
+
+        // 게시글 버튼 노출 권한 처리 S
+        boolean showEditButton = false, showListButton = false, showDeleteButton = false;
+
+        Authority editAuthority = board.getWriteAccessType(); // 글작성, 수정 권한
+        Authority listAuthority = board.getListAccessType(); // 글목록 보기 권한
+
+
+        if (editAuthority == Authority.ALL || boardMember == null ||
+                (editAuthority == Authority.USER && memberUtil.isLogin())) { // 수정 삭제 권한이 ALL인 경우, 비회원인 경우, 회원만 가능한 경우 + 로그인한 경우 수정, 삭제 버튼 클릭시 비회원 검증 하므로 노출
+            showEditButton = showDeleteButton = true;
+        }
+
+        if (listAuthority == Authority.ALL || (listAuthority == Authority.USER && memberUtil.isLogin())) {
+            showListButton = true;
+        }
+
+        if (memberUtil.isAdmin()) { // 관리자는 모든 권한 가능
+            showEditButton = showDeleteButton = showListButton = true;
+        }
+
+        item.setShowEditButton(showEditButton);
+        item.setShowDeleteButton(showDeleteButton);
+        item.setShowListButton(showListButton);
+        // 게시글 버튼 노출 권한 처리 E
+
 
     }
 }
