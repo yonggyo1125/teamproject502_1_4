@@ -6,6 +6,7 @@
         <li th:if="${items == null || items.empty}" th:text="#{조회된_게시글이_없습니다.}" class="no-data"></li>
         <li th:if="${items != null && !items.empty}" th:each="item : ${items}" th:object="${item}">
             <a th:href="*{@utils.redirectUrl('/board/view/' + seq)}" class="subject">
+                <span th:if="*{notice}" th:text="${'[' + #messages.msg('공지') + ']'}"></span>
                 <span th:if="*{category != null && category != ''}" th:text="*{'[' + category + ']'}" class="category"></span>
                 <th:block th:text="*{subject}"></th:block>
             </a>
