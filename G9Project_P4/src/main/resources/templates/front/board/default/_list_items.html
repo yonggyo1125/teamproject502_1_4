@@ -11,6 +11,8 @@
                     <th:block th:text="*{poster}"></th:block>
                     <th:block th:if="*{member != null}" th:text="*{#strings.concat('(', member.email, ')')}"></th:block>
                 </span>
+                <span class="view-count" th:if="*{viewCount > 0}"
+                    th:text="*{viewCount < 1000 ? viewCount : #numbers.formatInteger(viewCount, 3, 'COMMA')}"></span>
                 <span class="datetime" th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></span>
             </div> <!--// post-info -->
         </li>
