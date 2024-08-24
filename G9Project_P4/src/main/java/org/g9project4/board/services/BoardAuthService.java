@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.g9project4.board.entities.Board;
 import org.g9project4.board.entities.BoardData;
 import org.g9project4.board.exceptions.BoardNotFoundException;
+import org.g9project4.board.exceptions.GuestPasswordCheckException;
 import org.g9project4.global.exceptions.UnAuthorizedException;
 import org.g9project4.member.MemberUtil;
 import org.g9project4.member.constants.Authority;
@@ -70,7 +71,7 @@ public class BoardAuthService {
         if (!boardData.isEditable()) {
             if (boardData.getMember() == null) {
                 // 비회원 게시글 - 비밀번호 검증 필요
-
+                throw new GuestPasswordCheckException();
             }
 
             throw new UnAuthorizedException();
