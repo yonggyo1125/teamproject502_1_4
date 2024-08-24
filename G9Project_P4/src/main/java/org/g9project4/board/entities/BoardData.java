@@ -86,11 +86,8 @@ public class BoardData extends BaseEntity {
     private boolean editable; // 수정, 삭제 가능 여부
 
     @Transient
-    private boolean commentable; // 댓글 수정, 삭제 가능 여부
+    private boolean commentable; // 댓글 작성 가능 여부
 
     @Transient
-    private boolean viewable; // 상세쪽 조회 가능 여부
-
-    @Transient
-    private boolean listable; // 목록쪽 조회 가능 여부
+    private boolean mine; // 게시글 소유자
 }
