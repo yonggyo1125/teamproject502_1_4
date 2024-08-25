@@ -13,10 +13,12 @@ import org.g9project4.board.controllers.BoardDataSearch;
 import org.g9project4.board.controllers.RequestBoard;
 import org.g9project4.board.entities.Board;
 import org.g9project4.board.entities.BoardData;
+import org.g9project4.board.entities.CommentData;
 import org.g9project4.board.entities.QBoardData;
 import org.g9project4.board.exceptions.BoardDataNotFoundException;
 import org.g9project4.board.exceptions.BoardNotFoundException;
 import org.g9project4.board.repositories.BoardDataRepository;
+import org.g9project4.board.services.comment.CommentInfoService;
 import org.g9project4.file.entities.FileInfo;
 import org.g9project4.file.services.FileInfoService;
 import org.g9project4.global.CommonSearch;
@@ -46,6 +48,7 @@ public class BoardInfoService {
     private final JPAQueryFactory queryFactory;
     private final BoardDataRepository repository;
     private final BoardConfigInfoService configInfoService;
+    private final CommentInfoService commentInfoService;
     private final FileInfoService fileInfoService;
     private final WishListService wishListService;
     private final HttpServletRequest request;
@@ -264,6 +267,11 @@ public class BoardInfoService {
         // 추가 데이터 처리
         addInfo(item);
 
+
+        // 댓글 목록
+        List<CommentData> comments = commentInfoService.getList(seq);
+        item.setComments(comments);
+        System.out.println("item : " + item);
         return item;
     }
 

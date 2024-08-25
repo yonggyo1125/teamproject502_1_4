@@ -1,31 +1,38 @@
 package org.g9project4.global.exceptions;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.script.AlertBackException;
 import org.g9project4.global.exceptions.script.AlertException;
 import org.g9project4.global.exceptions.script.AlertRedirectException;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface ExceptionProcessor {
+
     @ExceptionHandler(Exception.class)
     default ModelAndView errorHandler(Exception e, HttpServletRequest request) {
+
+        Utils utils = (Utils)request.getAttribute("utils");
 
         ModelAndView mv = new ModelAndView();
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR; // 기본 응답 코드 500
         String tpl = "error/error";
 
-
+        String message = e.getMessage();
 
         if (e instanceof CommonException commonException) {
             status = commonException.getStatus();
+            message = commonException.isErrorCode() ? utils.getMessage(message) : message;
 
             if (e instanceof AlertException) {
                 tpl = "common/_execute_script";
-                String script = String.format("alert('%s');", e.getMessage());
+                String script = String.format("alert('%s');", message);
 
                 if (e instanceof AlertBackException alertBackException) {
                     script += String.format("%s.history.back();", alertBackException.getTarget());
@@ -53,7 +60,7 @@ public interface ExceptionProcessor {
         if (StringUtils.hasText(qs)) url += "?" + qs;
 
 
-        mv.addObject("message", e.getMessage());
+        mv.addObject("message", message);
         mv.addObject("status", status.value());
         mv.addObject("method", request.getMethod());
         mv.addObject("path", url);
