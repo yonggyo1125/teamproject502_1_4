@@ -114,7 +114,7 @@ public class BoardController implements ExceptionProcessor {
             return utils.tpl("board/" + mode);
         }
 
-        saveService.save(form);
+        boardData = saveService.save(form);
 
 
         status.setComplete();

@@ -305,6 +305,41 @@ public class BoardInfoService {
         return getForm(seq, DeleteStatus.UNDELETED);
     }
 
+
+    /**
+     * 내가 작성한 게시글 목록
+     *
+     */
+    public ListData<BoardData> getMyList(CommonSearch search) {
+        if (!memberUtil.isLogin()) {
+            return new ListData<>();
+        }
+
+        int page = Math.max(search.getPage(), 1);
+        int limit = search.getLimit();
+        limit = limit < 1 ? 10 : limit;
+        int offset = (page - 1) * limit;
+
+
+        QBoardData boardData = QBoardData.boardData;
+        BooleanBuilder andBuilder = new BooleanBuilder();
+        andBuilder.and(boardData.member.seq.eq(memberUtil.getMember().getSeq()));
+
+        List<BoardData> items = queryFactory.selectFrom(boardData)
+                .where(andBuilder)
+                .leftJoin(boardData.board)
+                .fetchJoin()
+                .offset(offset)
+                .limit(limit)
+                .orderBy(boardData.createdAt.desc())
+                .fetch();
+
+        long total = repository.count(andBuilder);
+        int ranges = utils.isMobile() ? 5 : 10;
+        Pagination pagination = new Pagination(page, (int)total, ranges, limit, request);
+
+        return new ListData<>(items, pagination);
+    }
     /**
      * 내가 찜한 게시글 목록
      *

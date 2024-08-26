@@ -1,6 +1,5 @@
 package org.g9project4.member.services;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.file.services.FileUploadDoneService;
 import org.g9project4.member.MemberUtil;
@@ -29,7 +28,7 @@ public class MemberSaveService {
     private final AuthoritiesRepository authoritiesRepository;
     private final PasswordEncoder passwordEncoder;
     private final MemberUtil memberUtil;
-    private final HttpSession session;
+
     /**
      * 회원 가입 처리
      *
@@ -64,9 +63,7 @@ public class MemberSaveService {
             member.setPassword(hash);
         }
 
-        memberRepository.saveAndFlush(member);
-
-        session.setAttribute("userInfoChanged", true);
+        save(member, null);
     }
 
     public void save(Member member, List<Authority> authorities) {
@@ -91,6 +88,6 @@ public class MemberSaveService {
         }
 
         // 파일 업로드 완료 처리
-        uploadDoneService.process(member.getGid());
+        uploadDoneService.process(member.getEmail());
     }
 }

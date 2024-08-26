@@ -5,8 +5,9 @@
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
     <h1 th:text="#{내_정보수정}"></h1>
-    <form name="frmUpdate" method="POST" th:action="${@utils.url('/mypage/info')}" autocomplete="off" th:object="${requestProfile}">
+    <form name="frmUpdate" method="POST" th:action="${@utils.redirectUrl('/mypage/info')}" autocomplete="off" th:object="${requestProfile}">
         <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+
         <dl>
             <dt th:text="#{이메일}"></dt>
             <dd th:text="${loggedMember.email}"></dd>
@@ -37,6 +38,17 @@
             <dd>
                 <input type="text" name="mobile" th:field="*{mobile}">
                 <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{프로필_이미지}"></dt>
+            <dd>
+                <div class="profile-image">
+                    <i th:if="${myProfileImage != null}" class="remove xi-close" th:data-seq="${myProfileImage.seq}"></i>
+                    <div class="fileUploads inner" th:data-gid="${loggedMember.email}" data-image-only="true" data-single="true">
+                     <img th:if="${myProfileImage != null}" th:object="${myProfileImage}" th:src="*{fileUrl}" alt="*{fileName}">
+                    </div>
+                </div>
             </dd>
         </dl>
         <button type="reset" th:text="#{다시입력}"></button>

@@ -21,7 +21,8 @@ public class MemberUtil {
     private final MemberInfoService infoService;
 
     public boolean isLogin() {
-        return getMember() != null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof MemberInfo;
     }
 
     public boolean isAdmin() {

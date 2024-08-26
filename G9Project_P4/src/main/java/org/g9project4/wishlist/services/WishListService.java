@@ -3,6 +3,9 @@ package org.g9project4.wishlist.services;
 import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.member.MemberUtil;
+import org.g9project4.member.entities.Member;
+import org.g9project4.member.exceptions.MemberNotFoundException;
+import org.g9project4.member.repositories.MemberRepository;
 import org.g9project4.wishlist.constants.WishType;
 import org.g9project4.wishlist.entities.QWishList;
 import org.g9project4.wishlist.entities.WishList;
@@ -19,6 +22,7 @@ import static org.springframework.data.domain.Sort.Order.desc;
 @RequiredArgsConstructor
 public class WishListService {
     private final MemberUtil memberUtil;
+    private final MemberRepository memberRepository;
     private final WishListRepository repository;
 
     public void add(Long seq, WishType type) {
@@ -26,10 +30,13 @@ public class WishListService {
             return;
         }
 
+        Member member = memberRepository.findByEmail(memberUtil.getMember().getEmail()).orElseThrow(MemberNotFoundException::new);
+
+
         WishList wishList = WishList.builder()
                 .wishType(type)
                 .seq(seq)
-                .member(memberUtil.getMember())
+                .member(member)
                 .build();
         repository.saveAndFlush(wishList);
     }

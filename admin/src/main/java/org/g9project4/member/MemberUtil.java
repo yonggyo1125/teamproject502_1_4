@@ -15,9 +15,10 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class MemberUtil {
-    private final MemberRepository memberRepository;
+    private final MemberRepository repository;
     public boolean isLogin() {
-        return getMember() != null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof MemberInfo;
     }
 
     public boolean isAdmin() {
@@ -29,13 +30,21 @@ public class MemberUtil {
     }
 
     public Member getMember() {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication.isAuthenticated() && authentication.getPrincipal() instanceof MemberInfo memberInfo) {
-            Member member = memberRepository.findByEmail(memberInfo.getEmail()).orElse(null);
-            return member;
-            //return memberInfo.getMember();
+        Member member = null;
+        if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof MemberInfo memberInfo) {
+
+
+            member = memberInfo.getMember();
+            if (member == null) {
+                member = repository.findByEmail(memberInfo.getEmail()).orElse(null);
+
+                memberInfo.setMember(member);
+            }
         }
-        return null;
+
+        return member;
     }
 }

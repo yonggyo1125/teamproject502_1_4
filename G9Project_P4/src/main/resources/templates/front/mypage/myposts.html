@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/mypage}">
+<section layout:fragment="content">
+    <h1 th:text="#{내가_작성한_게시글}"></h1>
+    <th:block th:replace="~{front/mypage/_list_items::items}"></th:block>
+</section>
+</html>

@@ -54,7 +54,7 @@ public class MemberInfoService implements UserDetailsService {
      * @param member
      */
     public void addMemberInfo(Member member) {
-       String gid = member.getGid();
+       String gid = member.getEmail();
        List<FileInfo> items = fileInfoService.getList(gid);
        if (items != null && !items.isEmpty()) {
            member.setProfileImage(items.get(0));
