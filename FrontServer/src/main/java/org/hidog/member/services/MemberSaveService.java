@@ -58,7 +58,7 @@ public class MemberSaveService {
         String password = form.getPassword();
 
         QMember qMember = QMember.member;
-        if (memberRepository.exists(qMember.userName.eq(userName))) {
+        if (!member.getUserName().equals(userName) && memberRepository.exists(qMember.userName.eq(userName))) {
             throw new DuplicateMemberException();
         }
 

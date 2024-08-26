@@ -1,10 +1,8 @@
 package org.hidog.member.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hidog.member.constants.Authority;
 
 import java.io.Serializable;
@@ -17,6 +15,7 @@ import java.io.Serializable;
 public class Authorities implements Serializable {
     @Id
     @ManyToOne(fetch= FetchType.LAZY)
+    @JsonIgnore @ToString.Exclude
     private Member member;
 
     @Id

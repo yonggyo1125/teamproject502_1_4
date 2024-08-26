@@ -1,4 +1,5 @@
 /* 기본 */
+/*
 * {
     margin: 0;
     padding: 0;
@@ -22,6 +23,7 @@ main {
 }
 
 /* 제목 */
+/*
 h1 {
     text-align: center;
     margin: 20px 0;
@@ -81,6 +83,7 @@ h1 {
 }
 
 /* 버튼 */
+/*
 .button {
     background-color: #68A5FE;
     color: white;
@@ -97,4 +100,12 @@ h1 {
 
 .button:hover {
     background-color: #F5D2D2;
+}
+*/
+.profile-image {
+    width: 250px;
+    height: 300px;
+    background:url("../../../common/images/no_profile.png") no-repeat center center;
+    background-size: cover;
+    cursor: pointer;
 }

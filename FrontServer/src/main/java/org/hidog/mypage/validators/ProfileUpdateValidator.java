@@ -1,6 +1,11 @@
 package org.hidog.mypage.validators;
 
+import lombok.RequiredArgsConstructor;
 import org.hidog.global.validators.PasswordValidator;
+import org.hidog.member.MemberUtil;
+import org.hidog.member.entities.Member;
+import org.hidog.member.entities.QMember;
+import org.hidog.member.repositories.MemberRepository;
 import org.hidog.mypage.controllers.RequestProfile;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -8,7 +13,11 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
+@RequiredArgsConstructor
 public class ProfileUpdateValidator implements Validator, PasswordValidator{
+
+    private final MemberUtil memberUtil;
+    private final MemberRepository memberRepository;
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -42,6 +51,13 @@ public class ProfileUpdateValidator implements Validator, PasswordValidator{
                 errors.rejectValue("password", "Complexity");
             }
 
+        }
+
+        String userName = form.getUserName();
+        Member member = memberUtil.getMember();
+        QMember qMember = QMember.member;
+        if (!member.getUserName().equals(userName) && memberRepository.exists(qMember.userName.eq(userName))) {
+            errors.rejectValue("userName", "Duplicated");
         }
     }
 }

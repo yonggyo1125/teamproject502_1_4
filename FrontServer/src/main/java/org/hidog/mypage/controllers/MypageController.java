@@ -69,6 +69,7 @@ public class MypageController implements ExceptionProcessor {
         if (mode.equals("info")) {
             addCommonScript.add("fileManager");
             addScript.add("mypage/info");
+            addCss.add("mypage/info");
         }
 
         model.addAttribute("addCommonScript", addCommonScript);

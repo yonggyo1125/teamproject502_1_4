@@ -5,6 +5,7 @@ import org.hidog.member.constants.Authority;
 import org.hidog.member.entities.Authorities;
 import org.hidog.member.entities.Member;
 import org.hidog.member.repositories.MemberRepository;
+import org.hidog.member.services.MemberInfoService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberUtil {
     private final MemberRepository repository;
+    private final MemberInfoService infoService;
     public boolean isLogin() {
         return getMember() != null;
     }
@@ -35,6 +37,8 @@ public class MemberUtil {
 
             Member member = repository.findByEmail(memberInfo.getEmail()).orElse(null);
             memberInfo.setMember(member);
+
+            infoService.addInfo(member);
 
             return member;
         }
