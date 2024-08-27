@@ -19,7 +19,7 @@ public class VistRecordService {
     private final Utils utils;
 
     public void record(Long contentId) {
-        int uid = memberUtil.isLogin() ? memberUtil.getMember().getSeq().intValue() : utils.guestUid();
+        int uid = getUid();
 
         LocalDate yearMonth = thisMonth();
 
@@ -35,12 +35,17 @@ public class VistRecordService {
     }
 
     public List<Long> getMonthlyRecommend() {
-
+        LocalDate yearMonth = thisMonth();
+        int uid = getUid();
     }
 
     public LocalDate thisMonth() {
         LocalDate today = LocalDate.now();
         // 년, 월 기준의 통계
         return LocalDate.of(today.getYear(), today.getMonth(), 1);
+    }
+
+    public int getUid() {
+        return memberUtil.isLogin() ? memberUtil.getMember().getSeq().intValue() : utils.guestUid();
     }
 }
