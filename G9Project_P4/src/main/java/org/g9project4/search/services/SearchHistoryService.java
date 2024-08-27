@@ -8,10 +8,13 @@ import org.g9project4.search.entities.QSearchHistory;
 import org.g9project4.search.entities.SearchHistory;
 import org.g9project4.search.entities.SearchHistoryId;
 import org.g9project4.search.repositories.SearchHistoryRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+
+import static org.springframework.data.domain.Sort.Order.desc;
 
 @Service
 @RequiredArgsConstructor
@@ -53,7 +56,7 @@ public class SearchHistoryService {
         builder.and(searchHistory.member.seq.eq(memberUtil.getMember().getSeq()))
                 .and(searchHistory.searchType.eq(type));
 
-        List<SearchHistory> items = (List<SearchHistory>)repository.findAll(builder);
+        List<SearchHistory> items = (List<SearchHistory>)repository.findAll(builder, Sort.by(desc("searchCount")));
 
         return items.stream().map(SearchHistory::getKeyword).toList();
     }
