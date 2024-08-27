@@ -9,6 +9,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.g9project4.board.controllers.AdminBoardDataSearch;
 import org.g9project4.board.controllers.BoardDataSearch;
 import org.g9project4.board.controllers.RequestBoard;
 import org.g9project4.board.entities.Board;
@@ -88,6 +89,14 @@ public class BoardInfoService {
         /* 검색 처리 S */
         QBoardData boardData = QBoardData.boardData;
         BooleanBuilder andBuilder = new BooleanBuilder();
+
+        /* 관리자 검색 용도 */
+        if (memberUtil.isAdmin() && search instanceof AdminBoardDataSearch adminSearch) {
+            List<Long> memberSeq = adminSearch.getMemberSeq();
+            if (memberSeq != null && !memberSeq.isEmpty()) {
+                andBuilder.and(boardData.member.seq.in(memberSeq));
+            }
+        }
 
         // 삭제, 미삭제 게시글 조회 처리
         if (status != DeleteStatus.ALL) {
