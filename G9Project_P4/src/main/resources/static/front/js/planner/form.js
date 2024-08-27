@@ -81,10 +81,10 @@ const planner = {
         document.querySelector(".itinerary tbody").innerHTML = "";
     },
     // 여행지 선택
-    selectTourPlace(seq, data) {
-        let url = '/planner/select/tourplace';
-        if (data) url += "?data=" + data;
-        layerPopup.open(, 800, 600);
+    selectTourPlace(seq) {
+        let url = '/planner/select/tourplace?data=' + seq;
+
+        layerPopup.open(url, 800, 600);
     }
 };
 
@@ -135,7 +135,7 @@ window.addEventListener("DOMContentLoaded", function() {
         el.addEventListener("click", function() {
             const tr = this.parentElement;
             const seq = tr.dataset.seq;
-            planner.selectTourPlace(seq, tr);
+            planner.selectTourPlace(seq);
         });
     }
     // 여행지 선택 하기 E
@@ -178,8 +178,8 @@ function callbackCalendar(date) {
 * 여행지 팝업 선택 콜백 처리
 *
 */
-function selectTourPlaceCallback(item) {
-    console.log("item", item, planner);
+function selectTourPlaceCallback(item, seq) {
+    console.log("item", item, seq);
     if (!item || !planner.callbackTarget) return;
     console.log(item);
     const { contentId, title, address, firstImage, firstImage2 } = item;
@@ -187,10 +187,10 @@ function selectTourPlaceCallback(item) {
 
     const imageUrl = firstImage2 ? firstImage2 : firstImage;
 
-    const contentIdEl = targetEl.querySelector(".content-id");
-    const placeEl = targetEl.querySelector(".tourplace");
-    const imageEl = targetEl.querySelector(".tourplace-image");
-    const addressEl = targetEl.querySelector(".tourplace-address");
+    const contentIdEl = targetEl.querySelector(`[name='content_id_${seq}']`);
+    const placeEl = targetEl.querySelector("#tourplace-" + seq);
+    const imageEl = targetEl.querySelector("#tourplace-image-" + seq);
+    const addressEl = targetEl.querySelector("#tourplace-address-" + seq);
 
     contentIdEl.value = contentId;
     placeEl.innerHTML = title;

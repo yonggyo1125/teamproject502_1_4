@@ -4,7 +4,10 @@ window.addEventListener("DOMContentLoaded", function() {
         el.addEventListener("click", function() {
             const item = JSON.parse(this.dataset.json);
             if (typeof parent.selectTourPlaceCallback === 'function') {
-                parent.selectTourPlaceCallback(item);
+                const searchParams = new URLSearchParams(location.search);
+                const data = searchParams.get("data");
+
+                parent.selectTourPlaceCallback(item, data);
             }
         });
     }
