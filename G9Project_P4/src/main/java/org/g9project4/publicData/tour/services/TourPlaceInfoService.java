@@ -15,6 +15,8 @@ import org.g9project4.publicData.tour.controllers.TourPlaceSearch;
 import org.g9project4.publicData.tour.entities.QTourPlace;
 import org.g9project4.publicData.tour.entities.TourPlace;
 import org.g9project4.publicData.tour.repositories.TourPlaceRepository;
+import org.g9project4.visitrecord.constants.RecommendType;
+import org.g9project4.visitrecord.services.VistRecordService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
@@ -31,6 +33,7 @@ public class TourPlaceInfoService {
     private final TourPlaceRepository repository;
     private String serviceKey = "n5fRXDesflWpLyBNdcngUqy1VluCJc1uhJ0dNo4sNZJ3lkkaYkkzSSY9SMoZbZmY7/O8PURKNOFmsHrqUp2glA==";
     private final HttpServletRequest request;
+    private final VistRecordService recordService;
 
     /**
      * 좌표, 거리 기반으로 검색
@@ -70,20 +73,42 @@ public class TourPlaceInfoService {
         return null;
     }
     */
+
     public ListData<TourPlace> getTotalList(TourPlaceSearch search) {
+
+        return getTotalList(search, null);
+    }
+
+    public ListData<TourPlace> getTotalList(TourPlaceSearch search, RecommendType recommendType) {
         int page = Math.max(search.getPage(), 1);
         int limit = search.getLimit();
         limit = limit < 1 ? 10 : limit;
         int offset = (page - 1) * limit;
 
-        Pagination pagination = new Pagination(page, (int) repository.count(), 0, limit, request);
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         QTourPlace tourPlace = QTourPlace.tourPlace;
+        BooleanBuilder andBuilder = new BooleanBuilder();
+
+        // 추천 검색 S
+        if (recommendType != null) {
+            if (recommendType == RecommendType.VIEW) {
+                List<Long> contentIds = recordService.getMonthlyRecommend();
+                andBuilder.and(tourPlace.contentId.in(contentIds));
+            } else if (recommendType == RecommendType.KEYWORD) {
+
+            }
+        }
+        // 추천 검색 E
+
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+
         List<TourPlace> items = queryFactory.selectFrom(tourPlace)
                 .orderBy(tourPlace.contentId.asc())
                 .offset(offset)
                 .limit(limit)
                 .fetch();
+
+        Pagination pagination = new Pagination(page, (int) repository.count(andBuilder), 0, limit, request);
+
         return new ListData<>(items, pagination);
     }
     /*
