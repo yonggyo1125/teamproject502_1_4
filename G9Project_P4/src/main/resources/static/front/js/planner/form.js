@@ -1,4 +1,5 @@
 const planner = {
+    callbackTarget: null,
     /* 초기화 */
     init() {
         const dates = this.getDates();
@@ -81,8 +82,9 @@ const planner = {
         document.querySelector(".itinerary tbody").innerHTML = "";
     },
     // 여행지 선택
-    selectTourPlace(seq) {
+    selectTourPlace(seq, callbackTarget) {
         layerPopup.open('/planner/select/tourplace', 800, 600);
+        this.callbackTarget = callbackTarget;
     }
 };
 
@@ -133,7 +135,7 @@ window.addEventListener("DOMContentLoaded", function() {
         el.addEventListener("click", function() {
             const tr = this.parentElement;
             const seq = tr.dataset.seq;
-            planner.selectTourPlace(seq);
+            planner.selectTourPlace(seq, tr);
         });
     }
     // 여행지 선택 하기 E
