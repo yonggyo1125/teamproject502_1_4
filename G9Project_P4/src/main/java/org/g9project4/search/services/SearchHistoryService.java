@@ -1,5 +1,6 @@
 package org.g9project4.search.services;
 
+import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.member.MemberUtil;
 import org.g9project4.search.constants.SearchType;
@@ -40,9 +41,16 @@ public class SearchHistoryService {
     }
 
     public List<String> getKeywords(SearchType type) {
-        QSearchHistory searchHistory = QSearchHistory.searchHistory;
+        if (!memberUtil.isLogin()) {
+            return null;
+        }
 
-        List<SearchHistory> items = (List<SearchHistory>)repository.findAll(searchHistory.searchType.eq(type));
+        QSearchHistory searchHistory = QSearchHistory.searchHistory;
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(searchHistory.member.seq.eq(memberUtil.getMember().getSeq()))
+                .and(searchHistory.searchType.eq(type));
+
+        List<SearchHistory> items = (List<SearchHistory>)repository.findAll(builder);
 
         return items.stream().map(SearchHistory::getKeyword).toList();
     }
