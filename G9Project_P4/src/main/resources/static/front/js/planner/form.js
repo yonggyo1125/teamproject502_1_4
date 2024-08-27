@@ -1,5 +1,4 @@
 const planner = {
-    callbackTarget: null,
     /* 초기화 */
     init() {
         const dates = this.getDates();
@@ -82,9 +81,10 @@ const planner = {
         document.querySelector(".itinerary tbody").innerHTML = "";
     },
     // 여행지 선택
-    selectTourPlace(seq, callbackTarget) {
-        layerPopup.open('/planner/select/tourplace', 800, 600);
-        this.callbackTarget = callbackTarget;
+    selectTourPlace(seq, data) {
+        let url = '/planner/select/tourplace';
+        if (data) url += "?data=" + data;
+        layerPopup.open(, 800, 600);
     }
 };
 
@@ -172,5 +172,34 @@ function callbackCalendar(date) {
     if (selected === 2 && trs.length === 0) {
         planner.init(); // 선택 일정만큼 입력 항목 생성
     }
+}
 
+/**
+* 여행지 팝업 선택 콜백 처리
+*
+*/
+function selectTourPlaceCallback(item) {
+    console.log("item", item, planner);
+    if (!item || !planner.callbackTarget) return;
+    console.log(item);
+    const { contentId, title, address, firstImage, firstImage2 } = item;
+    const targetEl = planner.callbackTarget;
+
+    const imageUrl = firstImage2 ? firstImage2 : firstImage;
+
+    const contentIdEl = targetEl.querySelector(".content-id");
+    const placeEl = targetEl.querySelector(".tourplace");
+    const imageEl = targetEl.querySelector(".tourplace-image");
+    const addressEl = targetEl.querySelector(".tourplace-address");
+
+    contentIdEl.value = contentId;
+    placeEl.innerHTML = title;
+    addressEl.innerHTML = address;
+
+    if (imageUrl?.trim()) {
+        const img = new Image();
+        img.src = imageUrl.trim();
+        img.width=100
+        imageEl.innerHTML = img;
+    }
 }
