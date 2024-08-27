@@ -57,5 +57,6 @@ public class CommonInterceptor implements HandlerInterceptor {
             Member member = memberUtil.getMember();
             request.setAttribute("myProfileImage", member.getProfileImage());
         }
+
     }
 }
