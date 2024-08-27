@@ -1,5 +1,7 @@
 package org.g9project4.global;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ public class Utils { // 빈의 이름 - utils
     private final MessageSource messageSource;
     private final HttpServletRequest request;
     private final DiscoveryClient discoveryClient;
+    private final ObjectMapper om;
 
     public String url(String url) {
         List<ServiceInstance> instances = discoveryClient.getInstances("front-service");
@@ -150,5 +153,15 @@ public class Utils { // 빈의 이름 - utils
         String ua = request.getHeader("User-Agent");
 
         return Objects.hash(ip, ua);
+    }
+
+    public String toJson(Object data) {
+        try {
+            return om.writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
