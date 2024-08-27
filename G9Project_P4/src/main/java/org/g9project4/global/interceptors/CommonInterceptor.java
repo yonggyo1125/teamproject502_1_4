@@ -23,7 +23,7 @@ public class CommonInterceptor implements HandlerInterceptor {
 
 
         checkDevice(request);
-        upateMemberStatus(request);
+        updateMemberStatus(request);
 
         request.setAttribute("utils", utils);
 
@@ -49,7 +49,7 @@ public class CommonInterceptor implements HandlerInterceptor {
         session.setAttribute("device", device);
     }
 
-    public void upateMemberStatus(HttpServletRequest request) {
+    public void updateMemberStatus(HttpServletRequest request) {
         request.setAttribute("loggedMember", memberUtil.getMember());
         request.setAttribute("isLogin", memberUtil.isLogin());
         request.setAttribute("isAdmin", memberUtil.isAdmin());
