@@ -179,27 +179,27 @@ function callbackCalendar(date) {
 *
 */
 function selectTourPlaceCallback(item, seq) {
-    console.log("item", item, seq);
-    if (!item || !planner.callbackTarget) return;
-    console.log(item);
+    // 팝업 닫기
+    layerPopup.close();
+
     const { contentId, title, address, firstImage, firstImage2 } = item;
-    const targetEl = planner.callbackTarget;
 
     const imageUrl = firstImage2 ? firstImage2 : firstImage;
 
-    const contentIdEl = targetEl.querySelector(`[name='content_id_${seq}']`);
-    const placeEl = targetEl.querySelector("#tourplace-" + seq);
-    const imageEl = targetEl.querySelector("#tourplace-image-" + seq);
-    const addressEl = targetEl.querySelector("#tourplace-address-" + seq);
+    const contentIdEl = document.querySelector(`[name='contentId_${seq}']`);
+        console.log("test", contentIdEl)
+    const placeEl = document.getElementById("tourplace-" + seq);
+    const imageEl = document.getElementById("tourplace-image-" + seq);
+    const addressEl = document.getElementById("tourplace-address-" + seq);
 
     contentIdEl.value = contentId;
     placeEl.innerHTML = title;
     addressEl.innerHTML = address;
 
     if (imageUrl?.trim()) {
-        const img = new Image();
-        img.src = imageUrl.trim();
-        img.width=100
-        imageEl.innerHTML = img;
+        const rootUrl = document.querySelector("meta[name='rootUrl']").content;
+        const url = `${rootUrl}tour/detail/${contentId}`;
+
+        imageEl.innerHTML = `<a href='${url}' target='_blank'><img src='${imageUrl}' width='50'></a>`;
     }
 }
