@@ -2,6 +2,7 @@ package org.g9project4.visitrecord.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @NoArgsConstructor @AllArgsConstructor
+@IdClass(VisitRecordId.class)
 public class VisitRecord {
     @Id
     private Long contentId; // 여행지 등록 번호
