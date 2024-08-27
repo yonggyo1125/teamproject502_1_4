@@ -1,5 +1,6 @@
 package org.g9project4.visitrecord.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -18,6 +19,7 @@ public class VisitRecord {
     private Long contentId; // 여행지 등록 번호
 
     @Id
+    @Column(name="_uid")
     private int uid; // 비회원(IP + User-Agent), 회원(회원번호)
 
     @Id
