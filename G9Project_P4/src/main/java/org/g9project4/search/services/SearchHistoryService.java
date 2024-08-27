@@ -6,6 +6,7 @@ import org.g9project4.member.MemberUtil;
 import org.g9project4.search.constants.SearchType;
 import org.g9project4.search.entities.QSearchHistory;
 import org.g9project4.search.entities.SearchHistory;
+import org.g9project4.search.entities.SearchHistoryId;
 import org.g9project4.search.repositories.SearchHistoryRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -23,11 +24,13 @@ public class SearchHistoryService {
             return;
         }
 
-        SearchHistory history = SearchHistory.builder()
-                .keyword(keyword)
-                .member(memberUtil.getMember())
-                .searchType(type)
-                .build();
+        SearchHistoryId searchHistoryId = new SearchHistoryId(keyword, memberUtil.getMember(), type);
+        SearchHistory history = repository.findById(searchHistoryId).orElseGet(SearchHistory::new);
+
+        history.setKeyword(keyword);
+        history.setMember(memberUtil.getMember());
+        history.setSearchType(type);
+        history.setSearchCount(history.getSearchCount() + 1L);
 
         repository.saveAndFlush(history);
     }
