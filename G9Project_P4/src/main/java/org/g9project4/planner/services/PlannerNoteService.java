@@ -32,6 +32,9 @@ public class PlannerNoteService {
         if (!StringUtils.hasText(form.getSubject())) {
             form.setSubject(planner.getTitle());
         }
+
+        String content = form.getContent();
+
     }
 
     public void commonProcess(RequestBoard form, Errors errors, Model model) {
