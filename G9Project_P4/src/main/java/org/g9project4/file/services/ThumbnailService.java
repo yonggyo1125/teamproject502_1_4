@@ -26,6 +26,15 @@ public class ThumbnailService {
             int width = form.getWidth() == null || form.getWidth() < 10 ? 10 : form.getWidth();
             int height = form.getHeight() == null || form.getHeight() < 10 ? 10 : form.getHeight();
 
+            /**
+             * Thumb이미지가 이미 존재하면 생성 X 경로만 반환
+             */
+            String thumbPath = getThumbPath(seq, url, width, height);
+            File _thumbPath = new File(thumbPath);
+            if (_thumbPath.exists()) {
+                return thumbPath;
+            }
+
             if (seq != null && seq > 0L) { // 파일 등록번호
 
             }
