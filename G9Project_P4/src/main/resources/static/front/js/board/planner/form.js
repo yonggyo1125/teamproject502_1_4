@@ -26,6 +26,25 @@ window.addEventListener("DOMContentLoaded", function() {
         frmSave.content.value = JSON.stringify(contentData);
     });
 
+    const insertEditors = document.getElementsByClassName("insert-editor");
+    for (const el of insertEditors) {
+        el.addEventListener("click", function() {
+            const editorName = this.dataset.editorName;
+            const url = this.dataset.url;
+            const imageUrls = {[editorName]: [url]};
+            insertImages(imageUrls);
+        });
+    }
+
+    const removeEls = document.querySelectorAll(".file-item .remove");
+    for (const el of removeEls) {
+       el.addEventListener("click", function() {
+           if (confirm('정말 삭제하겠습니까?')) {
+               const seq = this.dataset.seq;
+               fileManager.delete(seq);
+           }
+       });
+    }
 });
 
 function getEditor(editorName) {

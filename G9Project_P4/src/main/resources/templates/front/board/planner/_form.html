@@ -34,7 +34,7 @@
             <div class="uploaded-files" th:id="*{'uploaded-files-editor_' + seq}">
                 <div th:if="${files != null && files['editor_' + item.seq] != null}" th:each="file : ${files['editor_' + item.seq]}" class="file-item" th:id="${'file-' + file.seq}">
                     <a th:href="${@utils.redirectUrl('/file/download/' + file.seq)}" th:text="${file.fileName}"></a>
-                    <i class="xi-file-upload insert-editor" th:data-url="${file.fileUrl}"></i>
+                    <i class="xi-file-upload insert-editor" th:data-url="${file.fileUrl}" th:data-editor-name="${'editor_' + item.seq}"></i>
                     <i class="xi-close remove" th:data-seq="${file.seq}"></i>
                 </div>
             </div>
