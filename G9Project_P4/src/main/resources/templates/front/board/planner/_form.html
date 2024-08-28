@@ -3,7 +3,7 @@
 <th:block th:fragment="form" th:object="${requestBoard}">
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
     <input type="hidden" name="gid" th:field="*{gid}">
-
+    <input type="hidden" name="num1" th:field="*{num1}">
 
     <div th:replace="~{front/board/planner/_common::category}"></div>
 
