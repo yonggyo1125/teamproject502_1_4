@@ -8,8 +8,12 @@ import org.g9project4.global.configs.FileProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 @Service
@@ -19,6 +23,7 @@ public class ThumbnailService {
 
     private final FileProperties properties;
     private final FileInfoService infoService;
+    private final RestTemplate restTemplate;
 
     public String create(RequestThumb form) {
         try {
@@ -42,6 +47,13 @@ public class ThumbnailService {
             if (seq != null && seq > 0L) { // 파일 등록번호
                 FileInfo fileInfo = infoService.get(seq);
                 Thumbnails.of(fileInfo.getFilePath())
+                        .size(width, height)
+                        .toFile(thumbPath);
+            } else { // 파일 URL
+                String orgPath = String.format("%s_original", thumbPath);
+                byte[] bytes = restTemplate.getForObject(URI.create(url), byte[].class);
+                Files.write(Paths.get(orgPath), bytes);
+                Thumbnails.of(orgPath)
                         .size(width, height)
                         .toFile(thumbPath);
             }
