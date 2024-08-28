@@ -102,6 +102,7 @@ const planner = {
     addTourDoneEvent(el) {
         if (el) {
             el.addEventListener("click", function() {
+                const tr = this.parentElement.parentElement;
                 const classList = tr.classList;
                 classList.remove("done");
                 const dateEl = tr.querySelector("select");
@@ -174,8 +175,8 @@ window.addEventListener("DOMContentLoaded", function() {
 
     /* 양식 제출 처리 S */
     frmSave.addEventListener("submit", function(e) {
-
         const trs = document.querySelectorAll(".itinerary tbody tr");
+        console.log(trs);
         if (trs.length > 0) {
             const items = [];
             for (const tr of trs) {

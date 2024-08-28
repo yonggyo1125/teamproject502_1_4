@@ -166,6 +166,10 @@ public class Utils { // 빈의 이름 - utils
         return null;
     }
 
+    public Long toLong(String num) {
+        return Long.valueOf(num);
+    }
+
     public List<Map<String, String>> toList(String json) {
 
         try {
