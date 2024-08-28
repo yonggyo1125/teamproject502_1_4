@@ -57,12 +57,17 @@
                                         <option th:each="item2 : ${items}" th:value="${item2.date}" th:text="${item2.date}" th:selected="${item2.date == item.date}"></option>
                                     </select>
                                 </td>
-                                <th:block th:object="${@tourPlaceInfoService.get(item.contentId)}">
+                                <th:block th:if="${!#strings.isEmpty(item.contentId)}" th:object="${@tourPlaceInfoService.get(item.contentId)}">
                                     <td class="select-tour-place tourplace" th:id="${'tourplace-' + item.seq}" th:text="*{title}"></td>
                                     <td class="select-tour-place tourplace-image" th:id="${'tourplace-image-' + item.seq}">
-                                        <img th:if="${!#strings.isEmpty(item.firstImage)}" th:src="${@utils.getThumbUrl(item.firstImage, 50, 50)}">
+                                        <img th:if="*{!#strings.isEmpty(firstImage)}" th:src="*{@utils.getThumbUrl(firstImage, 50, 50)}">
                                     </td>
-                                    <td class="select-tour-place tourplace-address" id="tourplace-address-[seq]"></td>
+                                    <td class="select-tour-place tourplace-address" th:id="${'tourplace-address-' + item.seq}"></td>
+                                </th:block>
+                                <th:block th:if="${#strings.isEmpty(item.contentId)}">
+                                    <td class="select-tour-place tourplace" th:id="${'tourplace-' + item.seq}" th:text="#{여행지_선택}"></td>
+                                    <td class="select-tour-place tourplace-image" th:id="${'tourplace-image-' + item.seq}"></td>
+                                    <td class="select-tour-place tourplace-address" th:id="${'tourplace-address-' + item.seq}"></td>
                                 </th:block>
                                 <td>
                                     <input type="checkbox" th:name="*{'tourDone_' + seq}" value="true" th:id="*{'tour-done-' + seq}" class="tour-done" th:checked="*{#strings.equals(done, 'true')}">
