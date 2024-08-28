@@ -35,24 +35,7 @@ const planner = {
 
         // 여행 완료 체크 처리
         const tourDoneEl = tr.querySelector(".tour-done");
-        if (tourDoneEl) {
-            tourDoneEl.addEventListener("click", function() {
-                const classList = tr.classList;
-                classList.remove("done");
-                const dateEl = tr.querySelector("select");
-                if (dateEl) dateEl.removeAttribute("readonly");
-
-                const chkEl = tr.querySelector("input[name='chk']");
-                if (chkEl) chkEl.disabled = false;
-
-                if (this.checked) {
-                    classList.add("done");
-                    if (dateEl) dateEl.setAttribute("readonly", true);
-                    if (chkEl) chkEl.disabled = true;
-                }
-            });
-        }
-
+        this.addTourDoneEvent(tourDoneEl);
 
         this.getTarget().append(tr);
 
@@ -111,6 +94,29 @@ const planner = {
         let url = '/planner/select/tourplace?data=' + seq;
 
         layerPopup.open(url, 800, 600);
+    },
+    /**
+    * 여행 완료 토클 이벤트 추가
+    *
+    */
+    addTourDoneEvent(el) {
+        if (el) {
+            el.addEventListener("click", function() {
+                const classList = tr.classList;
+                classList.remove("done");
+                const dateEl = tr.querySelector("select");
+                if (dateEl) dateEl.removeAttribute("readonly");
+
+                const chkEl = tr.querySelector("input[name='chk']");
+                if (chkEl) chkEl.disabled = false;
+
+                if (this.checked) {
+                    classList.add("done");
+                    if (dateEl) dateEl.setAttribute("readonly", true);
+                    if (chkEl) chkEl.disabled = true;
+                }
+            });
+        }
     }
 };
 
@@ -185,6 +191,12 @@ window.addEventListener("DOMContentLoaded", function() {
         }
     });
     /* 양식 제출 처리 E */
+
+    // 여행 완료처리 토클 이벤트 처리
+    const tourDoneEls = document.getElementsByClassName("tour-done");
+    for (const el of tourDoneEls) {
+        planner.addTourDoneEvent(el);
+    }
 });
 
 
