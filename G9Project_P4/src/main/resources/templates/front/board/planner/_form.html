@@ -24,11 +24,12 @@
                 </div>
                 <div class="bottom">
                     <a th:href="*{@utils.redirectUrl('/tour/detail/' + contentId)}">
-                        <img th:src="*{@utils.getThumbUrl(firstImage, 350, 300)}">
+                        <img th:src="*{@utils.getThumbUrl(firstImage, 400, 350)}">
                     </a>
                 </div>
             </div>
             <textarea class="content" th:data-seq="*{seq}"></textarea>
+            <button type="button" th:text="#{이미지_업로드}" class="fileUploads" th:data-gid="${requestBoard.gid}" th:data-location="*{'editor_' + seq}" data-image-only="true"></button>
         </li>
     </ul>
 
