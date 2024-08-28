@@ -11,5 +11,8 @@
         <th:block th:replace="~{front/board/gallery/_update::update}"></th:block>
     </th:block>
 
+    <th:block th:if="${board.skin == 'planner'}">
+        <th:block th:replace="~{front/board/planner/_update::update}"></th:block>
+    </th:block>
 </main>
 </html>

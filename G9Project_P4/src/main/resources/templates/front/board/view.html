@@ -9,6 +9,10 @@
     <th:block th:if="${board.skin == 'gallery'}">
         <th:block th:if="${board.skin == 'gallery'}" th:replace="~{front/board/gallery/_view::view}"></th:block>
     </th:block>
+    <th:block th:if="${board.skin == 'planner'}">
+        <th:block th:if="${board.skin == 'planner'}" th:replace="~{front/board/planner/_view::view}"></th:block>
+    </th:block>
+
 
     <th:block th:if="${board.useComment}" th:replace="~{front/board/_comment::comment}"></th:block>
 
@@ -18,6 +22,9 @@
         </th:block>
         <th:block th:if="${board.skin == 'gallery'}">
             <th:block th:replace="~{front/board/gallery/_list_items::items}"></th:block>
+        </th:block>
+        <th:block th:if="${board.skin == 'planner'}">
+            <th:block th:replace="~{front/board/planner/_list_items::items}"></th:block>
         </th:block>
     </th:block>
 </main>

@@ -11,12 +11,19 @@
         <div th:replace="~{front/board/gallery/_common::pageTitle}"></div>
     </th:block>
 
+    <th:block th:if="${board.skin == 'planner'}">
+        <div th:replace="~{front/board/planner/_common::pageTitle}"></div>
+    </th:block>
+
     <th:block th:if="${board.skin == 'default'}">
         <th:block th:replace="~{front/board/default/_list_items::items}"></th:block>
     </th:block>
 
     <th:block th:if="${board.skin == 'gallery'}">
         <th:block th:replace="~{front/board/gallery/_list_items::items}"></th:block>
+    </th:block>
+    <th:block th:if="${board.skin == 'planner'}">
+        <th:block th:replace="~{front/board/planner/_list_items::items}"></th:block>
     </th:block>
 </main>
 </html>
