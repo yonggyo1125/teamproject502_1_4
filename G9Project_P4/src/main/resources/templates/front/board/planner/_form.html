@@ -37,8 +37,7 @@
 
 
 
-    <div class="error" th:each="err : ${#fields.errors('content')}" th:text="${err}">
-    <script th:replace="~{common/_file_tpl::attach}"></script>
+    <div class="error" th:each="err : ${#fields.errors('content')}" th:text="${err}"></div>
     <script th:replace="~{common/_file_tpl::editor}"></script>
 </th:block>
 </html>

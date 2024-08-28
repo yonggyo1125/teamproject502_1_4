@@ -29,7 +29,7 @@ function fileUploadCallback(files) {
 
     const imageUrls = {};
     for (const file of files) {
-        const { location, fileUrl } = file;
+        const { seq, location, fileName, fileUrl } = file;
         imageUrls[location] = imageUrls[location] ?? [];
         imageUrls[location].push(fileUrl);
 
