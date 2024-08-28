@@ -68,6 +68,9 @@ public class PlannerController implements ExceptionProcessor {
         commonProcess(mode, model);
 
         if (errors.hasErrors()) {
+
+
+
             return utils.tpl("planner/" + mode);
         }
 

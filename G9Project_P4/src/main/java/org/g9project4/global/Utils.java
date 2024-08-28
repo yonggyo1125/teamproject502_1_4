@@ -1,6 +1,7 @@
 package org.g9project4.global;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -161,6 +162,15 @@ public class Utils { // 빈의 이름 - utils
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+
+        return null;
+    }
+
+    public List<Map<String, String>> toList(String json) {
+
+        try {
+            return om.readValue(json, new TypeReference<>() {});
+        } catch (JsonProcessingException e) {}
 
         return null;
     }

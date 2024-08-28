@@ -5,13 +5,17 @@
         <input type="hidden" name="sDate" th:field="*{sDate}">
         <input type="hidden" name="eDate" th:field="*{eDate}">
 
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+
         <div class="planner-box">
             <div class="left">
                 <h2 th:text="#{일정_선택하기}"></h2>
-                <iframe name="ifrmCalendar" class="select-date" th:src="${@utils.redirectUrl('/calendar')}" frameborder="0"></iframe>
+                <iframe name="ifrmCalendar" class="select-date" th:src="*{@utils.redirectUrl('/calendar?sDate=' + (sDate == null ? '' : sDate)  + '&eDate=' + (eDate == null ? '' : eDate))}" frameborder="0"></iframe>
                 <div class="error" th:each="err : ${#fields.errors('sDate')}" th:text="${err}"></div>
                 <div class="error" th:each="err : ${#fields.errors('eDate')}" th:text="${err}"></div>
+
                 <button type="button" th:text="#{일정_다시_선택하기}" id="reselect-calendar"></button>
+
             </div>
             <div class="right">
                 <div class="title-wrap">
