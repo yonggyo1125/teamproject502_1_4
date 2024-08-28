@@ -1,8 +1,10 @@
 package org.g9project4.planner.services;
 
 import com.querydsl.core.BooleanBuilder;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.global.ListData;
+import org.g9project4.global.Pagination;
 import org.g9project4.global.exceptions.UnAuthorizedException;
 import org.g9project4.member.MemberUtil;
 import org.g9project4.planner.controllers.PlannerSearch;
@@ -17,6 +19,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 import static org.springframework.data.domain.Sort.Order.desc;
 
 @Service
@@ -24,6 +28,8 @@ import static org.springframework.data.domain.Sort.Order.desc;
 public class PlannerInfoService {
     private final PlannerRepository plannerRepository;
     private final MemberUtil memberUtil;
+    private final HttpServletRequest request;
+
     /**
      * 플래너 한개 조회
      *
@@ -87,9 +93,12 @@ public class PlannerInfoService {
 
         Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
         Page<Planner> data = plannerRepository.findAll(andBuilder, pageable);
+        Pagination pagination = new Pagination(page, (int)data.getTotalElements(), 10, limit, request);
 
+        List<Planner> items = data.getContent();
+        items.forEach(this::addInfo);
 
-        return null;
+        return new ListData<>(items, pagination);
     }
 
     private void addInfo(Planner item) {
