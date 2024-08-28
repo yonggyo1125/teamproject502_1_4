@@ -45,7 +45,29 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            <tr th:if="${items == null || items.empty}">
+                                <td colspan="6" th:text="#{여행일정을_작성하세요}"></td>
+                            </tr>
+                            <tr th:unless="${items == null || items.empty}" th:each="item : ${items}" th:object="${item}" th:id="*{'item-' + seq}" th:data-seq="*{seq}">
+                                <td>
+                                    <input type="checkbox" name="chk" th:value="*{seq}" th:id="*{'chk-' + seq}">
+                                    <label th:for="*{'chk-' + seq}"></label>
+                                    <input type="hidden" th:name="*{'contentId_' + seq}" class="content-id">
+                                </td>
+                                <td>
+                                    <select name="date_[seq]" id="tour-date-[seq]">
+                                        <option value="" th:text="#{일정_선택}"></option>
+                                        [dates]
+                                    </select>
+                                </td>
+                                <td class="select-tour-place tourplace" id="tourplace-[seq]">여행지 선택</td>
+                                <td class="select-tour-place tourplace-image" id="tourplace-image-[seq]"></td>
+                                <td class="select-tour-place tourplace-address" id="tourplace-address-[seq]"></td>
+                                <td>
+                                    <input type="checkbox" name="tourDone_[seq]" value="true" id="tour-done-[seq]" class="tour-done">
+                                    <label for="tour-done-[seq]"></label>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <div class="error" th:each="err: ${#fields.errors('itinerary')}" th:text="${err}"></div>
