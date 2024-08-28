@@ -39,8 +39,12 @@ const planner = {
             tourDoneEl.addEventListener("click", function() {
                 const classList = tr.classList;
                 classList.remove("done");
+                const dateEl = tr.querySelector("select");
+                if (dateEl) dateEl.removeAttribute("readonly");
+
                 if (this.checked) {
                     classList.add("done");
+                    if (dateEl) dateEl.setAttribute("readonly", true);
                 }
             });
         }
@@ -95,6 +99,11 @@ const planner = {
     },
     // 여행지 선택
     selectTourPlace(seq) {
+        const tr = document.getElementById(`item-${seq}`);
+        if (tr && tr.classList.contains("done")) { // 여행완료 체크된 경우 여행지 선택 팝업 X
+            return;
+        }
+
         let url = '/planner/select/tourplace?data=' + seq;
 
         layerPopup.open(url, 800, 600);

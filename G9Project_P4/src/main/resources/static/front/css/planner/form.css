@@ -8,3 +8,7 @@
 .planner-box .title-wrap dt { margin-right: 20px; }
 .planner-box .title-wrap dd { flex-grow: 1; }
 .planner-box .title-wrap input[type='text'] { width: 100%; height: 45px; border: 1px solid #ccc; border-radius: 3px; }
+.planner-box tr.done {
+    text-decoration:  line-through;
+    background: #ccc;
+}
