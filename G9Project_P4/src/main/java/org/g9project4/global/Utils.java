@@ -164,4 +164,12 @@ public class Utils { // 빈의 이름 - utils
 
         return null;
     }
+
+    public String getThumbUrl(Long seq, int width, int height) {
+        return String.format("%s?seq=%d&width=%d&height=%d", url("/file/thumb"), seq, width, height);
+    }
+
+    public String getThumbUrl(String url, int width, int height) {
+        return String.format("%s?url=%s&width=%d&height=%d", url("/file/thumb"), url, width, height);
+    }
 }
