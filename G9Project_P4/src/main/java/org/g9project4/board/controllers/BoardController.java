@@ -105,6 +105,11 @@ public class BoardController implements ExceptionProcessor {
         mode = mode != null && StringUtils.hasText(mode.trim()) ? mode.trim() : "write";
         commonProcess(form.getBid(), mode, model);
 
+        // 여행 플래너 공통 처리
+        if (form.getBid().equals("planner_note")) {
+            plannerNoteService.commonProcess(form, errors, model);
+        }
+
         boolean isGuest = (mode.equals("write") && !memberUtil.isLogin());
         if (mode.equals("update")) {
             BoardData data = (BoardData)model.getAttribute("boardData");
