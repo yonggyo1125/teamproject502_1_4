@@ -168,7 +168,6 @@ window.addEventListener("DOMContentLoaded", function() {
 
     /* 양식 제출 처리 S */
     frmSave.addEventListener("submit", function(e) {
-        e.preventDefault();
 
         const trs = document.querySelectorAll(".itinerary tbody tr");
         if (trs.length > 0) {
