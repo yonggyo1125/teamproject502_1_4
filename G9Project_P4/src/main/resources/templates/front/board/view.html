@@ -13,9 +13,9 @@
         <th:block th:if="${board.skin == 'planner'}" th:replace="~{front/board/planner/_view::view}"></th:block>
     </th:block>
 
-
-    <th:block th:if="${board.useComment}" th:replace="~{front/board/_comment::comment}"></th:block>
-
+    <th:block th:if="${board.useComment}">
+        <th:block th:replace="~{front/board/_comment::comment}"></th:block>
+    </th:block>
     <th:block th:if="${board.showListBelowView}">
         <th:block th:if="${board.skin == 'default'}">
             <th:block th:replace="~{front/board/default/_list_items::items}"></th:block>

@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="comment">
+    <th:block th:if="${board.skin == 'default'}">
+        <th:block th:replace="~{front/board/default/_comment::comment}"></th:block>
+    </th:block>
 
-    <th:block th:if="${board.skin == 'default'}" th:replace="~{front/board/default/_comment::comment}"></th:block>
-
-    <th:block th:if="${board.skin == 'gallery'}" th:replace="~{front/board/gallery/_comment::comment}"></th:block>
-
-    <th:block th:if="${board.skin == 'planner'}" th:replace="~{front/board/planner/_comment::comment}"></th:block>
+    <th:block th:if="${board.skin == 'gallery'}">
+        <th:block th:replace="~{front/board/gallery/_comment::comment}"></th:block>
+    </th:block>
+    <th:block th:if="${board.skin == 'planner'}">
+        <th:block th:replace="~{front/board/planner/_comment::comment}"></th:block>
+    </th:block>
 </th:block>
 </html>
