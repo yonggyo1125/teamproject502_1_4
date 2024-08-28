@@ -33,6 +33,19 @@ const planner = {
             });
         }
 
+        // 여행 완료 체크 처리
+        const tourDoneEl = tr.querySelector(".tour-done");
+        if (tourDoneEl) {
+            tourDoneEl.addEventListener("click", function() {
+                const classList = tr.classList;
+                classList.remove("done");
+                if (this.checked) {
+                    classList.add("done");
+                }
+            });
+        }
+
+
         this.getTarget().append(tr);
 
     },
