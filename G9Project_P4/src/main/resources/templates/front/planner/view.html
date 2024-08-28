@@ -3,7 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content" th:object="${data}">
-    [[${data}]]
     <h1 th:text="*{title}"></h1>
     <dl>
         <dt th:text="#{여행기간}"></dt>
@@ -14,7 +13,20 @@
     </dl>
     <dl>
         <dt th:text="#{여행일정}"></dt>
-        <dd></dd>
+        <dd>
+            <ul th:if="*{itineraries != null && !itineraries.empty}" th:each="item : *{itineraries}" th:object="${item}">
+                <li>
+                    <a th:if="*{!#strings.isEmpty(firstImage)}" th:href="*{@utils.redirectUrl('/tour/detail/' + seq)}" class="photo">
+                        <img th:src="*{@utils.getThumbUrl(firstImage, 100, 80)}">
+                    </a>
+                    <div class="tour-info">
+                        <div class="title" th:text="*{title}"></div>
+                        <div class="address" th:text="*{address}"></div>
+                        <div class="tour-done" th:text="*{#strings.equals(done, true)? #messages.msg('여행완료'):#messages.msg('여행중')}"></div>
+                    </div>
+                </li>
+            </ul>
+        </dd>
     </dl>
 </main>
 </html>
