@@ -45,9 +45,10 @@ public class PlannerNoteService {
         }
 
         String content = form.getContent();
+        Map<String, List<FileInfo>> files = new HashMap<>();
         if (StringUtils.hasText(content)) {
             Map<String, String> contents = utils.toMap(content);
-            Map<String, List<FileInfo>> files = new HashMap<>();
+
             for (Map.Entry<String, String> entry : contents.entrySet()) {
                 String key = entry.getKey();
                 String location = "editor_" + key.split("_")[1];
@@ -56,9 +57,8 @@ public class PlannerNoteService {
             }
 
             model.addAttribute("contents", contents);
-            model.addAttribute("files", files);
         }
-
+        model.addAttribute("files", files);
 
     }
 
