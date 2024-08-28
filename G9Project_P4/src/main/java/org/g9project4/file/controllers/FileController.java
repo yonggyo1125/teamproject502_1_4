@@ -86,7 +86,7 @@ public class FileController implements RestExceptionProcessor {
     }
 
     @GetMapping("/thumb")
-    public void thumb() {
+    public void thumb(RequestThumb form) {
 
     }
 }
