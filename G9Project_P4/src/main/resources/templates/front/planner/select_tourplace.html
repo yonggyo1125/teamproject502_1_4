@@ -9,7 +9,7 @@
         <li th:if="${items == null || items.empty}" th:text="#{조회된_여행지가_없습니다.}"></li>
         <li th:unless="${items == null || items.empty}" th:each="item : ${items}" th:object="${item}">
             <div th:if="*{firstImage2}" class="photo">
-                <img width='150' th:src="*{firstImage2}" th:alt="*{title}">
+                <img th:src="*{@utils.getThumbUrl(firstImage, 100, 60)}" th:alt="*{title}">
             </div>
             <div class="tour-info">
                 <div th:text="*{title}"></div>
