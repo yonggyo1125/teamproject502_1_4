@@ -3,6 +3,24 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
-    <h1 th:text="#{나의_플래너_목록}"></h1>
+    <h1 th:text="#{나의_여행_플래너_목록}"></h1>
+    <form name="frmSearch" method="GET" th:action="${@utils.redirectUrl('/planner/list')}" autocomplete="off" th:object="${plannerSearch}">
+        <input type="text" name="skey" th:field="*{skey}" th:placeholder="#{검색어를_입력하세요.}">
+        <button type="submit" th:text="#{검색하기}"></button>
+    </form>
+
+    <ul>
+        <li th:if="${items == null || items.empty}" th:text="#{조회된_플래너가_없습니다.}" class="no-data"></li>
+        <li th:unless="${items == null || items.empty}" th:each="item : ${items}" th:object="${item}">
+            <a th:href="*{@utils.redirectUrl('/planner/view/' + seq)}" th:text="*{title}"></a>
+
+            <div class="planner-info">
+                <span th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></span>
+                <a th:href="*{@utils.redirectUrl('/board/write/planner_note?num1=' + seq)}" th:text="#{노트작성}"></a>
+            </div>
+        </li>
+    </ul>
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </main>
 </html>
