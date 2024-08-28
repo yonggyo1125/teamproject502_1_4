@@ -13,6 +13,21 @@ window.addEventListener("DOMContentLoaded", function() {
             }
         })();
     }
+
+
+    frmSave.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const items = document.getElementsByClassName("content");
+        const contentData = {};
+        for (const el of items) {
+            const seq = el.dataset.seq;
+            contentData[`content_${seq}`] = el.value;
+        }
+
+        frmSave.content.value = JSON.stringify(contentData);
+    });
+
 });
 
 function getEditor(editorName) {
@@ -46,11 +61,32 @@ function fileUploadCallback(files) {
         target.append(el);
         const insertEditorEl = el.querySelector(".insert-editor");
         if (insertEditorEl) {
-            insertEditorEl.addEventListener("click", (e) => insertEditor(location, e.currentTarget.dataset.url));
+            insertEditorEl.addEventListener("click", (e) => insertImages({[location]: [e.currentTarget.dataset.url]}));
         }
+
+        // 파일 삭제 이벤트 처리
+        const removeEl = el.querySelector(".remove");
+        removeEl.addEventListener("click", () => {
+            if (confirm('정말 삭제하겠습니까?')) {
+                fileManager.delete(seq);
+            }
+        });
     }
 
     insertImages(imageUrls);
+}
+
+/**
+* 파일 삭제 후속 처리
+*
+*/
+function fileDeleteCallback(file) {
+    if (!file) return;
+
+    const { seq } = file;
+
+    const el = document.getElementById(`file-${seq}`);
+    el.parentElement.removeChild(el);
 }
 
 function insertImages(imageUrls) {
