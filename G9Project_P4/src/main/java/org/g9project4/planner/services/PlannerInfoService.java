@@ -1,7 +1,9 @@
 package org.g9project4.planner.services;
 
 import lombok.RequiredArgsConstructor;
+import org.g9project4.global.ListData;
 import org.g9project4.planner.entities.Planner;
+import org.g9project4.planner.exceptions.PlannerNotFoundException;
 import org.g9project4.planner.repositories.PlannerRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,10 @@ public class PlannerInfoService {
         addInfo(planner);
 
         return planner;
+    }
 
+    public ListData<Planner> getList() {
+        return null;
     }
 
     private void addInfo(Planner item) {
