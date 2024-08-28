@@ -15,9 +15,7 @@ window.addEventListener("DOMContentLoaded", function() {
     }
 
 
-    frmSave.addEventListener("submit", function(e) {
-        e.preventDefault();
-
+    frmSave.addEventListener("submit", function() {
         const items = document.getElementsByClassName("content");
         const contentData = {};
         for (const el of items) {
