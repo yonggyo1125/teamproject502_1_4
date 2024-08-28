@@ -122,26 +122,27 @@ public class PlannerInfoService {
         String itinerary = item.getItinerary();
         if (StringUtils.hasText(itinerary)) {
             List<Map<String, String>> items = utils.toList(itinerary);
-
             List<Long> contentIds = items.stream()
-                    .filter(d -> !StringUtils.hasText(d.get("contentId")))
+                    .filter(d -> StringUtils.hasText(d.get("contentId")))
                     .map(d -> Long.valueOf(d.get("contentId")))
                     .toList();
 
             List<TourPlace> tourPlaces = tourPlaceRepository.findAllById(contentIds);
-            for (Map<String, String> data : items) {
-                tourPlaces.forEach(d -> {
-                   String _contentId = data.get("contentId");
-                   if (!StringUtils.hasText(_contentId)) return;
+            for (int i = 0; i < items.size(); i++) {
+                Map<String, String> data = items.get(i);
+                String _contentId = data.get("contentId");
+                if (!StringUtils.hasText(_contentId)) return;
+                Long contentId = Long.valueOf(_contentId);
 
-                   Long contentId = Long.valueOf(_contentId);
-                   if (d.getContentId().equals(contentId)) {
-                       data.put("title", d.getTitle());
-                       data.put("address", d.getAddress());
-                       data.put("firstImage", d.getFirstImage());
-                       data.put("firstImage2", d.getFirstImage2());
+                for (TourPlace tourPlace : tourPlaces) {
+                   if (tourPlace.getContentId().equals(contentId)) {
+                       data.put("title", tourPlace.getTitle());
+                       data.put("address", tourPlace.getAddress());
+                       data.put("firstImage", tourPlace.getFirstImage());
+                       data.put("firstImage2", tourPlace.getFirstImage2());
+                       items.set(i, data);
                    }
-                });
+                }
             }
 
             item.setItineraries(items);
