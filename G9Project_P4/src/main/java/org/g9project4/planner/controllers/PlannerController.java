@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.ExceptionProcessor;
+import org.g9project4.planner.entities.Planner;
+import org.g9project4.planner.services.PlannerInfoService;
 import org.g9project4.planner.services.PlannerSaveService;
 import org.g9project4.publicData.tour.controllers.TourPlaceSearch;
 import org.g9project4.publicData.tour.entities.TourPlace;
@@ -25,7 +27,9 @@ import java.util.Map;
 public class PlannerController implements ExceptionProcessor {
 
     private final PlannerSaveService saveService;
+    private final PlannerInfoService infoService;
     private final TourPlaceInfoService tourPlaceInfoService;
+
     private final Utils utils;
     
     @ModelAttribute("pageTitle")
@@ -55,6 +59,15 @@ public class PlannerController implements ExceptionProcessor {
     public String update(@PathVariable("seq") Long seq, Model model) {
         commonProcess(seq, "update", model);
 
+        RequestPlanner form = infoService.getForm(seq);
+
+        String item = form.getItinerary();
+        if (StringUtils.hasText(item)) {
+            List<Map<String, String>> items = utils.toList(item);
+            model.addAttribute("items", items);
+        }
+
+        model.addAttribute("requestPlanner", form);
         return utils.tpl("planner/update");
     }
 
@@ -91,8 +104,13 @@ public class PlannerController implements ExceptionProcessor {
      * @return
      */
     @GetMapping
-    public String list(Model model) {
+    public String list(@ModelAttribute PlannerSearch search, Model model) {
         commonProcess("list", model);
+
+        ListData<Planner> data = infoService.getList(search);
+
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
 
         return utils.tpl("planner/list");
     }
@@ -106,6 +124,9 @@ public class PlannerController implements ExceptionProcessor {
     @GetMapping("/view/{seq}")
     public String view(@PathVariable("seq") Long seq, Model model) {
         commonProcess(seq, "view", model);
+
+        Planner data = infoService.get(seq);
+        model.addAttribute("data", data);
 
         return utils.tpl("planner/view");
     }

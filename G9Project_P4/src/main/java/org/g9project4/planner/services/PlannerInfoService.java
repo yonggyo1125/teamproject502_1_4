@@ -8,10 +8,12 @@ import org.g9project4.global.Pagination;
 import org.g9project4.global.exceptions.UnAuthorizedException;
 import org.g9project4.member.MemberUtil;
 import org.g9project4.planner.controllers.PlannerSearch;
+import org.g9project4.planner.controllers.RequestPlanner;
 import org.g9project4.planner.entities.Planner;
 import org.g9project4.planner.entities.QPlanner;
 import org.g9project4.planner.exceptions.PlannerNotFoundException;
 import org.g9project4.planner.repositories.PlannerRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +31,7 @@ public class PlannerInfoService {
     private final PlannerRepository plannerRepository;
     private final MemberUtil memberUtil;
     private final HttpServletRequest request;
+    private final ModelMapper modelMapper;
 
     /**
      * 플래너 한개 조회
@@ -59,6 +62,14 @@ public class PlannerInfoService {
         addInfo(item);
 
         return item;
+    }
+
+    public RequestPlanner getForm(Long seq) {
+        Planner item = get(seq);
+        RequestPlanner form = modelMapper.map(item, RequestPlanner.class);
+        form.setMode("update");
+
+        return form;
     }
 
     public ListData<Planner> getList(PlannerSearch search) {
