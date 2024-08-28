@@ -55,6 +55,11 @@ const commonLib = {
         if(!ClassicEditor || !id?.trim()) return;
 
         return ClassicEditor.create(document.getElementById(id.trim()), {});
+    },
+    editorLoadByDOM(el) {
+        if(!ClassicEditor || !el) return;
+
+        return ClassicEditor.create(el, {});
     }
 };
 

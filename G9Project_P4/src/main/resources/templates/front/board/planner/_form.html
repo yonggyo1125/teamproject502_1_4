@@ -15,11 +15,24 @@
         </dd>
     </dl>
 
-    <ul th>
-
+    <ul th:if="${planner.itineraries != null && !planner.itineraries.empty}">
+        <li th:each="item : ${planner.itineraries}" th:object="${item}">
+            <div class="tour-info">
+                <div class="top">
+                    <div class="title" th:text="*{title}"></div>
+                    <div class="date" th:text="*{date}"></div>
+                </div>
+                <div class="bottom">
+                    <a th:href="*{@utils.redirectUrl('/tour/detail/' + contentId)}">
+                        <img th:src="*{@utils.getThumbUrl(firstImage, 350, 300)}">
+                    </a>
+                </div>
+            </div>
+            <textarea class="content" th:data-seq="*{seq}"></textarea>
+        </li>
     </ul>
 
-    [[${planner}]]
+
 
     <div class="error" th:each="err : ${#fields.errors('content')}" th:text="${err}">
     <script th:replace="~{common/_file_tpl::attach}"></script>

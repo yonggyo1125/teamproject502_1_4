@@ -42,5 +42,5 @@ public class Member extends BaseEntity implements Serializable {
     private transient List<Planner> planners;
 
     @Transient
-    private FileInfo profileImage;
+    private transient FileInfo profileImage;
 }
