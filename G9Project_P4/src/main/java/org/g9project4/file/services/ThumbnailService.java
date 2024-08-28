@@ -1,6 +1,7 @@
 package org.g9project4.file.services;
 
 import lombok.RequiredArgsConstructor;
+import net.coobird.thumbnailator.Thumbnails;
 import org.g9project4.file.controllers.RequestThumb;
 import org.g9project4.file.entities.FileInfo;
 import org.g9project4.global.configs.FileProperties;
@@ -31,14 +32,21 @@ public class ThumbnailService {
              */
             String thumbPath = getThumbPath(seq, url, width, height);
             File _thumbPath = new File(thumbPath);
+            if (_thumbPath == null)
+                return null;
+
             if (_thumbPath.exists()) {
                 return thumbPath;
             }
 
             if (seq != null && seq > 0L) { // 파일 등록번호
-
+                FileInfo fileInfo = infoService.get(seq);
+                Thumbnails.of(fileInfo.getFilePath())
+                        .size(width, height)
+                        .toFile(thumbPath);
             }
 
+            return thumbPath;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,7 +55,7 @@ public class ThumbnailService {
     }
 
     public String getThumbPath(Long seq, String url, int width, int height) {
-        if (seq == null && !StringUtils.hasText(url)) {
+        if ((seq == null || seq < 1L) && !StringUtils.hasText(url)) {
             return null;
         }
 

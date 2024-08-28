@@ -1,5 +1,6 @@
 package org.g9project4.file.controllers;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.file.entities.FileInfo;
@@ -10,10 +11,13 @@ import org.g9project4.global.exceptions.RestExceptionProcessor;
 import org.g9project4.global.rests.JSONData;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
+import java.nio.file.Files;
 import java.util.List;
 
 @RestController
@@ -27,7 +31,9 @@ public class FileController implements RestExceptionProcessor {
     private final FileDeleteService deleteService;
     private final BeforeFileUploadProcess beforeProcess;
     private final AfterFileUploadProcess afterProcess;
+    private final ThumbnailService thumbnailService;
     private final Utils utils;
+
 
     @PostMapping("/upload")
     public ResponseEntity<JSONData> upload(@RequestPart("file") MultipartFile[] files,
@@ -86,7 +92,22 @@ public class FileController implements RestExceptionProcessor {
     }
 
     @GetMapping("/thumb")
-    public void thumb(RequestThumb form) {
+    public void thumb(RequestThumb form, HttpServletResponse response) {
+        String path = thumbnailService.create(form);
+        if (!StringUtils.hasText(path)) {
+            return;
+        }
 
+        File file = new File(path);
+        try (FileInputStream fis = new FileInputStream(file);
+            BufferedInputStream bis = new BufferedInputStream(fis)) {
+            String contentType = Files.probeContentType(file.toPath());
+            response.setHeader("Content-Type", contentType);
+            OutputStream out = response.getOutputStream();
+            out.write(bis.readAllBytes());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
