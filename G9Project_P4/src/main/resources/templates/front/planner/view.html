@@ -20,7 +20,14 @@
                         <img th:src="*{@utils.getThumbUrl(firstImage, 100, 80)}">
                     </a>
                     <div class="tour-info">
-                        <div class="title" th:text="*{title}"></div>
+                        <dl class="title">
+                           <dt th:text="#{여행지}"></dt>
+                            <dd th:text="*{title}"></dd>
+                        </dl>
+                        <dl>
+                            <dt th:text="#{여행일}"></dt>
+                            <dd th:text="*{date}"></dd>
+                        </dl>
                         <div class="address" th:text="*{address}"></div>
                         <div class="tour-done" th:text="*{#strings.equals(done, true)? #messages.msg('여행완료'):#messages.msg('여행중')}"></div>
                     </div>
@@ -28,5 +35,12 @@
             </ul>
         </dd>
     </dl>
+    <div class="links">
+        <a th:href="${@utils.redirectUrl('/planner')}" th:text="#{플래너_목록}"></a>
+        <a th:href="${@utils.redirectUrl('/planner/write')}" th:text="#{플래너_작성}"></a>
+        <a th:href="*{@utils.redirectUrl('/planner/update/' + seq}" th:text="#{플래너_수정}"></a>
+        <a th:href="*{@utils.redirectUrl('/planner/delete/' + seq}" th:text="#{플래너_삭제}" onclick="return confirm('정말 삭제하겠습니까?');"></a>
+
+    </div>
 </main>
 </html>
