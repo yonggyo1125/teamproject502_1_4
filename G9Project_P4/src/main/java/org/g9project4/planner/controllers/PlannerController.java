@@ -164,19 +164,24 @@ public class PlannerController implements ExceptionProcessor {
         List<String> addCommonScript = new ArrayList<>();
         List<String> addScript = new ArrayList<>();
         addCss.add("planner/style");
-
+        
+        String pageTitle = utils.getMessage("여행_플래너");
         // 플래너 작성, 수정
         if (List.of("write", "update").contains(mode)) {
             addCss.add("planner/form");
             addScript.add("planner/form");
+            pageTitle += " " + utils.getMessage(mode.equals("update")?"수정":"작성");
         } else if (mode.equals("select_tourplace")) { // 여행지 선택
             addCss.add("planner/select_tourplace");
             addScript.add("planner/select_tourplace");
+        } else if (mode.equals("list")) {
+            pageTitle = utils.getMessage("나의_여행_플래너_목록");
         }
 
         model.addAttribute("addCss", addCss);
         model.addAttribute("addCommonScript", addCommonScript);
         model.addAttribute("addScript", addScript);
+        model.addAttribute("pageTitle", pageTitle);
     }
 
     /**
