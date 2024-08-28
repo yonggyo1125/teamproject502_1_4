@@ -28,9 +28,14 @@
                     </a>
                 </div>
             </div>
-            <textarea class="content" th:data-seq="*{seq}"></textarea>
+            <textarea class="content" th:data-seq="*{seq}" th:value="${contents == null || contents['content_' + seq] == null ? '': contents['content_' + seq]}"></textarea>
             <button type="button" th:text="#{이미지_업로드}" class="fileUploads" th:data-gid="${requestBoard.gid}" th:data-location="*{'editor_' + seq}" data-image-only="true"></button>
             <div class="uploaded-files" th:id="*{'uploaded-files-editor_' + seq}">
+                <div th:if="${files != null && files['editor_' + seq]}" th:each="file : ${files['editor_' + seq]}" class="file-item" th:id="${'file-' + file.seq}">
+                    <a th:href="${@utils.redirectUrl('/file/download/' + file.seq)}" th:text="${file.fileName}"></a>
+                    <i class="xi-file-upload insert-editor" th:data-url="${file.fileUrl}"></i>
+                    <i class="xi-close remove" th:data-seq="${file.seq}"></i>
+                </div>
             </div>
         </li>
     </ul>
