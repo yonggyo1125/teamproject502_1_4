@@ -24,11 +24,30 @@ function getEditor(editorName) {
 function fileUploadCallback(files) {
     if (!files || files.length === 0) return;
 
+    const editorTpl = document.getElementById("editor-file-tpl").innerHTML;
+    const domParser = new DOMParser();
+
     const imageUrls = {};
     for (const file of files) {
         const { location, fileUrl } = file;
         imageUrls[location] = imageUrls[location] ?? [];
         imageUrls[location].push(fileUrl);
+
+        const target = document.getElementById(`uploaded-files-${location}`);
+        let html = editorTpl;
+
+        html = html.replace(/\[seq\]/g, seq)
+                    .replace(/\[fileName\]/g, fileName)
+                    .replace(/\[fileUrl\]/g, fileUrl);
+
+        const dom = domParser.parseFromString(html, "text/html");
+        const el = dom.querySelector(".file-item");
+
+        target.append(el);
+        const insertEditorEl = el.querySelector(".insert-editor");
+        if (insertEditorEl) {
+            insertEditorEl.addEventListener("click", (e) => insertEditor(location, e.currentTarget.dataset.url));
+        }
     }
 
     insertImages(imageUrls);

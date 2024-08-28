@@ -30,6 +30,8 @@
             </div>
             <textarea class="content" th:data-seq="*{seq}"></textarea>
             <button type="button" th:text="#{이미지_업로드}" class="fileUploads" th:data-gid="${requestBoard.gid}" th:data-location="*{'editor_' + seq}" data-image-only="true"></button>
+            <div class="uploaded-files" th:id="*{'uploaded-files-editor_' + seq}">
+            </div>
         </li>
     </ul>
 
