@@ -42,9 +42,13 @@ const planner = {
                 const dateEl = tr.querySelector("select");
                 if (dateEl) dateEl.removeAttribute("readonly");
 
+                const chkEl = tr.querySelector("input[name='chk']");
+                if (chkEl) chkEl.disabled = false;
+
                 if (this.checked) {
                     classList.add("done");
                     if (dateEl) dateEl.setAttribute("readonly", true);
+                    if (chkEl) chkEl.disabled = true;
                 }
             });
         }
@@ -161,6 +165,23 @@ window.addEventListener("DOMContentLoaded", function() {
         });
     }
     // 여행지 선택 하기 E
+
+    /* 양식 제출 처리 S */
+    frmSave.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const trs = document.querySelectorAll(".itinerary tr");
+        if (trs.length > 0) {
+            const items = [];
+            for (const tr of trs) {
+                const seq = tr.dataset.seq;
+                const date = tr.querySelector("select").value;
+                const contentId = tr.querySelector(".content-id").value;
+                const done = tr.querySelector(".done").checked;
+            }
+        }
+    });
+    /* 양식 제출 처리 E */
 });
 
 
