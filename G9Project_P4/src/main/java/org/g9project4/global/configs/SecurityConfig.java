@@ -58,7 +58,7 @@ public class SecurityConfig {
         /* 로그인, 로그아웃 E */
         /* 인가(접근 통제) 설정 S*/
         http.authorizeRequests(authorizeRequests -> {
-            authorizeRequests.requestMatchers("/mypage/**").authenticated()//회원 전용
+            authorizeRequests.requestMatchers("/mypage/**", "/planner/**").authenticated()//회원 전용
                     .anyRequest().permitAll();
         });
         http.exceptionHandling(c -> {
