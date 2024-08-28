@@ -15,6 +15,7 @@ import org.g9project4.search.constants.SearchType;
 @NoArgsConstructor
 @AllArgsConstructor
 @IdClass(SearchHistoryId.class)
+@Table(indexes=@Index(name="idx_search_history_viewcount", columnList = "viewCount DESC"))
 public class SearchHistory extends BaseEntity {
     @Id
     private String keyword;

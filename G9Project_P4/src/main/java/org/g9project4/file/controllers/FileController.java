@@ -84,4 +84,9 @@ public class FileController implements RestExceptionProcessor {
 
         return new JSONData(items);
     }
+
+    @GetMapping("/thumb")
+    public void thumb() {
+
+    }
 }
