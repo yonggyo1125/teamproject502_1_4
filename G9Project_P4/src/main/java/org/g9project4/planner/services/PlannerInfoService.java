@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Pagination;
+import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.UnAuthorizedException;
 import org.g9project4.member.MemberUtil;
 import org.g9project4.planner.controllers.PlannerSearch;
@@ -13,6 +14,8 @@ import org.g9project4.planner.entities.Planner;
 import org.g9project4.planner.entities.QPlanner;
 import org.g9project4.planner.exceptions.PlannerNotFoundException;
 import org.g9project4.planner.repositories.PlannerRepository;
+import org.g9project4.publicData.tour.entities.TourPlace;
+import org.g9project4.publicData.tour.repositories.TourPlaceRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.data.domain.Sort.Order.desc;
 
@@ -29,9 +33,11 @@ import static org.springframework.data.domain.Sort.Order.desc;
 @RequiredArgsConstructor
 public class PlannerInfoService {
     private final PlannerRepository plannerRepository;
+    private final TourPlaceRepository tourPlaceRepository;
     private final MemberUtil memberUtil;
     private final HttpServletRequest request;
     private final ModelMapper modelMapper;
+    private final Utils utils;
 
     /**
      * 플래너 한개 조회
@@ -113,6 +119,32 @@ public class PlannerInfoService {
     }
 
     private void addInfo(Planner item) {
+        String itinerary = item.getItinerary();
+        if (StringUtils.hasText(itinerary)) {
+            List<Map<String, String>> items = utils.toList(itinerary);
 
+            List<Long> contentIds = items.stream()
+                    .filter(d -> !StringUtils.hasText(d.get("contentId")))
+                    .map(d -> Long.valueOf(d.get("contentId")))
+                    .toList();
+
+            List<TourPlace> tourPlaces = tourPlaceRepository.findAllById(contentIds);
+            for (Map<String, String> data : items) {
+                tourPlaces.forEach(d -> {
+                   String _contentId = data.get("contentId");
+                   if (!StringUtils.hasText(_contentId)) return;
+
+                   Long contentId = Long.valueOf(_contentId);
+                   if (d.getContentId().equals(contentId)) {
+                       data.put("title", d.getTitle());
+                       data.put("address", d.getAddress());
+                       data.put("firstImage", d.getFirstImage());
+                       data.put("firstImage2", d.getFirstImage2());
+                   }
+                });
+            }
+
+            item.setItineraries(items);
+        }
     }
 }

@@ -4,7 +4,8 @@
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
     <h1 th:text="#{나의_여행_플래너_목록}"></h1>
-    <form name="frmSearch" method="GET" th:action="${@utils.redirectUrl('/planner/list')}" autocomplete="off" th:object="${plannerSearch}">
+    <a th:href="${@utils.redirectUrl('/planner/write')}" th:text="#{플래너_작성}"></a>
+    <form name="frmSearch" method="GET" th:action="${@utils.redirectUrl('/planner')}" autocomplete="off" th:object="${plannerSearch}">
         <input type="text" name="skey" th:field="*{skey}" th:placeholder="#{검색어를_입력하세요.}">
         <button type="submit" th:text="#{검색하기}"></button>
     </form>

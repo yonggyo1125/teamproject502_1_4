@@ -2,7 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content">
-
+<main layout:fragment="content" th:object="${data}">
+    <h1 th:text="*{title}"></h1>
+    <dl>
+        <dt th:text="#{여행기간}"></dt>
+        <dd>
+            <th:block th:text="*{#temporals.format(sDate, 'yyyy.MM.dd')}"></th:block> ~
+            <th:block th:text="*{#temporals.format(eDate, 'yyyy.MM.dd')}"></th:block>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{여행일정}"></dt>
+        <dd></dd>
+    </dl>
 </main>
 </html>

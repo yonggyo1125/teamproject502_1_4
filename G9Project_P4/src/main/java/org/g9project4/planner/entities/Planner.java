@@ -9,6 +9,8 @@ import org.g9project4.global.entities.BaseEntity;
 import org.g9project4.member.entities.Member;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 @Data
 @Entity
@@ -34,4 +36,7 @@ public class Planner extends BaseEntity {
     @Lob
     @Column(nullable = false)
     private String itinerary; // 여행일정
+
+    @Transient
+    public List<Map<String, String>> itineraries;
 }
