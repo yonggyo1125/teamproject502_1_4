@@ -14,6 +14,7 @@ import org.g9project4.publicData.tour.constants.ContentType;
 import org.g9project4.publicData.tour.controllers.TourPlaceSearch;
 import org.g9project4.publicData.tour.entities.QTourPlace;
 import org.g9project4.publicData.tour.entities.TourPlace;
+import org.g9project4.publicData.tour.exceptions.TourPlaceNotFoundException;
 import org.g9project4.publicData.tour.repositories.TourPlaceRepository;
 import org.g9project4.search.constants.SearchType;
 import org.g9project4.search.services.SearchHistoryService;
@@ -76,6 +77,12 @@ public class TourPlaceInfoService {
         return null;
     }
     */
+
+    public TourPlace get(Long contentId) {
+        TourPlace item = repository.findById(contentId).orElseThrow(TourPlaceNotFoundException::new);
+
+        return item;
+    }
 
     public ListData<TourPlace> getTotalList(TourPlaceSearch search) {
 
