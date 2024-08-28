@@ -170,15 +170,19 @@ window.addEventListener("DOMContentLoaded", function() {
     frmSave.addEventListener("submit", function(e) {
         e.preventDefault();
 
-        const trs = document.querySelectorAll(".itinerary tr");
+        const trs = document.querySelectorAll(".itinerary tbody tr");
         if (trs.length > 0) {
             const items = [];
             for (const tr of trs) {
                 const seq = tr.dataset.seq;
-                const date = tr.querySelector("select").value;
+                const date = tr.querySelector(`#tour-date-${seq}`).value;
                 const contentId = tr.querySelector(".content-id").value;
-                const done = tr.querySelector(".done").checked;
+                const done = tr.querySelector(".tour-done").checked;
+
+                items.push({seq, date, contentId, done});
             }
+
+            frmSave.itinerary.value = JSON.stringify(items);
         }
     });
     /* 양식 제출 처리 E */
@@ -230,7 +234,6 @@ function selectTourPlaceCallback(item, seq) {
     const imageUrl = firstImage2 ? firstImage2 : firstImage;
 
     const contentIdEl = document.querySelector(`[name='contentId_${seq}']`);
-        console.log("test", contentIdEl)
     const placeEl = document.getElementById("tourplace-" + seq);
     const imageEl = document.getElementById("tourplace-image-" + seq);
     const addressEl = document.getElementById("tourplace-address-" + seq);
