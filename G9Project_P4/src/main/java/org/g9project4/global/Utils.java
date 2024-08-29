@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.g9project4.file.services.FileInfoService;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.MessageSource;
@@ -30,7 +29,6 @@ public class Utils { // 빈의 이름 - utils
     private final HttpServletRequest request;
     private final DiscoveryClient discoveryClient;
     private final ObjectMapper om;
-    private final FileInfoService fileInfoService;
 
     public String url(String url) {
         List<ServiceInstance> instances = discoveryClient.getInstances("front-service");
