@@ -11,6 +11,9 @@
         <div class="post-info">
             <div class="left">
                 <th:block th:text="#{작성자}"></th:block>:
+                <th:block th:if="*{member != null && member.profileImage != null}">
+                    <img th:src="*{@utils.getThumbUrl(member.profileImage.seq, 40, 40)}" th:alt="*{#strings.concat(poster, '(', member.email, ')')}">
+                </th:block>
                 <th:block th:text="*{poster}"></th:block>
                 <th:block th:if="*{member != null}" th:text="*{#strings.concat('(', member.email, ')')}"></th:block>
             </div>
