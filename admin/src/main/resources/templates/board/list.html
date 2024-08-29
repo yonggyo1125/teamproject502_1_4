@@ -70,6 +70,9 @@
                         <a th:href="*{@utils.url('/board/edit/' + bid)}" class="sbtn">
                             <i class="xi-pen"></i> 수정하기
                         </a>
+                        <a th:href="*{@utils.frontUrl('/board/list/' + bid)}" class="sbtn blue" target="_blank">
+                            <i class="xi-list"></i> 미리보기
+                        </a>
                     </td>
                 </tr>
             </tbody>
