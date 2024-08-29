@@ -8,9 +8,11 @@
         <li th:if="${items == null || items.empty}" th:text="#{조회된_게시글이_없습니다.}" class="no-data"></li>
         <li th:if="${items != null && !items.empty}" th:each="item : ${items}" th:object="${item}">
             <div class='photos' th:if="*{selectedImages != null && !selectedImages.empty}">
-                <a th:href="${@utils.redirectUrl('/board/view/' + item.seq)}" th:each="image : *{selectedImages}" th:object="${image}">
-                    <div th:style="*{#strings.concat('background:url(', thumbUrl ,'?seq=',seq,'&width=150&height=150) no-repeat center center; background-size: cover')}" class="photo"></div>
-                </a>
+                <div class="inner">
+                    <a th:href="${@utils.redirectUrl('/board/view/' + item.seq)}" th:each="image : *{selectedImages}" th:object="${image}">
+                        <div th:style="*{#strings.concat('background:url(', thumbUrl ,'?seq=',seq,'&width=150&height=150) no-repeat center center; background-size: cover')}" class="photo"></div>
+                    </a>
+                </div>
                 <span class="badge" th:if="*{selectedImages.size() > 1}" th:text="*{#strings.concat('+', selectedImages.size() - 1)}"></span>
             </div>
             <div class="subject-content">

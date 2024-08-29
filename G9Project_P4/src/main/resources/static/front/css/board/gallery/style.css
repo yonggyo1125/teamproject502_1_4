@@ -12,7 +12,53 @@
     background: #f8f8f8;
 }
 
+.board-main .photos {
+    position: relative;
+    width: 162px;
+    height: 162px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 3px;
+}
 
+.board-main .photos > .inner {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    height: 150px;
+    display: flex;
+}
+.board-main .photos a {
+    display: none;
+}
+.board-main .photo {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #000;
+}
+.board-main .photo {
+    margin-right: 10px;
+}
+
+.board-main .photos:hover a {
+    display: block;
+}
+
+.board-main .inner a:first-of-type {
+    display: block;
+}
+
+.board-main .photos .badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: inline-block;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #000;
+    cursor: pointer;
+}
 
 .board-main .list-items .post-info {
     width: 300px;
