@@ -100,8 +100,29 @@ function insertEditor(source) {
 function fileDeleteCallback(file) {
     if (!file) return;
 
-    const { seq } = file;
+    const { seq, extension, location } = file;
 
     const el = document.getElementById(`file-${seq}`);
     el.parentElement.removeChild(el);
+
+    if (location !== 'editor' || !editor) {
+        return;
+    }
+
+    const fileName = `${seq}${extension}`;
+    const html = editor.getData();
+    const domParser = new DOMParser();
+    const dom = domParser.parseFromString(html, "text/html");
+    const figures = dom.getElementsByTagName("figure");
+    for (const figure of figures) {
+        const images = figure.getElementsByTagName("img");
+        for (const image of images) {
+            if (image.src.includes(fileName)) {
+                image.parentElement.removeChild(image);
+            }
+        }
+    }
+
+    const newHtml = dom.body.innerHTML;
+    editor.setData(newHtml);
 }
