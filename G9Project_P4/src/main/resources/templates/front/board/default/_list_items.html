@@ -14,8 +14,11 @@
             </a>
             <div class="post-info">
                 <span class="poster">
-                    <th:block th:text="*{poster}"></th:block>
-                    <th:block th:if="*{member != null}" th:text="*{#strings.concat('(', member.email, ')')}"></th:block>
+
+                    <th:block th:if="*{member == null}" th:text="*{poster}"></th:block>
+                    <th:block th:if="*{member != null}">
+                        <img th:if="*{member.profileImage != null}" th:src="*{@utils.getThumbUrl(member.profileImage.seq, 40, 40)}" th:alt="*{#strings.concat(poster, '(', member.email, ')')}">
+                    </th:block>
                 </span>
                 <span class="view-count" th:if="*{viewCount > 0}"
                     th:text="*{viewCount < 1000 ? viewCount : #numbers.formatInteger(viewCount, 3, 'COMMA')}"></span>
