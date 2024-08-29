@@ -5,6 +5,34 @@
 <main layout:fragment="content">
     <h1>메인페이지</h1>
 
+    <h2>
+        <a th:href="${@utils.redirectUrl('/board/list/freetalk')}" th:text="#{자유게시판}"></a>
+    </h2>
+    <ul>
+        <li th:each="item : ${@bInfo.getLatest('freetalk')}" th:object="${item}">
+            <a th:href="*{@bInfo.getViewUrl(seq)}">
+                <div class="subject" th:text="*{subject}"></div>
+                <div class="post-info">
+                    <th:block th:text="*{#temporals.format(createdAt, 'yy.MM.dd')}"></th:block>
+                </div>
+            </a>
+        </li>
+    </ul>
+
+
+    <h2>
+        <a th:href="${@utils.redirectUrl('/board/list/planner_note')}" th:text="#{여행노트}"></a>
+    </h2>
+    <ul>
+        <li th:each="item : ${@bInfo.getLatest('planner_note')}" th:object="${item}">
+            <a th:href="*{@bInfo.getViewUrl(seq)}">
+                <div class="subject" th:text="*{subject}"></div>
+                <div class="post-info">
+                    <th:block th:text="*{#temporals.format(createdAt, 'yy.MM.dd')}"></th:block>
+                </div>
+            </a>
+        </li>
+    </ul>
 
 </main>
 </html>

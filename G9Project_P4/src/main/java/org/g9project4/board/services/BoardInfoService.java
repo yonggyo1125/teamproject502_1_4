@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Service
+@Service("bInfo")
 @Transactional
 @RequiredArgsConstructor
 public class BoardInfoService {
@@ -496,5 +496,31 @@ public class BoardInfoService {
         if (member != null) {
             memberInfoService.addMemberInfo(member);
         }
+    }
+
+    /**
+     * 최신 게시글
+     *
+     * @param bid
+     * @param cnt
+     * @return
+     */
+    public List<BoardData> getLatest(String bid, int cnt) {
+        cnt = Math.max(cnt, 5);
+        BoardDataSearch search = new BoardDataSearch();
+        search.setBid(bid);
+        search.setLimit(cnt);
+
+        ListData<BoardData> data = getList(bid, search);
+
+        return data.getItems();
+    }
+
+    public List<BoardData> getLatest(String bid) {
+        return getLatest(bid, 0);
+    }
+
+    public String getViewUrl(Long seq) {
+        return utils.redirectUrl("/board/view/" + seq);
     }
 }
