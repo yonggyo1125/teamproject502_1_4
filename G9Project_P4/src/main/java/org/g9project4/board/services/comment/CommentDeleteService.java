@@ -19,6 +19,8 @@ public class CommentDeleteService {
         commentDataRepository.delete(data);
         commentDataRepository.flush();
 
+        commentInfoService.updateCommentCount(boardDataSeq);
+
         return boardDataSeq;
     }
 }

@@ -1,0 +1,74 @@
+/* 기본 스타일 */
+#frmUpdate {
+    box-shadow: 2px 2px 5px #34495e;
+    padding: 25px;
+    border-radius: 10px;
+    background: #fff;
+    width: 700px; /* 데스크탑 화면에서의 너비 */
+    margin: 0 auto;
+}
+
+/* 기본 레이아웃 */
+#frmUpdate dl {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px; /* 항목 간의 공백 추가 */
+}
+
+#frmUpdate dl dt {
+    width: 100px; /* 항목 레이블의 너비 */
+    display: flex;
+    align-items: center;
+}
+
+#frmUpdate dl dd {
+    flex-grow: 1;
+}
+
+#frmUpdate .fileUploads {
+    width: 204px; /* 파일 업로드 박스의 너비 */
+}
+
+#frmUpdate .image-file-box {
+    margin-bottom: 5px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    #frmUpdate {
+        width: 100%; /* 모바일 화면에서 폼의 너비를 100%로 설정 */
+        padding: 15px; /* 모바일 화면에서 내부 여백 조정 */
+    }
+
+    #frmUpdate dl {
+        flex-direction: column; /* 모바일 화면에서는 수직으로 쌓이도록 조정 */
+    }
+
+    #frmUpdate dl dt {
+        width: auto; /* 레이블 너비를 자동으로 설정 */
+        margin-bottom: 10px; /* 레이블과 입력 필드 간의 간격 추가 */
+    }
+
+    #frmUpdate dl dd {
+        width: 100%; /* 입력 필드의 너비를 100%로 설정 */
+    }
+
+    #frmUpdate .fileUploads {
+        width: 100%; /* 모바일 화면에서 파일 업로드 박스의 너비를 100%로 설정 */
+    }
+}
+
+/* 매우 작은 화면을 위한 추가 스타일 */
+@media (max-width: 480px) {
+    #frmUpdate {
+        padding: 10px; /* 작은 화면에서 내부 여백 추가로 줄이기 */
+    }
+
+    #frmUpdate dl {
+        margin-bottom: 10px; /* 항목 간의 공백을 줄이기 */
+    }
+
+    #frmUpdate dl dt {
+        margin-bottom: 5px; /* 레이블과 입력 필드 간의 간격 줄이기 */
+    }
+}

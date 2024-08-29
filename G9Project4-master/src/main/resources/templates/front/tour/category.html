@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>지도 보기</title>
+    <style>
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+    <!-- 카카오 지도 API 로드 -->
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=43a2034cb765c278f32c3be400fa5515"></script>
+    <!-- JavaScript 파일 로드 -->
+    <script src="/js/map.js"></script>
+</head>
+<body>
+<h1>지도 보기</h1>
+<div id="category">
+    <button id="BK9" class="category">은행</button>
+    <button id="MT1" class="category">마트</button>
+    <button id="PM9" class="category">약국</button>
+    <button id="OL7" class="category">주유소</button>
+    <button id="CE7" class="category">카페</button>
+    <button id="CS2" class="category">편의점</button>
+</div>
+<div id="map"></div>
+</body>
+</html>

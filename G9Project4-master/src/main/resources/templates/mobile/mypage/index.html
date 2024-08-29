@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mobile/layouts/mypage}">
+<section layout:fragment="content">
+    <h1 th:text="#{마이_페이지}"></h1>
+    <div class="section1">
+        <form id="frmIndex" name="frmIndex" method="GET" autocomplete="off" th:object="${requestProfile}">
+
+            <input type="hidden" name="gid" th:field="*{gid}">
+            <dl>
+                <dd>
+                    <div class="profile-image fileUploads" data-mode="dragNdrop" th:data-gid="*{gid}"
+                         th:data-single="true"
+                         th:data-image-only="true">
+                        <div th:if="${myProfileImage != null}" th:object="${myProfileImage}" class="image-file-box"
+                             th:id="*{'file-' + seq}">
+                            <div class="inner"
+                                 th:style="*{#strings.concat('background: url(', fileUrl, ') no-repeat center center; background-size: cover;')}"
+                                 th:data-url="*{fileUrl}"></div>
+                        </div>
+                        <span class="user-greeting">
+                            <span class="a1" th:text="${loggedMember.userName}"></span>
+                            <span class="a2">님</span> <br>
+                            <span class="a3">환영합니다</span>
+                        </span>
+                    </div>
+                </dd>
+            </dl>
+            <div class="myprofile">
+                <h3 th:text="#{내_정보}"></h3>
+                <dl>
+                    <dt th:text="#{이메일}"></dt>
+                    <dd th:text="${loggedMember.email}"></dd>
+                </dl>
+                <dl>
+                    <dt th:text="#{휴대전화번호}"></dt>
+                    <dd th:text="${loggedMember.mobile}"></dd>
+                </dl>
+                <dl>
+                    <dt th:text="#{출생일}"></dt>
+                    <dd th:text="${loggedMember.birth}"></dd>
+                </dl>
+                <dl>
+                    <dt th:text="#{성별}"></dt>
+                    <dd th:text="${loggedMember.gende}"></dd>
+                </dl>
+                <dl>
+                    <dt th:text="#{외국인여부}"></dt>
+                    <dd th:text="${loggedMember.isForeigner}"></dd>
+                </dl>
+            <dl>
+                <dt th:text="#{관심사}"></dt>
+                        <!-- Iterate over interests and display each one -->
+                        <dd th:each="interest : ${requestProfile.interests}">
+                <span th:text="${interest.name()}"></span> </dd>
+            </dl>
+
+
+        </div>
+    </form>
+        <div class="mypage-tour-story">
+            <h2 th:text="#{나의_여행_이야기}"></h2>
+            <table>
+                내가 최근에 검색한 여행지<br>
+                <thead>
+                <tr>
+                    <th>
+                        검색어
+                    </th>
+                    <th>
+                        검색 시간
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${searchHistory!=null}" th:each="search : ${searchHistory}">
+                    <td th:text="${search.keyword}">
+                    </td>
+                    <td th:text="${#temporals.format(search.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                </tr>
+                </tbody>
+            </table>
+                <br>
+                <table>
+                    내가 찜한 게시글 목록<br>
+                    <thead>
+                    <tr>
+                        <th>
+                            게시판 이름
+                        </th>
+                        <th>
+                            제목
+                        </th>
+                        <th>
+                            작성자
+                        </th>
+                        <th>
+                            게시글 바로가기
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${wishList!=null}" th:each="wish : ${wishList}">
+<!--                        <span th:text="${wish}"></span>-->
+                        <td th:text="${@boardDataRepository.getById(wish.seq).board.bName}">
+                        </td>
+                        <td>
+                            <a th:text="${@boardDataRepository.getById(wish.seq).subject}" th:href="${@utils.redirectUrl('/board/view/')+wish.seq}"></a>
+                        </td>
+                        <td th:text="${@boardDataRepository.getReferenceById(wish.seq).poster}"></td>
+                        <td>
+                            <a th:href="${@utils.redirectUrl('/board/view/'+wish.seq)}">
+                                <button type="button" th:text="#{게시글_보기}"></button>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

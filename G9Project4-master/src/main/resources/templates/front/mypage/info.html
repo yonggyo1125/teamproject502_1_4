@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/mypage}">
+<section layout:fragment="content">
+    <h1 th:text="#{내_정보수정}"></h1>
+    <form id="frmUpdate" name="frmUpdate" method="POST" th:action="${@utils.url('/mypage/info')}" autocomplete="off" th:object="${requestProfile}">
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+        <input type="hidden" name="gid" th:field="*{gid}">
+        <dl>
+            <dt th:text="#{이메일}"></dt>
+            <dd th:text="${loggedMember.email}"></dd>
+        </dl>
+        <dl>
+            <dt th:text="#{회원명}"></dt>
+            <dd>
+                <input type="text" name="userName" th:field="*{userName}">
+                <div class="error" th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{비밀번호}"></dt>
+            <dd>
+                <input type="password" name="password" th:field="*{password}">
+                <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{비밀번호_확인}"></dt>
+            <dd>
+                <input type="password" name="confirmPassword" th:field="*{confirmPassword}">
+                <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{휴대전화번호}"></dt>
+            <dd>
+                <input type="text" name="mobile" th:field="*{mobile}">
+                <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt th:text="#{출생일}"></dt>
+            <dd>
+                <input type="date" name="birth" th:value="*{birth}"  required>
+                <div class="error" th:each="err:${#fields.errors('birth')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt th:text="#{성별}"></dt>
+            <dd>
+                <input type="radio" name="gende" th:field="*{gende}" value="MALE"> 남자
+                <input type="radio" name="gende" th:field="*{gende}" value="FEMALE"> 여자
+                <div class="error" th:each="err:${#fields.errors('gende')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt th:text="#{외국인여부}"></dt>
+            <dd>
+                <input type="radio" name="isForeigner" th:field="*{isForeigner}" value="true"> 예
+                <input type="radio" name="isForeigner" th:field="*{isForeigner}" value="false"> 아니오
+                <div class="error" th:each="err:${#fields.errors('isForeigner')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt th:text="#{관심사}"></dt>
+            <dd>
+                <input type="checkbox" name="interests" th:field="*{interests}" value="MATJIB"> 맛집
+                <input type="checkbox" name="interests" th:field="*{interests}" value="HOCANCE"> 호캉스
+                <input type="checkbox" name="interests" th:field="*{interests}" value="MUSEUM"> 박물관
+                <input type="checkbox" name="interests" th:field="*{interests}" value="CAMPING"> 캠핑
+                <input type="checkbox" name="interests" th:field="*{interests}" value="HIKING"> 등산
+                <input type="checkbox" name="interests" th:field="*{interests}" value="NATURE"> 자연
+                <input type="checkbox" name="interests" th:field="*{interests}" value="ART"> 예술
+                <input type="checkbox" name="interests" th:field="*{interests}" value="SEA"> 강/바다
+                <input type="checkbox" name="interests" th:field="*{interests}" value="WITHCHILD"> 아이와 함께
+                <input type="checkbox" name="interests" th:field="*{interests}" value="WITHFAMILY"> 온가족 함께
+                <input type="checkbox" name="interests" th:field="*{interests}" value="WITHLOVER"> 연인과 함께
+                <input type="checkbox" name="interests" th:field="*{interests}" value="FISHING"> 낚시
+
+                <div class="error" th:each="err:${#fields.errors('interests')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+
+
+        <dl>
+            <dt th:text="#{프로필_이미지}"></dt>
+            <dd>
+                <div class="profile-image fileUploads" data-mode="dragNdrop" th:data-gid="*{gid}" th:data-single="true" th:data-image-only="true">
+                    <div th:if="${myProfileImage != null}" th:object="${myProfileImage}" class="image-file-box" th:id="*{'file-' + seq}">
+                        <div class="xi-close remove" th:data-seq="*{seq}"></div>
+                        <div class="inner" th:style="*{#strings.concat('background: url(', fileUrl, ') no-repeat center center; background-size: cover;')}" th:data-url="*{fileUrl}"></div>
+                    </div>
+                </div>
+                <button type="button" th:text="#{이미지_업로드}" class="small fileUploads" th:data-gid="*{gid}" th:data-single="true" th:data-image-only="true"></button>
+            </dd>
+        </dl>
+        <div class="button-group">
+            <button class='black' type="reset" th:text="#{다시입력}"></button>
+            <button type="submit" th:text="#{수정하기}"></button>
+        </div>
+    </form>
+    <script th:replace="~{common/_file_tpl::image}"></script>
+</section>
+</html>

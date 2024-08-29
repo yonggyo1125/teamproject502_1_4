@@ -1,0 +1,66 @@
+/*Search Option Css E*/
+.search-option {
+    background-color: #e6e6e6;
+    width: 300px;
+    position: relative;
+    top: 96px;
+    float: right;
+}
+
+.search-option-form {
+    min-width: 1100px;
+    padding-top: 50px;
+}
+.search-option .place-search-option{
+    display: flex;
+}
+.search-option * {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.1rem;
+}
+.search-option dt {
+    padding-right: 10px;
+    text-align-last: end;
+    width: 130px;
+    text-align: center;
+    font-size: large;
+    color: #2d2926;
+}
+.search-option input[type="radio"] {
+    display: none; /* 기본 체크박스 스타일 제거 */
+    width: 30px;
+    height: 30px;
+    /*background: url('unchecked.png') no-repeat center;*/
+    cursor: pointer;
+}
+select{
+    width: 150px;
+}
+input[type="checkbox"]:checked {
+    appearance: auto;
+}
+.search-option dd *{
+    color: #666;
+}
+/*Search Option Css E*/
+/*버튼 CSS*/
+.buttons {
+    display: flex;
+    margin: 0 auto;
+}
+
+button.search-option-submit {
+    background: var(--muted-text-color);
+    border: 1px #666 solid;
+    border-radius: var(--button-border-radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin: 0 24px;
+    width: 64px;
+    height: 40px;
+    color: #666;
+}

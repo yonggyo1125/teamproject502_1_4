@@ -1,0 +1,28 @@
+
+/* table CSS Start*/
+table {
+    table-layout: auto;
+    align-content: center;
+    width: 80%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-left: 20px;
+    text-align: center;
+}
+table * {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+}
+table td{
+    border-top: 1px solid black;
+
+}
+.table-image{
+    min-width: 300px;
+    max-width: 400px;
+}
+img{
+    width: 90% ;
+}
+/* table CSS End*/

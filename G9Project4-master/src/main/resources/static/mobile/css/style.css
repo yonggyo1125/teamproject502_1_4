@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700;800&family=Noto+Serif+KR:wght@200..900&display=swap');
+
+* {
+    font-family: "Jua", sans-serif;
+    color: #000;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: 200;
+}
+
+.layout-width {
+    max-width: 1300px;
+    min-width: 900px;
+    margin: 0 auto;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 60px;
+    color: white;
+    z-index: 1000;
+    transition: all 0.5s;
+}
+
+header.on {
+    background: #fff;
+    color: #000;
+}
+
+/* 헤더 상단 로그인 회원가입 버튼 시작 */
+header .site-top > .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+header .site-top > .inner > .layout-right {
+    float: right;
+}
+
+header .main-logo {
+    max-height: 130px;
+    max-width: 130px;
+    min-height: 100px;
+    min-width: 100px;
+}
+
+.main-top-buttons button {
+    background-color: var(--secondary-color);
+}
+
+/* 헤더 상단 로그인 회원가입 버튼 끝 */
+
+/* 헤더 메인 메뉴바 시작 */
+.ac {
+    text-align: center;
+    display: block;
+}
+
+header i {
+    font-size: 40px;
+    height: 60px;
+    align-content: center;
+    min-width: 100px;
+    color: black;
+    text-align: center;
+}
+
+header nav {
+    width: 100%;
+    margin-top: 15px;
+    padding: 0;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    overflow-x: auto; /* 메뉴가 너무 넓어질 때 스크롤 가능하게 설정 */
+}
+
+header nav > .inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+}
+
+header nav > .inner > a {
+    text-decoration: none;
+}
+
+header nav > .inner > * {
+    border-radius: 5px;
+    font-size: 1.5rem; /* 모바일 화면에 맞게 폰트 크기 조정 */
+    font-weight: bold;
+    color: #fff;
+    max-height: 60px;
+    line-height: 60px;
+    min-width: 120px; /* 모바일 화면에 맞게 너비 조정 */
+    padding: 0 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+header nav > .inner > *:hover::after {
+    content: "";
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: #fff;
+}
+
+header nav .inner img {
+    width: 30px; /* 모바일 화면에 맞게 이미지 크기 조정 */
+    height: 30px;
+    vertical-align: middle;
+}
+
+/* 드롭다운 컨테이너 스타일 */
+header .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* 드롭다운 링크 호버 스타일 */
+header .dropdown a:hover {
+    color: #fff;
+}
+
+/* 콘텐츠 박스 스타일 */
+header .content-box {
+    min-width: 320px; /* 모바일 화면에 맞게 최소 너비 조정 */
+    max-width: 100%;
+    min-height: 650px;
+    margin: 50px auto;
+    box-shadow: 2px 2px 10px #414141;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+}
+
+/* 드롭다운 콘텐츠 스타일 */
+header .dropdown-content {
+    display: none;
+    position: absolute;
+    background: #fff;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    left: 0;
+    top: 3.5rem;
+}
+
+header .dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 1.2rem; /* 모바일 화면에 맞게 폰트 크기 조정 */
+    line-height: 30px;
+    background-color: transparent;
+    text-align: left !important;
+}
+
+header .dropdown-content a:hover {
+    color: var(--primary-color);
+    background-color: #f8f8f8;
+}
+
+header .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+header .my-account {
+    padding-left: 10px; /* 모바일 화면에 맞게 패딩 조정 */
+}
+
+header .my-account > .dropdown-content {
+    min-width: 160px;
+}
+
+/* 헤더 아이프레임 숨김 */
+.dn {
+    display: none;
+}
+
+/* 메인 CSS S */
+main {
+    margin-top: 155px;
+    min-height: 1000px;
+    width: 90%; /* 모바일 화면에 맞게 너비 조정 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Q2 {
+    line-height: 50px;
+}
+
+.xi-search {
+    font-size: 25px;
+    line-height: 100%;
+}
+
+/* 페이징 공통 S */
+.pagination {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.pagination .page {
+    border: 1px solid #596b99;
+    color: #596b99;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: #fff;
+}
+
+.pagination .page.on {
+    background: #596b99;
+    color: #fff;
+}
+
+.pagination .page + .page {
+    margin-left: 3px;
+}
+
+/* 페이징 공통 E */
+/* 메인 CSS E */
+
+/* 푸터 시작 */
+.footer-content {
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 20px; /* 모바일 화면에 맞게 패딩 조정 */
+    box-sizing: border-box;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* 푸터 끝 */
+
+/* 파일 공통 S */
+.image-file-box {
+    border: 2px #000;
+    width: 100%; /* 모바일 화면에 맞게 너비 조정 */
+    max-width: 204px;
+    position: relative;
+    margin-bottom: 10px; /* 모바일 화면에 맞게 마진 조정 */
+}
+
+.image-file-box + .image-file-box {
+    margin-left: 0;
+}
+
+.image-file-box > .inner {
+    width: 100%;
+    height: auto; /* 모바일 화면에 맞게 높이 조정 */
+}
+
+.image-file-box .remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    line-height: 20px;
+}
+
+/* 파일 공통 E */
+
+/* 프로필 공통 S */
+.my-profile-image {
+    width: 100%; /* 모바일 화면에 맞게 너비 조정 */
+    max-width: 150px;
+    height: auto; /* 모바일 화면에 맞게 높이 조정 */
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.my-profile-image > .inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* 프로필 공통 E */
+
+/* 찜하기 */
+.wishlist-toggle {
+    cursor: pointer;
+}
+
+.wishlist-toggle.on {
+    color: red;
+}
+
+/* 반응형 미디어 쿼리 */
+@media (max-width: 768px) {
+    header .site-top > .inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header .main-logo {
+        max-height: 100px;
+        max-width: 100px;
+    }
+
+    header nav > .inner > * {
+        font-size: 1.2rem;
+        min-width: 100px;
+    }
+
+    .content-box {
+        min-width: 100%;
+    }
+
+    main {
+        width: 100%;
+        margin-top: 200px; /* 상단 여백 조정 */
+    }
+
+    .footer-content {
+        padding: 20px 10px; /* 모바일 화면에 맞게 패딩 조정 */
+    }
+}

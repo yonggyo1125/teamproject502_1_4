@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content" class="main">
+    <!-- 홈 섹션 시작 -->
+    <section class="home" id="home">
+        <!-- 배경 이미지 -->
+        <img th:src="${@utils.url('/images/main/home1.jpg')}" alt="배경 이미지" class="home__img">
+
+        <!-- 텍스트 및 버튼 -->
+        <div class="home__container container grid">
+            <div class="home__data">
+                <span class="home__data-subtitle">Discover your place</span>
+                <h1 class="home__data-title"><b>여행이<br>필요할때,<br>여행어때?</b></h1>
+                <!--                <h1 class="home__data-title"><b>여행을<br>떠나고 싶을때,<br>여행어때?</b></h1>-->
+                <a th:href="${@utils.redirectUrl('/tour/view')}" class="button">Explore</a>
+            </div>
+
+            <!-- 소셜 링크 -->
+            <div class="home__social">
+                <a href="https://www.facebook.com/" target="_blank" class="home__social-link">
+                    <i class="ri-facebook-box-fill"></i>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" class="home__social-link">
+                    <i class="ri-instagram-fill"></i>
+                </a>
+                <a href="https://twitter.com/" target="_blank" class="home__social-link">
+                    <i class="ri-twitter-fill"></i>
+                </a>
+            </div>
+
+            <!-- 정보 섹션 -->
+            <div class="home__info">
+                <div>
+                    <span class="home__info-title">국내 BEST 여행지</span>
+                    <a th:href="${@utils.redirectUrl('/tour/list')}"
+                       class="button button--flex button--link home__info-button">
+                        More <i class="ri-arrow-right-line"></i>
+                    </a>
+                </div>
+
+                <div class="home__info-overlay">
+                    <a th:href="${@utils.redirectUrl('/tour/list')}">
+                        <img th:src="${@utils.url('/images/main/home2.jpg')}" alt="추천 장소 이미지" class="home__info-img">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 홈 섹션 끝 -->
+
+
+    <!-- ABOUT 부분  -->
+    <section class="about section" id="about">
+        <div class="about__container container grid">
+            <div class="about__data">
+                <h2 class="section__title about__title">소중한 추억,<br>다른 사람들과 공유해보세요!<br></h2>
+                <p class="about__description">
+                </p>
+                <a th:href="${@utils.redirectUrl('/board/list/review')}" class="button">나도 게시글 작성하기</a>
+            </div>
+
+
+            <div class="about__img">
+                <div class="about__img-overlay">
+                    <a th:href="${@utils.redirectUrl('/board/list/qna')}">
+                        <img th:src="${@utils.url('/images/main/about1.jpg')}" alt="" class="about__img-one">
+                    </a>
+                </div>
+
+                <div class="about__img-overlay">
+                    <a th:href="${@utils.redirectUrl('/board/list/freetalk')}">
+                    <img th:src="${@utils.url('/images/main/about2.jpg')}" alt="" class="about__img-two">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ABOUT 부분 끝 -->
+
+
+    <!--            메인 3개 -->
+    <section class="sec1">
+        <div class="secWrap">
+            <h3>
+                <span>여행어때</span>에서 여행을 시작하세요!
+            </h3>
+
+            <div class="con">
+                <div class="box">
+                    <!--        <li><a th:href="${@utils.redirectUrl('/tour/list')}" th:text="#{홈}"></a></li>-->
+                    <a th:href="${@utils.redirectUrl('/tour/list?contentType=spot')}">
+                        <img th:src="${@utils.url('/images/list/spot.png')}" alt=""/>
+                        <h4>관광</h4>
+                        <p>
+                            우리나라의 도시, 관광명소,<br/> 맛집 정보를 확인하세요.
+                        </p>
+                    </a>
+                </div>
+
+                <div class="box">
+                    <a th:href="${@utils.redirectUrl('/tour/list?contentType=culture')}">
+                        <img th:src="${@utils.url('/images/list/culture.jpg')}" alt=""/>
+                        <h4>문화시설</h4>
+                        <p>
+                            다양한 문화시설을 방문하고,<br/> 정보를 공유하세요.
+                        </p>
+                    </a>
+                </div>
+
+                <div class="box">
+                    <a th:href="${@utils.redirectUrl('/tour/list?contentType=festival')}">
+                        <img th:src="${@utils.url('/images/list/festival.jpg')}" alt=""/>
+                        <h4>행사/공연/축제</h4>
+                        <p>
+                            전국의 가지각색의 축제를 확인하고<br/>나와 꼭 맞는 축제에 방문해보세요.
+                        </p>
+                    </a>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--            메인 3개 끝-->
+
+    <!--        메인 6개 시작 -->
+    <!--        메인 6개 시작 -->
+    <section class="sec2">
+        <div class="secWrap">
+            <h3>인기 여행장소</h3>
+            <p class="tit">다른 여행자들의 리뷰를 참고해 나만의 여행을 계획해보세요!</p>
+
+            <div class="row1">
+                <div class="box">
+                    <a th:href="${@utils.redirectUrl('/tour/list?contentType=course')}">
+                        <div class="ImgBox">
+                            <img th:src="${@utils.url('/images/list/course.jpg')}" alt=""/>
+                            <div class="txt">
+                                <h4>여행코스</h4>
+                            </div>
+                        </div>
+                    </a>
+
+
+                    <a th:href="${@utils.redirectUrl('/tour/list?contentType=leports')}">
+                        <div class="ImgBox">
+                            <img th:src="${@utils.url('/images/list/leports.jpg')}" alt=""/>
+                            <div class="txt">
+                                <h4 th:text="#{레포츠}">레포츠</h4>
+                            </div>
+                        </div>
+                    </a>
+                    <a th:href="${@utils.redirectUrl('/tour/list?contentType=stay')}">
+                        <div class="ImgBox">
+                            <img th:src="${@utils.url('/images/list/stay.jpg')}" alt=""/>
+                            <div class="txt">
+                                <h4 th:text="#{숙소}">호텔</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class=" row2">
+                <div class="box">
+                    <a th:href="${@utils.redirectUrl('/tour/list?contentType=shopping')}">
+                        <div class="ImgBox">
+                            <img th:src="${@utils.url('/images/list/shopping.jpg')}" alt=""/>
+                            <div class="txt">
+                                <h4 th:text="#{쇼핑}">쇼핑</h4>
+                            </div>
+                        </div>
+                    </a>
+                    <a th:href="${@utils.redirectUrl('/tour/list?contentType=restaurant')}">
+                        <div class="ImgBox">
+                            <img th:src="${@utils.url('/images/list/restaurant.jpg')}" alt=""/>
+                            <div class="txt">
+                                <h4 th:text="#{식당}">레스토랑</h4>
+                            </div>
+                        </div>
+                    </a>
+                    <a th:href=" ${@utils.redirectUrl('/tour/list?contentType=green')}">
+                        <div class="ImgBox">
+                            <img th:src="${@utils.url('/images/list/green.jpg')}" alt=""/>
+                            <div class="txt">
+                                <h4 th:text="#{생태관광지}"></h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    </nav>
+    <!--    6개 끝-->
+
+
+    <div th:class="review_main_wright2">
+        <h3>맞춤 여행지</h3>
+        <p class="tit2">나만의 완벽한 여행 코스, 맞춤형 여행이 바로 여기에서 시작됩니다!</p>
+    </div>
+
+
+    <!--special-box S-->
+    <div class="special-box">
+
+        <div class="bg"></div>
+        <div class="cont">
+            <!-- Slider main container -->
+            <div class="swiper">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide"><img th:src="${@utils.url('/images/main/main2.jpg')}" alt="Slide 1"></div>
+                    <div class="swiper-slide"><img th:src="${@utils.url('/images/main/home1.jpg')}" alt="Slide 2"></div>
+                    <div class="swiper-slide"><img th:src="${@utils.url('/images/main/city06.jpg')}" alt="Slide 3"></div>
+                    <!-- Add more slides as needed -->
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- If we need scrollbar -->
+                <div class="swiper-scrollbar"></div>
+            </div>
+        </div>
+    </div>
+    <!--special-box E-->
+
+</main>
+
+</html>

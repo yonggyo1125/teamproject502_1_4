@@ -1,0 +1,106 @@
+/* 전체 레이아웃 */
+.view-content {
+    background-color: #f5f5f5; /* 배경색 */
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* 제목 */
+.subject {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* 게시글 정보 */
+.post-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.post-info .left {
+    flex: 1;
+}
+
+.post-info .right {
+    text-align: right;
+}
+
+.post-info .wishlist-toggle {
+    cursor: pointer;
+}
+
+.post-info .wishlist-toggle.on {
+    color: red;
+}
+
+/* 내용 */
+.contents {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* 다운로드 파일 리스트 */
+.downloads {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.downloads li {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.downloads a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.downloads a:hover {
+    text-decoration: underline;
+}
+
+/* 버튼 */
+.btn {
+    display: inline-block;
+    background-color: #f9bb57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #f7a54a;
+}
+
+.btn:active {
+    background-color: #f78c00;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .post-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .post-info .left, .post-info .right {
+        margin-bottom: 10px;
+    }
+}

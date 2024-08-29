@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="items">
+
+    <nav th:replace="~{mobile/board/default/_common::categorylink}"></nav>
+
+    <ul class="list-items">
+        <li th:if="${items == null || items.empty}" th:text="#{조회된_게시글이_없습니다.}" class="no-data"></li>
+        <li th:if="${items != null && !items.empty}" th:each="item : ${items}" th:object="${item}">
+            <a th:href="*{@utils.redirectUrl('/board/view/' + seq)}" class="subject">
+                <span th:if="*{notice}" th:text="${'[' + #messages.msg('공지') + ']'}"></span>
+                <span th:if="*{category != null && category != ''}" th:text="*{'[' + category + ']'}" class="category"></span>
+                <th:block th:text="*{subject}"></th:block>
+            </a>
+            <div class="post-info">
+                <span class="poster">
+                    <th:block th:text="*{poster}"></th:block>
+                    <th:block th:if="*{member != null}" th:text="*{#strings.concat('(', member.email, ')')}"></th:block>
+                </span>
+                <span class="view-count" th:if="*{viewCount > 0}"
+                      th:text="*{viewCount < 1000 ? viewCount : #numbers.formatInteger(viewCount, 3, 'COMMA')}"></span>
+                <span class="datetime" th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></span>
+            </div> <!--// post-info -->
+        </li>
+    </ul>
+
+    <div class="bottom-box">
+        <div class="links">
+            <a th:href="${@utils.redirectUrl('/board/write/' + board.bid)}" class="btn" th:text="#{글쓰기}"></a>
+        </div>
+        <form name="frmSearch" th:action="${@utils.redirectUrl('/board/list/' + board.bid)}" autocomplete="off" th:object="${boardDataSearch}">
+            <input type="hidden" name="category" th:field="*{category}">
+            <select name="sopt" th:field="*{sopt}">
+                <option value="ALL" th:text="#{통합검색}"></option>
+                <option value="SUBJECT" th:text="#{제목}"></option>
+                <option value="CONTENT" th:text="#{내용}"></option>
+                <option value="SUBJECT_CONTENT" th:text="#{제목+내용}"></option>
+                <option value="NAME" th:text="#{이름}"></option>
+            </select>
+            <input type="text" name="skey" th:field="*{skey}">
+            <button type="submit" th:text="#{검색하기}"></button>
+        </form>
+    </div>
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+</th:block>
+</html>

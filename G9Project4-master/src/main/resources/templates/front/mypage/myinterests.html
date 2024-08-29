@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/mypage}">
+<section layout:fragment="content">
+    <h1 th:text="#{내_관심사맞춤여행지}"></h1>
+    <table th:replace="~{front/mypage/_form::placeList}"></table>
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+</section>
+</html>

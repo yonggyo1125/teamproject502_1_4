@@ -1,0 +1,368 @@
+html {
+    font-size: 15px;
+}
+
+body {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+dl, dt, dd {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    border: 0;
+}
+
+dl {
+    display: flex;
+}
+
+dt {
+    width: 180px;
+}
+
+dd {
+    flex-grow: 1;
+}
+
+/* 공통 컬러 시작*/
+/* 공통 컬러 사용법-css:    var(--primary-color);
+ 타 css파일에 공통컬러 적용시 추가-> html에 이미 추가 되어 있음
+ */
+:root {
+    /* COLORS */
+    --white: #f9f9f9;
+    --gray: #444;
+    --blue: #0367a6;
+    --lightblue: #008997;
+    --error-red: #e74c3c;
+
+    --primary-color: #7d845a; /* Primary 색상- 녹두색 */
+    --secondary-color: #5f504b; /* Secondary 색상- 갈색 */
+    --accent-color: #2d2926; /* Accent 색상- 다크그린*/
+    --background-color: #f8f9fa; /* 배경 색상 -  */
+    --text-color: #000000; /* 텍스트 색상- 블랙 */
+    --muted-text-color: #9c9ca6; /* 메서드 색상- 매트그레이 */
+    --border-color: #454546; /* 테두리 색상- 다크그레이 */
+
+
+    --button-padding: 0.5rem 0.3rem;
+    --button-font-size: 16px;
+    --button-font-weight: normal;
+    --button-color: #fff;
+    --button-border-radius: 4px;
+    --button-cursor: pointer;
+    --button-transition: background-color 0.3s ease;
+    --button-primary-bg: #138496; /* Primary 색상- 녹두색 */
+    --button-primary-hover-bg: #b3bc88;
+    --button-secondary-bg: #5f504b; /* Secondary 색상- 갈색 */
+    --button-secondary-hover-bg: #937c74;
+    --button-success-bg: #28a745;
+    --button-success-hover-bg: #218838;
+    --button-danger-bg: #dc3545;
+    --button-danger-hover-bg: #c82333;
+    --button-warning-bg: #ffc107;
+    --button-warning-hover-bg: #e0a800;
+    --button-info-bg: #17a2b8;
+    --button-info-hover-bg: #138496;
+
+    /* 공통 컬러 끝*/
+
+}
+
+/* 공통 버튼 시작*/
+
+/* 공통 버튼 사용법-html:   <button type="submit" class="button button-secondary" >검색</button>   */
+
+
+/* 공통 버튼 스타일 1 */
+.button {
+    display: inline-block;
+    background-color: var(--blue);
+    padding: var(--button-padding);
+    font-size: var(--button-font-size);
+    font-weight: var(--button-font-weight);
+    color: var(--button-color);
+    border: none;
+    border-radius: var(--button-border-radius);
+    cursor: var(--button-cursor);
+    text-align: center;
+    text-decoration: none;
+    transition: var(--button-transition);
+}
+
+.button:hover {
+    background-color: var(--lightblue);
+    color: black;
+}
+
+/* 버튼 색상 정의 */
+.button-primary {
+    background-color: var(--button-primary-bg);
+}
+
+.button-secondary {
+    background-color: var(--button-secondary-bg);
+}
+
+.button-success {
+    background-color: var(--button-success-bg);
+}
+
+.button-danger {
+    background-color: var(--button-danger-bg);
+}
+
+.button-warning {
+    background-color: var(--button-warning-bg);
+}
+
+.button-info {
+    background-color: var(--button-info-bg);
+}
+
+/* 호버 효과 */
+.button-primary:hover {
+    background-color: var(--button-primary-hover-bg);
+}
+
+.button-secondary:hover {
+    background-color: var(--button-secondary-hover-bg);
+}
+
+.button-success:hover {
+    background-color: var(--button-success-hover-bg);
+}
+
+.button-danger:hover {
+    background-color: var(--button-danger-hover-bg);
+}
+
+.button-warning:hover {
+    background-color: var(--button-warning-hover-bg);
+}
+
+.button-info:hover {
+    background-color: var(--button-info-hover-bg);
+}
+
+.follow-image {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    pointer-events: none; /* 마우스 이벤트를 이미지에 전달하지 않음 */
+    z-index: 10000;
+    transition: transform 0.1s ease; /* 부드러운 이동 효과 */
+}
+
+/* 공통 버튼 끝*/
+
+/* 초기화 시작 */
+/* Reset some basic elements */
+
+body, h1, dl, dt, dd, form, input, button {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.button-group {
+    float: right;
+    font-size: 40px; /* 버튼 텍스트 크기 조정 */
+    border-radius: 5px; /* 모서리 둥글게 */
+
+}
+
+.button-group button {
+    background-color: white; /* 버튼 배경색 */
+    border: 1px solid lightgray; /* 버튼 테두리 */
+    border-radius: 5px; /* 버튼의 모서리를 둥글게 */
+    padding: 10px 20px; /* 버튼 안의 텍스트에 여백을 줌 */
+    font-size: 14px; /* 폰트 크기 */
+    cursor: pointer; /* 마우스를 올렸을 때 포인터 모양 변경 */
+    transition: background-color 0.3s ease; /* 배경색 변화에 애니메이션 추가 */
+}
+
+/* 버튼에 마우스를 올렸을 때의 스타일 */
+.button-group button:hover {
+    background-color: #f0f0f0; /* 살짝 어두운 배경색으로 변화 */
+}
+
+/* 버튼 그룹에 간격 추가 */
+.button-group {
+    display: flex;
+    gap: 10px; /* 버튼 간의 간격을 10px로 설정 */
+}
+
+
+/* 이미지 및 파일 선택 버튼 스타일 */
+
+.fileUploads {
+    display: inline-block;
+    padding: 10px 20px; /* 안쪽 여백 */
+    font-size: 16px; /* 텍스트 크기 */
+    color: black; /* 텍스트 색상 */
+    background-color: white; /* 기본 배경색  */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 커서 변경 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    text-decoration: none; /* 텍스트 밑줄 제거 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+
+.fileUploads:hover {
+    background-color: white; /* 호버 시 배경색 변경 */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 변경 */
+}
+
+
+.fileUploads:active {
+    background-color: white; /* 클릭 시 배경색 변경 */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15); /* 클릭 시 그림자 변경 */
+}
+
+
+/* 이미지 선택 버튼 */
+.fileUploads.image-upload {
+    background-color: #28a745; /* 녹색 배경색 */
+}
+
+.fileUploads.image-upload:hover {
+    background-color: #218838; /* 호버 시 녹색 배경색 변경 */
+}
+
+.fileUploads.image-upload:active {
+    background-color: #1e7e34; /* 클릭 시 녹색 배경색 변경 */
+}
+
+/* 파일 선택 버튼  */
+.fileUploads.file-upload {
+    background-color: #ffc107; /* 노란색 배경색 */
+    color: #212529; /* 텍스트 색상 변경 */
+}
+
+.fileUploads.file-upload:hover {
+    background-color: #e0a800; /* 호버 시 노란색 배경색 변경 */
+}
+
+.fileUploads.file-upload:active {
+    background-color: #c69500; /* 클릭 시 노란색 배경색 변경 */
+}
+
+
+h2 {
+    padding-top: 80px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+main {
+    width: 100%;
+    min-width: 600px;
+    margin: 50px auto;
+    /*padding: 20px;*/
+    border-radius: 8px;
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+}
+
+h1 {
+    text-align: center;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+form {
+    width: 100%;
+}
+
+dl {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+dt {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+dd {
+    margin-left: 0;
+    margin-bottom: 10px;
+}
+.error{
+    color: var(--error-red);
+}
+/* 초기화 끝 */
+
+/*========== SCROLL UP ==========*/
+.scrollup {
+    position: fixed; /* 페이지에 고정 위치 */
+    bottom: 6.5rem; /* 페이지 하단에서 1rem 거리 */
+    right: 1rem; /* 페이지 오른쪽에서 1rem 거리 */
+    background-color: var(--button-info-hover-bg); /* 버튼 배경 색상 */
+    color: var(--white-color); /* 아이콘 색상 */
+    padding: 0.5rem; /* 버튼 안쪽 여백 */
+    border-radius: 50%; /* 원형 버튼 */
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+    transition: background-color 0.3s; /* 배경 색상 변화에 대한 전환 효과 */
+}
+
+.scrollup:hover {
+    background-color: var(--first-color-alt); /* 호버 시 배경 색상 변화 */
+}
+
+.scrollup__icon {
+    font-size: 1.5rem; /* 아이콘 크기 */
+    color: white;
+}
+
+/* 팝업 공통 S */
+#layer_dim {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+}
+
+#layer_popup {
+    position: fixed;
+    z-index: 101;
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#layer_popup iframe {
+    border: 0;
+}
+
+/* 팝업 공통 E */

@@ -1,0 +1,75 @@
+/* 전체 컨테이너 스타일 */
+.container {
+    display: flex;
+    align-items: stretch; /* 두 컨테이너의 높이를 동일하게 맞추기 위해 stretch 사용 */
+    gap: 20px; /* 테이블과 차트 사이의 간격 */
+}
+
+/* 테이블 컨테이너 스타일 */
+.table-container {
+    flex: 1; /* 테이블 컨테이너를 가능한 만큼 확장 */
+    padding: 10px; /* 여백 추가 */
+    box-sizing: border-box; /* 패딩을 포함하여 너비를 계산 */
+    margin-top: 40px;
+
+}
+
+/* 차트 컨테이너 스타일 */
+.chart-container {
+    flex: 1; /* 차트 컨테이너를 가능한 만큼 확장 */
+    padding: 10px; /* 여백 추가 */
+    box-sizing: border-box; /* 패딩을 포함하여 너비를 계산 */
+    display: flex; /* 차트 중앙 정렬 */
+    justify-content: center; /* 차트 중앙 정렬 */
+    align-items: center; /* 차트 수직 중앙 정렬 */
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%; /* 테이블이 컨테이너의 전체 너비를 차지하도록 설정 */
+    border-collapse: collapse; /* 셀의 경계가 겹치지 않도록 설정 */
+    background-color: #fff; /* 테이블 배경 색상 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 테이블 그림자 효과 */
+    border-radius: 8px; /* 테이블 모서리 둥글기 */
+    margin: 0; /* 테이블의 기본 마진 제거 */
+}
+
+/* 헤더 셀 스타일 */
+th {
+    background-color: #4c74af; /* 헤더 배경 색상 */
+    color: white; /* 헤더 글자 색상 */
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #ddd; /* 헤더 하단 경계 */
+    font-weight: bold;
+}
+
+/* 데이터 셀 스타일 */
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* 셀 하단 경계 */
+}
+
+/* 행 스타일 */
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* 짝수 행 배경 색상 */
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* 호버 시 행 배경 색상 */
+}
+
+/* 테이블 경계 스타일 */
+table {
+    border: 1px solid #ddd; /* 테이블 전체 경계 */
+}
+
+/* 셀 경계 스타일 */
+td, th {
+    border-right: 1px solid #ddd; /* 셀 오른쪽 경계 */
+}
+
+td:last-child, th:last-child {
+    border-right: none; /* 마지막 셀 오른쪽 경계 제거 */
+}

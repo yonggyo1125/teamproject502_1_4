@@ -1,0 +1,124 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+.table_rows {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.table_head th {
+    background-color: black;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.2rem;
+    padding: 10px;
+}
+
+.table_rows td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
+}
+
+.table_rows tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Button Styles */
+.sbtn {
+    padding: 8px 16px;
+    background-color: gray;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.sbtn:hover {
+    background-color: gray;
+}
+
+.right {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.write {
+    text-align: right; /* 오른쪽 정렬 */
+}
+
+.write-btn {
+    font-size: 20px; /* 글씨 크기 */
+}
+
+
+/* Titles */
+.completed-title {
+    text-align: left;
+    color: #5f504b; /* Bright red color */
+    margin-top: 40px;
+    font-weight: 600;
+}
+
+.uncompleted-title {
+    text-align: left;
+    color: orange; /* Bright blue color */
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Post Information */
+.post-info {
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.subject {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+/* Content Section */
+.contents {
+    border-top: 2px solid #007bff;
+    border-bottom: 2px solid #007bff;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Pagination / Links */
+.links {
+    text-align: right;
+}
+
+

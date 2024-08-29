@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="items">
+    <div class="write">
+        <a th:href="*{@utils.url('/board/write/' + bid)}" class="write-btn">
+            <i class="xi-pen"></i> 글쓰기
+        </a>
+    </div>
+
+<!--    <img class="qna-images" &lt;!&ndash;th:src="${@utils.url('/images/qna1.png')}"&ndash;&gt;>-->
+
+    <h1 class="uncompleted-title">대답이 필요한 게시물</h1>
+    <table class="table_rows">
+        <thead class="table_head">
+        <tr>
+            <th width="40">
+                <input type="checkbox" class="checkall" data-target-name="chk" id="checkall">
+                <label for="checkall"></label>
+            </th>
+            <th width="150">게시글 번호</th>
+            <th width="250">게시글 제목</th>
+            <th width="150">작성자</th>
+            <th width="200">작성일</th>
+            <th width="150">조회수</th>
+            <th width="200"></th>
+        </tr>
+        <tr th:if="${items == null || items.isEmpty()}">
+            <th colspan="7" class="no_data">조회된 게시글이 없습니다</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- longText1이 없는 항목들 -->
+        <tr th:each="item, status : ${items}" th:if="${item.longText1 == null}" th:object="${item}">
+            <td>
+                <input type="hidden" th:name="${'seq_' + status.index}" th:value="*{seq}">
+                <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk_' + status.index}">
+                <label th:for="${'chk_' + status.index}"></label>
+            </td>
+            <td th:text="*{seq}"></td>
+            <td th:text="*{subject}"></td>
+            <td th:text="*{poster}"></td>
+            <td th:text="*{#temporals.format(createdAt,'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="*{viewCount}"></td>
+            <td>
+                <a th:href="*{@utils.url('/board/update/' + seq)}" class="sbtn">
+                    <i class="xi-pen"></i> 수정하기
+                </a>
+                <a th:href="*{@utils.url('/board/qna/answer/' + seq)}" class="sbtn">
+                    <i class="xi-pen"></i> 답해주기
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+
+<!-- 대답을 완료한 게시물 -->
+<th:block th:fragment="items">
+    <h1 class="completed-title">대답을 완료한 게시물</h1>
+    <table class="table_rows">
+        <thead class="table_head">
+        <tr>
+            <th width="40">
+                <input type="checkbox" class="checkall" data-target-name="chk" id="checkall">
+                <label for="checkall"></label>
+            </th>
+            <th width="150">게시글 번호</th>
+            <th width="250">게시글 제목</th>
+            <th width="150">작성자</th>
+            <th width="200">작성일</th>
+            <th width="150">조회수</th>
+            <th width="200">답변 상태</th>
+            <th width="200"></th>
+        </tr>
+        <tr th:if="${items == null || items.isEmpty()}">
+            <th colspan="7" class="no_data">조회된 게시글이 없습니다</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- longText1이 있는 항목들 -->
+        <tr th:each="item, status : ${items}" th:if="${item.longText1 != null}" th:object="${item}">
+            <td>
+                <input type="hidden" th:name="${'seq_' + status.index}" th:value="*{seq}">
+                <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk_' + status.index}">
+                <label th:for="${'chk_' + status.index}"></label>
+            </td>
+            <td th:text="*{seq}"></td>
+            <td th:text="*{subject}"></td>
+            <td th:text="*{poster}"></td>
+            <td th:text="*{#temporals.format(createdAt,'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="*{viewCount}"></td>
+            <td>답변완료</td>
+            <td>
+                <a th:href="*{@utils.url('/board/update/' + seq)}" class="sbtn">
+                    <i class="xi-pen"></i> 수정하기
+                </a>
+                <a th:href="*{@utils.url('/board/qna/answer/' + seq)}" class="sbtn">
+                    <i class="xi-pen"></i> 답해주기
+                </a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+</th:block>
+
+
+</a>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="form">
+    <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+    <input type="hidden" th:field="*{gid}">
+    <input type="hidden" th:field="*{poster}">
+    <input type="hidden" th:field="*{subject}">
+    <input type="hidden" th:field="*{content}">
+
+    <th:block>
+        <div th:replace="~{front/board/qna/_common::category}"></div>
+    </th:block><dl>
+        <dt th:text="#{작성자}"></dt>
+        <dd th:utext="*{poster}"></dd>
+    </dl>
+    <dl>
+        <dt th:text="#{제목}"></dt>
+        <dd th:utext="*{subject}"></dd>
+    </dl>
+
+    <dl>
+        <dt th:text="#{내용}"></dt>
+        <dd th:utext="*{content}"></dd>
+    </dl>
+    <dl>
+        <dt th:text="#{답변}"></dt>
+        <dd>
+            <textarea name="longText1" th:field="*{longText1}" placeholder="질문에 대한 답변을 입력해주세요." rows="10" style="width: 100%;"></textarea>
+            <div class="error" th:each="err : ${#fields.errors('longText1')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+
+</th:block>
+</html>

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mobile/layouts/main}">
+<main layout:fragment="content">
+    <h1> 여행 계획으로 변경될 페이지</h1>
+
+    <button type="button" onclick="commonLib.popup.open('/calendar', 400, 400);">달력</button>
+</main>
+</html>

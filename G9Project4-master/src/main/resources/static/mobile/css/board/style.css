@@ -1,0 +1,364 @@
+/* CKEditor Editable Area */
+.ck-editor__editable {
+    height: 250px; /* 모바일 화면에 맞춰 높이 조정 */
+}
+
+/* Main Area Styling */
+.main-area {
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* 게시글 목록 공통 S */
+.board-main .list-items li {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    height: auto; /* 모바일에서는 높이 자동 조정 */
+    padding: 10px;
+}
+
+.board-main .list-items li:first-of-type {
+    border-top: 1px solid #ccc;
+}
+
+.board-main .list-items li:hover {
+    background: #f8f8f8;
+}
+
+.board-main .list-items .post-info {
+    width: 100%; /* 모바일에서 100% 너비 */
+    text-align: left; /* 모바일에서는 왼쪽 정렬 */
+}
+
+.board-main .list-items .post-info > span {
+    line-height: 1.5; /* 라인 높이 조정 */
+}
+
+.board-main .list-items .subject {
+    flex-grow: 1;
+    line-height: 1.5; /* 라인 높이 조정 */
+    padding: 0 10px;
+    font-size: 1rem; /* 폰트 크기 조정 */
+}
+
+.board-main .list-items .no-data {
+    align-items: center;
+    height: auto; /* 모바일에서는 높이 자동 조정 */
+    font-size: 1rem; /* 폰트 크기 조정 */
+    justify-content: center;
+}
+
+.board-main .category-links {
+    display: flex;
+    flex-wrap: wrap; /* 모바일에서는 줄바꿈 */
+    margin-bottom: 15px;
+}
+
+.board-main .category-links a {
+    height: auto; /* 모바일에서는 높이 자동 조정 */
+    padding: 10px;
+    line-height: 1.5; /* 라인 높이 조정 */
+    background: #ccc;
+    border-radius: 5px;
+    font-size: 1rem; /* 폰트 크기 조정 */
+    margin: 5px; /* 모바일에서는 여백 추가 */
+}
+
+.board-main .category-links a.on {
+    background: #000;
+    color: #fff;
+}
+
+.board-main .bottom-box {
+    display: flex;
+    flex-direction: column; /* 모바일에서 세로 방향으로 배치 */
+    align-items: flex-start;
+    height: auto; /* 모바일에서는 높이 자동 조정 */
+}
+
+.board-main .links .btn {
+    display: inline-block;
+    height: auto; /* 모바일에서는 높이 자동 조정 */
+    padding: 10px 15px;
+    line-height: 1.5; /* 라인 높이 조정 */
+    background: #ccc;
+    border-radius: 5px;
+    font-size: 1rem; /* 폰트 크기 조정 */
+    border: 0;
+    transition: background 0.3s ease;
+    margin-bottom: 5px; /* 버튼 사이 여백 추가 */
+}
+
+.board-main .links .btn:hover {
+    background: #000;
+    color: #fff;
+}
+
+.board-main .links .btn + .btn {
+    margin-left: 0;
+}
+
+/* 게시글 보기 공통 S */
+.board-main .view-content .subject {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1rem; /* 폰트 크기 조정 */
+    margin-bottom: 10px;
+}
+
+.board-main .view-content .post-info {
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    flex-direction: column; /* 모바일에서 세로 방향으로 배치 */
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.board-main .view-content .contents {
+    min-height: 250px; /* 모바일에서 높이 조정 */
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.board-main .view-content .contents img {
+    max-width: 100%; /* 모바일 화면에서 이미지 크기 조정 */
+    height: auto;
+}
+
+.board-main .downloads {
+    margin-bottom: 20px;
+}
+
+.board-main .downloads li {
+    height: auto; /* 모바일에서는 높이 자동 조정 */
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+}
+
+.board-main .downloads li a {
+    font-size: 1rem; /* 폰트 크기 조정 */
+    line-height: 1.5; /* 라인 높이 조정 */
+}
+
+.board-main .downloads li a:hover {
+    text-decoration: underline;
+}
+
+/* 댓글 */
+#frmComment {
+    margin: 20px 0 20px; /* 모바일에서는 여백 조정 */
+}
+
+.commenter_info {
+    margin-bottom: 5px;
+}
+
+.commenter_info input {
+    width: 100%; /* 모바일 화면에서 100% 너비 */
+    max-width: 300px; /* 최대 너비 조정 */
+}
+
+.comment_content {
+    display: flex;
+    flex-direction: column; /* 모바일에서 세로 방향으로 배치 */
+    height: auto; /* 모바일에서는 높이 자동 조정 */
+}
+
+.comment_content button {
+    width: 100%; /* 모바일 화면에서 100% 너비 */
+    max-width: 120px; /* 최대 너비 조정 */
+    background: #000;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    font-size: 1rem; /* 폰트 크기 조정 */
+    margin-top: 10px; /* 버튼 사이 여백 추가 */
+}
+
+.comment_content textarea {
+    width: 100%;
+    height: auto; /* 모바일에서는 높이 자동 조정 */
+    border: 1px solid #d5d5d5;
+    padding: 10px;
+    resize: none;
+    font-size: 1rem; /* 폰트 크기 조정 */
+}
+
+.comment_items {
+    margin-top: 10px;
+}
+
+.comment_items > li {
+    border: 1px solid #d5d5d5;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.comment_items > li + li {
+    margin-top: 10px;
+}
+
+.comment_items .comment_top {
+    display: flex;
+    flex-direction: column; /* 모바일에서 세로 방향으로 배치 */
+    justify-content: flex-start;
+    height: auto; /* 모바일에서는 높이 자동 조정 */
+    align-items: flex-start;
+    border-bottom: 1px solid #222;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.comment_items .comment {
+    padding: 10px;
+    background: #f8f8f8;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.comment_items .comment textarea {
+    width: 100%;
+    height: auto; /* 모바일에서는 높이 자동 조정 */
+    border: 1px solid #d5d5d5;
+    padding: 10px;
+    border-radius: 3px;
+    resize: none;
+}
+
+.comment_items .btns {
+    text-align: right;
+}
+
+.comment_items button,
+.comment_items .btns a {
+    border: 1px solid #596b99;
+    background: #fff;
+    height: auto; /* 모바일에서는 높이 자동 조정 */
+    padding: 10px;
+    color: #596b99;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 1rem; /* 폰트 크기 조정 */
+}
+
+.comment_items button:hover,
+.comment_items .btns a:hover {
+    background: #596b99;
+    color: #fff;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .ck-editor__editable {
+        height: 200px; /* 모바일 화면에서 높이 조정 */
+    }
+
+    .main-area {
+        padding: 10px;
+    }
+
+    .board-main .list-items li {
+        height: auto; /* 높이 자동 조정 */
+        padding: 8px;
+    }
+
+    .board-main .list-items .subject {
+        font-size: 1rem; /* 폰트 크기 조정 */
+    }
+
+    .board-main .category-links a {
+        padding: 8px;
+        font-size: 0.9rem; /* 폰트 크기 조정 */
+    }
+
+    .board-main .bottom-box {
+        flex-direction: column; /* 모바일에서 세로 방향으로 배치 */
+        align-items: flex-start;
+    }
+
+    .board-main .links .btn {
+        font-size: 0.9rem; /* 폰트 크기 조정 */
+        padding: 8px 12px;
+    }
+
+    .board-main .view-content .subject,
+    .board-main .view-content .post-info,
+    .board-main .view-content .contents {
+        font-size: 1rem; /* 폰트 크기 조정 */
+        padding: 8px;
+    }
+
+    .board-main .downloads li {
+        padding: 8px;
+    }
+
+    .comment_content textarea {
+        font-size: 0.9rem; /* 폰트 크기 조정 */
+    }
+
+    .comment_items .comment_top {
+        padding: 8px;
+    }
+
+    .comment_items button,
+    .comment_items .btns a {
+        font-size: 0.9rem; /* 폰트 크기 조정 */
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ck-editor__editable {
+        height: 150px; /* 모바일 화면에서 높이 조정 */
+    }
+
+    .board-main .list-items li {
+        padding: 5px;
+    }
+
+    .board-main .list-items .subject {
+        font-size: 0.9rem; /* 폰트 크기 조정 */
+    }
+
+    .board-main .category-links a {
+        padding: 6px;
+        font-size: 0.8rem; /* 폰트 크기 조정 */
+    }
+
+    .board-main .links .btn {
+        font-size: 0.8rem; /* 폰트 크기 조정 */
+        padding: 6px 10px;
+    }
+
+    .board-main .view-content .subject,
+    .board-main .view-content .post-info,
+    .board-main .view-content .contents {
+        font-size: 0.9rem; /* 폰트 크기 조정 */
+        padding: 6px;
+    }
+
+    .board-main .downloads li {
+        padding: 6px;
+    }
+
+    .comment_content textarea {
+        font-size: 0.8rem; /* 폰트 크기 조정 */
+    }
+
+    .comment_items .comment_top {
+        padding: 6px;
+    }
+
+    .comment_items button,
+    .comment_items .btns a {
+        font-size: 0.8rem; /* 폰트 크기 조정 */
+        padding: 6px;
+    }
+}

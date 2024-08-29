@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title><th:block th:if="${pageTitle!=null}" th:text="${#strings.concat(pageTitle,' - ')}"></th:block>사이트 제목</title>
+
+
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/style.css}">
+    <link th:if="${addCss != null}" rel="stylesheet" type="text/css"
+          th:each="cssFile:${addCss}" th:href="@{/admin/css/{file}.css(file=${cssFile})}">
+    <!--컨트롤러 없이 addViewControllers 사용 시-->
+    <th:block layout:fragment="addCss"></th:block>
+
+    <script th:src="@{/common/js/common.js}"></script>
+    <script th:src="@{/admin/js/common.js}"></script>
+    <script th:if="${addScript != null}"
+            th:each="jsFile:${addScript}" th:src="@{admin/js/{file}.js(file=${jsFile})}"></script>
+    <!--컨트롤러 없이 addViewControllers 사용 시-->
+    <th:block layout:fragment="addScript"></th:block>
+</head>
+<body>
+<header th:replace="~{admin/outlines/_header::common}"></header>
+<main layout:fragment="content"></main>
+<footer th:replace="~{admin/outlines/_footer::common}"></footer>
+<iframe name="ifrmHidden" class="dn"></iframe>
+</body>
+</html>

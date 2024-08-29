@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/mypage}">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<th:block th:fragment="menus">
+
+    <aside class="sidebar" >
+        <!--
+        <div class="layout-left">
+            <a class="main-logo" th:href="${@utils.redirectUrl('/')}">
+                <img th:src="${@utils.url('/images/mainLogo(w).png')}" th:alt="#{메인로고}" class="main-logo">
+            </a>
+        </div>
+-->
+        <a th:href="${@utils.redirectUrl('/mypage')}"
+           th:text="#{마이_페이지}" class="sidebar-item"></a>
+        <a th:href="${@utils.redirectUrl('/mypage/info')}" th:text="#{내_정보수정}" class="sidebar-item"></a>
+        <a th:href="${@utils.redirectUrl('/mypage/mypost')}" th:text="#{내_게시글}" class="sidebar-item"></a>
+        <a th:href="${@utils.redirectUrl('/mypage/mycomment')}" th:text="#{내_댓글}" class="sidebar-item"></a>
+        <a th:href="${@utils.redirectUrl('/mypage/myplace')}" th:text="#{내_맞춤여행지}" class="sidebar-item"></a>
+        <a th:href="${@utils.redirectUrl('/mypage/visitplace')}" th:text="#{내_방문맞춤여행지}" class="sidebar-item"></a>
+        <a th:href="${@utils.redirectUrl('/mypage/myinterests')}" th:text="#{내_관심사맞춤여행지}" class="sidebar-item"></a>
+
+        <button type="button" id="toggleBtn-mypage">
+            <i class="xi-plus"></i>
+        </button>
+    </aside>
+</th:block>
+<aside class="sidebar" th:fragment="menus">
+    <a th:href="${@utils.redirectUrl('/mypage/info')}" th:text="#{내_정보수정}" class="sidebar-item"></a>
+    <a th:href="${@utils.redirectUrl('/mypage/mypost')}" th:text="#{내_게시글}" class="sidebar-item"></a>
+    <a th:href="${@utils.redirectUrl('/mypage/myplace')}" th:text="#{맞춤여행지}" class="sidebar-item"></a>
+    <a th:href="${@utils.redirectUrl('/mypage/visitplace')}" th:text="#{방문기록_맞춤여행지}" class="sidebar-item"></a>
+    <a th:href="${@utils.redirectUrl('/mypage/myinterests')}" th:text="#{관심사_맞춤여행지}" class="sidebar-item"></a>
+</aside>
+</html>

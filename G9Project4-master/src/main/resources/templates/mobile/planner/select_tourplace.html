@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org/thymeleaf/layout"
+      layout:decorate="~{mobile/layouts/popup}">
+<main layout:fragment="content">
+    <h1 th:text="#{여행지_선택}"></h1>
+
+    <ul>
+        <li th:if="${items == null || items.empty}" th:text="#{조회된_여행지가_없습니다.}"></li>
+        <li th:unless="${items == null || items.empty}" th:each="item : ${items}" th:object="${item}">
+            <div th:if="*{firstImage2}" class="photo">
+                <img width='150' th:src="*{firstImage2}" th:alt="*{title}">
+            </div>
+            <div class="tour-info">
+                <div th:text="*{title}"></div>
+                <div th:text="*{address}"></div>
+                <div th:text="*{tel}"></div>
+            </div>
+            <div class="btns">
+                <button type="button" class="select" th:text="#{선택하기}" th:data-content-id="*{contentId}" th:data-title="*{title}" th:data-address="*{address}" th:data-tel="*{tel}"></button>
+                <a href="#" th:text="#{여행지정보}" target="_blank"></a>
+            </div>
+        </li>
+    </ul>
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+</main>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<section layout:fragment="content">
+    <h1>회원 수정</h1>
+    <form name="frmSave" method="post" th:action="${@utils.redirectUrl('/manager/member/save')}" autocomplete="off" th:object="${member}">
+
+
+        <th:block th:replace="~{adminMember/member/_form::form}"></th:block>
+
+        <div class="submit_btns">
+            <button type="submit" class="btn">수정하기</button>
+        </div>
+    </form>
+    <form name="frmDelete" method="post" th:action="${@utils.redirectUrl('/manager/member/delete')}" autocomplete="off">
+        <input type="hidden" name="email" th:value="${requestMember.email}" />
+    <button type="submit" class="btn">삭제하기</button>
+
+    </form>
+</section>
+</html>

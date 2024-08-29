@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="myBoardData">
+    <table class="list-items">
+        <thead>
+        <tr>
+            <th th:text="#{순번}"></th>
+            <th th:text="#{게시판_이름}"></th>
+            <th th:text="#{분류}"></th>
+            <th th:text="#{게시글_제목}"></th>
+            <th th:text="#{수정일}"></th>
+            <th th:text="#{삭제여부}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(items)}">
+            <th colspan="6"  th:text="#{조회된_게시글이_없습니다.}" class="no-data"></th>
+        </tr>
+        <tr th:if="${!#lists.isEmpty(items)}" th:each="item, s : ${items}" th:object="${item}" class="boardData-list">
+
+            <th th:text="${s.index + 1}"></th>
+            <th>
+                <a th:href="${@utils.redirectUrl('/board/list/'+item.board.bid)}" th:text="${item.board.bName}"></a>
+            </th>
+            <th>
+	    <span th:if="*{category != null && category != ''}" th:text="*{'[' + category + ']'}"
+              class="category"></span>
+            </th>
+            <th>
+                <a th:if="${item.deletedAt==null}" th:href="${@utils.redirectUrl('/board/view/'+item.seq)}" th:text="${item.subject}"></a>
+                <span th:if="${item.deletedAt!=null}" th:text="${item.subject}"></span>
+            </th>
+            <th th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm:ss')}"></th>
+            <th>
+                <i class="xi-check-square-o" th:if="${item.deletedAt!=null}"></i>
+                <i class="xi-checkbox-blank" th:if="${item.deletedAt==null}"></i>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+<th:block th:fragment="myCommentData">
+    <table class="list-items">
+        <thead>
+        <tr>
+            <th th:text="#{순번}"></th>
+            <th th:text="#{게시판_이름}"></th>
+            <th th:text="#{게시글_제목}"></th>
+            <th th:text="#{댓글_내용}"></th>
+            <th th:text="#{수정일}"></th>
+            <th th:text="#{삭제여부}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(items)}">
+            <th colspan="6"  th:text="#{조회된_댓글이_없습니다.}" class="no-data"></th>
+        </tr>
+        <tr th:if="${!#lists.isEmpty(items)}" th:each="item,s : ${items}" th:object="${item}" class="comment-list">
+
+            <th th:text="${s.index + 1}"></th>
+            <th>
+                <a th:href="${@utils.redirectUrl('/board/list/'+item.boardData.board.bid)}" th:text="${item.boardData.board.bName}"></a>
+            </th>
+            <th>
+                <a th:if="${item.boardData.deletedAt==null}" th:href="${@utils.redirectUrl('/board/view/'+item.boardData.seq)}" th:text="${item.boardData.subject}"></a>
+                <span th:if="${item.boardData.deletedAt!=null}" th:text="${item.boardData.subject}"></span>
+            </th>
+            <th th:text="*{content}"></th>
+            <th th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm:ss')}"></th>
+            <th>
+                <i class="xi-check-square-o" th:if="${item.boardData.deletedAt!=null}"></i>
+                <i class="xi-checkbox-blank" th:if="${item.boardData.deletedAt==null}"></i>
+            </th>
+        </tr>
+        </tbody>
+
+    </table>
+</th:block>
+<th:block th:fragment="myWishList">
+    <table class="wishList-items">
+        <thead>
+        <tr>
+            <th th:text="#{순번}"></th>
+            <th th:text="#{게시판_이름}"></th>
+            <th th:text="#{게시글_제목}"></th>
+            <th th:text="#{작성자}"></th>
+            <th th:text="#{수정일}"></th>
+            <th th:text="#{삭제여부}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(items)}">
+            <th colspan="5" th:text="#{조회된_찜글이_없습니다.}" class="no-data"></th>
+        </tr>
+        <tr th:if="${!#lists.isEmpty(items)}" th:each="item, s : ${items}" th:object="${item}">
+            <th th:text="${s.index + 1}"></th>
+            <th>
+                <a th:href="*{@utils.redirectUrl('/board/list/'+ board.bid)}" th:text="*{board.bName}" target="_blank"></a>
+            </th>
+            <th>
+                <a th:if="*{deletedAt==null}" th:href="*{@utils.redirectUrl('/board/view/'+ seq)}" th:text="*{subject}" target="_blank"></a>
+                <span th:if="*{deletedAt!=null}" th:text="*{subject}"></span>
+            </th>
+            <th th:text="*{poster}"></th>
+            <th th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm:ss')}"></th>
+            <th>
+                <i class="xi-check-square-o" th:if="*{deletedAt!=null}"></i>
+                <i class="xi-checkbox-blank" th:if="*{deletedAt==null}"></i>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+<th:block th:fragment="searchHistory">
+    <table class="searchHistory-items">
+        <thead>
+        <tr>
+            <th th:text="#{순번}"></th>
+            <th th:text="#{검색어}"></th>
+            <th th:text="#{검색_일시}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${items==null || items.empty}">
+            <th colspan="5" th:text="#{조회된_검색기록이_없습니다.}" class="no-data"></th>
+        </tr>
+        <tr th:unless="${items==null || items.empty}" th:each="item, s : ${items}" class="searchHistory-list">
+            <th th:text="${s.index + 1}"></th>
+            <th th:text="${item.keyword}">
+            </th>
+            <th th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></th>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+</html>

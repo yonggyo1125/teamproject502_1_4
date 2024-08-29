@@ -1,0 +1,192 @@
+/* 기본 스타일 */
+.section1 {
+    padding: 25px;
+    border-radius: 2px;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start; /* 상단 정렬 */
+    margin: 30px;
+}
+
+#frmIndex {
+    border: 2px solid rgba(52, 73, 94, 0.1);
+    padding: 25px;
+    border-radius: 5px;
+    background: #fff;
+    width: 550px; /* 데스크탑 화면에서의 너비 */
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+}
+
+#frmIndex > dl > dd > div > .user-greeting {
+    margin-left: 40px;
+}
+
+#frmIndex > dl > dd > div > .user-greeting > .a1 {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+#frmIndex > dl > dd > div > .user-greeting > .a2 {
+    font-size: 1.25rem;
+    margin-left: 5px;
+}
+
+#frmIndex > dl > dd > div > .user-greeting > .a3 {
+    font-size: 1.25rem;
+    margin-top: 10px;
+    display: block;
+}
+
+#frmIndex .profile-image {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 20px;
+    flex-grow: 1;
+}
+
+#frmIndex .profile-image .inner {
+    border-radius: 100px;
+    margin-bottom: 20px;
+}
+
+#frmIndex .myprofile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 2;
+}
+
+#frmIndex .myprofile > h3 {
+    padding-bottom: 20px;
+    line-height: 0.5;
+    text-align: start;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+#frmIndex .myprofile > dl {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.mypage-tour-story {
+    border: 2px solid rgba(52, 73, 94, 0.1);
+    padding: 25px;
+    border-radius: 5px;
+    background: #fff;
+    width: 800px; /* 데스크탑 화면에서의 너비 */
+    height: 500px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+    /* 큰 태블릿 및 작은 데스크탑에서 적용 */
+    .section1 {
+        flex-direction: column;
+        margin: 15px;
+        padding: 20px;
+    }
+
+    #frmIndex {
+        width: 100%;
+        flex-direction: column;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    #frmIndex .profile-image {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    #frmIndex .myprofile {
+        flex-grow: 1;
+        align-items: flex-start;
+    }
+
+    .mypage-tour-story {
+        width: 100%;
+        height: auto; /* 높이를 자동으로 설정 */
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* 모바일 화면에서 적용 */
+    .section1 {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    #frmIndex {
+        width: 100%;
+        flex-direction: column;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    #frmIndex > dl > dd > div > .user-greeting {
+        margin-left: 0;
+    }
+
+    #frmIndex .profile-image {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    #frmIndex .myprofile > h3 {
+        font-size: 1.25rem;
+        margin-bottom: 20px;
+    }
+
+    #frmIndex .myprofile > dl {
+        font-size: 1.1rem;
+    }
+
+    .mypage-tour-story {
+        width: 100%;
+        height: auto; /* 높이를 자동으로 설정 */
+        padding: 15px;
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 매우 작은 화면에서 적용 */
+    .section1 {
+        flex-direction: column;
+        padding: 10px;
+        margin: 5px;
+    }
+
+    #frmIndex {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #frmIndex .profile-image {
+        margin-bottom: 10px;
+    }
+
+    #frmIndex .myprofile > h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    #frmIndex .myprofile > dl {
+        font-size: 1rem;
+    }
+
+    .mypage-tour-story {
+        width: 100%;
+        height: auto; /* 높이를 자동으로 설정 */
+        padding: 10px;
+        margin-top: 10px;
+    }
+}

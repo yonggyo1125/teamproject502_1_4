@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mobile/layouts/main}">
+<main layout:fragment="content">
+    <div class="main-area">
+        <th:block th:if="${board.skin == 'default'}">
+            <th:block  th:replace="~{mobile/board/default/_view::view}"></th:block>
+        </th:block>
+        <th:block th:if="${board.skin == 'gallery'}">
+            <th:block th:if="${board.skin == 'gallery'}" th:replace="~{mobile/board/gallery/_view::view}"></th:block>
+        </th:block>
+
+        <th:block th:if="${board.useComment}"
+                  th:replace="~{mobile/board/_comment::comment}">
+
+        </th:block>
+
+        <th:block th:if="${board.showListBelowView}">
+            <th:block th:if="${board.skin == 'default'}">
+                <th:block th:replace="~{mobile/board/default/_list_items::items}"></th:block>
+            </th:block>
+            <th:block th:if="${board.skin == 'gallery'}">
+                <th:block th:replace="~{mobile/board/gallery/_list_items::items}"></th:block>
+            </th:block>
+        </th:block>
+    </div>
+
+</main>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraqnet.net.nz/thymeleaf/layout"
+      layout:decorate="~{mobile/layouts/main}">
+<main layout:fragment="contents">
+    <form name="frmSave" method="POST" th:action="${@utils.redirectUrl('/planner/save')}" autocomplete="off" th:object="${requestPlanner}">
+        <input type="hidden" name="mode" value="update">
+        <input type="hidden" name="seq" th:field="*{seq}">
+        <th:block th:replace="~{mobile/planner/_form::form}"></th:block>
+    </form>
+</main>
+</html>

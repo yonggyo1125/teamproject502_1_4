@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="form" th:object="${requestMember}">
+    <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+
+    <input type="hidden" name="seq" th:field="*{seq}">
+
+    <h2>회원 권한 부여</h2>
+    <div class="mb30">
+        <input type="radio" name="authorities" value="ADMIN" id="authority_admin" th:field="*{authorities}">
+        <label for="authority_admin">관리자</label>
+        <input type="radio" name="authorities" value="USER" id="authority_user" th:field="*{authorities}">
+        <label for="authority_user">사용자</label>
+    </div>
+
+    <!--    <h2>활동 여부 설정</h2>-->
+    <!--    <div class="mb30">-->
+    <!--        <input type="radio" name="activity" id="activity_true" value="true" th:field="*{activity}">-->
+    <!--        <label for="activity_true">계정 활동 가능</label>-->
+    <!--        <input type="radio" name="activity" id="activity_false" value="false" th:field="*{activity}">-->
+    <!--        <label for="activity_false">계정 활동 불가능</label>-->
+    <!--    </div>-->
+
+    <h2>회원 정보 설정</h2>
+    <input type="hidden" name="mode" value="edit">
+    <input type="hidden" name="seq" th:field="*{seq}">
+    <dl class="mb30">
+        <dt th:text="#{이메일}"></dt>
+        <dd>
+            <div>
+                <input type="hidden" name="email" th:field="*{email}">
+                <th:block th:text="*{email}"></th:block>
+            </div>
+        </dd>
+        <dt th:text="#{회원명}"></dt>
+        <dd>
+            <div>
+                <input type="text" name="userName" th:field="*{userName}">
+                <div class="error" th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
+            </div>
+        </dd>
+        <dt th:text="#{전화번호}"></dt>
+        <dd>
+            <div>
+                <input type="text" name="mobile" th:field="*{mobile}">
+                <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
+            </div>
+        </dd>
+
+        <dd>
+            <input type="hidden" name="password" th:field="*{password}">
+        </dd>
+    </dl>
+
+    <script th:replace="~{common/_file_tpl::editor_tpl}"></script>
+</th:block>
+
+</html>

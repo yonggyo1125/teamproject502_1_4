@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<section layout:fragment="content">
+    <th:block th:fragment="items">
+        <h1 th:text="${bName}"></h1>
+        <form name="frmList" method="post" th:action="@{/boardData}" target="ifrmHidden" autocomplete="off">
+            <input type="hidden" name="_method" value="PATCH">
+
+            <table class="table_rows">
+                <thead>
+                <tr>
+                    <th width="40">
+                        <input type="checkbox" class="checkall" data-target-name="chk" id="checkall">
+                        <label for="checkall"></label>
+                    </th>
+                    <th width="200">게시글 번호</th>
+                    <th width="350">게시글 제목</th>
+                    <th width="300">작성자</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${items == null || items.isEmpty()}">
+                    <td colspan="5" class="no_data">조회된 게시글이 없습니다</td>
+                </tr>
+                <tr th:each="item, status : ${items}">
+                    <td align="center">
+                        <input type="hidden" name="seq_${status.index}" th:value="${item.seq}">
+                        <input type="checkbox" name="chk" th:value="${status.index}" id="chk_${status.index}">
+                        <label th:for="${'chk_' + status.index}"></label>
+                    </td>
+                    <td th:text="${item.seq}" align="center"></td>
+                    <td th:text="${item.subject}" align="center"></td>
+                    <td th:text="${item.poster}" align="center"></td>
+                    <td align="center">
+
+                        <a th:href="@{/board/data/view/{seq}(seq=${item.seq})}" class="sbtn">
+                            <i class="xi-pen"></i> 게시글 자세히보기
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="table_actions">
+                <button type="button" class="sbtn form_action" data-mode="delete" data-form-name="frmList">선택 게시글 삭제</button>
+            </div>
+        </form>
+    </th:block>
+
+    <!-- Pagination block -->
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+</section>
+</html>

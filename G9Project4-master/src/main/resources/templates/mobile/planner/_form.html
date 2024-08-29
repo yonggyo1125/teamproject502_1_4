@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="form" th:object="${requestPlanner}">
+    <input type="hidden" name="itinerary" th:field="*{itinerary}">
+    <input type="hidden" name="sDate" th:field="*{sDate}">
+    <input type="hidden" name="eDate" th:field="*{eDate}">
+
+    <div class="planner-box">
+        <div class="left">
+            <h2 th:text="#{일정_선택하기}"></h2>
+            <iframe name="ifrmCalendar" class="select-date" th:src="${@utils.redirectUrl('/calendar')}"
+                    frameborder="0"></iframe>
+            <div class="error" th:each="err : ${#fields.errors('sDate')}" th:text="${err}"></div>
+            <div class="error" th:each="err : ${#fields.errors('eDate')}" th:text="${err}"></div>
+            <button type="button" th:text="#{일정_다시_선택하기}" id="reselect-calendar"></button>
+        </div>
+        <div class="right">
+            <div class="title-wrap">
+                <dl>
+                    <dt th:text="#{플래너명}"></dt>
+                    <dd>
+                        <input type="text" name="title" th:field="*{title}">
+                        <div class="error" th:each="err : ${#fields.errors('title')}" th:text="${err}"></div>
+                    </dd>
+                </dl>
+                <div class="controls">
+                    <button type="button" th:text="#{전체삭제}" class="remove-all"></button>
+                    <button type="button" th:text="#{삭제}" class="remove"></button>
+                    <button type="button" th:text="#{추가}" class="add"></button>
+                </div>
+            </div> <!--// title-wrap -->
+
+            <div class="itinerary">
+                <table class="inner">
+                    <thead>
+                    <tr>
+                        <th th:text="#{선택}"></th>
+                        <th th:text="#{일자}"></th>
+                        <th colspan='2' th:text="#{여행지명}"></th>
+                        <th th:text="#{주소}"></th>
+                        <th th:text="#{여행완료}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <div class="error" th:each="err: ${#fields.errors('itinerary')}" th:text="${err}"></div>
+            </div>
+
+            <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+            <div class="button-group">
+                <button type="reset" th:text="#{취소}"></button>
+                <button type="submit" th:text="#{저장}"></button>
+            </div>
+        </div>
+    </div> <!--// planner-box -->
+    <script type="text/html" id="tpl-planner">
+        <table>
+            <tr id="item-[seq]" data-seq="[seq]">
+                <td>
+                    <input type="checkbox" name="chk" value="[seq]" id="chk-[seq]">
+                    <label for="chk-[seq]"></label>
+                    <input type="hidden" name="contentId_[seq]">
+                </td>
+                <td>
+                    <select name="date_[seq]">
+                        <option value="" th:text="#{일정_선택}"></option>
+                        [dates]
+                    </select>
+                </td>
+                <td class="select-tour-place" id="tourplace-[seq]">여행지 선택</td>
+                <td class="select-tour-place" id="tourpace-image-[seq]"></td>
+                <td class="select-tour-place" id="tourplace-address-[seq]"></td>
+                <td>
+                    <input type="checkbox" name="tourDone_[seq]" value="true" id="tour-done-[seq]">
+                    <label for="tour-done-[seq]"></label>
+                </td>
+            </tr>
+        </table>
+    </script>
+</th:block>
+</html>

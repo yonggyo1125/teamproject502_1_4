@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="placeList" class="tour-list">
+    <div class="list-info">
+        <h1 th:text="#{검색_결과}"></h1>
+        <h4 th:if="${pagination!=null}" th:text="${'검색된 항목 : '+pagination.total}" class="right"></h4>
+    </div>
+    <ul class="list_thumType place">
+        <li class="bdr_nor" th:each="item, s:${items}" th:object="${item}">
+            <div class="place-photo">
+                <a th:href="*{@utils.redirectUrl('/tour/detail/'+contentId)}">
+                    <img class="firstImage" th:src="*{firstImage}" th:alt="#{이미지가_존재하지_않습니다.}">
+                </a>
+            </div>
+            <div class="place-info">
+                <div class="place-tit">
+                    <a th:href="*{@utils.redirectUrl('/tour/detail/' + contentId)}" th:text="*{title}">
+                    </a>
+                </div>
+                <div class="place-address" th:text="*{address}"></div>
+                <!--            <p class="place-contenType" th:if="*{contentType != null}" th:text="*{contentType.getType()}"></p>-->
+                <div class="place-categories" >
+                    <span th:if="*{!#strings.isEmpty(contentTypeId)}" th:text="*{@utils.getTypeByID(contentTypeId).type}"></span>
+                    <span th:if="*{category1!=null}" th:text="*{'#'+@categoryRepository.findDistinctName1ByCategory1(category1)}"></span>
+                    <span th:if="*{category2!=null}" th:text="*{'#'+@categoryRepository.findDistinctName2ByCategory2(category2)}"></span>
+                    <span th:if="*{category3!=null && @categoryRepository.findDistinctName3ByCategory3(category3)!=null}" th:text="*{'#'+@categoryRepository.findDistinctName3ByCategory3(category3)}"></span>
+                </div>
+
+                <p class="place-address" th:text="*{placePointValue}"></p>
+            </div>
+
+        </li>
+    </ul>
+</div>
+<!-- searchSidebar 섹션 -->
+<table th:fragment="searchSidebar" class="map-tour-list">
+    <span th:class="${'wishlist-toggle' + (isLogin? '' : ' required-login')}" th:data-seq="*{seq}" data-type="BOARD" th:classappend="*{@wishListService.check(seq, 'BOARD')} ? 'on'">♥</span>
+    <br>
+    <ul class="list_thumType place" th:each="item, s:${items}" th:object="${item}">
+        <li class="bdr_nor" th:attr="data-lat=*{latitude}, data-lng=*{longitude}">
+            <div class="place-describe">
+                <div class="place-tit">
+                    <a th:href="''" th:text="*{title}"></a>
+                </div>
+                <p class="place-address" th:text="*{address}"></p>
+                <p class="place-contenType" th:if="*{contentType != null}" th:text="*{contentType.getType()}"></p>
+            </div>
+            <div class="place-photo">
+                <a th:if="*{firstImage != null}" href="#"
+                   th:attr="data-lat=*{latitude}, data-lng=*{longitude}, data-detail=*{contentId}, data-address=*{address}, data-title=*{title}, data-image=*{firstImage}">
+                    <img class="firstImage" th:src="*{firstImage}">
+                </a>
+                <a th:if="*{firstImage==null}" href="#" th:attr="data-lat=*{latitude}, data-lng=*{longitude}"><i
+                        class="xi-image not-exist"></i></a>
+            </div>
+        </li>
+    </ul>
+</table>
+
+</html>

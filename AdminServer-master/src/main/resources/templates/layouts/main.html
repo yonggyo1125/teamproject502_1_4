@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf_token" th:content="${_csrf.token}">
+    <meta name="csrf_header" th:content="${_csrf.headerName}">
+    <title>
+        <th:block th:if="${pageTitle != null}"
+        th:text="${#strings.concat(pageTitle, ' - ')}"></th:block>
+        사이트 제목
+    </title>
+    <link rel="stylesheet" type="text/css" th:href="${@utils.url('/css/style.css')}">
+    <link th:if="${addCss != null}" rel="stylesheet" type="text/css"
+          th:each="cssFile: ${addCss}" th:href="${@utils.url(#strings.concat('/css/', cssFile, '.css'))}">
+    <th:block layout:fragment="addCss"></th:block>
+
+    <script th:src="${@utils.url('/js/common.js')}"></script>
+    <script th:if="${addScript != null}" th:each="jsFile : ${addScript}" th:src="${@utils.url(#strings.concat('/js/', jsFile, '.js'))}"></script>
+    <th:block layout:fragment="addScript"></th:block>
+</head>
+<body>
+<header th:replace="~{outlines/_header::common}"></header>
+<main>
+    <aside th:replace="~{outlines/_side::menus}"></aside>
+    <section>
+        <nav th:replace="~{outlines/_submenu::submenus}"></nav>
+        <section  layout:fragment="content"></section>
+    </section>
+</main>
+<iframe name="ifrmHidden" class="dn"></iframe>
+</body>
+</html>

@@ -1,0 +1,12 @@
+.list-items{
+    width: 100%;
+    margin: 0 auto;
+}
+.list-items tr{
+    margin-top: 10px;
+    height: 1.5rem;
+}
+.list-items th{
+
+    padding: 10px 0;
+}

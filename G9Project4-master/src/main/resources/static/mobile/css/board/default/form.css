@@ -1,0 +1,113 @@
+:root {
+    /* COLORS */
+    --white: #f9f9f9;
+    --gray: #444;
+    --blue: #0367a6;
+    --lightblue: #008997;
+    --error-red: #e74c3c;
+    /* RADII */
+    --input-radius: 0.4rem;
+    --button-radius: 0.2rem; /* 버튼 모서리 반경을 조금 더 작게 설정 */
+    /* SIZES */
+    --max-width: 100%; /* 모바일에서는 최대 너비를 100%로 설정 */
+    font-size: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* 전체 글 */
+dt {
+    font-size: 1rem; /* 모바일에서 폰트 크기 조정 */
+}
+
+/* 글 아래 텍스트 */
+dd {
+    text-indent: 1rem; /* 모바일에서 텍스트 들여쓰기 조정 */
+}
+
+.button-group {
+    text-align: center;
+    border-radius: var(--button-radius); /* 버튼 모서리 반경을 조금 더 작게 설정 */
+    padding: 0.5rem 1rem; /* 모바일에서 버튼 안쪽 여백 조정 */
+    font-size: 1rem; /* 모바일에서 버튼 텍스트 크기 조정 */
+    display: flex;
+    justify-content: center; /* 버튼 그룹 중앙 정렬 */
+    gap: 0.5rem; /* 버튼 사이 여백 추가 */
+}
+
+form {
+    background-color: var(--white);
+    padding: 1rem; /* 모바일에서 form의 패딩 조정 */
+    border-radius: var(--button-radius);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15); /* 모바일에서 그림자 크기 조정 */
+    max-width: var(--max-width);
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto; /* 수평 중앙 배치 */
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 1.5rem; /* 모바일에서 제목 폰트 크기 조정 */
+    padding-right: 1rem; /* 모바일에서 제목 오른쪽 패딩 조정 */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    :root {
+        font-size: 10px; /* 화면 크기에 맞게 폰트 크기 조정 */
+    }
+
+    dt {
+        font-size: 0.9rem; /* 모바일에서 폰트 크기 조정 */
+    }
+
+    dd {
+        text-indent: 0.5rem; /* 모바일에서 텍스트 들여쓰기 조정 */
+    }
+
+    .button-group {
+        padding: 0.5rem 0.5rem; /* 모바일에서 버튼 안쪽 여백 조정 */
+        font-size: 0.9rem; /* 모바일에서 버튼 텍스트 크기 조정 */
+        gap: 0.25rem; /* 버튼 사이 여백 조정 */
+    }
+
+    form {
+        padding: 1rem; /* 모바일에서 form의 패딩 조정 */
+    }
+
+    .title {
+        font-size: 1.2rem; /* 모바일에서 제목 폰트 크기 조정 */
+        padding-right: 0.5rem; /* 모바일에서 제목 오른쪽 패딩 조정 */
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        font-size: 8px; /* 화면 크기에 맞게 폰트 크기 조정 */
+    }
+
+    dt {
+        font-size: 0.8rem; /* 모바일에서 폰트 크기 조정 */
+    }
+
+    dd {
+        text-indent: 0.5rem; /* 모바일에서 텍스트 들여쓰기 조정 */
+    }
+
+    .button-group {
+        padding: 0.5rem 0.5rem; /* 모바일에서 버튼 안쪽 여백 조정 */
+        font-size: 0.8rem; /* 모바일에서 버튼 텍스트 크기 조정 */
+        gap: 0.2rem; /* 버튼 사이 여백 조정 */
+    }
+
+    form {
+        padding: 0.8rem; /* 모바일에서 form의 패딩 조정 */
+    }
+
+    .title {
+        font-size: 1rem; /* 모바일에서 제목 폰트 크기 조정 */
+        padding-right: 0.5rem; /* 모바일에서 제목 오른쪽 패딩 조정 */
+    }
+}

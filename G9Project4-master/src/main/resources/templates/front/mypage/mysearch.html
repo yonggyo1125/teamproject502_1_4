@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/popup}">
+<main layout:fragment="content">
+    <th:block th:replace="~{front/mypage/_list_items::searchHistory}"></th:block>
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+</main>
+</html>

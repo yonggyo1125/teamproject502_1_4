@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<section layout:fragment="content">
+    <h1>사이트 방문자 통계</h1>
+    <div class="container">
+        <!-- 왼쪽: 테이블 -->
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Visitor Count</th>
+                </tr>
+                </thead>
+                <tbody id="jang">
+                <tr th:each="stat : ${stats}">
+                    <td th:text="${stat.visitDate}"></td>
+                    <td th:text="${stat.visitCount}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 오른쪽: 그래프 -->
+        <div class="chart-container">
+            <canvas id="visitChart"></canvas>
+        </div>
+    </div>
+    <th:block th:if="${items!=null}">
+        <h1>질문게시판 답해야하는 게시물</h1>
+        <div class="middleContainer">
+            <th:block th:fragment="items">
+                <table class="table_rows">
+                    <thead>
+                    <tr>
+                        <th width="40">
+                            <input type="checkbox" class="checkall" data-target-name="chk" id="checkall">
+                            <label for="checkall"></label>
+                        </th>
+                        <th width="200">게시글 번호</th>
+                        <th width="350">게시글 제목</th>
+                        <th width="300">작성자</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${items == null || items.isEmpty()}">
+                        <td colspan="5" class="no_data">조회된 게시글이 없습니다</td>
+                    </tr>
+                    <tr th:each="item, status : ${items}" th:if="${item.longText1 == null}">
+                        <td align="center">
+                            <input type="hidden" name="seq_${status.index}" th:value="${item.seq}">
+                            <input type="checkbox" name="chk" th:value="${status.index}" id="chk_${status.index}">
+                            <label th:for="${'chk_' + status.index}"></label>
+                        </td>
+                        <td th:text="${item.seq}" align="center"></td>
+                        <td th:text="${item.subject}" align="center"></td>
+                        <td th:text="${item.poster}" align="center"></td>
+                        <td align="center">
+                            <a th:href="@{http://localhost:3001/board/list/qna}" class="sbtn">
+                                <i class="xi-pen"></i> 게시글 답하러가기
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </th:block>
+        </div>
+    </th:block>
+
+</section>
+</html>

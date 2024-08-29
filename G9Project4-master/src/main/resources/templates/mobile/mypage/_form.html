@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<table th:fragment="placeList" class="tour-list">
+    <h1 th:if="${tourPlaceSearch != null and tourPlaceSearch.contentType != null}"
+        th:text="${#strings.concat(tourPlaceSearch.contentType.getType(), ' 리스트보기')}"></h1>
+
+    <h1>리스트 보기</h1>
+
+    <div class="sort">
+        <!-- Sort by ID (ascending)-->
+        <a th:href="@{${baseURL}(page=1, limit=10, sort='contentId', sortDirection='asc')}" th:text="#{ID 순}"></a>
+        <!-- Sort by Popularity (descending) -->
+        <a th:href="@{${baseURL}(page=1, limit=10, sort='placePointValue', sortDirection='desc')}" th:text="#{인기 순}"></a>
+    </div>
+    <thead>
+    <tr>
+        <th th:text="#{순번}"></th>
+        <th th:text="#{컨텐트ID}"></th>
+        <th th:text="#{장소이름}"></th>
+        <th th:text="#{주소}"></th>
+        <th th:text="#{사진}"></th>
+        <th th:text="#{전화번호}"></th>
+        <th th:text="#{여행지점수}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item,s : ${data.items}" th:object="${item}" class="item" th:id="tourPlace+${s.index}">
+        <td class="table-index">[[${s.index + 1}]]</td>
+        <td class="table-contentId" th:text="*{contentId}"></td>
+        <td class="table-title">
+            <a th:href="*{@utils.redirectUrl('/tour/detail/' + contentId)}" th:text="*{title}"></a>
+        </td>
+        <td class="table-address" th:text="*{address}"></td>
+        <td class="table-image">
+            <img class="firstImage" th:src="*{firstImage}">
+        </td>
+        <td th:text="*{tel}"></td>
+        <td th:text="*{placePointValue}"></td>
+
+
+    </tr>
+    </tbody>
+</table>
+</html>

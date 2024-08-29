@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="items">
+
+    <div class="header-image">
+        <img th:src="@{/images/home-2084.jpg}" alt="Header image" style="width: 100%; height: auto">
+    </div>
+
+    <nav th:replace="~{front/board/default/_common::categorylink}"></nav>
+
+    <th:block th:fragment="items" th:class="list_main">
+        <table class="table_rows">
+            <thead class="table_head">
+            <tr>
+                <th width="50" th:text="#{순번}"></th>
+                <th width="100" th:text="#{작성자}"></th>
+                <th width="200" class="post-title" th:text="#{제목}">게시글 제목</th>
+                <th width="200" class="post-date" th:text="#{작성일}"></th>
+                <th width="50" class="views" th:text="#{조회수}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(items)}" th:text="#{조회된_게시글이_없습니다}" class="no-data"></tr>
+                <tr th:if="${!#lists.isEmpty(items)}" th:each="item, s:${items}" th:object="${item}">
+                    <th th:text="${s.index}"></th>
+                    <th class="poster" th:text="*{poster}"></th>
+                    <th class="subject">
+                        <a th:href="*{@utils.redirectUrl('/board/view/'+seq)}">
+                        <span th:if="*{notice}" th:text="${'[' + #messages.msg('공지') + ']'}"></span>
+                        <span th:if="*{category != null && category != ''}" th:text="*{'[' + category + ']'}" class="category"></span>
+                        <th:block th:text="*{subject}"></th:block>
+                        </a>
+                    </th>
+                    <th class="datetime" th:text="*{#temporals.format(createdAt,'yyyy.MM.dd HH:mm')}"></th>
+                    <th class="view-count" th:text="*{viewCount < 1000 ? viewCount : #numbers(viewCount, 3, 'COMMA')}"></th>
+                </tr>
+            </tbody>
+        </table>
+    <div class="bottom-box">
+        <div class="links-wrap">
+            <div class="links">
+                <a th:href="${@utils.redirectUrl('/board/write/' + board.bid)}" class="btn2" th:text="#{글쓰기}"></a>
+            </div>
+        </div>
+        <form name="frmSearch" class="list-form" th:action="${@utils.redirectUrl('/board/list/' + board.bid)}" autocomplete="off" th:object="${boardDataSearch}">
+            <input type="hidden" name="category" th:field="*{category}">
+            <select name="sopt" th:field="*{sopt}">
+                <option value="ALL" th:text="#{통합검색}"></option>
+                <option value="SUBJECT" th:text="#{제목}"></option>
+                <option value="CONTENT" th:text="#{내용}"></option>
+                <option value="SUBJECT_CONTENT" th:text="#{제목+내용}"></option>
+                <option value="NAME" th:text="#{이름}"></option>
+            </select>
+            <input type="text" name="skey" th:field="*{skey}">
+            <button type="submit" th:text="#{검색하기}"></button>
+        </form>
+    </div>
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+    </th:block>
+</th:block>
+</html>

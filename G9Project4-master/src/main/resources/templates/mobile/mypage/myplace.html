@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mobile/layouts/mypage}">
+<section layout:fragment="content">
+    <h1 th:text="#{내_맞춤여행지}"></h1>
+    <p>현재 날짜: <span th:text="${currentDate}"></span></p>
+    <table th:replace="~{mobile/mypage/_form::placeList}"></table>
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+</section>
+</html>

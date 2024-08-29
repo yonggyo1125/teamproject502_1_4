@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content" th:object="${data}">
+    <h1 th:text="*{title}"></h1>
+    <dl>
+        <dt th:text="#{여행기간}"></dt>
+        <dd>
+            <th:block th:text="*{#temporals.format(sDate, 'yyyy.MM.dd')}"></th:block> ~
+            <th:block th:text="*{#temporals.format(eDate, 'yyyy.MM.dd')}"></th:block>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{여행일정}"></dt>
+        <dd>
+            <ul th:if="*{itineraries != null && !itineraries.empty}" th:each="item : *{itineraries}" th:object="${item}">
+                <li>
+                    <a th:if="*{!#strings.isEmpty(firstImage)}" th:href="*{@utils.redirectUrl('/tour/detail/' + seq)}" class="photo">
+                        <img th:src="*{@utils.getThumbUrl(firstImage, 100, 80)}">
+                    </a>
+                    <div class="tour-info">
+                        <dl class="title">
+                            <dt th:text="#{여행지}"></dt>
+                            <dd th:text="*{title}"></dd>
+                        </dl>
+                        <dl>
+                            <dt th:text="#{여행일}"></dt>
+                            <dd th:text="*{date}"></dd>
+                        </dl>
+                        <div class="address" th:text="*{address}"></div>
+                        <div class="tour-done" th:text="*{#strings.equals(done, true)? #messages.msg('여행완료'):#messages.msg('여행중')}"></div>
+                    </div>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+    <div class="links">
+        <a th:href="${@utils.redirectUrl('/planner')}" th:text="#{플래너_목록}"></a>
+        <a th:href="${@utils.redirectUrl('/planner/write')}" th:text="#{플래너_작성}"></a>
+        <a th:href="*{@utils.redirectUrl('/planner/update/' + seq)}" th:text="#{플래너_수정}"></a>
+        <a th:href="*{@utils.redirectUrl('/planner/delete/' + seq)}" th:text="#{플래너_삭제}" onclick="return confirm('정말 삭제하겠습니까?');"></a>
+        <a th:href="*{@utils.redirectUrl('/board/write/planner_note?num1=' + seq)}" th:text="#{여행노트_작성}"></a>
+    </div>
+</main>
+</html>

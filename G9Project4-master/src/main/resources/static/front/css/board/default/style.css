@@ -1,0 +1,176 @@
+/*List CSS Start*/
+
+.category-links {
+    text-align: center; /* 중앙 정렬 */
+    font-size: 18px; /* 적당한 글자 크기 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 애플 시스템 폰트 */
+    font-weight: 500; /* 적당한 글자 두께 */
+    color: #333; /* 다크 그레이 색상 */
+    margin: 20px 0; /* 위아래 여백 */
+    padding: 10px 0; /* 위아래 패딩 */
+    border-bottom: 1px solid #e1e1e1; /* 아래쪽에 얇은 경계선 */
+}
+
+.category-links a {
+    color: #007aff; /* 애플 블루 색상 */
+    text-decoration: none; /* 기본 밑줄 제거 */
+    transition: color 0.3s, border-bottom 0.3s; /* 부드러운 색상 전환 효과 */
+}
+
+.category-links a:hover,
+.category-links a:focus {
+    color: #0051a2; /* 호버 시 어두운 블루 색상 */
+    border-bottom: 2px solid #007aff; /* 호버 시 밑줄 추가 */
+}
+
+
+.table_rows {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.table_head th, .table_rows td {
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table_head {
+    background-color: #f9f9f9;
+    color: #333;
+    border-bottom: 2px solid #d0d0d0;
+}
+
+.table_head th {
+    font-weight: bold;
+}
+
+.table_rows tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.table_rows tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+.table_rows tbody tr:hover {
+    background-color: #e0e0e0;
+}
+.left{
+    float: left;
+}
+.right {
+    float: right;
+}
+
+.list-form {
+    text-align: right;
+    margin-top: 10px;
+}
+
+
+/*List CSS End*/
+
+/*View Css Start*/
+.subject{
+    font-weight: 400;
+    font-size: 15px;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+.post-info {
+    font-size: 1.2rem;
+    min-height: 40px;
+    display: flex; /* 요소들을 가로로 배치 */
+    justify-content: space-between; /* 양 끝으로 정렬 */
+    align-items: flex-start; /* 위쪽 정렬 */
+
+}
+.contents{
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    min-height: 500px;
+    padding: 15px;
+    margin: 7px;
+}
+
+.sbtn{
+    width: 70px;
+    height: 30px;
+    color: #222;
+    display: inline-block;
+    font-size: 0.9rem;
+}
+
+.right {
+    float: none; /* float 해제 */
+    text-align: right;
+    margin-top: -20px; /* 필요에 따라 위로 올리기 */
+}
+.links-wrap {
+    display: flex;
+    justify-content: right;
+}
+.links {
+    text-align: right;
+    padding: 10px 20px; /* 안쪽 여백 */
+    font-size: 16px; /* 텍스트 크기 */
+    color: black; /* 텍스트 색상 */
+    background-color: white; /* 기본 배경색  */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 커서 변경 */
+    text-decoration: none; /* 텍스트 밑줄 제거 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+
+
+/*View Css End*/
+
+/*Write Css Start*/
+
+.writefrm {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--button-radius);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    max-width: var(--max-width);
+    width: 100%;
+    box-sizing: border-box;
+    /* form을 중앙에 배치 */
+    margin: 0 auto; /* 수평 중앙 배치 */
+    display: flex;
+    flex-direction: column;
+
+}
+
+/*Write Css End*/
+
+
+/* 댓글 */
+#frmComment { margin: 20px 0 30px; }
+.commenter_info { margin-bottom: 5px; }
+.commenter_info input { width: 120px; }
+.comment_content { display: flex; height: 100px; }
+.comment_content button { width: 100px; background: #000; color: #fff; border: 0; cursor: pointer; font-size: 1.15rem; }
+.comment_content textarea { flex-grow: 1; border: 1px solid #d5d5d5; padding: 10px; resize: none; }
+
+.comment_items { margin-top: 10px; }
+.comment_items > li { border: 1px solid #d5d5d5; padding: 10px; border-radius: 3px; }
+.comment_items > li + li { margin-top: 10px; }
+.comment_items .comment_top { display: flex; justify-content: space-between; height: 35px; align-items: center; border-bottom: 1px solid #222; margin-bottom: 10px; padding: 0 10px; }
+.comment_items .comment { padding: 10px; background: #f8f8f8; border-radius: 3px; margin-bottom: 10px; }
+.comment_items .comment textarea { width: 100%; height: 150px; border: 1px solid #d5d5d5; padding: 10px; border-radius: 3px; resize: none; }
+
+.comment_items .btns { text-align: right; }
+.comment_items button, .comment_items .btns a { border: 1px solid #596b99; background: #fff; height: 35px; padding: 0 15px; color: #596b99; cursor: pointer; transition: all 0.5s; border-radius: 3px; display: inline-block; line-height: 33px; }
+.comment_items button:hover, .comment_items .btns a:hover { background: #596b99; color: #fff; }
+

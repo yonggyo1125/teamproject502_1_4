@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="image1" class="my-profile-image image1" th:if="${isLogin && myProfileImage != null}" th:object="${myProfileImage}">
+    <div class="inner" th:style="*{#strings.concat('background:url(', fileUrl, ') no-repeat center center; background-size: cover;')}"></div>
+</div>
+</html>

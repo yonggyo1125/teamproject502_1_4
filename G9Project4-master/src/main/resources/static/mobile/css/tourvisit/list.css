@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR:wght@200..900&display=swap');
+
+/*=============== TABLE CSS ===============*/
+table {
+    table-layout: auto;
+    width: 100%; /* 테이블이 전체 너비를 차지하도록 설정 */
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 20px 0; /* 상하 여백 추가 */
+    text-align: center;
+}
+
+table * {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+}
+
+table td {
+    border-top: 1px solid black;
+}
+
+.table-image {
+    min-width: 200px; /* 모바일에서 이미지 최소 너비 조정 */
+    max-width: 100%; /* 이미지가 테이블 너비에 맞게 조정 */
+}
+
+img {
+    width: 100%; /* 모바일에서 이미지가 부모 요소에 맞게 조정 */
+}
+
+/*=============== TABS CSS ===============*/
+.tabs {
+    display: flex;
+    flex-direction: column; /* 모바일에서 열 방향으로 변경 */
+    border-bottom: 2px solid #ddd;
+}
+
+.tab-button {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 5px 5px 0 0;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    flex: 1;
+}
+
+.tab-button.active {
+    background-color: #ddd;
+    border-bottom: 2px solid transparent;
+}
+
+/* 탭 콘텐츠 스타일 */
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+
+/*=============== MOBILE STYLES ===============*/
+@media screen and (max-width: 767px) {
+    table {
+        font-size: 0.875rem; /* 모바일에서 폰트 크기 조정 */
+    }
+
+    .tabs {
+        flex-direction: column; /* 모바일에서 열 방향으로 변경 */
+    }
+
+    .tab-button {
+        padding: 12px 10px; /* 모바일에서 패딩 조정 */
+    }
+
+    .tab-content {
+        padding: 10px; /* 모바일에서 패딩 조정 */
+    }
+}

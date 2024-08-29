@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<section layout:fragment="content">
+    <h1>게시글 관리</h1>
+
+    <h2>게시글 목록</h2>
+
+    <div>
+        <div class='tab-menu'>
+            <a th:href="${@utils.redirectUrl('/board/posts')}">전체</a>
+            <a th:href="${@utils.redirectUrl('/board/notice')}">공지사항</a>
+            <a th:href="${@utils.redirectUrl('/board/qna')}">질문과답변</a>
+            <a th:href="${@utils.redirectUrl('/board/freetalk')}">자유게시판</a>
+            <a th:href="${@utils.redirectUrl('/board/plan')}">여행게시판</a>
+        </div>
+    </div>
+
+    <form name="frmList" method="post" th:action="${@utils.redirectUrl('/board/posts')}" autocomplete="off" th:object="${boardDataSearch}">
+        <table class="table_rows">
+            <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" class="checkall" data-target-name="chk">
+                </th>
+                <th>게시글번호</th>
+                <th>작성자</th>
+                <th>제목</th>
+                <th>작성일시</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${items == null || items.isEmpty()}">
+                <td class="no-data" colspan="6">조회된 게시글이 없습니다.</td>
+            </tr>
+            <tr th:unless="${items == null || items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
+                <td>
+                    <input type="checkbox" name="chk" th:value="${status.index}">
+                </td>
+                <td th:text="*{seq}"></td>
+                <td>
+                    <th:block th:text="*{poster}"></th:block>
+                    <th:block th:if="*{member != null}" th:text="*{#strings.concat('(', member.email + ')')}"></th:block>
+                </td>
+                <td th:text="*{subject}"></td>
+                <td th:text="*{createdAt}"></td>
+                <td>
+                    <a th:href="${@utils.redirectUrl('/board/posts' + bid)}" class="sbtn">
+                        <i class="xi-wrench"></i> 관리
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="table_actions"><!--common.js에서 양식 공통 처리함-->
+            <button type="button" class="sbtn form_action" data-mode="delete" data-form-name="frmList">선택 게시물 삭제</button>
+        </div>
+
+    </form>
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+</section>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="tabs">
+    <nav th:replace="~{common/_tourtype_tpl::typelist}"></nav>
+
+    <div class="tabs">
+        <button class="tab-button" onclick="showContent('tab1')">탭 1</button>
+        <button class="tab-button" onclick="showContent('tab2')">탭 2</button>
+        <button class="tab-button" onclick="showContent('tab3')">탭 3</button>
+    </div>
+
+    <div id="tab1" class="tab-content">
+        <table th:replace="~{front/tour/_form :: placeList}"></table>
+    </div>
+
+    <div id="tab2" class="tab-content">
+        <table th:replace="~{front/tour/_form :: placeList}"></table>
+    </div>
+
+    <div id="tab3" class="tab-content">
+        <table th:replace="~{front/tour/_form :: placeList}"></table>
+    </div>
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+</main>
+</html>

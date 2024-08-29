@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<th:block layout:fragment="addCommonScript">
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=f7e5ce6f3b0051af5d9e6eeb83ef6d44&libraries=services"></script>
+</th:block>
+<main layout:fragment="content">
+    <h1>관광지 상세 정보 보기</h1>
+    <section>
+        <th:block th:if="${items.detailItem!=null}" th:object="${items.detailItem}">
+            <dl  th:if="*{title!=null && !title.trim().equals('')}">
+                <dt th:text="#{여행지_이름}"></dt>
+                <dd th:text="*{title}"></dd>
+            </dl>
+            <dl th:if="*{homepage!=null && !homepage.trim().equals('')}">
+                <dt th:text="#{홈페이지}"></dt>
+                <dd th:utext="*{homepage}"></dd>
+            </dl>
+            <dl  th:if="*{addr1!=null && !addr1.trim().equals('')}">
+                <dt th:text="#{주소}"></dt>
+                <dd>
+                    <address th:text="*{addr1}"></address>
+                </dd>
+            </dl>
+            <dl th:if="*{tel!=null && !tel.trim().equals('')}">
+                <dt th:text="#{전화번호}"></dt>
+                <dd th:text="*{tel}">
+                </dd>
+            </dl>
+            <dl th:if="*{firstimage!=null && !firstimage.trim().equals('')}">
+                <dt th:text="#{사진1}"></dt>
+                <dd>
+                    <img style="height:600px" th:src="*{firstimage}">
+                </dd>
+            </dl>
+            <dl th:if="*{overview!=null && !overview.trim().equals('')}">
+                <dt th:text="#{설명}"></dt>
+                <dd>
+                    <div style="width: 800px;" th:utext="*{@utils.nl2br(overview)}"></div>
+                </dd>
+            </dl>
+            <dl th:if="*{(mapx!=null && mapx>0) || addr1!=null }">
+                <div id="map" th:data-lat="*{mapy}" th:data-lng="*{mapx}" th:data-address="*{addr1}" th:data-mLevel="*{mlevel}"></div>
+            </dl>
+        </th:block>
+        <th:block th:if="${items.detailPetItem!=null}" th:object="${items.detailPetItem}">
+            <dl th:if="*{acmpyPsblCpam!=null && !acmpyPsblCpam.trim().equals('')}">
+                <dt th:text="#{동반가능동물}"></dt>
+                <dd th:text="*{acmpyPsblCpam}">
+                </dd>
+            </dl>
+            <dl th:if="*{relaRntlPrdlst!=null && !relaRntlPrdlst.trim().equals('')}">
+                <dt th:text="#{관련_렌탈_품목}"></dt>
+                <dd th:text="*{relaRntlPrdlst}">
+                </dd>
+            </dl>
+            <dl th:if="*{acmpyNeedMtr!=null && !acmpyNeedMtr.trim().equals('')}">
+                <dt th:text="#{동반시_필요사항}"></dt>
+                <dd th:text="*{acmpyNeedMtr}">
+                </dd>
+            </dl>
+            <dl th:if="*{relaFrnshPrdlst!=null && !relaFrnshPrdlst.trim().equals('')}">
+                <dt th:text="#{관련_비치_품목}"></dt>
+                <dd th:text="*{relaFrnshPrdlst}">
+                </dd>
+            </dl>
+            <dl th:if="*{etcAcmpyInfo!=null && !etcAcmpyInfo.trim().equals('')}">
+                <dt th:text="#{기타_동반_정보}"></dt>
+                <dd th:text="*{etcAcmpyInfo}">
+                </dd>
+            </dl>
+            <dl th:if="*{relaPurcPrdlst!=null && !relaPurcPrdlst.trim().equals('')}">
+                <dt th:text="#{관련_구매_품목}"></dt>
+                <dd th:text="*{relaPurcPrdlst}">
+                </dd>
+            </dl>
+            <dl th:if="*{relaAcdntRiskMtr!=null && !relaAcdntRiskMtr.trim().equals('')}">
+                <dt th:text="#{관련_사고_대비사항}"></dt>
+                <dd th:text="*{relaAcdntRiskMtr}">
+                </dd>
+            </dl>
+            <dl th:if="*{acmpyTypeCd!=null && !acmpyTypeCd.trim().equals('')}">
+                <dt th:text="#{동반_유형_코드}"></dt>
+                <dd th:text="*{acmpyTypeCd}">
+                </dd>
+            </dl>
+            <dl th:if="*{relaPosesFclty!=null && !relaPosesFclty.trim().equals('')}">
+                <dt th:text="#{관련_구비_시설}"></dt>
+                <dd th:text="*{relaPosesFclty}">
+                </dd>
+            </dl>
+            <dl th:if="*{petTursmInfo!=null && !petTursmInfo.trim().equals('')}">
+                <dt th:text="#{반려견_관광정보}"></dt>
+                <dd th:text="*{petTursmInfo}">
+                </dd>
+            </dl>
+        </th:block>
+    </section>
+
+</main>
+</html>

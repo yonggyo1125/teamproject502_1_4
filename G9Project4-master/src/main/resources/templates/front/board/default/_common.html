@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="pageTitle" class="page-title">
+    <h1>
+        <a th:href="${@utils.redirectUrl('/board/list/' + board.bid)}" th:text="${board.bName}"></a>
+    </h1>
+</div>
+
+<div th:fragment="category" class="category-tab">
+        <span th:if="${board.categories != null && !board.categories.isEmpty()}"
+              th:each="cat, status : ${board.categories}">
+            <input type="radio" name="category" th:value="${cat}"  th:id="${'category-' + status.index}" th:checked="${(requestBoard != null && requestBoard.category == cat) || (param.category == cat)}">
+            <label th:for="${'category-' + status.index}" th:text="${cat}"></label>
+        </span>
+</div>
+
+<nav th:fragment="categorylink" class="category-links" th:if="${board.categories != null && !board.categories.empty}">
+    <a th:href="${@utils.redirectUrl('/board/list/' + board.bid)}" th:text="#{전체}" class="link" th:classappend="${param.category == null || param.category == ''} ? 'on'"></a>
+    <a th:each="category : ${board.categories}" th:text="${category}"
+       th:href="${@utils.redirectUrl('/board/list/' + board.bid + '?category=' + category)}"
+       class="link" th:classappend="${#strings.equals(category, param.category)} ? 'on'"></a>
+</nav>
+
+<form th:fragment="comment_form" id="frmComment" name="frmComment" method="post" th:action="${@utils.redirectUrl('/comment/save')}" target="ifrmProcess" autocomplete="off" th:object="${requestComment}" th:if="${boardData.commentable}">
+
+    <input type="hidden" name="mode" th:field="*{mode}">
+    <input th:if="${boardData != null}" type="hidden" name="boardDataSeq" th:value="${boardData.seq}">
+    <input th:if="*{mode == 'edit' && seq != null}" type="hidden" name="seq" th:field="*{seq}">
+
+    <div class="commenter_info">
+        <input type="text" name="commenter" th:placeholder="#{작성자}" th:field="*{commenter}">
+
+        <input th:if="${!isLogin}" type="password" name="guestPw" th:placeholder="#{비밀번호}" th:field="*{guestPw}">
+    </div>
+    <!--// commenter_info -->
+
+    <div class="comment_content">
+        <textarea name="content" th:placeholder="#{댓글을_입력하세요.}" th:field="*{content}"></textarea>
+        <button type="submit" th:text="#{작성하기}"></button>
+    </div>
+    <!--// comment_content -->
+</form>
+</html>

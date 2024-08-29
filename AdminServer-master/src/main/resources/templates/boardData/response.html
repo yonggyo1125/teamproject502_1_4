@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+
+<section layout:fragment="content">
+    <th:block th:fragment="boardData">
+        <form name="formList" method="post" th:action="@{/}" autocomplete="off">
+            <div class="container">
+                <!-- 왼쪽: 사용자 정보 및 게시물 내용 -->
+                <div class="left">
+                    <div>
+                        <label>사용자 이름:</label>
+                        <span th:text="${boardData.poster}"></span>
+                    </div>
+                    <div>
+                        <label>제목:</label>
+                        <span th:text="${boardData.subject}"></span>
+                    </div>
+                    <div>
+                        <label>내용:</label>
+                        <p th:text="${boardData.content}"></p>
+                    </div>
+                </div>
+
+                <!-- 오른쪽: 답변 필드 -->
+                <div class="right">
+                    <div>
+                        <label>내용:</label>
+                        <p th:text="${boardData.longText1}"></p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </th:block>
+</section>
+
+</html>

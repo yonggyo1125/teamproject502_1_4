@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="items">
+    <div class="list-header">
+        <div class="list-header-content">
+            <div class="container-box">
+                <div class="row-center">
+                    <div class="list-header-txtbox">
+                        <h1 class="list-header-title">여행어때 사용자들의 자세한
+                            <br>국내 여행지 리뷰</br>
+                        </h1>
+                        <p class="list-header-text">생생한 경험자들의 여행리뷰를 참고하여 성공적인 여행을 만들 수
+                            있어요</p>
+                        <a th:href="${@utils.url('/board/write/' + bid)}">
+                            <button class="list-write-btn">나도
+                                리뷰 작성하러 가기
+                            </button>
+                        </a>
+                        <div class="review_search_area">
+                        </div>
+                    </div>
+                    <div class="list-header-img-box">
+                        <img th:src="${@utils.url('/images/BoardReview/list.png')}" alt=""/>
+                    </div>
+
+                </div>
+            </div>
+            <div></div>
+        </div>
+        <sbpro-border _ngcontent-jaq-c36="" _nghost-jaq-c35="">
+            <div _ngcontent-jaq-c35="" class="svg-border-rounded text-light">
+                <svg class="svg" _ngcontent-jaq-c35=""
+                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34"
+                     preserveAspectRatio="none" fill="#E0E0E0">
+                    <path _ngcontent-jaq-c35=""
+                          d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
+                </svg>
+            </div>
+            <!----><!----><!----></sbpro-border>
+    </div>
+    <th:block>
+        <section class="sec2">
+            <div class="secWrap">
+                <div th:class="review_main_wright">
+                    <h3>최근 여행리뷰</h3>
+                    <p class="tit">다른 여행자들의 리뷰를 참고해 나만의 여행을 계획해보세요!</p>
+                </div>
+
+
+                <div class="row1">
+                    <th:block th:if="${!#lists.isEmpty(items)}" th:each="item, status : ${items}" th:object="${item}">
+                        <tr th:if="${!#lists.isEmpty(item.editorImages)}">
+                            <div th:class="box">
+                                <a th:href="*{@utils.url('/board/view/'+seq)}">
+                                    <div class="ImgBox">
+                                        <img th:src="*{@utils.getThumbUrl(editorImages[0].fileUrl,348,170)}">
+                                        <div th:class="txt">
+                                            <p th:class="list-body-a" th:href="*{@utils.url('/board/view/'+seq)}"
+                                               th:text="*{subject}"></p>
+                                        </div>
+                                    </div>
+                                    <div class="sec2">
+                                        <div class="data">
+                                            <!-- 기존 요소들 -->
+                                            <ul class="info">
+                                                <li>
+                                                    <p>조회수: <span class="placeName" th:text="*{viewCount}"></span></p>
+                                                </li>
+                                                <li>
+                                                    <p>댓글수: <span class="withFriend" th:text="*{commentCount}"></span></p>
+                                                </li>
+                                            </ul>
+
+                                            <!-- 오른쪽 상단으로 이동할 요소 -->
+                                            <div class="header-info2">
+                                                <p class="Name2">
+                                                    <span class="userName" th:text="*{poster}"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </tr>
+                    </th:block>
+                    <!--            <th:block>-->
+                    <!--                <li th:if="${!#lists.isEmpty(items)}" th:text="#{이미지가_작성된_리뷰가_없어요._첫_작성자가_되어보세요.}" class="no-data"></li>-->
+                    <!--            </th:block>-->
+                </div>
+            </div>
+        </section>
+    </th:block>
+
+
+    <!--    <div th:class="review_main_wright">-->
+    <!--        <h3>최근 여행리뷰</h3>-->
+    <!--        <p class="tit">다른 여행자들의 리뷰를 참고해 나만의 여행을 계획해보세요!</p>-->
+    <!--    </div>-->
+
+    <!--    <th:block th:class="sec2">-->
+    <!--        <div class="secWrap">-->
+    <!--            <th:block th:if="${!#lists.isEmpty(items)}" th:each="item, status : ${items}" th:object="${item}">-->
+    <!--                <tr th:if="${!#lists.isEmpty(item.editorImages)}">-->
+    <!--                    <div th:class="row1">-->
+    <!--                        <div th:class="box">-->
+    <!--                            <label th:for="${'chk_' + status.index}"></label>-->
+    <!--                            <div class="ImgBox">-->
+    <!--                                <div th:class="txt">-->
+    <!--                                    <td>-->
+    <!--                                        <a th:class="list-body-a" th:href="*{@utils.url('/board/view/'+seq)}"-->
+    <!--                                           th:text="*{subject}"></a>-->
+    <!--                                    </td>-->
+    <!--                                </div>-->
+    <!--                                <a th:href="*{@utils.url('/board/view/'+seq)}">-->
+    <!--                                    <img th:src="*{@utils.getThumbUrl(editorImages[0].fileUrl,348,170)}">-->
+    <!--                                    &lt;!&ndash;                                    <div class="list-body-img" th:utext="${item.content}"</div>&ndash;&gt;-->
+    <!--                                </a>-->
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </tr>-->
+    <!--            </th:block>-->
+    <!--            &lt;!&ndash;            <th:block>&ndash;&gt;-->
+    <!--            &lt;!&ndash;                <li th:if="${!#lists.isEmpty(items)}" th:text="#{이미지가_작성된_리뷰가_없어요._첫_작성자가_되어보세요.}" class="no-data"></li>&ndash;&gt;-->
+    <!--            &lt;!&ndash;            </th:block>&ndash;&gt;-->
+    <!--        </div>-->
+</th:block>
+
+
+<th:block th:fragment="items" th:class="list_main">
+    <table class="table_rows">
+        <thead class="table_head">
+        <tr>
+            <th width="40">
+                <input type="checkbox" class="checkall" data-target-name="chk" id="checkall">
+                <label for="checkall"></label>
+            </th>
+            <th width="150">게시글 번호</th>
+            <th width="250">게시글 제목</th>
+            <th width="150">작성자</th>
+            <th width="200">작성일</th>
+            <th width="150">조회수</th>
+            <th width="200"></th>
+        </tr>
+        <tr th:if="${items == null || items.isEmpty()}">
+            <th colspan="6" class="no_data">조회된 게시글이 없습니다</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:unless="${items == null || items.isEmpty()}" th:each="item, status : ${items}"
+            th:object="${item}">
+            <td>
+                <input type="hidden" th:name="${'seq_' + status.index}" th:value="*{seq}">
+                <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk_' + status.index}">
+                <label th:for="${'chk_' + status.index}"></label>
+            </td>
+            <td th:text="*{seq}"></td>
+            <td><a th:href="*{@utils.url('/board/view/'+seq)}" th:text="*{subject}"></a></td>
+            <td th:text="*{poster}"></td>
+            <td th:text="*{#temporals.format(createdAt,'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="*{viewCount}"></td>
+            <td>
+                <a th:href="*{@utils.url('/board/update/' + seq)}" class="sbtn">
+                    <i class="xi-pen"></i> 수정하기
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="*{@utils.url('/board/write/' + bid)}" class="sbtn right">
+        <i class="xi-pen"></i> 글쓰기
+    </a>
+
+</th:block>
+</th:block>
+</html>

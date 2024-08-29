@@ -1,0 +1,124 @@
+/* 기본 스타일 유지 */
+
+.secWrap {
+    width: 100%; /* 전체 너비로 조정 */
+    margin: 0 auto; /* 가운데 정렬 */
+    text-align: center;
+}
+
+.sec1 h3 {
+    margin-top: 80px;
+    margin-bottom: 30px;
+    font-size: 26px;
+    color: #333;
+}
+
+.sec1 h3 span {
+    color: rgba(245, 161, 25, 0.9);
+}
+
+.sec1 .con {
+    display: flex;
+    flex-direction: column; /* 모바일에서 세로 정렬 */
+    align-items: center;
+}
+
+.sec1 h4 {
+    color: #333;
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    line-height: 1;
+}
+
+.sec1 p {
+    text-align: left;
+}
+
+.sec1 h5 {
+    font-size: 14px;
+    color: rgba(245, 161, 25, 0.9);
+    margin-top: 25px;
+    margin-bottom: 70px;
+}
+
+.sec1 .box p {
+    text-align: center;
+    line-height: 1.5;
+}
+
+.sec1 .box img {
+    border-radius: 5px;
+    border: 2px solid #f0f0f0;
+}
+
+.sec1 .box:hover img {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); /* 더 크고 어두운 그림자 */
+    transform: scale(1.05); /* 이미지를 약간 확대 */
+    transition: all 0.4s ease-in-out;
+}
+
+/* 모바일 스타일 */
+
+@media screen and (max-width: 767px) {
+
+    .sec1 h3 {
+        font-size: 22px; /* 폰트 크기 조정 */
+    }
+
+    .sec1 h4 {
+        font-size: 16px; /* 폰트 크기 조정 */
+    }
+
+    .sec1 p {
+        font-size: 14px; /* 폰트 크기 조정 */
+    }
+
+    .sec1 h5 {
+        font-size: 12px; /* 폰트 크기 조정 */
+        margin-bottom: 50px; /* 하단 여백 조정 */
+    }
+
+    .sec1 .con {
+        flex-direction: column; /* 세로 정렬로 변경 */
+        gap: 20px; /* 항목 간 간격 조정 */
+    }
+
+    .sec1 .box {
+        flex-direction: column; /* 세로 정렬로 변경 */
+    }
+
+    .sec1 .box img {
+        max-width: 100%; /* 모바일에서 이미지가 부모에 맞게 조정 */
+        height: auto; /* 비율 유지 */
+    }
+
+    .sec2 h3 {
+        font-size: 22px; /* 폰트 크기 조정 */
+    }
+
+    .sec2 .tit {
+        font-size: 14px; /* 폰트 크기 조정 */
+    }
+
+    .sec2 .box a {
+        flex: 1 1 100%; /* 전체 너비로 변경 */
+        margin-bottom: 16px; /* 하단 여백 조정 */
+    }
+
+    .sec2 .ImgBox {
+        height: 150px; /* 모바일에서 이미지 높이 조정 */
+    }
+
+    .sec2 .txt {
+        height: auto; /* 텍스트 높이 자동 조정 */
+        padding-left: 10px; /* 패딩 조정 */
+        padding-right: 10px; /* 패딩 조정 */
+    }
+
+    .sec2 .more {
+        width: 100%; /* 전체 너비로 변경 */
+        padding: 10px; /* 패딩 조정 */
+        font-size: 12px; /* 폰트 크기 조정 */
+    }
+}

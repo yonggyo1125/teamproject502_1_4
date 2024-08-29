@@ -1,0 +1,178 @@
+/* 기본 레이아웃 */
+main {
+    display: flex;
+    padding: 0;
+    width: 100%;
+    flex-direction: column; /* 모바일에서 사이드바를 위에 배치하기 위해 column 방향으로 변경 */
+}
+
+/* 사이드바 기본 스타일 */
+main > aside {
+    background: #596b99;
+    color: #fff;
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px; /* 사이드 바를 숨기기 위해 왼쪽으로 이동 */
+    transition: left 0.5s ease; /* 사이드바가 왼쪽으로 나타나거나 사라지는 애니메이션 */
+    padding-top: 60px;
+    z-index: 1000;
+}
+
+/* 사이드바 활성화 시 스타일 */
+main > aside.on {
+    left: 0; /* 사이드바가 화면 왼쪽에 표시됩니다. */
+}
+
+/* 사이드바 로고 스타일 */
+main > aside .main-logo {
+    max-height: 150px;
+}
+
+/* 사이드바 링크 스타일 */
+main > aside > a {
+    display: block;
+    padding: 25px;
+    border-bottom: 1px solid #9c9ca6;
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+main > aside > a:hover {
+    background: #34495e;
+}
+
+/* 사이드바 토글 버튼 스타일 */
+main > aside > #toggleBtn-mypage {
+    position: absolute;
+    left: 251px;
+    width: 46px;
+    height: 46px;
+    background: #596b99;
+    color: #fff;
+    z-index: 1001;
+    top: calc(50% - 23px);
+    border-radius: 80%;
+}
+
+/* 사이드바 토글 버튼 내 아이콘 색상 */
+main > aside > #toggleBtn-mypage * {
+    color: #fff;
+}
+
+/* 메인 섹션 스타일 */
+main > section {
+    flex-grow: 1;
+    padding: 25px 50px;
+}
+
+/* 제목 스타일 */
+h1 {
+    margin-top: 50px;
+    font-size: 2rem;
+    border-bottom: 2px solid #000;
+    padding-bottom: 20px;
+    line-height: 1;
+}
+
+/* 입력 요소 기본 스타일 */
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'] {
+    border: 1px solid #d5d5d5;
+    height: 45px;
+    border-radius: 3px;
+    width: 100%;
+    padding: 0 10px;
+}
+
+/* 버튼 기본 스타일 */
+main button {
+    background: #596b99;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    height: 45px;
+    width: 100%;
+    border-radius: 3px;
+    font-size: 1.2rem;
+}
+
+/* 작은 버튼 스타일 */
+main button.small {
+    width: auto;
+    height: auto;
+    padding: 10px 25px;
+}
+
+/* 검정색 버튼 스타일 */
+main button.black {
+    background: #000;
+}
+
+/* 버튼 그룹 스타일 */
+.button-group {
+    display: flex;
+    width: 500px;
+    margin: 10px auto;
+}
+
+.button-group > button {
+    width: 0;
+    flex-grow: 1;
+}
+
+.button-group > button + button {
+    margin-left: 5px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    /* 모바일 화면에서 사이드바 숨기기 및 버튼 스타일링 */
+    main > aside {
+        width: 200px; /* 모바일에서 사이드 바 너비 조정 */
+        left: -200px; /* 화면 밖으로 숨기기 */
+    }
+
+    main > aside.on {
+        left: 0; /* 사이드바가 화면 왼쪽에 표시됩니다. */
+    }
+
+    /* 사이드바 토글 버튼 스타일링 */
+    main > aside > #toggleBtn-mypage {
+        left: 201px;
+    }
+
+    /* 메인 섹션 패딩 조정 */
+    main > section {
+        padding: 15px 20px;
+    }
+
+    /* 버튼 그룹 너비 조정 */
+    .button-group {
+        width: 100%; /* 모바일 화면에서 버튼 그룹 너비 100% */
+        flex-direction: column; /* 버튼 그룹을 세로로 나열 */
+    }
+
+    .button-group > button + button {
+        margin-left: 0;
+        margin-top: 5px; /* 버튼 그룹의 항목 간격 조정 */
+    }
+}
+
+@media (max-width: 480px) {
+    /* 더 작은 화면에서 사이드바 너비 조정 */
+    main > aside {
+        width: 180px; /* 화면 크기에 따라 조정 */
+    }
+
+    main > aside > #toggleBtn-mypage {
+        left: 181px;
+    }
+
+    .button-group {
+        width: 100%;
+    }
+}

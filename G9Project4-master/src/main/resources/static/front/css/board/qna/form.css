@@ -1,0 +1,49 @@
+:root {
+    /* COLORS */
+    --white: #f9f9f9;
+    --gray: #444;
+    --blue: #0367a6;
+    --lightblue: #008997;
+    --error-red: #e74c3c;
+    /* RADII */
+    --input-radius: 0.4rem;
+    --button-radius: 0.2rem; /* 버튼 모서리 반경을 조금 더 작게 설정 */
+    /* SIZES */
+    --max-width: 800px;
+    font-size: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+dt { /* 전체 글 */
+    font-size: 15px;
+}
+dd { /* 글 아래 텍스트 */
+    text-indent: 15px
+}
+
+.button-group { /* 다시 입력, 작성하기 */
+    text-align: center;
+    border-radius: var(--button-radius); /* 버튼 모서리 반경을 조금 더 작게 설정 */
+    padding: 0.3rem 0.3rem; /* 버튼 안쪽 여백을 줄여서 버튼을 작게 만듦 */
+    font-size: 50px; /* 버튼 텍스트 크기를 줄임 */
+}
+form {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--button-radius);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    max-width: var(--max-width);
+    width: 100%;
+    box-sizing: border-box;
+    /* form을 중앙에 배치 */
+    margin: 0 auto; /* 수평 중앙 배치 */
+    display: flex;
+    flex-direction: column;
+
+}
+
+.title { /* 제목 늘리기 */
+    font-size: 25px;
+    padding-right: 100px;
+}
+

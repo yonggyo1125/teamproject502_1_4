@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header th:fragment="common">
+    <div class="site-top">
+        <div class="inner">
+            <div class="layout-left">
+                <a class="main-logo" th:href="${@utils.redirectUrl('/')}">
+                    <img th:src="${@utils.url('/images/mainLogo(b).png')}" th:alt="#{메인로고}" class="main-logo"></img>
+                    <!--                    <img class="main-logo" th:src="${@utils.url('/common/image/korea.png')}" th:alt="#{mainImage}">-->
+                </a>
+            </div>
+            <!-- 메인메뉴바 시작 !!! -->
+            <nav>
+                <div class="inner layout-width">
+                    <div class="dropdown">
+                        <h5 class="ac">
+                            <a th:href="${@utils.redirectUrl('/tour/list')}" th:text="#{여행지정보}"></a>
+                        </h5>
+                        <div class="dropdown-content">
+                            <a th:each="type,s: ${@contentType}" th:object="${@contentType}" class="item" th:id="contentType+${s.index}" th:text="${type.getType()}" th:href="${@utils.redirectUrl('/tour/list?contentType='+type.getName())}"></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h5>
+                            <a th:href="${@utils.redirectUrl('/tour/view')}" th:text="여행지도"></a>
+                        </h5>
+                    </div>
+                    <div class="dropdown">
+                        <h5>
+                            <a th:text="#{게시판}"></a>
+                        </h5>
+                        <div class="dropdown-content">
+                            <a th:each="board:${@boardInfoService.getBoardList()}" class="item" th:if="${board.active}" th:id="boardName+${board.getBName()}" th:text="${board.getBName()}" th:href="${@utils.redirectUrl('/board/list/'+board.getBid())}"></a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <h5>
+                            <a th:href="${@utils.redirectUrl('/plan')}" th:text="#{여행노트}"></a>
+                        </h5>
+                        <div class="dropdown-content">
+                            <a th:href="${@utils.redirectUrl('/plan/list')}" th:text="#{여행노트_보기}"></a>
+                            <a th:href="${@utils.redirectUrl('/plan/write')}" th:text="#{여행노트_쓰기}"></a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                    <h5>
+                        <a th:href="${@utils.redirectUrl('/planner')}" th:text="#{여행_플래너}"></a>
+                    </h5>
+                    <div class="dropdown-content">
+                        <a th:href="${@utils.redirectUrl('/planner/list')}" th:text="#{계획_보기}"></a>
+                        <a th:href="${@utils.redirectUrl('/planner/write')}" th:text="#{계획_하기}"></a>
+                    </div>
+                </div>
+                </div>
+            </nav>
+            <div class="dropdown layout-right my-account">
+                <a th:for="mypage" th:href="${@utils.redirectUrl('/mypage')}">
+                    <i th:id="mypage" class="xi-profile-o"></i></a>
+                <div class=" dropdown-content" th:if="${isLogin!=null&& !isLogin}">
+                    <a th:href="${@utils.redirectUrl('/member/login')}" th:text="#{로그인}">
+                    </a>
+
+                    <a th:href="${@utils.redirectUrl('/member/join')}" th:text="#{회원가입}">
+                    </a>
+                </div>
+                <div class="dropdown-content" th:if="${isLogin !=null && isLogin}">
+                    <div th:replace="~{common/_profile_image::image1}"></div>
+                    <span th:text="${#messages.msg('LOGIN_MSG',loggedMember.userName,loggedMember.email)}"/><br>
+                    <a th:href="${@utils.redirectUrl('/member/logout')}">
+                        <button type="submit" th:text="#{로그아웃}"></button>
+                    </a>
+                    <a th:href="${@utils.redirectUrl('/mypage')}">
+                        <button type="submit" th:text="#{마이_페이지}"></button>
+                    </a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="${@utils.redirectUrl('/admin')}"
+                       target="_blank">
+                        <button type="submit" th:text="#{관리자_페이지}"></button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 메인메뉴바 끝 -->
+</header>
+</html>

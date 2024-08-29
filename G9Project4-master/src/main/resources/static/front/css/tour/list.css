@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR:wght@200..900&display=swap');
+.list-info .right{
+    text-align: right;
+}
+/* ul CSS Start*/
+ul *{
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    align-items: center;
+}
+ul{
+    width: 90%;
+    padding: 0 200px 0 30px;
+}
+ul > li{
+    margin: 0 auto;
+    height: 140px;
+    position: relative;
+    padding: 20px 0 !important;
+    border-bottom: 1px solid #e6e6e6;
+}
+.list_thumType .place {
+    float: none;
+}
+.list_thumType > .bdr_nor{
+    border-top: 1px solid #e6e6e6;
+    display: flex;
+}
+.list_thumType > .bdr_nor > .place-info{
+    padding-left: 30px;
+    display: block;
+
+}
+.list_thumType > li img{
+    float: left;
+    position: relative;
+    width: 178px;
+    height: 120px;
+}
+.list_thumType > li > div{
+    display: flex;
+}
+.list_thumType > li .place-tit{
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+.list_thumType > li .place-address{
+    color: var(--gray);
+}
+.list_thumType > li .place-categories span{
+    color: var(--muted-text-color)
+}
+
+/* ul CSS End*/

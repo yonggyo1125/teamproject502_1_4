@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700;800&family=Noto+Serif+KR:wght@200..900&display=swap');
+
+.section1 {
+    padding: 25px;
+    border-radius: 2px;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start; /* 상단 정렬 */
+    margin: 30px;
+}
+
+#frmIndex {
+    border: 2px solid rgba(52, 73, 94, 0.1);;
+    padding: 25px;
+    border-radius: 5px;
+    background: #fff;
+    width: 550px;
+   /* margin: 0 auto auto 20px; */
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+}
+
+#frmIndex > dl > dd > div > .user-greeting {
+    margin-left: 40px;
+}
+
+#frmIndex > dl > dd > div > .user-greeting > .a1 {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+#frmIndex > dl > dd > div > .user-greeting > .a2 {
+    font-size: 1.25rem;
+    margin-left: 5px;
+}
+
+
+#frmIndex > dl > dd > div > .user-greeting > .a3 {
+    font-size: 1.25rem;
+    margin-top: 10px;
+    display: block;
+}
+
+#frmIndex .profile-image {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 20px;
+    flex-grow: 1;
+}
+
+#frmIndex .profile-image .inner {
+    border-radius: 100px;
+    margin-bottom: 20px;
+}
+
+#frmIndex .myprofile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 2;
+}
+
+#frmIndex .myprofile > h3 {
+    padding-bottom: 20px;
+    line-height: 0.5;
+    text-align: start;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+#frmIndex .myprofile > dl {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.mypage-tour-story {
+    border: 2px solid rgba(52, 73, 94, 0.1);;
+    padding: 25px;
+    border-radius: 5px;
+    background: #fff;
+    width: 800px;
+    height: 820px;
+    /*margin: 20px auto auto 0;*/
+   /* display: flex;
+    flex-direction: row; */
+}
+
+.mypage-tour-story > h2 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid #000;
+    padding-bottom: 20px;
+    line-height: 0.5;
+    padding-left: 0; /* 기본 padding-left를 0으로 설정 */
+    padding-right: 0; /* 기본 padding-right를 0으로 설정 */
+    padding-top: 0; /* 기본 padding-top을 0으로 설정 */
+}
+
+.wish-heart {
+    color: red;
+    font-size: 1.2rem;
+}
+
+.search-star {
+    color: gold;
+    font-size: 1.2rem;
+}

@@ -1,0 +1,398 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@500;600;700&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+    --header-height: 3rem;
+
+    /*========== Colors ==========*/
+    --hue-color: 190;
+
+    --first-color: hsl(var(--hue-color), 64%, 22%);
+    --first-color-second: hsl(var(--hue-color), 64%, 22%);
+    --first-color-alt: hsl(var(--hue-color), 64%, 15%);
+    --title-color: hsl(var(--hue-color), 64%, 18%);
+    --text-color: hsl(var(--hue-color), 24%, 35%);
+    --text-color-light: hsl(var(--hue-color), 8%, 60%);
+    --input-color: hsl(var(--hue-color), 24%, 97%);
+    --body-color: hsl(var(--hue-color), 100%, 99%);
+    --white-color: #fff;
+    --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
+    --scroll-thumb-color: hsl(var(--hue-color), 12%, 75%);
+
+    /*========== Font and typography ==========*/
+    --body-font: "Open Sans", sans-serif;
+    --title-font: "Raleway", sans-serif;
+    --biggest-font-size: 2.5rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: 0.938rem;
+    --small-font-size: 0.813rem;
+    --smaller-font-size: 0.75rem;
+
+    /*========== Font weight ==========*/
+    --font-medium: 500;
+    --font-semi-bold: 600;
+
+    /*========== Margenes Bottom ==========*/
+    --mb-0-25: 0.25rem;
+    --mb-0-5: 0.5rem;
+    --mb-0-75: 0.75rem;
+    --mb-1: 1rem;
+    --mb-1-25: 1.25rem;
+    --mb-1-5: 1.5rem;
+    --mb-2: 2rem;
+    --mb-2-5: 2.5rem;
+
+    /*========== z index ==========*/
+    --z-tooltip: 10;
+    --z-fixed: 100;
+
+    /*========== Hover overlay ==========*/
+    --img-transition: 0.3s;
+    --img-hidden: hidden;
+    --img-scale: scale(1.1);
+}
+
+@media screen and (min-width: 968px) {
+    :root {
+        --biggest-font-size: 4rem;
+        --h1-font-size: 2.25rem;
+        --h2-font-size: 1.75rem;
+        --h3-font-size: 1.25rem;
+        --normal-font-size: 1rem;
+        --small-font-size: 0.875rem;
+        --smaller-font-size: 0.813rem;
+    }
+}
+
+/*========== Variables Dark theme ==========*/
+body.dark-theme {
+    --first-color-second: hsl(var(--hue-color), 54%, 12%);
+    --title-color: hsl(var(--hue-color), 24%, 95%);
+    --text-color: hsl(var(--hue-color), 8%, 75%);
+    --input-color: hsl(var(--hue-color), 29%, 16%);
+    --body-color: hsl(var(--hue-color), 29%, 12%);
+    --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
+    --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
+}
+
+/*========== Button Dark/Light ==========*/
+.nav__dark {
+    display: flex;
+    align-items: center;
+    column-gap: 2rem;
+    position: absolute;
+    right: 3rem;
+    top: 18rem;
+}
+
+.change-theme,
+.change-theme-name {
+    color: var(--text-color);
+}
+
+.change-theme {
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.change-theme-name {
+    font-size: var(--small-font-size);
+}
+
+/*=============== BASE ===============*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    width: 100% !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: var(--header-height) 0 0 0;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+h1,
+h2,
+h3 {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+    font-family: var(--title-font);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+button,
+input {
+    border: none;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+}
+
+button {
+    cursor: pointer;
+}
+
+input {
+    outline: none;
+}
+
+.main {
+    overflow-x: hidden;
+}
+
+/*=============== HOME ===============*/
+.home {
+    position: relative;
+    height: 78vh;
+    overflow: hidden;
+}
+
+.home__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.home__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: calc(100vh - var(--header-height));
+    padding: 0.2rem 5rem 15rem 10rem;
+    position: relative;
+    z-index: 1;
+    color: var(--white-color);
+}
+
+.home__data {
+    margin-bottom: 1rem;
+}
+
+.home__data-subtitle {
+    font-size: 2rem;
+    display: block;
+    font-weight: var(--font-semi-bold);
+    margin-bottom: var(--mb-0-75);
+    color: var(--white-color);
+}
+
+.home__data-title {
+    font-size: 5.5rem;
+    font-weight: var(--font-medium);
+    margin-bottom: var(--mb-2-5);
+    color: var(--white-color);
+    text-align: left;
+}
+
+.home__data-title b {
+    color: var(--white-color);
+}
+
+.home__social {
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 1rem;
+    margin-top: 1rem;
+}
+
+.home__social a {
+    color: var(--white-color);
+    font-size: 1.5rem;
+}
+
+.home__info {
+    background-color: var(--first-color);
+    display: flex;
+    padding: 1.5rem 1.7rem;
+    align-items: center;
+    column-gap: 0.5rem;
+    position: absolute;
+    right: 10rem;
+    bottom: 22rem;
+    width: 400px;
+    z-index: 1;
+}
+
+.home__info-title {
+    font-size: var(--h2-font-size);
+    font-weight: var(--font-semi-bold);
+    color: var(--white-color);
+}
+
+.home__info-button {
+    font-size: var(--h2-font-size);
+    color: var(--white-color);
+}
+
+.home__info-img {
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.home__info-img:hover {
+    transform: scale(1.1);
+}
+
+/*=============== BUTTONS ===============*/
+.button {
+    display: inline-block;
+    background-color: var(--first-color);
+    color: var(--white-color);
+    padding: 1rem 2rem;
+    font-weight: var(--font-semi-bold);
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: var(--first-color-alt);
+}
+
+.button--flex {
+    display: flex;
+    align-items: center;
+    column-gap: 0.25rem;
+}
+
+.button--link {
+    background: none;
+    padding: 0;
+}
+
+.button--link:hover {
+    background: none;
+}
+
+.ri-arrow-right-line {
+    color: white;
+}
+
+/*=============== SPECIAL BOX ===============*/
+.bg {
+    background: url("https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=dea079de-8bf6-4558-b788-f9d7e85ef30c") 50% center no-repeat rgb(255, 255, 255);
+    height: 415px;
+}
+
+.cont {
+    margin-top: -415px;
+    height: 418px;
+}
+
+.swiper {
+    width: 600px;
+    height: 300px;
+}
+
+.swiper-pagination {
+    height: 30px;
+    width: 30px;
+}
+
+/*=============== ABOUT ===============*/
+.about__container {
+    display: flex;
+    flex-direction: column; /* 기본적으로 열 방향으로 변경 */
+    align-items: center; /* 수직 중앙 정렬 */
+    gap: 1rem; /* 자식 요소 간의 간격을 1rem으로 줄임 */
+}
+
+.about__data {
+    flex: 1;
+    text-align: center; /* 텍스트 중앙 정렬 */
+    padding: 2rem 1rem;
+    margin: 0;
+    max-width: 100%; /* 최대 너비를 100%로 설정 */
+}
+
+.about__description {
+    margin-bottom: var(--mb-2);
+}
+
+.about__img {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* 열 방향으로 변경 */
+    gap: 1rem; /* 이미지 사이의 간격을 줄임 */
+    align-items: center; /* 이미지들을 중앙 정렬 */
+    margin: 0;
+}
+
+.about__img-overlay {
+    overflow: var(--img-hidden);
+}
+
+.about__img-one,
+.about__img-two {
+    width: 100%; /* 모바일에서 너비를 100%로 설정 */
+    max-width: 180px; /* 최대 너비 설정 */
+    transition: var(--img-transition);
+}
+
+.about__img-one:hover,
+.about__img-two:hover {
+    transform: var(--img-scale);
+}
+
+/*=============== MOBILE STYLES ===============*/
+@media screen and (max-width: 767px) {
+    :root {
+        --biggest-font-size: 2rem;
+        --h1-font-size: 1.25rem;
+        --h2-font-size: 1rem;
+        --h3-font-size: 0.875rem;
+        --normal-font-size: 0.75rem;
+        --small-font-size: 0.625rem;
+        --smaller-font-size: 0.5rem;
+    }
+
+    .home__container {
+        padding: 1rem 2rem 5rem 2rem; /* 패딩 조정 */
+        height: auto; /* 높이를 자동으로 설정 */
+    }
+
+    .home__data-title {
+        font-size: 3rem; /* 모바일에서 제목 크기 조정 */
+    }
+
+    .home__info {
+        width: 100%; /* 모바일에서 전체 너비 사용 */
+        position: relative; /* 절대 위치에서 상대 위치로 변경 */
+        bottom: auto; /* 아래 위치 제거 */
+        right: auto; /* 오른쪽 위치 제거 */
+    }
+
+    .about__container {
+        flex-direction: column; /* 모바일에서 열 방향으로 변경 */
+    }
+}

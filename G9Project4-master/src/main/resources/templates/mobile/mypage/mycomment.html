@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mobile/layouts/mypage}">
+<section layout:fragment="content">
+    <h1 th:text="#{내_댓글}"></h1>
+
+    <table>
+        내가 작성한 댓글 목록<br>
+        <thead>
+        <tr>
+            <th>
+                게시판 이름
+            </th>
+            <th>
+                제목
+            </th>
+            <th>
+                내 댓글로 바로가기
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${loggedMember.comments != null}" th:each="comment : ${loggedMember.comments}" th:object="${comment}">
+            <td th:text="${@boardDataRepository.getById(comment.seq).board.bName}">
+            </td>
+            <td>
+                <a th:text="${@boardDataRepository.getById(comment.seq).subject}" th:href="${@utils.redirectUrl('/board/view/')+comment.seq}"></a>
+            </td>
+            <td>
+                <a th:href="${@utils.redirectUrl('/board/view/'+comment.seq)}">
+                    <button type="button" th:text="#{게시글_보기}"></button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</html>

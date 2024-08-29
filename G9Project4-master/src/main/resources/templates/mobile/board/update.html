@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mobile/layouts/main}">
+<main layout:fragment="content">
+
+    <th:block th:if="${board.skin == 'default'}">
+        <th:block th:replace="~{mobile/board/default/_update::update}"></th:block>
+    </th:block>
+
+    <th:block th:if="${board.skin == 'gallery'}">
+        <th:block th:replace="~{mobile/board/gallery/_update::update}"></th:block>
+    </th:block>
+
+</main>
+</html>

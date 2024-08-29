@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="placeList" class="tour-list">
+
+    <div class="list-info">
+        <h1 th:if="${tourPlaceSearch.contentType!=null}"
+            th:text="${#strings.concat(tourPlaceSearch.contentType,' 리스트보기')}"></h1>
+        <h4 th:if="${pagination!=null}" th:text="${'검색된 항목 : '+pagination.total}" class="right"></h4>
+    </div>
+    <ul class="list_thumType place">
+        <li class="bdr_nor" th:each="item, s:${data.items}" th:object="${item}">
+            <!-- -->
+        <div class="place-photo">
+            <a th:href="*{@utils.redirectUrl('/tour/detail/'+contentId)}"><img class="firstImage" th:src="*{firstImage}" th:alt="#{이미지가_존재하지_않습니다.}"></a>
+        </div>
+        <div class="place-tit">
+            <a th:href="*{@utils.redirectUrl('/tour/detail/' + contentId)}" th:text="*{title}"></a>
+        </div>
+        <p class="place-address" th:text="*{address}"></p>
+
+        <p class="place-address" th:text="${item.finalPointValue}"></p>
+    </li>
+</ul>
+</div>
+
+</html>

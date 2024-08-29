@@ -1,0 +1,7 @@
+#frmUpdate { box-shadow: 2px 2px 5px #34495e; padding: 25px; border-radius: 10px; background: #fff; width: 700px; margin: 0 auto; }
+
+#frmUpdate dl { display: flex; flex-direction: row; }
+#frmUpdate dl dt { width: 100px; display: flex; align-items: center; }
+#frmUpdate dl dd { flex-grow: 1; }
+#frmUpdate .fileUploads { width: 204px; }
+#frmUpdate .image-file-box { margin-bottom: 5px; }

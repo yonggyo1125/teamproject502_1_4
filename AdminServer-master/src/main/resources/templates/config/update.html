@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+
+<section layout:fragment="content">
+    <div th:replace="~{common/_message::message}"></div>
+    <h1>API UPDATE 설정</h1>
+
+    <div name="showSkey" th:object="${apiConfig}">
+        <h2>공공 API 설정</h2>
+        <table class="table_cols mb30">
+            <tr>
+                <th width="180">인증키(Encoding)</th>
+                <td>
+                    <span type="text" name="publicOpenApiKey" th:text="*{publicOpenApiKey}"></span>
+                </td>
+            </tr>
+        </table>
+
+        <h2>카카오 API 앱키</h2>
+        <table class="table_cols">
+            <tr>
+                <th width="180">Javascript 키</th>
+                <td>
+                    <span type="text" name="kakaoJavascriptKey" th:text="*{kakaoJavascriptKey}"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <form name="apiUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/tour')}"class="submit_btns">
+        관광지 정보<button type="submit" class="btn">업데이트</button>
+    </form>
+    <form name="greenApiUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/green')}" class="submit_btns">
+        생태관광지 정보
+        <button type="submit" class="btn">업데이트</button>
+    </form>
+    <form name="greenApiUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/areaCode')}" class="submit_btns">
+        지역코드 정보
+        <button type="submit" class="btn">업데이트</button>
+    </form>
+    <form name="greenApiUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/sigunguCode')}" class="submit_btns">
+        시군구코드 정보
+        <button type="submit" class="btn">업데이트</button>
+    </form>
+    <form name="greenApiUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/categories')}" class="submit_btns">
+        카테고리 정보
+        <button type="submit" class="btn">업데이트</button>
+    </form>
+</section>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="form" th:object="${requestBoard}">
+    <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+    <input type="hidden" name="gid" th:field="*{gid}">
+
+    <th:block>
+        <div th:replace="~{front/board/qna/_common::category}"></div>
+    </th:block>
+
+    <dl>
+        <dt th:text="#{작성자}"></dt>
+        <dd>
+            <input type="text" name="poster" placeholder="작성자를 입력해주세요." th:field="*{poster}">
+            <div class="error" th:each="err : ${#fields.errors('poster')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+    <dl th:if="${isAdmin}">
+        <dt th:text="#{공지사항}"></dt>
+        <dd>
+            <input type="checkbox" name="notice" value="true" th:field="*{notice}" id="notice">
+            <label for="notice" th:text="#{공지글로_등록하기}"></label>
+        </dd>
+    </dl>
+    <dl th:if="*{ guest }">
+        <dt th:text="#{비밀번호}"></dt>
+        <dd>
+            <input type="password" name="guestPw" placeholder="비밀번호를 입력해주세요." th:field="*{guestPw}">
+            <div class="error" th:each="err : ${#fields.errors('guestPw')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt th:text="#{제목}"></dt>
+        <dd>
+            <input type="text" name="subject" class="title" placeholder="제목을 입력해주세요." th:field="*{subject}">
+            <div class="error" th:each="err : ${#fields.errors('subject')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt th:text="#{내용}"></dt>
+        <dd>
+            <textarea name="content" th:field="*{content}" id="content1" placeholder="내용을 입력해주세요"></textarea>
+            <div class="error" th:each="err : ${#fields.errors('content')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+    <dl th:if="${board.useEditor && board.useUploadImage}">
+        <dt th:text="#{이미지_업로드}"></dt>
+        <dd>
+            <button type="button" class="fileUploads" th:data-gid="*{gid}" data-location="editor" data-image-only="true" th:text="#{이미지_선택}"></button>
+            <div class="uploaded-files" id="uploaded-files-editor">
+                <div th:if="*{editorImages != null}" th:each="file : *{editorImages}" class="file-item" th:id="${'file-' + file.seq}">
+                    <a th:href="${@utils.redirectUrl('/file/download/' + file.seq)}" th:text="${file.fileName}"></a>
+                    <i class="xi-file-upload insert-editor" th:data-url="${file.fileUrl}"></i>
+                    <i class="xi-close remove" th:data-seq="${file.seq}"></i>
+                </div>
+            </div>
+        </dd>
+    </dl>
+    <dl th:if="${board.useUploadFile}">
+        <dt th:text="#{파일_첨부}"></dt>
+        <dd>
+            <button type="button" class="fileUploads" th:data-gid="*{gid}" data-location="attach" th:text="#{파일_선택}"></button>
+            <div class="uploaded-files" id="uploaded-files-attach">
+                <div th:if="*{attachFiles != null}" th:each="file : *{attachFiles}" class="file-item" th:id="${'file-' + file.seq}">
+                    <a th:href="${@utils.redirectUrl('/file/download/' + file.seq)}" th:text="${file.fileName}"></a>
+                    <i class="xi-close remove" th:data-seq="${file.seq}"></i>
+                </div>
+            </div>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{답변}"></dt>
+        <dd>
+            <textarea name="longText1" th:field="*{longText1}" placeholder="질문에 대한 답변을 입력해주세요." rows="10" style="width: 100%;" readonly></textarea>
+            <div class="error" th:each="err : ${#fields.errors('longText1')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+
+    <script th:replace="~{common/_file_tpl::attach}"></script>
+    <script th:replace="~{common/_file_tpl::editor}"></script>
+</th:block>
+</html>

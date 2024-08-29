@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mobile/layouts/main}">
+<main layout:fragment="content" class="main">
+    <!-- 홈 섹션 시작 -->
+    <section class="home" id="home">
+        <!-- 배경 이미지 -->
+        <img th:src="${@utils.url('/images/main/home1.jpg')}" alt="배경 이미지" class="home__img">
+
+        <!-- 텍스트 및 버튼 -->
+        <div class="home__container container grid">
+            <div class="home__data">
+                <span class="home__data-subtitle">Discover your place</span>
+                <h1 class="home__data-title">Explore The <br> Best <b>Beautiful <br>Places</b></h1>
+                <a th:href="${@utils.redirectUrl('/tour/list/spot')}" class="button">Explore</a>
+            </div>
+
+            <!-- 소셜 링크 -->
+            <div class="home__social">
+                <a href="https://www.facebook.com/" target="_blank" class="home__social-link">
+                    <i class="ri-facebook-box-fill"></i>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" class="home__social-link">
+                    <i class="ri-instagram-fill"></i>
+                </a>
+                <a href="https://twitter.com/" target="_blank" class="home__social-link">
+                    <i class="ri-twitter-fill"></i>
+                </a>
+            </div>
+
+            <!-- 정보 섹션 -->
+            <div class="home__info">
+                <div>
+                    <span class="home__info-title">국내 BEST 여행지</span>
+                    <a th:href="${@utils.redirectUrl('/tour/list/spot')}"
+                       class="button button--flex button--link home__info-button">
+                        More <i class="ri-arrow-right-line"></i>
+                    </a>
+                </div>
+
+                <div class="home__info-overlay">
+                    <a th:href="${@utils.redirectUrl('/tour/list/spot')}">
+                        <img th:src="${@utils.url('/images/main/home2.jpg')}" alt="추천 장소 이미지" class="home__info-img">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 홈 섹션 끝 -->
+    <!--special-box S-->
+    <div class="special-box">
+        <h1>메인 슬라이더</h1>
+        <div class="bg"></div>
+        <div class="cont">
+            <!-- Slider main container -->
+            <div class="swiper">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide"><img th:src="${@utils.url('/images/main/about1.jpg')}"></div>
+                    <div class="swiper-slide"><img th:src="${@utils.url('/images/main/about2.jpg')}"></div>
+                    <div class="swiper-slide"><img th:src="${@utils.url('/images/main/home1.jpg')}"></div>
+                    ...
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- If we need scrollbar -->
+                <div class="swiper-scrollbar"></div>
+            </div>
+        </div>
+    </div>
+    <!--special-box E-->
+    <!-- ABOUT 부분  -->
+    <section class="about section" id="about">
+        <div class="about__container container grid">
+            <div class="about__data">
+                <h2 class="section__title about__title">More Information <br> About The Best Beaches</h2>
+                <p class="about__description">You can find the most beautiful and pleasant places at the best
+                    prices with special discounts, you choose the place we will guide you all the way to wait, get your
+                    place now.
+                </p>
+                <a href="#" class="button">Reserve a place</a>
+            </div>
+
+            <div class="about__img">
+                <div class="about__img-overlay">
+                    <img th:src="${@utils.url('/images/main/about1.jpg')}" alt="" class="about__img-one">
+                </div>
+
+                <div class="about__img-overlay">
+                    <img th:src="${@utils.url('/images/main/about2.jpg')}" alt="" class="about__img-two">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ABOUT 부분 끝 -->
+
+</main>
+</html>

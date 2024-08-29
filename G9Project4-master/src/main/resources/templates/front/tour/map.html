@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+
+<main layout:fragment="content" class="tour-map">
+
+    <div class="map_wrap">
+        <div id="map"></div>
+        <th:block layout:fragment="addCommonScript">
+            <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=43a2034cb765c278f32c3be400fa5515&libraries=services"></script>
+        </th:block>
+
+        <!-- 메뉴 바 (검색 폼 및 사이드바) -->
+        <div id="menu_wrap">
+            <div class="search-form">
+                <form id="search_form" name="frmSearch" method="get" autocomplete="off"
+                      th:action="${@utils.redirectUrl('/tour/view')}" th:object="${tourPlaceSearch}">
+                    <input type="hidden" th:value="TITLE_ADDRESS" name="sopt">
+                    <div class="search-input-container">
+                        <input type="text" name="skey" th:field="*{skey}" th:placeholder="#{여행지로_검색}">
+                        <button class="search-button" type="submit">
+                            <i class="xi-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <!-- 검색 결과 컨테이너 -->
+                <div id="search-results" class="search-results">
+                    <!-- 검색 결과 내용이 여기에 삽입됩니다 -->
+                    <table th:replace="~{front/tour/_form::searchSidebar}"></table>
+                    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+                </div>
+            </div>
+            <div id="sidebar">
+                <!-- 사이드 바 내용 -->
+                <h2>사이드 바</h2>
+                <ul class="sidebar-list">
+                    <li>
+                        <button type="button" class="styled-button" onclick="commonLib.popup.open('/board/write/popup/planNote', 800, 600);">여행노트 작성</button>
+                    </li>
+                    <li>
+                        <a href="/mypage">
+                            <button type="button" class="styled-button">마이페이지</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <button id="toggleBtn">여행노트</button>
+        <button id="photoButton" class="photo-button"></button>
+
+        <ul id="category">
+            <li id="BK9" data-order="0">
+                <span class="category_bg bank"></span>
+                은행
+            </li>
+            <li id="MT1" data-order="1">
+                <span class="category_bg mart"></span>
+                마트
+            </li>
+            <li id="PM9" data-order="2">
+                <span class="category_bg pharmacy"></span>
+                약국
+            </li>
+            <li id="OL7" data-order="3">
+                <span class="category_bg oil"></span>
+                주유소
+            </li>
+            <li id="CE7" data-order="4">
+                <span class="category_bg cafe"></span>
+                카페
+            </li>
+            <li id="CS2" data-order="5">
+                <span class="category_bg store"></span>
+                편의점
+            </li>
+        </ul>
+    </div>
+</main>
+
+</html>

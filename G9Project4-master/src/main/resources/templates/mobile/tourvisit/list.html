@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mobile/layouts/main}">
+<main layout:fragment="content">
+     <!--   <th:block th:replace="~{common/_search_top::search}"></th:block> -->
+       <nav th:replace="~{common/_tourtype_tpl::typelist}"></nav>
+
+    <div class="tab-container">
+        <div th:replace="~{front/tourvisit/_tab :: tabs}"></div>
+
+    </div>
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+</main>
+</html>
