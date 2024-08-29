@@ -21,4 +21,20 @@
             <i class="xi-close remove" data-seq="[seq]"></i>
         </div>
     </script>
+
+    <script th:fragment="gallery-editor" type="text/html" id="editor-file-tpl">
+        <div class="photo-item" id="file-[seq]">
+            <div class="bg" style="background:url('[thumbUrl]') no-repeat center center; background-size: cover;"></div>
+            <i class="xi-file-upload insert-editor" data-url="[fileUrl]"></i>
+            <i class="xi-close remove" data-seq="[seq]"></i>
+            <span class="select" data-seq="[seq]" th:text="#{선택}"></span>
+        </div>
+    </script>
+    <script th:fragment="gallery-attach" type="text/html" id="attach-file-tpl">
+        <div class="photo-item" id="file-[seq]">
+            <div class="bg" style="background:url('[thumbUrl]') no-repeat center center; background-size: cover;"></div>
+            <i class="xi-close remove" data-seq="[seq]"></i>
+            <span class="select" data-seq="[seq]" th:text="#{선택}"></span>
+        </div>
+    </script>
 </html>
