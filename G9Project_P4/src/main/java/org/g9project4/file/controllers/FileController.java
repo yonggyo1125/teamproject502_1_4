@@ -118,6 +118,10 @@ public class FileController implements RestExceptionProcessor {
             throw new BadRequestException(utils.getErrorMessages(errors));
         }
 
-        return null;
+        selectService.process(form);
+
+        List<FileInfo> items = infoService.getSelectedList(form.getGid(), form.getLocation(), form.getCnt());
+
+        return new JSONData(items);
     }
 }

@@ -15,4 +15,6 @@ public class RequestSelect {
 
     @NotNull
     private List<Long> seq;
+
+    private int cnt;
 }
