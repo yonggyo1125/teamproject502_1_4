@@ -50,7 +50,7 @@
         <dd>
             <button type="button" class="fileUploads" th:data-gid="*{gid}"
                     data-location="editor" data-image-only="true"
-                    th:text="#{이미지_선택}"></button>
+                    th:text="#{이미지_선택}" data-select-cnt="3"></button>
             <div class="uploaded-files photo-item-wrapper" id="uploaded-files-editor">
                 <div th:if="*{editorImages != null}" th:each="file : *{editorImages}" class="photo-item" th:id="${'file-' + file.seq}">
                     <div class="bg" th:style="${#strings.concat('background:url(', @utils.getThumbUrl(file.seq, 150, 150), ') no-repeat center center; background-size: cover;')}"></div>
@@ -65,11 +65,12 @@
         <dt th:text="#{파일_첨부}"></dt>
         <dd>
             <button type="button" class="fileUploads" th:data-gid="*{gid}"
-                    data-location="attach" th:text="#{파일_선택}"></button>
+                    data-location="attach" th:text="#{파일_선택}" data-select-cnt="2"></button>
             <div class="uploaded-files photo-item-wrapper" id="uploaded-files-attach">
-                <div th:if="*{attachFiles != null}" th:each="file : *{attachFiles}" class="file-item" th:id="${'file-' + file.seq}">
-                    <a th:href="${@utils.redirectUrl('/file/download/' + file.seq)}" th:text="${file.fileName}"></a>
+                <div th:if="*{attachFiles != null}" th:each="file : *{attachFiles}" class="photo-item" th:id="${'file-' + file.seq}">
+                    <div class="bg" th:style="${#strings.concat('background:url(', @utils.getThumbUrl(file.seq, 150, 150), ') no-repeat center center; background-size: cover;')}"></div>
                     <i class="xi-close remove" th:data-seq="${file.seq}"></i>
+                    <span class="select" th:data-seq="${file.seq}" th:classappend="${file.selected} ? 'on'" th:text="#{선택}"></span>
                 </div>
             </div>
         </dd>

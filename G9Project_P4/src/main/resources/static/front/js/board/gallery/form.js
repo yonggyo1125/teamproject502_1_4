@@ -23,6 +23,15 @@ window.addEventListener("DOMContentLoaded", function() {
         });
    }
    /* 이미지 본문 추가 이벤트 처리 E */
+
+   /* 이미지 선택 처리 S */
+   const selectEls = document.querySelectorAll(".photo-item .select");
+   for (const el of selectEls) {
+    el.addEventListener("click", function() {
+
+    });
+   }
+   /* 이미지 선택 처리 E */
 });
 
 
