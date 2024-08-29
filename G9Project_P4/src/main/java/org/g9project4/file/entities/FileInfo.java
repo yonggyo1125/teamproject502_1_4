@@ -46,5 +46,5 @@ public class FileInfo extends BaseMemberEntity {
     private String filePath; // 파일 업로드 경로
 
     @Transient
-    private String thumbPath; // 썸네일 기본 경로
+    private String thumbUrl; // 썸네일 기본 경로
 }

@@ -49,17 +49,19 @@ function fileUploadCallback(files) {
     const domParser = new DOMParser();
 
     for (const file of files) {
-        const { seq, location, fileUrl, fileName } = file;
+        const { seq, location, fileUrl, fileName, thumbUrl } = file;
 
         const target = location === 'editor' ? editorTarget : attachTarget;
         let html = location === 'editor' ? editorTpl : attachTpl;
 
+        const _thumbUrl = `${thumbUrl}?seq=${seq}&width=150&height=150`;
         html = html.replace(/\[seq\]/g, seq)
                     .replace(/\[fileName\]/g, fileName)
-                    .replace(/\[fileUrl\]/g, fileUrl);
+                    .replace(/\[fileUrl\]/g, fileUrl)
+                    .replace(/\[thumbUrl]/g, _thumbUrl);
 
         const dom = domParser.parseFromString(html, "text/html");
-        const el = dom.querySelector(".file-item");
+        const el = dom.querySelector(".photo-item");
 
         target.append(el);
 

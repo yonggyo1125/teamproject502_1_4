@@ -51,7 +51,7 @@
             <button type="button" class="fileUploads" th:data-gid="*{gid}"
                     data-location="editor" data-image-only="true"
                     th:text="#{이미지_선택}"></button>
-            <div class="uploaded-files" id="uploaded-files-editor">
+            <div class="uploaded-files photo-item-wrapper" id="uploaded-files-editor">
                 <div th:if="*{editorImages != null}" th:each="file : *{editorImages}" class="file-item" th:id="${'file-' + file.seq}">
                     <a th:href="${@utils.redirectUrl('/file/download/' + file.seq)}" th:text="${file.fileName}"></a>
                     <i class="xi-file-upload insert-editor" th:data-url="${file.fileUrl}"></i>
@@ -65,7 +65,7 @@
         <dd>
             <button type="button" class="fileUploads" th:data-gid="*{gid}"
                     data-location="attach" th:text="#{파일_선택}"></button>
-            <div class="uploaded-files" id="uploaded-files-attach">
+            <div class="uploaded-files photo-item-wrapper" id="uploaded-files-attach">
                 <div th:if="*{attachFiles != null}" th:each="file : *{attachFiles}" class="file-item" th:id="${'file-' + file.seq}">
                     <a th:href="${@utils.redirectUrl('/file/download/' + file.seq)}" th:text="${file.fileName}"></a>
                     <i class="xi-close remove" th:data-seq="${file.seq}"></i>
@@ -74,7 +74,7 @@
         </dd>
     </dl>
 
-    <script th:replace="~{common/_file_tpl::attach}"></script>
-    <script th:replace="~{common/_file_tpl::editor}"></script>
+    <script th:replace="~{common/_file_tpl::gallery-attach}"></script>
+    <script th:replace="~{common/_file_tpl::gallery-editor}"></script>
 </th:block>
 </html>
