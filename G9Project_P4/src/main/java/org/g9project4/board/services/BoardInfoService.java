@@ -30,6 +30,7 @@ import org.g9project4.global.constants.DeleteStatus;
 import org.g9project4.member.MemberUtil;
 import org.g9project4.member.constants.Authority;
 import org.g9project4.member.entities.Member;
+import org.g9project4.member.services.MemberInfoService;
 import org.g9project4.wishlist.constants.WishType;
 import org.g9project4.wishlist.services.WishListService;
 import org.modelmapper.ModelMapper;
@@ -52,6 +53,7 @@ public class BoardInfoService {
     private final CommentInfoService commentInfoService;
     private final FileInfoService fileInfoService;
     private final WishListService wishListService;
+    private final MemberInfoService memberInfoService;
     private final HttpServletRequest request;
     private final ModelMapper modelMapper;
     private final MemberUtil memberUtil;
@@ -489,6 +491,10 @@ public class BoardInfoService {
         item.setShowList(showList);
         // 게시글 버튼 노출 권한 처리 E
 
-
+        // 회원 프로필 이미지 업데이트
+        Member member = item.getMember();
+        if (member != null) {
+            memberInfoService.addMemberInfo(member);
+        }
     }
 }
