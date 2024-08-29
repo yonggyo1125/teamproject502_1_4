@@ -53,10 +53,10 @@
                     th:text="#{이미지_선택}"></button>
             <div class="uploaded-files photo-item-wrapper" id="uploaded-files-editor">
                 <div th:if="*{editorImages != null}" th:each="file : *{editorImages}" class="photo-item" th:id="${'file-' + file.seq}">
-                    <div class="bg" th:style="${#strings.concat('background:url(', file.thumUrl, 'seq=', file.seq,'&width=150&height=150) no-repeat center center; background-size: cover;')}"></div>
-                    <i class="xi-file-upload insert-editor" data-url="[fileUrl]"></i>
-                    <i class="xi-close remove" data-seq="[seq]"></i>
-                    <span class="select" data-seq="[seq]" th:text="#{선택}"></span>
+                    <div class="bg" th:style="${#strings.concat('background:url(', file.thumUrl, '?seq=', file.seq,'&width=150&height=150) no-repeat center center; background-size: cover;')}"></div>
+                    <i class="xi-file-upload insert-editor" th:data-url="${file.fileUrl}"></i>
+                    <i class="xi-close remove" th:data-seq="${file.seq}"></i>
+                    <span class="select" th:data-seq="${file.seq}" th:classappend="${file.selected} ? 'on'" th:text="#{선택}"></span>
                 </div>
             </div>
         </dd>
