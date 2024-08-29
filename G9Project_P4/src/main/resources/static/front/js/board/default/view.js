@@ -52,6 +52,30 @@ window.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    /* 댓글 삭제 버튼 클릭 처리 S */
+    const deleteComments = document.getElementsByClassName("delete_comment");
+    let rootUrl = document.querySelector("meta[name='rootUrl']")?.content?.trim() ?? '';
+    rootUrl = rootUrl === '/' ? '' : rootUrl;
+
+    for (const el of deleteComments) {
+        el.addEventListener("click", function() {
+            const dataset = this.dataset;
+            const seq = dataset.seq;
+            const deleteUrl = rootUrl + `/comment/delete/${seq}`;
+
+            if (dataset.deletable === 'false') {
+                checkRequiredPassword(seq, () => {
+                    // 비번 확인 성공시 처리
+                    ifrmProcess.location.replace(deleteUrl);
+                }, createPasswordForm); // 비번 확인이 필요한 경우
+            } else {
+                // 비번 확인 성공시 처리
+                ifrmProcess.location.replace(deleteUrl);
+            }
+        });
+    }
+    /* 댓글 삭제 버튼 클릭 처리 E */
+
     function createPasswordForm() {
       // 비번확인이 필요한 경우
       const passwordBox = document.createElement("input");

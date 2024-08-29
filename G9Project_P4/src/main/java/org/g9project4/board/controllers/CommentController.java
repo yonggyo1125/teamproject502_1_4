@@ -1,7 +1,6 @@
 package org.g9project4.board.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.board.entities.CommentData;
@@ -12,7 +11,6 @@ import org.g9project4.board.services.comment.CommentInfoService;
 import org.g9project4.board.services.comment.CommentSaveService;
 import org.g9project4.board.validators.CommentValidator;
 import org.g9project4.global.Utils;
-import org.g9project4.global.exceptions.CommonException;
 import org.g9project4.global.exceptions.ExceptionProcessor;
 import org.g9project4.global.exceptions.script.AlertException;
 import org.springframework.http.HttpStatus;
@@ -22,8 +20,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/comment")
@@ -73,9 +69,12 @@ public class CommentController implements ExceptionProcessor {
 
         boardAuthService.check("comment_delete", seq);
 
-        Long boardDataSeq = commentDeleteService.delete(seq);
+        commentDeleteService.delete(seq);
 
-        return "redirect:/board/view/" + boardDataSeq;
+        String script = "parent.location.reload();";
+        model.addAttribute("script", script);
+
+        return "common/_execute_script";
     }
 
     @ExceptionHandler(GuestPasswordCheckException.class)
