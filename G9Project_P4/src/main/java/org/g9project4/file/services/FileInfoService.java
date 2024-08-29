@@ -109,6 +109,12 @@ public class FileInfoService {
         return getSelectedList(gid, null);
     }
 
+
+    public List<FileInfo> getSelectedList(String gid, String location, int cnt) {
+        List<FileInfo> items = getSelectedList(gid, location, FileStatus.DONE);
+        return items == null || items.isEmpty() ? null : items.stream().limit(cnt).toList();
+    }
+
     /**
      * 파일 정보 추가 처리
      * - fileUrl, filePath
