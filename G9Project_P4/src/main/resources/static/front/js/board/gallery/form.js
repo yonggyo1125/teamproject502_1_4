@@ -13,7 +13,7 @@ window.addEventListener("DOMContentLoaded", function() {
         el.addEventListener("click", (e) => insertEditor(e.currentTarget.dataset.url));
    }
 
-   const removeEls = document.querySelectorAll(".file-item .remove");
+   const removeEls = document.querySelectorAll(".photo-item .remove");
    for (const el of removeEls) {
         el.addEventListener("click", function() {
             if (confirm('정말 삭제하겠습니까?')) {

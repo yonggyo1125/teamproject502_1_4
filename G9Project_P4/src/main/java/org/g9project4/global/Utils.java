@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.g9project4.file.entities.FileInfo;
+import org.g9project4.file.services.FileInfoService;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.MessageSource;
@@ -15,10 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component("utils")
@@ -29,6 +28,7 @@ public class Utils { // 빈의 이름 - utils
     private final HttpServletRequest request;
     private final DiscoveryClient discoveryClient;
     private final ObjectMapper om;
+    private final FileInfoService fileInfoService;
 
     public String url(String url) {
         List<ServiceInstance> instances = discoveryClient.getInstances("front-service");
@@ -193,5 +193,18 @@ public class Utils { // 빈의 이름 - utils
 
     public String getThumbUrl(String url, int width, int height) {
         return String.format("%s?url=%s&width=%d&height=%d", url("/file/thumb"), url, width, height);
+    }
+
+    public List<FileInfo> getSelectedImages(String gid, String location) {
+        List<FileInfo> items = fileInfoService.getSelectedList(gid, location);
+        items = Objects.requireNonNullElse(items, Collections.EMPTY_LIST);
+
+        return items.stream()
+                    .filter(item -> item.getContentType().contains("image/"))
+                    .toList();
+    }
+
+    public List<FileInfo> getSelectedImages(String gid) {
+        return getSelectedImages(gid, null);
     }
 }
