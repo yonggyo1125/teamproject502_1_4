@@ -135,14 +135,26 @@ const fileManager = {
     *
     */
     select(gid, location, seq, cnt, callback) {
-        const formData = new FormData();
-        formData.append("gid", gid);
+
+        const formData = { gid };
         if (location?.trim()) {
-            formData.append("location", location);
+            formData.location = location;
         }
 
         seq = Array.isArray(seq) ? seq : [seq];
-        seq.forEach(s => formData.append("seq", s));
+        formData.seq = seq;
+        if (cnt > 0) formData.cnt = cnt;
+
+        const { ajaxLoad } = commonLib;
+        const headers = { 'Content-Type': 'application/json' };
+        (async() => {
+            try {
+                const res = await ajaxLoad('/file/select', 'POST', formData, headers);
+                console.log("res", res);
+            } catch (err) {
+                console.error(err);
+            }
+        })();
     }
 };
 
