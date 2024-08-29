@@ -8,6 +8,7 @@ import org.g9project4.member.services.LoginFailureHandler;
 import org.g9project4.member.services.LoginSuccessHandler;
 import org.g9project4.member.services.MemberAuthenticationEntryPoint;
 import org.g9project4.member.services.MemberInfoService;
+import org.g9project4.publicData.tour.services.TourPlacePointService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig {
 
     private final MemberInfoService memberInfoService;
+    private final TourPlacePointService tourPlacePointService;
     private final Utils utils;
     private final CorsFilter corsFilter;
 
@@ -35,6 +37,7 @@ public class SecurityConfig {
         LoginSuccessHandler loginSuccessHandler = new LoginSuccessHandler();
         LoginFailureHandler loginFailureHandler = new LoginFailureHandler();
         loginSuccessHandler.setUtils(utils);
+        loginSuccessHandler.setTourPlacePointService(tourPlacePointService);
         loginFailureHandler.setUtils(utils);
         /* 로그인, 로그아웃 S */
         http.formLogin(f -> {
