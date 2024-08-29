@@ -409,8 +409,11 @@ public class BoardInfoService {
         List<FileInfo> editorImages = fileInfoService.getList(gid, "editor");
         List<FileInfo> attachFiles = fileInfoService.getList(gid, "attach");
 
+        List<FileInfo> selectedImages = fileInfoService.getSelectedImages(gid);
+
         item.setEditorImages(editorImages);
         item.setAttachFiles(attachFiles);
+        item.setSelectedImages(selectedImages);
         // 업로드한 파일 목록 E
 
         /* 게시글 권한 정보 처리 S */

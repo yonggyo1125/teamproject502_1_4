@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -156,5 +157,18 @@ public class FileInfoService {
     public String getFileName(FileInfo item) {
         String fileName = item.getSeq() + Objects.requireNonNullElse(item.getExtension(), "");
         return fileName;
+    }
+
+    public List<FileInfo> getSelectedImages(String gid, String location) {
+        List<FileInfo> items = getSelectedList(gid, location);
+        items = Objects.requireNonNullElse(items, Collections.EMPTY_LIST);
+
+        return items.stream()
+                .filter(item -> item.getContentType().contains("image/"))
+                .toList();
+    }
+
+    public List<FileInfo> getSelectedImages(String gid) {
+        return getSelectedImages(gid, null);
     }
 }

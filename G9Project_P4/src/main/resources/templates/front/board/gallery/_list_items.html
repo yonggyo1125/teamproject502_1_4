@@ -7,9 +7,11 @@
     <ul class="list-items">
         <li th:if="${items == null || items.empty}" th:text="#{조회된_게시글이_없습니다.}" class="no-data"></li>
         <li th:if="${items != null && !items.empty}" th:each="item : ${items}" th:object="${item}">
-            <th:block th:each="file: ${@fileInfoService.getSelectedList(item.gid)}">
-
-            </th:block>
+            <div class='photos' th:if="*{selectedImages != null && !selectedImage.empty}">
+                <a th:href="*{@utils.redirectUrl('/board/view/' + seq)}" th:each="image : *{selectedImages}" th:object="${image}">
+                    <div th:style="*{#strings.concat('background:url(', thumbUrl ,'?seq=',seq,'&width=150&height=150') no-repeat center center; background-size: cover')}" class="photo"></div>
+                </a>
+            </div>
             <a th:href="*{@utils.redirectUrl('/board/view/' + seq)}" class="subject">
                 <span th:if="*{notice}" th:text="${'[' + #messages.msg('공지') + ']'}"></span>
                 <span th:if="*{category != null && category != ''}" th:text="*{'[' + category + ']'}" class="category"></span>

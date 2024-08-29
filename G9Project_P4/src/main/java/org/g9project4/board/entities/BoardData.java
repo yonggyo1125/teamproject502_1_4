@@ -85,6 +85,9 @@ public class BoardData extends BaseEntity {
     @Transient // 첨부 파일 목록
     private List<FileInfo> attachFiles;
 
+    @Transient // 선택 이미지 목록
+    private List<FileInfo> selectedImages;
+
     @Transient
     private boolean editable; // 수정, 삭제 가능 여부
 
