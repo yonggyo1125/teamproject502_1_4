@@ -3,6 +3,7 @@ package org.g9project4.file.controllers;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.g9project4.file.constants.FileStatus;
 import org.g9project4.file.entities.FileInfo;
 import org.g9project4.file.services.*;
 import org.g9project4.global.Utils;
@@ -120,7 +121,7 @@ public class FileController implements RestExceptionProcessor {
             throw new BadRequestException(utils.getErrorMessages(errors));
         }
         selectService.process(form);
-        List<FileInfo> items = infoService.getSelectedList(form.getGid(), form.getLocation(), form.getCnt());
+        List<FileInfo> items = infoService.getSelectedList(form.getGid(), form.getLocation(), FileStatus.ALL);
         return new JSONData(items);
     }
 }

@@ -149,7 +149,7 @@ const fileManager = {
         const headers = { 'Content-Type': 'application/json' };
         (async() => {
             try {
-                const res = await ajaxLoad('/file/select', 'POST', formData, headers);
+                const res = await ajaxLoad('/file/select', 'PATCH', formData, headers);
                 console.log("res", res);
             } catch (err) {
                 console.error(err);
