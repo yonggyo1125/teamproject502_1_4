@@ -28,12 +28,25 @@ window.addEventListener("DOMContentLoaded", function() {
    const selectEls = document.querySelectorAll(".photo-item .select");
    for (const el of selectEls) {
     el.addEventListener("click", function() {
+        try {
+            const {location, selectCnt } = this.dataset;
+            checkSelectCount(location, selectCnt);
 
+        } catch (err) {
+            alert(err.message);
+            console.error(err);
+        }
     });
    }
    /* 이미지 선택 처리 E */
 });
 
+function checkSelectCount(location, cnt) {
+    const items = document.querySelectorAll(`#uploaded-files-${location} .select.on`);
+    if (items.length > cnt) {
+        throw new Error(`이미지는 최대 ${cnt}개 까지 선택하세요.`);
+    }
+}
 
 /**
 * 파일 업로드 후속 처리
