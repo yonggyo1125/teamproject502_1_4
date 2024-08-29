@@ -25,18 +25,24 @@ window.addEventListener("DOMContentLoaded", function() {
    /* 이미지 본문 추가 이벤트 처리 E */
 
    /* 이미지 선택 처리 S */
-   const selectEls = document.querySelectorAll(".photo-item .select");
-   for (const el of selectEls) {
-    el.addEventListener("click", function() {
-        try {
-            const {location, selectCnt } = this.dataset;
-            checkSelectCount(location, selectCnt);
-
-        } catch (err) {
-            alert(err.message);
-            console.error(err);
+   const fileUploads = document.getElementsByClassName("fileUploads");
+   for (const fileUpload of fileUploads) {
+        const {gid, location, selectCnt } = fileUpload.dataset;
+        const selectEls = document.querySelectorAll(`#uploaded-files-${location} .photo-item .select`);
+        for (const el of selectEls) {
+            el.addEventListener("click", function() {
+                try {
+                    const { seq } = this.dataset;
+                    checkSelectCount(location, selectCnt);
+                    fileManager.select(gid, location, seq, selectCnt, () => {
+                        // 파일 선택 처리 후속 작업 ...
+                    });
+                } catch (err) {
+                    alert(err.message);
+                    console.error(err);
+                }
+            });
         }
-    });
    }
    /* 이미지 선택 처리 E */
 });

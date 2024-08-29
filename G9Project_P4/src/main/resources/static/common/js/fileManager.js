@@ -129,6 +129,20 @@ const fileManager = {
                 console.error(err);
             }
         })();
+    },
+    /**
+    * 파일 선택 처리
+    *
+    */
+    select(gid, location, seq, cnt, callback) {
+        const formData = new FormData();
+        formData.append("gid", gid);
+        if (location?.trim()) {
+            formData.append("location", location);
+        }
+
+        seq = Array.isArray(seq) ? seq : [seq];
+        seq.forEach(s => formData.append("seq", s));
     }
 };
 
