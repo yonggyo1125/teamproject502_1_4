@@ -2,6 +2,7 @@ package org.g9project4.file.services;
 
 import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
+import org.g9project4.file.constants.FileSelect;
 import org.g9project4.file.constants.FileStatus;
 import org.g9project4.file.entities.FileInfo;
 import org.g9project4.file.entities.QFileInfo;
@@ -56,7 +57,7 @@ public class FileInfoService {
      * @param status - ALL: 완료 + 미완료, DONE - 완료, UNDONE - 미완료
      * @return
      */
-    public List<FileInfo> getList(String gid, String location, FileStatus status) {
+    public List<FileInfo> getList(String gid, String location, FileSelect select, FileStatus status) {
 
         QFileInfo fileInfo = QFileInfo.fileInfo;
         BooleanBuilder andBuilder = new BooleanBuilder();
@@ -70,6 +71,12 @@ public class FileInfoService {
             andBuilder.and(fileInfo.done.eq(status == FileStatus.DONE));
         }
 
+        /* 파일 선택 여부 */
+        if (select != FileSelect.ALL) {
+            andBuilder.and(fileInfo.selected.eq(select == FileSelect.SELECTED));
+        }
+
+
         List<FileInfo> items = (List<FileInfo>)infoRepository.findAll(andBuilder, Sort.by(asc("createdAt")));
 
         // 2차 추가 데이터 처리
@@ -78,12 +85,28 @@ public class FileInfoService {
         return items;
     }
 
+    public List<FileInfo> getList(String gid, String location, FileStatus status) {
+        return getList(gid, location, FileSelect.ALL, status);
+    }
+
     public List<FileInfo> getList(String gid, String location) {
         return getList(gid, location, FileStatus.DONE);
     }
 
     public List<FileInfo> getList(String gid) {
         return getList(gid, null, FileStatus.DONE);
+    }
+
+    public List<FileInfo> getSelectedList(String gid, String location, FileStatus status) {
+        return getList(gid, location, FileSelect.SELECTED, status);
+    }
+
+    public List<FileInfo> getSelectedList(String gid, String location) {
+        return getSelectedList(gid, location, FileStatus.DONE);
+    }
+
+    public List<FileInfo> getSelectedList(String gid) {
+        return getSelectedList(gid, null);
     }
 
     /**

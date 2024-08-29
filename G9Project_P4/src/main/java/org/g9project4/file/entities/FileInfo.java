@@ -35,6 +35,8 @@ public class FileInfo extends BaseMemberEntity {
     @Column(length=80)
     private String contentType;
 
+    private boolean selected; // 선택된 이미지
+
     private boolean done; // 그룹 작업 완료 여부
 
     @Transient

@@ -125,6 +125,12 @@ public class BoardInfoService {
             andBuilder.and(boardData.notice.eq(notice));
         }
 
+        // num1 검색 추가
+        Long num1 = search.getNum1();
+        if (num1 != null) {
+            andBuilder.and(boardData.num1.eq(num1));
+        }
+
         /**
          * 조건 검색 처리
          *
@@ -280,7 +286,6 @@ public class BoardInfoService {
         // 댓글 목록
         List<CommentData> comments = commentInfoService.getList(seq);
         item.setComments(comments);
-        System.out.println("item : " + item);
         return item;
     }
 
@@ -418,7 +423,8 @@ public class BoardInfoService {
 
         // 회원 - 직접 작성한 게시글인 경우만 수정,삭제(editable)
         Member boardMember = item.getMember(); // 게시글을 작성한 회원
-        Member loggedMember = item.getMember(); // 로그인한 회원
+        //Member loggedMember = item.getMember(); // 로그인한 회원
+        Member loggedMember = memberUtil.getMember(); // 로그인한 회원
         if (boardMember != null && memberUtil.isLogin() && boardMember.getEmail().equals(loggedMember.getEmail())) {
             editable = true; // 수정, 삭제 가능
             mine = true; // 게시글 소유자

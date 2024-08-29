@@ -1,6 +1,5 @@
 package org.g9project4.board.services;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.board.entities.Board;
@@ -10,7 +9,6 @@ import org.g9project4.board.exceptions.BoardNotFoundException;
 import org.g9project4.board.exceptions.GuestPasswordCheckException;
 import org.g9project4.board.exceptions.GuestPasswordMismatchException;
 import org.g9project4.board.services.comment.CommentInfoService;
-import org.g9project4.global.exceptions.BadRequestException;
 import org.g9project4.global.exceptions.UnAuthorizedException;
 import org.g9project4.global.exceptions.script.AlertException;
 import org.g9project4.member.MemberUtil;
@@ -87,7 +85,6 @@ public class BoardAuthService {
              *      - 비회원 게시글은 인증 여부 체크 -> 인증 X -> 비밀번호 확인 페이지로 이동 검증
              *      - 검증 완료된 경우, 문제 X
              */
-
             if (List.of("update", "delete").contains(mode) && boardData != null && !boardData.isEditable()) {
                 if (boardData.getMember() == null) {
                     // 비회원 게시글 - 비밀번호 검증 필요

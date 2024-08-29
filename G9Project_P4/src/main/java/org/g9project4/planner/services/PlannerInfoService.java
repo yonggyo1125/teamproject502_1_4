@@ -3,9 +3,13 @@ package org.g9project4.planner.services;
 import com.querydsl.core.BooleanBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.g9project4.board.controllers.BoardDataSearch;
+import org.g9project4.board.entities.BoardData;
+import org.g9project4.board.services.BoardInfoService;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Pagination;
 import org.g9project4.global.Utils;
+import org.g9project4.global.constants.DeleteStatus;
 import org.g9project4.global.exceptions.UnAuthorizedException;
 import org.g9project4.member.MemberUtil;
 import org.g9project4.planner.controllers.PlannerSearch;
@@ -34,6 +38,7 @@ import static org.springframework.data.domain.Sort.Order.desc;
 public class PlannerInfoService {
     private final PlannerRepository plannerRepository;
     private final TourPlaceRepository tourPlaceRepository;
+    private final BoardInfoService boardInfoService;
     private final MemberUtil memberUtil;
     private final HttpServletRequest request;
     private final ModelMapper modelMapper;
@@ -147,5 +152,13 @@ public class PlannerInfoService {
 
             item.setItineraries(items);
         }
+
+        // 여행 노트 게시글 추가
+        BoardDataSearch search = new BoardDataSearch();
+        search.setLimit(1000);
+        search.setNum1(item.getSeq());
+
+        ListData<BoardData> data = boardInfoService.getList(search, DeleteStatus.UNDELETED);
+        item.setItems(data.getItems());
     }
 }

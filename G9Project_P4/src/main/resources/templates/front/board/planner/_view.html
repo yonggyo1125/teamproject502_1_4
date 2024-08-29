@@ -22,8 +22,11 @@
                 <span th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm:ss')}"></span>
             </div>
         </div> <!--// post-info -->
-        <div class="contents" th:if="*{editorView}" th:utext="*{content}"></div>
-        <div class="contents" th:unless="*{editorView}" th:utext="*{@utils.nl2br(content)}"></div>
+        <div th:if="*{!#strings.isEmpty(content)}" class="content-items">
+            <div th:each="item: *{@utils.toMap(content)}" class="content-item">
+                <th:block th:utext="${item.value}"></th:block>
+            </div>
+        </div>
 
         <ul th:if="*{attachFiles != null && !attachFiles.empty}" class="downloads">
             <li th:each="file, status : *{attachFiles}" th:object="${file}">
@@ -39,7 +42,6 @@
 
             <a th:if="*{showList}" th:href="${@utils.redirectUrl('/board/list/' + board.bid)}" th:text="#{글목록}" class="btn"></a>
         </div>
-
     </div>  <!--// view-content -->
 
 </th:block>
