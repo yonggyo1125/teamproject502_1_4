@@ -20,7 +20,7 @@
                 <!--// comment_top -->
                 <div class="comment" th:utext="*{@utils.nl2br(content)}"></div>
                 <div class="btns" th:if="*{showEdit}">
-                    <a  th:href="*{@utils.redirectUrl('/comment/delete/' + seq)}" th:data-deletable="*{editable}" class="delete_comment" th:text="#{삭제}" onclick="return confirm('정말 삭제하겠습니까?');"></a>
+                    <button type='button' th:data-deletable="*{editable}" th:data-seq="*{seq}" class="delete_comment" th:text="#{삭제}"></button>
                     <button type="button" class="edit_comment" th:data-seq="*{seq}" th:data-editable="*{editable}" th:text="#{수정}"></button>
                 </div>
             </li>
