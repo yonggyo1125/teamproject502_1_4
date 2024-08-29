@@ -92,7 +92,10 @@ public class BoardData extends BaseEntity {
     private boolean commentable; // 댓글 작성 가능 여부
 
     @Transient
-    private boolean showEdit; // 글쓰기,수정 버튼 노출 여부
+    private boolean showWrite; // 글쓰기 버튼 노출 여부
+
+    @Transient
+    private boolean showEdit; // 수정 버튼 노출 여부
 
     @Transient
     private boolean showDelete; // 글삭제 버튼 노출 여부
