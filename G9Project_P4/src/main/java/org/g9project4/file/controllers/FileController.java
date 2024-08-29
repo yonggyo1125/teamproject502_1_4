@@ -32,6 +32,7 @@ public class FileController implements RestExceptionProcessor {
     private final BeforeFileUploadProcess beforeProcess;
     private final AfterFileUploadProcess afterProcess;
     private final ThumbnailService thumbnailService;
+    private final FileSelectService selectService;
     private final Utils utils;
 
 
@@ -109,5 +110,14 @@ public class FileController implements RestExceptionProcessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @PatchMapping("/select")
+    public JSONData fileSelect(@Valid @RequestBody RequestSelect form, Errors errors) {
+        if (errors.hasErrors()) {
+            throw new BadRequestException(utils.getErrorMessages(errors));
+        }
+
+        return null;
     }
 }
