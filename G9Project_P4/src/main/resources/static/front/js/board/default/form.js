@@ -116,10 +116,17 @@ function fileDeleteCallback(file) {
     const figures = dom.getElementsByTagName("figure");
     for (const figure of figures) {
         const images = figure.getElementsByTagName("img");
+        const cnt = images.length;
+
         for (const image of images) {
             if (image.src.includes(fileName)) {
                 image.parentElement.removeChild(image);
             }
+        }
+
+        // 이미지가 1개만 있는 figure 태그인 경우
+        if (cnt === 1 && figure.getElementsByTagName("img").length === 0) {
+            figure.parentElement.removeChild(figure);
         }
     }
 
