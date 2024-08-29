@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <th:block th:fragment="write">
 
-        <div th:replace="~{front/board/default/_common::pageTitle}"></div>
+        <div th:replace="~{front/board/gallery/_common::pageTitle}"></div>
 
         <form name="frmSave" method="POST" th:action="${@utils.redirectUrl('/board/save')}" autocomplete="off" th:object="${requestBoard}">
             <input type="hidden" name="mode" value="write">
             <input type="hidden" name="bid" th:value="${board.bid}">
 
-            <th:block th:replace="~{front/board/default/_form::form}"></th:block>
+            <th:block th:replace="~{front/board/gallery/_form::form}"></th:block>
 
             <div class="button-group">
                 <button type="reset" th:text="#{다시입력}"></button>
