@@ -2,7 +2,6 @@
 .board-main .list-items li {
     display: flex;
     border-bottom: 1px solid #ccc;
-    height: 45px;
 }
 
 .board-main .list-items li:first-of-type {
@@ -12,6 +11,8 @@
 .board-main .list-item li:hover {
     background: #f8f8f8;
 }
+
+
 
 .board-main .list-items .post-info {
     width: 300px;

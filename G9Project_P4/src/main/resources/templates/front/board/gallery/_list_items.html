@@ -7,25 +7,28 @@
     <ul class="list-items">
         <li th:if="${items == null || items.empty}" th:text="#{조회된_게시글이_없습니다.}" class="no-data"></li>
         <li th:if="${items != null && !items.empty}" th:each="item : ${items}" th:object="${item}">
-            <div class='photos' th:if="*{selectedImages != null && !selectedImage.empty}">
-                <a th:href="*{@utils.redirectUrl('/board/view/' + seq)}" th:each="image : *{selectedImages}" th:object="${image}">
-                    <div th:style="*{#strings.concat('background:url(', thumbUrl ,'?seq=',seq,'&width=150&height=150') no-repeat center center; background-size: cover')}" class="photo"></div>
+            <div class='photos' th:if="*{selectedImages != null && !selectedImages.empty}">
+                <a th:href="${@utils.redirectUrl('/board/view/' + item.seq)}" th:each="image : *{selectedImages}" th:object="${image}">
+                    <div th:style="*{#strings.concat('background:url(', thumbUrl ,'?seq=',seq,'&width=150&height=150) no-repeat center center; background-size: cover')}" class="photo"></div>
                 </a>
+                <span class="badge" th:if="*{selectedImages.size() > 1}" th:text="*{#strings.concat('+', selectedImages.size() - 1)}"></span>
             </div>
-            <a th:href="*{@utils.redirectUrl('/board/view/' + seq)}" class="subject">
-                <span th:if="*{notice}" th:text="${'[' + #messages.msg('공지') + ']'}"></span>
-                <span th:if="*{category != null && category != ''}" th:text="*{'[' + category + ']'}" class="category"></span>
-                <th:block th:text="*{subject}"></th:block>
-            </a>
-            <div class="post-info">
-                <span class="poster">
-                    <th:block th:text="*{poster}"></th:block>
-                    <th:block th:if="*{member != null}" th:text="*{#strings.concat('(', member.email, ')')}"></th:block>
-                </span>
-                <span class="view-count" th:if="*{viewCount > 0}"
-                    th:text="*{viewCount < 1000 ? viewCount : #numbers.formatInteger(viewCount, 3, 'COMMA')}"></span>
-                <span class="datetime" th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></span>
-            </div> <!--// post-info -->
+            <div class="subject-content">
+                <a th:href="*{@utils.redirectUrl('/board/view/' + seq)}" class="subject">
+                    <span th:if="*{notice}" th:text="${'[' + #messages.msg('공지') + ']'}"></span>
+                    <span th:if="*{category != null && category != ''}" th:text="*{'[' + category + ']'}" class="category"></span>
+                    <th:block th:text="*{subject}"></th:block>
+                </a>
+                <div class="post-info">
+                    <span class="poster">
+                        <th:block th:text="*{poster}"></th:block>
+                        <th:block th:if="*{member != null}" th:text="*{#strings.concat('(', member.email, ')')}"></th:block>
+                    </span>
+                    <span class="view-count" th:if="*{viewCount > 0}"
+                        th:text="*{viewCount < 1000 ? viewCount : #numbers.formatInteger(viewCount, 3, 'COMMA')}"></span>
+                    <span class="datetime" th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></span>
+                </div> <!--// post-info -->
+            </div>
         </li>
     </ul>
 
