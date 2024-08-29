@@ -18,19 +18,22 @@ public class FileSelectService {
     private final FileInfoService infoService;
     private final FileInfoRepository repository;
 
-    public void process(List<Long> seqs, String gid, String location){
+    public void process(String mode, List<Long> seqs, String gid, String location){
         List<FileInfo> items = infoService.getList(gid, location, FileStatus.ALL);
         items.forEach(item -> {
-            item.setSelected(seqs != null && !seqs.isEmpty() && seqs.contains(item.getSeq()));
+            if (seqs != null && !seqs.isEmpty() && seqs.contains(item.getSeq())) {
+                item.setSelected(mode.equals("deselect") ? false : true);
+            }
         });
+
         repository.saveAllAndFlush(items);
     }
 
-    public void process(List<Long> seqs, String gid){
-        process(seqs, gid, null);
+    public void process(String mode, List<Long> seqs, String gid){
+        process(mode, seqs, gid, null);
     }
 
-    public void process(RequestSelect form){
-        process(form.getSeq(), form.getGid(), form.getLocation());
+    public void process(String mode, RequestSelect form){
+        process(mode, form.getSeq(), form.getGid(), form.getLocation());
     }
 }

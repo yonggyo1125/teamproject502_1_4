@@ -30,18 +30,8 @@ window.addEventListener("DOMContentLoaded", function() {
         const {gid, location, selectCnt } = fileUpload.dataset;
         const selectEls = document.querySelectorAll(`#uploaded-files-${location} .photo-item .select`);
         for (const el of selectEls) {
-            el.addEventListener("click", function() {
-                try {
-                    const { seq } = this.dataset;
-                    checkSelectCount(location, selectCnt);
-                    fileManager.select(gid, location, seq, selectCnt, () => {
-                        // 파일 선택 처리 후속 작업 ...
-                    });
-                } catch (err) {
-                    alert(err.message);
-                    console.error(err);
-                }
-            });
+            const seq = el.dataset.seq;
+            selectEventHandler(el, gid, location, seq, selectCnt);
         }
    }
    /* 이미지 선택 처리 E */
@@ -49,9 +39,31 @@ window.addEventListener("DOMContentLoaded", function() {
 
 function checkSelectCount(location, cnt) {
     const items = document.querySelectorAll(`#uploaded-files-${location} .select.on`);
-    if (items.length > cnt) {
+    if (items.length >= cnt) {
         throw new Error(`이미지는 최대 ${cnt}개 까지 선택하세요.`);
     }
+}
+
+function selectEventHandler(el, gid, location, seq, selectCnt) {
+    el.addEventListener("click", function() {
+        try {
+                    const { seq } = this.dataset;
+
+
+                    const mode = el.classList.contains("on") ? "deselect":"select";
+                    if (mode == 'select') {
+                        checkSelectCount(location, selectCnt);
+                    }
+                    fileManager.select(mode, gid, location, seq, selectCnt, () => {
+                        // 파일 선택 처리 후속 작업 ...
+                        el.classList.toggle("on");
+
+                    });
+                } catch (err) {
+                    alert(err.message);
+                    console.error(err);
+                }
+            });
 }
 
 /**
@@ -110,6 +122,10 @@ function fileUploadCallback(files) {
             }
         });
 
+        const selectEl = el.querySelector(".select");
+        const fileUpload = document.querySelector(`[data-location='${file.location}']`);
+        const selectCnt = fileUpload != null ? fileUpload.dataset.selectCnt : 0;
+        selectEventHandler(selectEl, file.gid, file.location, file.seq, selectCnt);
     }
 
     // 에디터 본문에 이미지 추가

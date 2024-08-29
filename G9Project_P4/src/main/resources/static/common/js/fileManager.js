@@ -134,7 +134,7 @@ const fileManager = {
     * 파일 선택 처리
     *
     */
-    select(gid, location, seq, cnt, callback) {
+    select(mode, gid, location, seq, cnt, callback) {
 
         const formData = { gid };
         if (location?.trim()) {
@@ -149,8 +149,10 @@ const fileManager = {
         const headers = { 'Content-Type': 'application/json' };
         (async() => {
             try {
-                const res = await ajaxLoad('/file/select', 'PATCH', formData, headers);
-                console.log("res", res);
+                const res = await ajaxLoad(`/file/select/${mode}`, 'PATCH', formData, headers);
+                if (res.success && typeof callback === 'function') {
+                    callback(res.data);
+                }
             } catch (err) {
                 console.error(err);
             }
